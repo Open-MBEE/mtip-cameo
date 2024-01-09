@@ -81,12 +81,12 @@ public class Connector extends CommonRelationship {
 			CameoUtils.logGUI("Supplier port not from part property.");
 			firstMemberEnd.setRole((ConnectableElement) supplier);
 		}
-		
+
 		Element clientPart = (Element) project.getElementByID(ImportXmlSysml.idConversion(xmlElement.getAttribute(XmlTagConstants.CLIENT_PART_WITH_PORT)));
 		if(clientPart != null) {
 			CameoUtils.logGUI("Client part found with id: " + clientPart.getID());
 			secondMemberEnd.setPartWithPort((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property)clientPart);
-			secondMemberEnd.setRole(((List<ConnectorEnd>) ((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) clientPart).get_connectorEndOfPartWithPort()).get(0).getRole());
+			secondMemberEnd.setRole((ConnectableElement) client);
 			StereotypesHelper.addStereotype(secondMemberEnd, nestedConnectorEndStereotype);
 			StereotypesHelper.setStereotypePropertyValue(secondMemberEnd, elementPropertyPathStereotype, "propertyPath", clientPart);
 		} else {

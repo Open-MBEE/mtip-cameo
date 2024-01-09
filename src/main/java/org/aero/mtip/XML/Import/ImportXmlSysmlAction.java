@@ -33,6 +33,10 @@ public class ImportXmlSysmlAction extends MDAction {
 		super(id, name, null, null);
 	}
 	public void actionPerformed(ActionEvent e) {
+		importXmlSysml();
+	}
+
+	public static void importXmlSysml() {
 		ImportXmlSysml.resetImportParameters();
 		Project project = Application.getInstance().getProject();
 		if(project == null) {
