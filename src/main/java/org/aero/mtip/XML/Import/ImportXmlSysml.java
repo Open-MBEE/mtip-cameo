@@ -1068,7 +1068,14 @@ public class ImportXmlSysml {
 	public static Element GetImportedOwner(XMLItem modelElement, HashMap<String, XMLItem> parsedXML) {
 		String ownerID = modelElement.getParent();
 		XMLItem ownerElement = parsedXML.get(ownerID);
-		
+
+//		If an owner is specified by ID but no element is provided, attempt to query the project for an existing element
+		if(ownerID != null && ownerElement == null){
+			Element element = (Element) project.getElementByID(ownerID);
+			if(element != null){
+				return element;
+			}
+		}
 		if(modelElement.getParent().trim().isEmpty() || ownerElement == null) {
 			return primaryLocation; // Set owned equal to Primary model if no hasParent attribute in XML -> parent field in XMLItem == ""
 		} 
