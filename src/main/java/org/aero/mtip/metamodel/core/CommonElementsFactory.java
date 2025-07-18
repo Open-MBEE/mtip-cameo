@@ -7,6 +7,7 @@
 
 package org.aero.mtip.metamodel.core;
 
+import org.aero.mtip.constants.CameoConstants;
 import org.aero.mtip.constants.DoDAFConstants;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.UAFConstants;
@@ -135,6 +136,7 @@ import org.aero.mtip.metamodel.sysml.profile.ParametricDiagram;
 import org.aero.mtip.metamodel.sysml.profile.Profile;
 import org.aero.mtip.metamodel.sysml.profile.ProfileDiagram;
 import org.aero.mtip.metamodel.sysml.profile.Stereotype;
+import org.aero.mtip.metamodel.sysml.profile.Term;
 import org.aero.mtip.metamodel.sysml.requirements.BusinessRequirement;
 import org.aero.mtip.metamodel.sysml.requirements.DesignConstraint;
 import org.aero.mtip.metamodel.sysml.requirements.ExtendedRequirement;
@@ -821,7 +823,7 @@ public class CommonElementsFactory {
       case SysmlConstants.GENERIC_TABLE:
         element = new GenericTable(name, EAID);
         break;
-      case SysmlConstants.GLOSSARY_TABLE:
+      case CameoConstants.GLOSSARY_TABLE:
         element = new GlossaryTable(name, EAID);
         break;
       case SysmlConstants.INSTANCE_TABLE:
@@ -1545,6 +1547,11 @@ public class CommonElementsFactory {
         element = new DataModelKind(name, EAID);
         break;
 
+      // Cameo-specific
+      case CameoConstants.TERM:
+        element = new Term(name, EAID);
+        break;
+        
       default:
         break;
     }

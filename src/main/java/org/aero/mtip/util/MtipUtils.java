@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
+import org.aero.mtip.constants.CameoConstants;
 import org.aero.mtip.constants.DoDAFConstants;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.UAFConstants;
@@ -24,6 +25,7 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.metamodel.core.CommonElementsFactory;
 import org.aero.mtip.profiles.DslCustomization;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
+import org.aero.mtip.profiles.MagicDraw;
 import org.aero.mtip.profiles.SysML;
 import org.aero.mtip.profiles.UAF;
 import com.nomagic.ci.persistence.IAttachedProject;
@@ -474,6 +476,10 @@ public class MtipUtils {
     } else if (SysML.isValueType(element)) {
       return SysmlConstants.VALUE_TYPE;
 
+      // Cameo-specific constructs used in SysML and derivative models
+    } else if (MagicDraw.hasTermStereotype(element)) {
+      return CameoConstants.TERM;
+      
       // Super classes listed below as to not to override their children
     } else if (element instanceof Constraint) {
       return SysmlConstants.CONSTRAINT;

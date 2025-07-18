@@ -1,5 +1,9 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.1
+* Added Cameop-specific Term and GlossaryTable support
+* Added ActivityNode and ActivityPartition properties to exported relationships
+
 ### 2022x v1.0.0
 * Fixed bug where UseCase type not identified.
 * Fixed bug where Parameter type not identified

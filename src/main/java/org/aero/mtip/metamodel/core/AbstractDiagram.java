@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.CheckForNull;
 import org.aero.mtip.XML.XmlWriter;
+import org.aero.mtip.constants.CameoConstants;
 import org.aero.mtip.constants.CameoDiagramConstants;
 import org.aero.mtip.constants.DoDAFConstants;
 import org.aero.mtip.constants.SysmlConstants;
@@ -504,7 +505,7 @@ public abstract class AbstractDiagram extends CommonElement {
       
       // Tables
       aMap.put("Generic Table", SysmlConstants.GENERIC_TABLE);
-      aMap.put("Glossary Table", SysmlConstants.GLOSSARY_TABLE);
+      aMap.put(CameoDiagramConstants.GLOSSARY_TABLE, CameoConstants.GLOSSARY_TABLE);
       aMap.put("Instance Table", SysmlConstants.INSTANCE_TABLE);
       aMap.put("Metric Table", SysmlConstants.METRIC_TABLE);
       aMap.put("Requirement Table", SysmlConstants.REQUIREMENT_TABLE);

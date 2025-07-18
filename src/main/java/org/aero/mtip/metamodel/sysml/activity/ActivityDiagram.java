@@ -70,7 +70,7 @@ public class ActivityDiagram extends AbstractDiagram {
 
     if (presentationElement instanceof InterruptibleActivityRegionView) {
       writeDiagramElementNoElement(elementListTag, presentationElement, parentPresentationElement,
-          XmlTagConstants.ATTRIBUTE_NAME_INTERRUPTIBLE_ACTIVITY_REGION);
+          ActivityNode.XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION);
     }
 
     writeDiagramElement(elementListTag, presentationElement, parentPresentationElement);

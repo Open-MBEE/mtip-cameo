@@ -100,7 +100,7 @@ public class XmlTagConstants {
 	public static final String ATTRIBUTE_NAME_COVERED_BY = "coveredBy";
 	public static final String ATTRIBUTE_NAME_TYPED_BY = "typedBy";
 	public static final String ATTRIBUTE_NAME_REPRESENTS = "represents";
-	public static final String ATTRIBUTE_NAME_ACTIVITY = "activity";
+
 	public static final String ATTRIBUTE_NAME_COLUMN_ELEMENT_TYPE = "columnElementType";
 	public static final String ATTRIBUTE_NAME_ROW_ELEMENT_TYPE = "rowElementType";
 	public static final String ATTRIBUTE_NAME_DECISION_INPUT = "decisionInput";
@@ -111,6 +111,7 @@ public class XmlTagConstants {
 	public static final String ATTRIBUTE_NAME_SPECIFICATION = "specification";
 	public static final String ATTRIBUTE_CONSTRAINED_ELEMENT = "constrainedElement";
 	public static final String ATTRIBUTE_NAME_INSTANCE_VALUE = "instanceValue";
+	
 	
 	// Tagged Value types
     public static final String TV_TYPE_BOOLEAN = "boolean";

@@ -4,6 +4,10 @@ public class CameoDiagramConstants {
     //UML
     public static final String CLASS_DIAGRAM = "Class Diagram";
     public static final String PROFILE_DIAGRAM = "Profile Diagram";
+    
+    //Cameo-specific
+    public static final String GLOSSARY_TABLE = "Glossary Table";
+    
 	//UAF
 	// Actual Resources
 	public static final String ACTUAL_RESOURCES_CONNECTIVITY = "Actual Resources Connectivity";

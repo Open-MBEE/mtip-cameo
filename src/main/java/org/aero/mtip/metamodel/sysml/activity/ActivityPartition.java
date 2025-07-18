@@ -1,8 +1,9 @@
-/* The Aerospace Corporation MTIP_Cameo
-Copyright 2022 The Aerospace Corporation
-
-This product includes software developed at
-The Aerospace Corporation (http://www.aerospace.org/). */
+/*
+ * The Aerospace Corporation MTIP_Cameo Copyright 2022 The Aerospace Corporation
+ * 
+ * This product includes software developed at The Aerospace Corporation
+ * (http://www.aerospace.org/).
+ */
 
 package org.aero.mtip.metamodel.sysml.activity;
 
@@ -11,33 +12,74 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
+import org.aero.mtip.util.Logger;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class ActivityPartition extends CommonElement {
+  public static final String XML_TAG_EDGE = "edge";
+  public static final String XML_TAG_NODE = "node";
+  public static final String XML_TAG_REPRESENTS = "represents";
+  public static final String XML_TAG_SUBPARTITION = "subpartition";
+  public static final String XML_TAG_SUPER_PARTITION = "superpartition";
 
-	public ActivityPartition(String name, String EAID) {
-		super(name, EAID);
-		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
-		this.metamodelConstant = SysmlConstants.ACTIVITY_PARTITION;
-		this.xmlConstant = XmlTagConstants.ACTIVITY_PARTITION;
-		this.element = f.createActivityPartitionInstance();
-	}
-	
-	@Override
-	public void setOwner(Element owner) {
-	    if(!(owner instanceof Activity)) {
-	        owner = CameoUtils.findNearestActivity(owner);
-	    }
-	        
-	    if (owner == null) {
-	      ModelHelper.dispose(Collections.singletonList(element));
-	      return;
-	    }
-	    
-	    element.setOwner(owner);
-	    com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition ap = (com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition)element;
-	    ap.setInActivity((com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity)owner);
-	}
+  public ActivityPartition(String name, String EAID) {
+    super(name, EAID);
+    this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
+    this.metamodelConstant = SysmlConstants.ACTIVITY_PARTITION;
+    this.xmlConstant = XmlTagConstants.ACTIVITY_PARTITION;
+    this.element = f.createActivityPartitionInstance();
+  }
+
+  @Override
+  public void setOwner(Element owner) {
+    if (!(owner instanceof Activity)) {
+      owner = CameoUtils.findNearestActivity(owner);
+    }
+
+    if (owner == null) {
+      ModelHelper.dispose(Collections.singletonList(element));
+      return;
+    }
+
+    element.setOwner(owner);
+    com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition ap =
+        (com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition) element;
+    ap.setInActivity(
+        (com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity) owner);
+  }
+
+  @Override
+  public org.w3c.dom.Element writeToXML(Element element) {
+    org.w3c.dom.Element data = super.writeToXML(element);
+    org.w3c.dom.Element relationships = getRelationships(data.getChildNodes());
+
+    com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition activityPartition =
+        getElementAsActivityPartition();
+
+    if (activityPartition == null) {
+      Logger.log(String.format(
+          "Unable to cast %s to ActivityPartition. Cannot export relationship elements of ActivityPartition.",
+          this.getClass().toString()));
+      return data;
+    }
+
+    writeRelationship(relationships, activityPartition.getRepresents(), XML_TAG_REPRESENTS);
+    writeRelationship(relationships, activityPartition.getSuperPartition(), XML_TAG_SUPER_PARTITION);
+
+    writeRelationships(relationships, activityPartition.getEdge(), XML_TAG_EDGE);
+    writeRelationships(relationships, activityPartition.getNode(), XML_TAG_NODE);
+    writeRelationships(relationships, activityPartition.getSubpartition(), XML_TAG_SUBPARTITION);
+
+    return data;
+  }
+
+  private com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition getElementAsActivityPartition() {
+    if (!(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition)) {
+      return null; // ActivityParameterNodes are ActivityNodes but cannot be cast.
+    }
+
+    return (com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition) element;
+  }
 }
