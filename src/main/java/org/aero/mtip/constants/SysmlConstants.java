@@ -138,7 +138,6 @@ public class SysmlConstants {
 	public static final String STEREOTYPE = "Stereotype";
 	public static final String STRUCTURED_ACTIVITY_NODE = "StructuredActivityNode";
 	public static final String TERMINATE = "Terminate";
-	public static final String TERM = "Term";
 	public static final String TIME_CONSTRAINT = "TimeConstraint";
 	public static final String TIME_EVENT = "TimeEvent";
 	public static final String TIME_EXPRESSION = "TimeExpression";
@@ -155,7 +154,6 @@ public class SysmlConstants {
 	// Tables
 	public static final String GENERIC_TABLE = "GenericTable";
 	public static final String INSTANCE_TABLE = "InstanceTable";
-	public static final String GLOSSARY_TABLE = "GlossaryTable";
 	public static final String METRIC_TABLE = "MetricTable";
 	public static final String REQUIREMENT_TABLE = "RequirementTable";
 	
@@ -175,7 +173,7 @@ public class SysmlConstants {
 	public static final String CAMEO_VERIFY_REQUIREMENT_MATRIX = "Verify Requirement Matrix";
 	
 	public static final String CAMEO_GENERIC_TABLE = "Generic Table";
-	public static final String CAMEO_GLOSSARY_TABLE = "Glossary Table";
+	
 	public static final String CAMEO_REQUIREMENT_TABLE = "Requirement Table";
 	public static final String CAMEO_INSTANCE_TABLE = "Instance Table";
 	public static final String CAMEO_METRIC_TABLE = "Metric Table";
@@ -354,7 +352,7 @@ public class SysmlConstants {
 			SYSTEM,
 			SYSTEM_CONTEXT,
 			TERMINATE,
-			TERM,
+			CameoConstants.TERM,
 			TIME_CONSTRAINT,
 			TIME_EVENT,
 			TIME_EXPRESSION,
@@ -370,8 +368,8 @@ public class SysmlConstants {
 			
 			// Table treated as Element - cannot be cast to Diagram
 			GENERIC_TABLE,
-			GLOSSARY_TABLE,
 			INSTANCE_TABLE,
+			CameoConstants.GLOSSARY_TABLE,
 			METRIC_TABLE,
 			REQUIREMENT_TABLE,
 	};

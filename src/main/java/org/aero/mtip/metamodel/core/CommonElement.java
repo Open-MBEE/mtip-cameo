@@ -6,6 +6,8 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 
 package org.aero.mtip.metamodel.core;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -358,6 +360,37 @@ public abstract class CommonElement {
 		
 		org.w3c.dom.Element documentationTag = XmlWriter.createMtipStringAttribute(XmlTagConstants.ATTRIBUTE_KEY_DOCUMENTATION, documentation);
 		XmlWriter.add(attributes, documentationTag);
+	}
+	
+	protected void writeRelationship(org.w3c.dom.Element relationships, Element element, String relationshipTagName) {
+	  if (element == null) {
+	    return;
+	  }
+
+	  org.w3c.dom.Element relationshipTag = XmlWriter.createMtipRelationship(element, relationshipTagName);
+	  XmlWriter.add(relationships, relationshipTag);
+	}
+	
+	protected <T> void writeRelationships(org.w3c.dom.Element relationships, Collection<T> elements, String relationshipTagName) {	 
+	  org.w3c.dom.Element relationshipListTag = XmlWriter.createTag(relationshipTagName, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
+	  
+	  if (elements.isEmpty()) {
+	    return;
+	  }
+	  
+	  List<T> elementsList = new ArrayList<T>(elements);
+	  
+	  for (int i = 0; i < elementsList.size(); i++) {
+	    if (!(elementsList.get(i) instanceof Element)) {
+          Logger.log(String.format("Unable to write relationships for xml tag %s. %s not child of Element.", relationshipTagName, elementsList.get(i).getClass().toString()));
+          return;
+        }
+        
+        org.w3c.dom.Element listItem = XmlWriter.createMtipListItem((Element)elementsList.get(i), relationshipTagName, Integer.toString(i));
+        XmlWriter.add(relationshipListTag, listItem);
+	  }
+	  
+	  XmlWriter.add(relationships, relationshipListTag);
 	}
 	
 	@CheckForNull
