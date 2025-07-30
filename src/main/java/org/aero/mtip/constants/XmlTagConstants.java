@@ -251,7 +251,7 @@ public class XmlTagConstants {
 	public static final String STEREOTYPE = "sysml.Stereotype";
 	public static final String STRUCTURED_ACTIVITY_NODE = "sysml.StructuredActivityNode";
 	public static final String TERMINATE = "sysml.Terminate";
-	public static final String TERM = "sysml.Term";
+	public static final String TERM = "cameo.Term";
 	public static final String TIMECONSTRAINT = "sysml.TimeConstraint";
 	public static final String TIMEEVENT = "sysml.TimeEvent";
 	public static final String TIMEEXPRESSION = "sysml.TimeExpression";

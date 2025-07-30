@@ -477,7 +477,7 @@ public class MtipUtils {
       return SysmlConstants.VALUE_TYPE;
 
       // Cameo-specific constructs used in SysML and derivative models
-    } else if (MagicDraw.hasTermStereotype(element)) {
+    } else if (DslCustomization.hasTermStereotype(element)) {
       return CameoConstants.TERM;
       
       // Super classes listed below as to not to override their children

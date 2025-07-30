@@ -1,7 +1,10 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.2
+* Fixed typo in changelog
+
 ### 2022x v1.0.1
-* Added Cameop-specific Term and GlossaryTable support
+* Added Cameo-specific Term and GlossaryTable support
 * Added ActivityNode and ActivityPartition properties to exported relationships
 
 ### 2022x v1.0.0
