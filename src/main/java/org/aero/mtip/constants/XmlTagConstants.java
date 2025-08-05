@@ -236,6 +236,7 @@ public class XmlTagConstants {
 	public static final String PROPERTY = "sysml.Property";
 	public static final String PROXY_PORT = "sysml.ProxyPort";
 	public static final String QUANTITY_KIND = "sysml.QuantityKind";
+	public static final String REALIZATION = "sysml.Realization";
 	public static final String REFERENCE_PROPERTY = "sysml.ReferenceProperty";
 	public static final String REGION = "sysml.Region";
 	public static final String REQUIREMENT = "sysml.Requirement";

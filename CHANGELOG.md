@@ -1,7 +1,10 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.3
+* Added missing Realization relationship
+
 ### 2022x v1.0.2
-* Fixed typo in changelog
+* Fixed term identification by referencing DSLCustomiztaion profile
 
 ### 2022x v1.0.1
 * Added Cameo-specific Term and GlossaryTable support

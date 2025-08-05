@@ -122,6 +122,7 @@ public class SysmlConstants {
 	public static final String PROPERTY = "Property";
 	public static final String PROXY_PORT = "ProxyPort";
 	public static final String QUANTITY_KIND = "QuantityKind";
+	public static final String REALIZATION = "Realization";
 	public static final String REFERENCE_POINT = "ReferencePoint";
 	public static final String REFERENCE_PROPERTY = "ReferenceProperty";
 	public static final String REGION = "Region";
@@ -401,6 +402,7 @@ public class SysmlConstants {
 			MESSAGE,
 			OBJECT_FLOW,
 			PACKAGE_IMPORT,
+			REALIZATION,
 			REFINE,
 			SATISFY,
 			TRACE,

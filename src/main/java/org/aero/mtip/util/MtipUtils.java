@@ -68,6 +68,7 @@ import com.nomagic.uml2.ext.magicdraw.activities.mdstructuredactivities.Structur
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationItem;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency;
+import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Realization;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Usage;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.Interface;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.InterfaceRealization;
@@ -556,6 +557,8 @@ public class MtipUtils {
       return SysmlConstants.PACKAGE_IMPORT;
     } else if (SysML.isSatisfy(element)) {
       return SysmlConstants.SATISFY;
+    } else if (element instanceof Realization) {
+      return SysmlConstants.REALIZATION;
     } else if (SysML.isTrace(element)) {
       return SysmlConstants.TRACE;
     } else if (element instanceof Transition) {

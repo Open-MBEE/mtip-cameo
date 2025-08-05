@@ -14,6 +14,7 @@ import org.aero.mtip.metamodel.core.general.Association;
 import org.aero.mtip.metamodel.core.general.Composition;
 import org.aero.mtip.metamodel.core.general.Dependency;
 import org.aero.mtip.metamodel.core.general.Generalization;
+import org.aero.mtip.metamodel.core.general.Realization;
 import org.aero.mtip.metamodel.core.general.Usage;
 import org.aero.mtip.metamodel.sysml.activity.ControlFlow;
 import org.aero.mtip.metamodel.sysml.activity.ObjectFlow;
@@ -143,6 +144,9 @@ public class CommonRelationshipsFactory {
 			case SysmlConstants.PACKAGE_IMPORT:
 				relationship = new PackageImport(name, EAID);
 				break;
+			case SysmlConstants.REALIZATION:
+			    relationship = new Realization(name, EAID);
+			    break;
 			case SysmlConstants.REFINE:
 				relationship = new Refine(name, EAID);
 				break;
