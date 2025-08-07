@@ -223,18 +223,20 @@ public class Exporter {
 			return;
 		}
 		
+		boolean isReferencedElement = MtipUtils.isReferencedElement(element);
+		
 		if (MtipUtils.isSupportedElement(commonElementType)) {
-			exportElement(element, commonElementType);
+			exportElement(element, commonElementType, isReferencedElement);
 			return;
 		}
 		
 		if (MtipUtils.isSupportedRelationship(commonElementType)) {
-			exportRelationship(element, commonElementType);
+			exportRelationship(element, commonElementType, isReferencedElement);
 			return;
 		}
 		
 		if (MtipUtils.isSupportedDiagram(commonElementType)) {
-			exportElement(element, commonElementType);
+			exportElement(element, commonElementType, isReferencedElement);
 			return;
 		}		
 		
@@ -242,7 +244,7 @@ public class Exporter {
 		Logger.log(String.format("%s is not categorized as an element, relationship, or diagram.", commonElementType));
 	}
 	
-	public void exportElement(Element element, String elementType) {
+	public void exportElement(Element element, String elementType, boolean isReferencedElement) {
 		if (elementType == null) {
 			Logger.log(String.format("Element type not found for %s with id %s", element.getHumanName(), MtipUtils.getId(element)));
 			return;
@@ -254,13 +256,13 @@ public class Exporter {
 			return;
 		}
 		
-		commonElement.writeToXML(element);
+		commonElement.writeToXML(element, isReferencedElement);
 		exportedElements.add(MtipUtils.getId(element));
 		
 		exportReferencedElements(element);
 	}
 	
-	public void exportRelationship(Element element, String relationshipType) {
+	public void exportRelationship(Element element, String relationshipType, boolean isReferencedElement) {
 	    if (relationshipType == null) {
 	         Logger.log(String.format("Relationship type not found for %s with id %s", element.getHumanName(), MtipUtils.getId(element)));
 	         return;
@@ -273,7 +275,7 @@ public class Exporter {
 			return;
 		}
 		
-		commonRelationship.writeToXML(element);
+		commonRelationship.writeToXML(element, isReferencedElement);
 		exportedElements.add(MtipUtils.getId(element));
 		
 		// Check if supplier and client are created - important for UML Metaclasses and SysML Profile objects referenced in extension and generalization relationships

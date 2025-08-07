@@ -661,6 +661,16 @@ public class MtipUtils {
 
     return SysmlConstants.PACKAGE;
   }
+  
+  public static boolean isReferencedElement(Element element) {
+    Project project = Project.getProject(element);
+    
+    if (Application.getInstance().getProject().equals(project)) {
+      return true;
+    }
+    
+    return false;
+  }
 
   public static boolean isRelationship(Element element) {
     if (element instanceof ActivityEdge 

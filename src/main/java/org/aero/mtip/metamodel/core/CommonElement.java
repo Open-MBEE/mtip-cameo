@@ -192,7 +192,7 @@ public abstract class CommonElement {
 	}
 	
 	@CheckForNull
-	public org.w3c.dom.Element writeToXML(Element element) {
+	public org.w3c.dom.Element writeToXML(Element element, boolean isReferencedElement) {
 		this.element = element;
 		
 		if (xmlConstant == null || (element.getOwner() == null && !(element instanceof com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdmodels.Model))) {
