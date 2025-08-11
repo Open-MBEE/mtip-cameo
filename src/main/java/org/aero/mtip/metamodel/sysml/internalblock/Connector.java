@@ -107,15 +107,6 @@ public class Connector extends CommonRelationship {
 
 		return connector;
 	}
-	@Override
-	public void setSupplier() {
-		
-	}
-	
-	@Override
-	public void setClient() {
-		
-	}
 	
 	@Override
 	public void setOwner(Element owner) {
@@ -136,7 +127,7 @@ public class Connector extends CommonRelationship {
 	}
 	
 	@Override
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		if(element instanceof com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector) {
 			List<ConnectorEnd> connectorEnds = ((com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector)element).getEnd();
 			if(connectorEnds.size() > 1) {
@@ -146,7 +137,7 @@ public class Connector extends CommonRelationship {
 		return null;
 	}
 	@Override
-	public Element getClient(Element element) {
+	public Element getClient() {
 		if(element instanceof com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector) {
 			List<ConnectorEnd> connectorEnds = ((com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector)element).getEnd();
 			if(connectorEnds.size() > 1) {

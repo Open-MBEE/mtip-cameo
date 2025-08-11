@@ -1,5 +1,11 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.4
+* Added explicit reference for ArchitecturalDescription
+* Added metadata to export log
+* Fixed NPE on no file selected
+* Fixed CommonRelationship `getSupplier()` and `getClient()` methods
+
 ### 2022x v1.0.3
 * Added missing Realization relationship
 

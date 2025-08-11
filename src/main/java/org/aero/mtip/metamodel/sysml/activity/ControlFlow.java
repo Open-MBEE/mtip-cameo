@@ -90,31 +90,32 @@ public class ControlFlow extends CommonRelationship {
 	@Override
 	public void setOwner(Element owner) {
 		if(!(owner instanceof Activity)) {
-			owner = CameoUtils.findNearestActivity(supplier);
+			owner = CameoUtils.findNearestActivity(getSupplier());
 		}
+		
 		element.setOwner(owner);
 	}
 	
 	@Override
-	public void setSupplier() {
+	public void setSupplier(Element supplier) {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		activityEdge.setSource((ActivityNode) supplier);
 	}
 	
 	@Override
-	public void setClient() {
+	public void setClient(Element client) {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		activityEdge.setTarget((ActivityNode) client);
 	}
 	
 	@Override
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		return activityEdge.getSource();
 	}
 	
 	@Override
-	public Element getClient(Element element) {
+	public Element getClient() {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		return activityEdge.getTarget();
 	}

@@ -106,7 +106,7 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public void setSupplier() {
+	public void setSupplier(Element supplier) {
 		if (supplier == null) {
 			Logger.log(String.format("Supplier null for message with import id %s", EAID));
 			return;
@@ -137,7 +137,7 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public void setClient() {
+	public void setClient(Element client) {
 		if (client == null) {
 			Logger.log(String.format("Client null for message with import id %s", EAID));
 			return;
@@ -169,7 +169,7 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message message = (com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message)element;
 		if(message.getSendEvent() instanceof OccurrenceSpecification) {
 			OccurrenceSpecification sendEvent = (OccurrenceSpecification) message.getSendEvent();
@@ -180,7 +180,7 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public Element getClient(Element element) {
+	public Element getClient() {
 		com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message message = (com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message)element;
 		if(message.getReceiveEvent() instanceof OccurrenceSpecification) {
 			OccurrenceSpecification sendEvent = (OccurrenceSpecification) message.getReceiveEvent();

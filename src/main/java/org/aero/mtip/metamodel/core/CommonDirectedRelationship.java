@@ -17,13 +17,23 @@ public abstract class CommonDirectedRelationship extends CommonRelationship {
 		super(name, EAID);
 	}
 	
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		Collection<Element> sources = ((DirectedRelationship)element).getSource();
 		return sources.iterator().next();
 	}
 	
-	public Element getClient(Element element) {
+	public Element getClient() {
 		Collection<Element> targets = ((DirectedRelationship)element).getTarget();
 		return targets.iterator().next();
+	}
+	
+	public void setSupplier(Element supplier) {
+	  DirectedRelationship directedRelationship = (DirectedRelationship)element;
+      directedRelationship.getSource().add(supplier);
+	}
+	
+	public void setClient(Element client) {
+	  DirectedRelationship directedRelationship = (DirectedRelationship)element;
+      directedRelationship.getTarget().add(client);
 	}
 }

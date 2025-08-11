@@ -194,6 +194,7 @@ import org.aero.mtip.metamodel.sysml.usecase.UseCaseDiagram;
 import org.aero.mtip.metamodel.sysml.view.Stakeholder;
 import org.aero.mtip.metamodel.sysml.view.View;
 import org.aero.mtip.metamodel.sysml.view.Viewpoint;
+import org.aero.mtip.metamodel.uaf.ArchitecturalDescription;
 import org.aero.mtip.metamodel.uaf.Dictionary.Alias;
 import org.aero.mtip.metamodel.uaf.Dictionary.Definition;
 import org.aero.mtip.metamodel.uaf.Metadata.DataModelKind;
@@ -864,6 +865,9 @@ public class CommonElementsFactory {
         break;
       case UAFConstants.ACTUAL_ENTERPRISE_PHASE:
         element = new ActualEnterprisePhase(name, EAID);
+        break;
+      case UAFConstants.ARCHITECTURAL_DESCRIPTION:
+        element = new ArchitecturalDescription(name, EAID);
         break;
       case UAFConstants.CAPABILITY:
         element = new Capability(name, EAID);

@@ -8,12 +8,10 @@
 package org.aero.mtip.metamodel.sysml.activity;
 
 import java.util.HashMap;
-import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
-import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.XMLItem;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity;
@@ -81,48 +79,26 @@ public abstract class ActivityNode extends CommonElement {
     com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode activityNode =
         getElementAsActivityNode();
 
-    if (activityNode == null) {
-      Logger.log(String.format(
-          "Unable to cast %s to ActivityNode. Cannot export relationship elements of ActivityNode.",
-          this.getClass().toString()));
-      return data;
+    if (activityNode != null) {
+      writeRelationship(relationships, activityNode.getActivity(), XML_TAG_ACTIVITY);
+      writeRelationship(relationships, activityNode.getInStructuredNode(),
+          XML_TAG_IN_STRUCTURED_NODE);
+
+      writeRelationships(relationships, activityNode.getIncoming(), XML_TAG_INCOMING);
+      writeRelationships(relationships, activityNode.getInGroup(), XML_TAG_IN_GROUP);
+      writeRelationships(relationships, activityNode.getInPartition(), XML_TAG_IN_PARTITION);
+      writeRelationships(relationships, activityNode.getInInterruptibleRegion(),
+          XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION);
+      writeRelationships(relationships, activityNode.getOutgoing(), XML_TAG_OUTGOING);
+      writeRelationships(relationships, activityNode.getRedefinedNode(), XML_TAG_REDEFINED_NODE);
     }
-
-    writeRelationship(relationships, activityNode.getActivity(), XML_TAG_ACTIVITY);
-    writeRelationship(relationships, activityNode.getInStructuredNode(),
-        XML_TAG_IN_STRUCTURED_NODE);
-
-    writeRelationships(relationships, activityNode.getIncoming(), XML_TAG_INCOMING);
-    writeRelationships(relationships, activityNode.getInGroup(), XML_TAG_IN_GROUP);
-    writeRelationships(relationships, activityNode.getInPartition(), XML_TAG_IN_PARTITION);
-    writeRelationships(relationships, activityNode.getInInterruptibleRegion(),
-        XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION);
-    writeRelationships(relationships, activityNode.getOutgoing(), XML_TAG_OUTGOING);
-    writeRelationships(relationships, activityNode.getRedefinedNode(), XML_TAG_REDEFINED_NODE);
 
     return data;
   }
 
-  public void writeActivity(org.w3c.dom.Element relationships, Element element) {
-    if (!(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode)) {
-      return; // ActivityParameterNodes are ActivityNodes but cannot be cast.
-    }
-
-    com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode activityNode =
-        (com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode) element;
-    Activity activity = activityNode.getActivity();
-
-    if (activity == null) {
-      return;
-    }
-
-    org.w3c.dom.Element activityTag = XmlWriter.createMtipRelationship(activity, XML_TAG_ACTIVITY);
-    XmlWriter.add(relationships, activityTag);
-  }
-
   private com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode getElementAsActivityNode() {
     if (!(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode)) {
-      return null; // ActivityParameterNodes are ActivityNodes but cannot be cast.
+      return null;
     }
 
     return (com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode) element;
