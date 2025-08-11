@@ -335,6 +335,7 @@ public class XmlTagConstants {
 	public static final String ACHIEVER = "uaf.Achiever";
 	public static final String ACTUAL_ENDURING_TASK = "uaf.ActualEnduringTask";
 	public static final String ACTUAL_ENTERPRISE_PHASE = "uaf.ActualEnterprisePhase";
+	public static final String ARCHITECTURAL_DESCRIPTION = "uaf.ArchitecturalDescription";
 	public static final String CAPABILITY = "uaf.Capability";
 	public static final String CAPABILITY_PROPERTY = "uaf.CapabilityProperty";
 	public static final String DESIRER = "uaf.Desirer";

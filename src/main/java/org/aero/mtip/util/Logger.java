@@ -24,6 +24,7 @@ import java.util.TreeMap;
 import javax.swing.JFileChooser;
 import org.aero.mtip.io.Exporter;
 import org.aero.mtip.io.Importer;
+import org.aero.mtip.menu.actions.AboutAction;
 import org.apache.commons.io.FilenameUtils;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
@@ -159,6 +160,13 @@ public class Logger {
 		instance.logImplicitElements(exporter.getImplicitElements());
 		instance.logUnsupportedElements(exporter.getUnsupportedElements());
 		instance.logDuration();
+	}
+	
+	public static void logMetadata() {
+	  log("------------ Metadata -----------\n");
+	  log(String.format("Model name: %s\n", Application.getInstance().getProject().getHumanName()));
+	  log(String.format("MTIP-Cameo Version: %s\n", AboutAction.VERSION));
+	  log("---------------------------------\n");
 	}
 	
 	public static void logConfigOptions() {

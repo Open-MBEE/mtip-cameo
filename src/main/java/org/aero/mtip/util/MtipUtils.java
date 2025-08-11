@@ -283,6 +283,8 @@ public class MtipUtils {
       return UmlConstants.ARTIFACT;
     } else if (SysML.isBoundReference(element)) {
       return SysmlConstants.BOUND_REFERENCE;
+    } else if (SysML.isBusinessRequirement(element)) {
+      return SysmlConstants.BUSINESS_REQUIREMENT;
     } else if (SysML.isClassifierBehavior(element)) {
       return SysmlConstants.CLASSIFIER_BEHAVIOR_PROPERTY;
     } else if (element instanceof CallBehaviorAction) {
@@ -666,10 +668,10 @@ public class MtipUtils {
     Project project = Project.getProject(element);
     
     if (Application.getInstance().getProject().equals(project)) {
-      return true;
+      return false;
     }
     
-    return false;
+    return true;
   }
 
   public static boolean isRelationship(Element element) {
