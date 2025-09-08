@@ -101,6 +101,10 @@ public class MagicDraw {
   public static boolean hasCustomImageHolderStereotype(Element element) {
     return getInstance().hasStereotype(element, CUSTOM_IMAGE_HOLDER);
   }
+  
+  public static boolean hasAuxiliaryResourceStereotype(Element element) {
+    return getInstance().hasStereotype(element, AUXILIARY_RESOURCE);
+  }
 
   public boolean isCurrentProject(Project activeProject) {
     if (project != activeProject) {

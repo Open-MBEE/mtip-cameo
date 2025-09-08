@@ -323,6 +323,10 @@ public class Exporter {
       if (type == null) {
         return;
       }
+      
+      if (CameoUtils.isPrimitiveValueType(element)) {
+        return;
+      }
 
       if (CameoUtils.isPredefinedElement(type)) {
         return;

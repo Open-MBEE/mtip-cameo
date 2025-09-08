@@ -6,3 +6,5 @@
 *.classpath
 *.prefs
 *.project
+
+test.log
