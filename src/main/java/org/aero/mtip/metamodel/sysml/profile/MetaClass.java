@@ -12,6 +12,7 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.XMLItem;
+import org.w3c.dom.NodeList;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.uml.Finder;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
@@ -30,24 +31,40 @@ public class MetaClass extends CommonElement {
 
   @Override
   public Element createElement(Project project, Element owner, XMLItem xmlElement) {
-    element = Finder.byQualifiedName().find(project,
-        "UML Standard Profile::UML2 Metamodel::" + this.name);
-    // TOOD: Add checks for other metaclass profiles (i.e. SysML)
-    // StereotypesHelper.getMetaClassByName(project, "Class");
-    if (element == null) {
-      Logger.log(String.format(
-          "Could not find metaclass by name or id. Creating metaclass with name: %s; id: %s",
-          this.name, xmlElement.getImportId()));
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class metaclass = StereotypesHelper.getMetaClassByName(project, this.name);
 
-      element = f.createClassInstance();
-      Profile standardProfile = StereotypesHelper.getProfile(project, "StandardProfile");
-      Stereotype metaclassStereotype =
-          StereotypesHelper.getStereotype(project, "Metaclass", standardProfile);
-      StereotypesHelper.addStereotype(element, metaclassStereotype);
-      ((NamedElement) element).setName(name);
+    // TODO: Confirm that this method gets Metaclasses from all profiles.
+    if (metaclass != null) {
+      return metaclass; 
     }
+    
+    Logger.log(String.format(
+        "Could not find metaclass by name or id. Creating metaclass with name: %s; id: %s",
+        this.name, xmlElement.getImportId()));
+
+    element = f.createClassInstance();
+    Profile standardProfile = StereotypesHelper.getProfile(project, "StandardProfile");
+    
+    Stereotype metaclassStereotype =
+        StereotypesHelper.getStereotype(project, "Metaclass", standardProfile);
+    StereotypesHelper.addStereotype(element, metaclassStereotype);
+    ((NamedElement) element).setName(name);
 
     return element;
+  }
+  
+  @Override
+  public org.w3c.dom.Element writeToXML(Element element) {
+    org.w3c.dom.Element data = super.writeToXML(element);
+    org.w3c.dom.Element relationships = getRelationships(data.getChildNodes());
+    
+    NodeList hasParentTags = relationships.getElementsByTagName(XmlTagConstants.HAS_PARENT);
+    
+    for (int i = 0; i < hasParentTags.getLength(); i++) {
+      relationships.removeChild(hasParentTags.item(i));
+    }
+
+    return data;
   }
 
 }

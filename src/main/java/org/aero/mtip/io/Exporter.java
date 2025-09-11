@@ -214,12 +214,12 @@ public class Exporter {
 
     String commonElementType = MtipUtils.getEntityType(element);
 
+    if (isImplicitlySupported(element)) {
+      addImplicitElement(element);
+      return;
+    }
+    
     if (commonElementType == null) {
-      if (isImplicitlySupported(element)) {
-        addImplicitElement(element);
-        return;
-      }
-
       if (isExplicitlyUnsupported(element)) {
         return;
       }
@@ -231,6 +231,7 @@ public class Exporter {
     }
 
     boolean isReferencedElement = MtipUtils.isReferencedElement(element);
+    
     if (isReferencedElement) {
       Logger.log(String.format("%s is a referenced element from project %s.",
           CameoUtils.getElementName(element), Project.getProject(element).getHumanName()));
@@ -299,20 +300,12 @@ public class Exporter {
 
     // Check if supplier and client are created - important for UML Metaclasses and SysML Profile
     // objects referenced in extension and generalization relationships
-    if (commonRelationship.getSupplier() != null) {
-      if (!exportedElements.contains(MtipUtils.getId(commonRelationship.getSupplier()))) {
-        exportEntity(commonRelationship.getSupplier());
-      }
-    } else {
-      Logger.log(String.format("%s type relationship has no supplier.", relationshipType));
+    if (commonRelationship.getSupplier() != null && !exportedElements.contains(MtipUtils.getId(commonRelationship.getSupplier()))) {
+      exportEntity(commonRelationship.getSupplier());
     }
 
-    if (commonRelationship.getClient() != null) {
-      if (!exportedElements.contains(MtipUtils.getId(commonRelationship.getClient()))) {
-        exportEntity(commonRelationship.getClient());
-      }
-    } else {
-      Logger.log(String.format("%s type relationship has no client.", relationshipType));
+    if (commonRelationship.getClient() != null && !exportedElements.contains(MtipUtils.getId(commonRelationship.getClient()))) {
+      exportEntity(commonRelationship.getClient());
     }
   }
 
@@ -348,12 +341,24 @@ public class Exporter {
     return SysmlConstants.PACKAGE;
   }
 
+  /**
+   * Determines if the provided element is implicitly supported. Elements are said to be implicitly supported
+   * if they are not written explicitly to output. This includes:
+   *    <ul><li>Any element referenced from standard profiles or libraries provided by Cameo</li>
+   *    <li>Comments</li>
+   *    <li>Literals of values, tagged values, etc.</li>
+   *    <li>TaggedValues</li></ul>
+   *    
+   * @param element
+   * @return
+   */
   public boolean isImplicitlySupported(Element element) {
     if (element instanceof ElementValue || element instanceof LiteralReal
         || element instanceof LiteralBoolean || element instanceof LiteralInteger
         || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
         || element instanceof InstanceValue || element instanceof ConnectorEnd
         || element instanceof Comment || element instanceof TaggedValue
+        || MtipUtils.isStandardLibraryElement(element)
         || MDCustomizationForSysML.isReferenceProperty(element)) {
       return true;
     }

@@ -771,4 +771,53 @@ public class MtipUtils {
     
     return elements;
   }
+  
+  /**
+   * Determines whether the element specified by the given import id and element type is a built in Cameo
+   * element or a user-defined element.
+   * @param elementId id of the element specified in the XML being imported.
+   * @param elementType type of the element specified in the XML being imported.
+   * @return true if element id and type correspond to a standard library element. Otherwise, false.
+   */
+  public static boolean isStandardLibraryElement(String elementId, String elementType) {
+    Element element = (Element) Application.getInstance().getProject().getElementByID(elementId);
+    
+    if (element == null) {
+      return false;
+    }
+    
+    return isStandardLibraryElement(element);
+  }
+  
+  public static boolean isStandardLibraryElement(Element element) {
+    return isChildOfAuxiliaryResource(element);
+  }
+  
+  /**
+   * Searches recursively up from the given element to find if the 1st level owning element has the auxiliary resource stereotype
+   * @param element Element from which to begin the search
+   * @return Returns true if the ancestor of element one-level below the primary model has the auxiliary resource stereotype. Otherwsie, false.
+   */
+  public static boolean isChildOfAuxiliaryResource(Element element) {    
+    while (element != null 
+          && element.getOwner() != null 
+          && !element.getOwner().equals(Application.getInstance().getProject().getPrimaryModel())) {
+      element = element.getOwner();
+    }
+    
+    if (MagicDraw.hasAuxiliaryResourceStereotype(element)) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  /**
+   * Gets the standard library element for the given id.
+   * @param importId id of the standard library element to be retrieved 
+   * @return The standard library element
+   */
+  public static Element getStandardLibraryElement(String importId) {
+    return (Element) Application.getInstance().getProject().getElementByID(importId);
+  }
 }

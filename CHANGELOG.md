@@ -1,5 +1,9 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.5
+* Added check to prevent PrimitiveValueTypes from being exported explicitly as referenced elements
+* Removed `hasParent` from `<relationships>` in `<data>` tags of Metaclasses
+
 ### 2022x v1.0.4
 * Added explicit reference for ArchitecturalDescription
 * Added metadata to export log

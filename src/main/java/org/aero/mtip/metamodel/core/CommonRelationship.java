@@ -40,8 +40,7 @@ public abstract class CommonRelationship extends CommonElement {
       XMLItem xmlElement) {
     try {
       super.createElement(project, owner, xmlElement);
-      setSupplier(supplier);
-      setClient(client);
+      
       return element;
     } catch (ClassCastException cce) {
       String logMessage =

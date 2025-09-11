@@ -240,20 +240,20 @@ public class Importer {
 			return getImportedElement(modelElement);
 		}
 		
-		if(!MtipUtils.isSupportedRelationship(modelElement.getType())) { 
+		if (!MtipUtils.isSupportedRelationship(modelElement.getType())) { 
 			Logger.log(String.format("%s type not supported. Import id %s", modelElement.getType(), modelElement.getImportId()));
 			return null;
 		}
 		
 		Element client = getImportedClient(modelElement, parsedXML);
 		
-		if(client == null) {
+		if (client == null) {
 			Logger.log(String.format("Client null for relationship %s. Import id %s", modelElement.getName(), modelElement.getImportId()));
 		}
 
-		Element supplier = GetImportedSupplier(modelElement, parsedXML);
+		Element supplier = getImportedSupplier(modelElement, parsedXML);
 		
-		if(supplier == null) {
+		if (supplier == null) {
 			Logger.log(String.format("Supplier null for relationship %s. Import id %s", modelElement.getName(), modelElement.getImportId()));
 		}
 		
@@ -808,9 +808,10 @@ public class Importer {
 		return getInstance().importIdToCameoId.get(id);
 	}
 	
+	@CheckForNull
 	public Element getOwnerElement(XMLItem modelElement, HashMap<String, XMLItem> parsedXML) {
 		if (modelElement == null) {
-		  
+		    return null;
 		}
 	  
 	    String ownerID = modelElement.getParent();
@@ -844,6 +845,10 @@ public class Importer {
 		if (isImported(modelElement.getClient())) {
 			return (Element) getImportedElement(modelElement.getClient());
 		}
+		
+		if (MtipUtils.isStandardLibraryElement(modelElement.getClient(), modelElement.getClientType())) {
+		  return MtipUtils.getStandardLibraryElement(modelElement.getClient());
+		}
 
 		String clientImportId = modelElement.getClient();
 		XMLItem clientElement = parsedXML.get(clientImportId);
@@ -869,7 +874,7 @@ public class Importer {
 		return null;
 	}
 	
-	public Element GetImportedSupplier(XMLItem modelElement, HashMap<String, XMLItem> parsedXML) {
+	public Element getImportedSupplier(XMLItem modelElement, HashMap<String, XMLItem> parsedXML) {
 		if (modelElement.getSupplier() == null || modelElement.getSupplier().trim().isEmpty()) {
 			Logger.log(String.format("No supplier id in xml for %s with id %s.", modelElement.getName(), modelElement.getImportId()));
 			return null;
@@ -878,6 +883,10 @@ public class Importer {
 		if (parentMap.containsKey(modelElement.getSupplier())) {
 			return  (Element) project.getElementByID(parentMap.get(modelElement.getSupplier()));
 		}
+		
+	    if (MtipUtils.isStandardLibraryElement(modelElement.getClient(), modelElement.getClientType())) {
+	        return MtipUtils.getStandardLibraryElement(modelElement.getSupplier());
+	    }
 		
 		String supplierImportId = modelElement.getSupplier();
 		XMLItem supplierElement = parsedXML.get(supplierImportId);

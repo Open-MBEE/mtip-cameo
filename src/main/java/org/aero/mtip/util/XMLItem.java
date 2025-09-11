@@ -30,7 +30,9 @@ public class XMLItem {
 	private String importId = "";
 	private String parent = "";
 	private String client = "";
+	private String clientType = "";
 	private String supplier = "";
+	private String supplierType = "";
 	private String name = "";
 	/** String id of the event for trigger element types in the importing XML file */
 	private String event = "";
@@ -290,23 +292,38 @@ public class XMLItem {
 	public String getCategory() {
 		return category;
 	}
+	
 	public String getImportId() {
 		return importId;
 	}
+	
 	public String getParent() {
 		return parent;
 	}
+	
 	public String getAttribute(String key) {
 		return attributes.get(key);
 	}
+	
 	public HashMap<String, String> getAttributes() {
 		return attributes;
 	}
+	
 	public String getClient() {
 		return client;
 	}
+	
+	public String getClientType() {
+	    return clientType;
+	}
+	
+	
 	public String getSupplier() {
 		return supplier;
+	}
+	
+	public String getSupplierType() {
+	  return supplierType;
 	}
 	
 	public boolean hasClient() {
