@@ -10,6 +10,7 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.UAFConstants;
 import org.aero.mtip.metamodel.core.general.Abstraction;
 import org.aero.mtip.metamodel.core.general.Aggregation;
+import org.aero.mtip.metamodel.core.general.Allocate;
 import org.aero.mtip.metamodel.core.general.Association;
 import org.aero.mtip.metamodel.core.general.Composition;
 import org.aero.mtip.metamodel.core.general.Dependency;
@@ -87,6 +88,9 @@ public class CommonRelationshipsFactory {
 			case SysmlConstants.ABSTRACTION:
 				relationship = new Abstraction(name, EAID);
 				break;
+			case SysmlConstants.ALLOCATE:
+			    relationship = new Allocate(name, EAID);
+			    break;
 			case SysmlConstants.AGGREGATION:
 				relationship = new Aggregation(name, EAID);
 				break;

@@ -8,13 +8,7 @@ package org.aero.mtip.metamodel.sysml.internalblock;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
-import org.aero.mtip.util.XMLItem;
-
-import com.nomagic.magicdraw.core.Project;
-import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
-import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
-import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
+import org.aero.mtip.profiles.SysML;
 
 public class BindingConnector extends Connector {
 
@@ -24,15 +18,6 @@ public class BindingConnector extends Connector {
 		this.xmlConstant = XmlTagConstants.BINDINGCONNECTOR;
 		this.metamodelConstant = SysmlConstants.BINDING_CONNECTOR;
 		this.element= f.createConnectorInstance();
-	}
-
-	@Override
-	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
-		super.createElement(project, owner, client, supplier, xmlElement);
-		Profile sysmlProfile = StereotypesHelper.getProfile(project, "SysML"); 
-		Stereotype bindingConnectorStereotype = StereotypesHelper.getStereotype(project, "BindingConnector", sysmlProfile);
-		StereotypesHelper.addStereotype(element, bindingConnectorStereotype);
-		
-		return element;
+		this.creationStereotype = SysML.getBindingConnectorStereotype();
 	}
 }

@@ -69,6 +69,7 @@ import com.nomagic.uml2.ext.magicdraw.activities.mdstructuredactivities.LoopNode
 import com.nomagic.uml2.ext.magicdraw.activities.mdstructuredactivities.StructuredActivityNode;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationItem;
+import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Abstraction;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Realization;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Usage;
@@ -305,8 +306,6 @@ public class MtipUtils {
       return SysmlConstants.CONDITIONAL_NODE;
     } else if (element instanceof ConnectionPointReference) {
       return SysmlConstants.CONNECTION_POINT_REFERENCE;
-    } else if (element instanceof Connector) {
-      return SysmlConstants.CONNECTOR;
     } else if (element instanceof Constraint) {
       return SysmlConstants.CONSTRAINT;
     } else if (SysML.isConstraintBlock(element)) {
@@ -525,7 +524,9 @@ public class MtipUtils {
 
   @CheckForNull
   public static String getSysmlRelationshipType(Element element) {
-    if (SysML.isAssociationBlock(element)) {
+    if (SysML.isAllocate(element)) {
+      return SysmlConstants.ALLOCATE;
+    } else if (SysML.isAssociationBlock(element)) {
       return SysmlConstants.ASSOCIATION_BLOCK;
     } else if (SysML.isBindingConnector(element)) {
       return SysmlConstants.BINDING_CONNECTOR;
@@ -547,8 +548,6 @@ public class MtipUtils {
       return SysmlConstants.INCLUDE;
     } else if (element instanceof InterfaceRealization) {
       return SysmlConstants.INTERFACE_REALIZATION;
-    } else if (element instanceof InformationFlow) {
-      return SysmlConstants.INFORMATION_FLOW;
     } else if (SysML.isItemFlow(element)) {
       return SysmlConstants.ITEM_FLOW;
     } else if (element instanceof Message) {
@@ -573,25 +572,38 @@ public class MtipUtils {
       return SysmlConstants.VERIFY;
 
       // Elements that are supertype must be checked after their subtypes
+    } else if (element instanceof InformationFlow) {
+      return SysmlConstants.INFORMATION_FLOW;
     } else if (element instanceof Association) {
-      com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property firstMemberEnd =
-          ModelHelper.getFirstMemberEnd((Association) element);
-      com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property secondMemberEnd =
-          ModelHelper.getSecondMemberEnd((Association) element);
-      if (firstMemberEnd.getAggregation() == AggregationKindEnum.SHARED
-          || secondMemberEnd.getAggregation() == AggregationKindEnum.SHARED) {
-        return SysmlConstants.AGGREGATION;
-      } else if (firstMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE
-          || secondMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE) {
-        return SysmlConstants.COMPOSITION;
-      } else {
-        return SysmlConstants.ASSOCIATION;
-      }
+      return MtipUtils.getAssociationType((Association) element);
+    } else if (element instanceof Abstraction) {
+      return SysmlConstants.ABSTRACTION;
     } else if (element instanceof Dependency) {
       return SysmlConstants.DEPENDENCY;
     }
 
     return null;
+  }
+
+  public static String getAssociationType(Association association) {
+    if (association instanceof Extension) {
+      return SysmlConstants.EXTENSION;
+    }
+
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property firstMemberEnd =
+        ModelHelper.getFirstMemberEnd((Association) association);
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property secondMemberEnd =
+        ModelHelper.getSecondMemberEnd((Association) association);
+
+    if (firstMemberEnd.getAggregation() == AggregationKindEnum.SHARED
+        || secondMemberEnd.getAggregation() == AggregationKindEnum.SHARED) {
+      return SysmlConstants.AGGREGATION;
+    } else if (firstMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE
+        || secondMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE) {
+      return SysmlConstants.COMPOSITION;
+    } else {
+      return SysmlConstants.ASSOCIATION;
+    }
   }
 
   @CheckForNull
@@ -677,9 +689,9 @@ public class MtipUtils {
   }
 
   public static boolean isRelationship(Element element) {
-    if (element instanceof ActivityEdge || element instanceof InformationFlow
-        || element instanceof Message || element instanceof Relationship
-        || element instanceof Transition) {
+    if (element instanceof ActivityEdge || element instanceof Connector
+        || element instanceof InformationFlow || element instanceof Message
+        || element instanceof Relationship || element instanceof Transition) {
       return true;
     }
 
@@ -740,81 +752,88 @@ public class MtipUtils {
 
   public static List<Diagram> getAllDiagramsRecursively(Element firstParent) {
     return MtipUtils.getAllElementsRecursively(firstParent).stream()
-        .filter(item -> item instanceof Diagram)
-        .map(item -> (Diagram) item)
+        .filter(item -> item instanceof Diagram).map(item -> (Diagram) item)
         .collect(Collectors.toList());
   }
-  
+
   public static List<Element> getElementsOnDiagram(Project project, Diagram diagram) {
     DiagramPresentationElement presentationDiagram = project.getDiagram(diagram);
-    List<Element> elementsOnDiagram = new ArrayList<Element> ();
-    
-    for(PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
-      elementsOnDiagram.addAll(MtipUtils.getElementsFromPresentationElementRecursively(presentationElement));
+    List<Element> elementsOnDiagram = new ArrayList<Element>();
+
+    for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
+      elementsOnDiagram
+          .addAll(MtipUtils.getElementsFromPresentationElementRecursively(presentationElement));
     }
-    
+
     return elementsOnDiagram;
   }
-  
-  public static List<Element> getElementsFromPresentationElementRecursively(PresentationElement presentationElement) {
-    List<Element> elements = new ArrayList<Element> ();
-    
+
+  public static List<Element> getElementsFromPresentationElementRecursively(
+      PresentationElement presentationElement) {
+    List<Element> elements = new ArrayList<Element>();
+
     Element element = presentationElement.getElement();
-    
+
     if (element != null) {
       elements.add(element);
     }
-    
-    for(PresentationElement nestedPresentationElement : presentationElement.getPresentationElements()) {
-      elements.addAll(MtipUtils.getElementsFromPresentationElementRecursively(nestedPresentationElement));
+
+    for (PresentationElement nestedPresentationElement : presentationElement
+        .getPresentationElements()) {
+      elements.addAll(
+          MtipUtils.getElementsFromPresentationElementRecursively(nestedPresentationElement));
     }
-    
+
     return elements;
   }
-  
+
   /**
-   * Determines whether the element specified by the given import id and element type is a built in Cameo
-   * element or a user-defined element.
+   * Determines whether the element specified by the given import id and element type is a built in
+   * Cameo element or a user-defined element.
+   * 
    * @param elementId id of the element specified in the XML being imported.
    * @param elementType type of the element specified in the XML being imported.
    * @return true if element id and type correspond to a standard library element. Otherwise, false.
    */
   public static boolean isStandardLibraryElement(String elementId, String elementType) {
     Element element = (Element) Application.getInstance().getProject().getElementByID(elementId);
-    
+
     if (element == null) {
       return false;
     }
-    
+
     return isStandardLibraryElement(element);
   }
-  
+
   public static boolean isStandardLibraryElement(Element element) {
     return isChildOfAuxiliaryResource(element);
   }
-  
+
   /**
-   * Searches recursively up from the given element to find if the 1st level owning element has the auxiliary resource stereotype
+   * Searches recursively up from the given element to find if the 1st level owning element has the
+   * auxiliary resource stereotype
+   * 
    * @param element Element from which to begin the search
-   * @return Returns true if the ancestor of element one-level below the primary model has the auxiliary resource stereotype. Otherwsie, false.
+   * @return Returns true if the ancestor of element one-level below the primary model has the
+   *         auxiliary resource stereotype. Otherwsie, false.
    */
-  public static boolean isChildOfAuxiliaryResource(Element element) {    
-    while (element != null 
-          && element.getOwner() != null 
-          && !element.getOwner().equals(Application.getInstance().getProject().getPrimaryModel())) {
+  public static boolean isChildOfAuxiliaryResource(Element element) {
+    while (element != null && element.getOwner() != null
+        && !element.getOwner().equals(Application.getInstance().getProject().getPrimaryModel())) {
       element = element.getOwner();
     }
-    
+
     if (MagicDraw.hasAuxiliaryResourceStereotype(element)) {
       return true;
     }
-    
+
     return false;
   }
-  
+
   /**
    * Gets the standard library element for the given id.
-   * @param importId id of the standard library element to be retrieved 
+   * 
+   * @param importId id of the standard library element to be retrieved
    * @return The standard library element
    */
   public static Element getStandardLibraryElement(String importId) {

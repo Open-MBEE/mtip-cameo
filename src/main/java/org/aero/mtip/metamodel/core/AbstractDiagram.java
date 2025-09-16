@@ -10,8 +10,11 @@ package org.aero.mtip.metamodel.core;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.CheckForNull;
@@ -55,6 +58,26 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Regi
 
 public abstract class AbstractDiagram extends CommonElement {
 	private static Map<String,String> cameoToMtipType = createCameoToMtipMap();
+	private static Collection<String> reversedEndsRelationships = new HashSet<> (Arrays.asList(
+        SysmlConstants.ABSTRACTION,
+        SysmlConstants.CONTROL_FLOW,
+        SysmlConstants.COPY,
+        SysmlConstants.DEPENDENCY,
+        SysmlConstants.EXTEND,
+        SysmlConstants.GENERALIZATION,
+        SysmlConstants.INCLUDE,
+        SysmlConstants.INFORMATION_FLOW,
+        SysmlConstants.INTERFACE_REALIZATION,
+        SysmlConstants.ITEM_FLOW,
+        SysmlConstants.MESSAGE,
+        SysmlConstants.OBJECT_FLOW,
+        SysmlConstants.REFINE,
+        SysmlConstants.SATISFY,
+        SysmlConstants.TRACE,
+        SysmlConstants.TRANSITION,
+        SysmlConstants.USAGE,
+        SysmlConstants.VERIFY      
+    ));
 
 	protected int elementCount = 0;
 	protected int relationshipCount = 0;
@@ -331,7 +354,7 @@ public abstract class AbstractDiagram extends CommonElement {
 		org.w3c.dom.Element typeTag = XmlWriter.createSimpleTypeTag(relationship);
 		
 		if (presentationElement instanceof PathElement) {
-		  writeRelationshipMetadataConnector(relationshipTag, (PathElement)presentationElement);
+		  writeRelationshipMetadataConnector(relationship, relationshipTag, (PathElement)presentationElement);
 		}
 	
 		XmlWriter.add(relationshipTag, idTag);
@@ -377,7 +400,7 @@ public abstract class AbstractDiagram extends CommonElement {
       XmlWriter.add(relDataTag, imageTag);
 	}
 	
-	protected void writeRelationshipMetadataConnector(org.w3c.dom.Element diagramRelationshipTag, PathElement pathElement) {
+	protected void writeRelationshipMetadataConnector(Element relationship, org.w3c.dom.Element diagramRelationshipTag, PathElement pathElement) {
 	  if (pathElement.getSupplierPoint() == null || pathElement.getClientPoint() == null) {
 	    return;
 	  }
@@ -385,10 +408,10 @@ public abstract class AbstractDiagram extends CommonElement {
 	  org.w3c.dom.Element relDataTag = XmlWriter.createTag(XmlTagConstants.RELATIONSHIP_METADATA, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
 	  
 	  org.w3c.dom.Element supplierPointTag = XmlWriter.createTag(XmlTagConstants.SUPPLIER_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
-	  writeCoordinates(supplierPointTag, pathElement.getSupplierPoint());
-	  
 	  org.w3c.dom.Element clientPointTag = XmlWriter.createTag(XmlTagConstants.CLIENT_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
-	  writeCoordinates(clientPointTag, pathElement.getClientPoint());
+	  
+	  writeCoordinates(supplierPointTag, getSupplierPoint(relationship, pathElement));
+	  writeCoordinates(clientPointTag, getClientPoint(relationship, pathElement));
 	  
 	  org.w3c.dom.Element breakPointsTag = XmlWriter.createTag(XmlTagConstants.BREAK_POINT, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
 	  
@@ -476,6 +499,22 @@ public abstract class AbstractDiagram extends CommonElement {
 	  }
 	  
 	  return MagicDraw.hasCustomImageHolderStereotype(presentationElement.getElement());
+	}
+	
+	protected static Point getSupplierPoint(Element relationship, PathElement pathElement) {
+	  if (AbstractDiagram.reversedEndsRelationships.contains(MtipUtils.getEntityType(relationship))) {
+	    return pathElement.getClientPoint();
+	  }
+	  
+	  return pathElement.getSupplierPoint();
+	}
+	
+	protected static Point getClientPoint(Element relationship, PathElement pathElement) {
+	   if (AbstractDiagram.reversedEndsRelationships.contains(MtipUtils.getEntityType(relationship))) {
+	        return pathElement.getSupplierPoint();
+	      }
+	      
+	      return pathElement.getClientPoint();
 	}
 	
 	private static Map<String, String> createCameoToMtipMap() {

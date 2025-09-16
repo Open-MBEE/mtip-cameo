@@ -358,7 +358,7 @@ public class Exporter {
         || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
         || element instanceof InstanceValue || element instanceof ConnectorEnd
         || element instanceof Comment || element instanceof TaggedValue
-        || MtipUtils.isStandardLibraryElement(element)
+        || (MtipUtils.isStandardLibraryElement(element) && !CameoUtils.isMetaclass(element))
         || MDCustomizationForSysML.isReferenceProperty(element)) {
       return true;
     }

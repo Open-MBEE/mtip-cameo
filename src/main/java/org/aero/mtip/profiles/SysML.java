@@ -18,6 +18,7 @@ public class SysML {
   public static final String NAME = "SysML";
 
   // static final String ASSOCIATION_BLOCK_NAME = ""
+  static final String ALLOCATE_NAME = "Allocate";
   static final String BINDING_CONNECTOR_NAME = "BindingConnector";
   static final String BLOCK_NAME = "Block";
   static final String BOUND_REFERENCE_NAME = "BoundReference";
@@ -86,6 +87,14 @@ public class SysML {
     }
 
     return instance;
+  }
+  
+  public static Stereotype getAllocateStereotype() {
+    return getInstance().getStereotype(ALLOCATE_NAME);
+  }
+  
+  public static Stereotype getBindingConnectorStereotype() {
+    return getInstance().getStereotype(BINDING_CONNECTOR_NAME);
   }
 
   public static Stereotype getBlockStereotype() {
@@ -239,6 +248,10 @@ public class SysML {
     }
 
     return true;
+  }
+  
+  public static boolean isAllocate(Element element) {
+    return getInstance().hasStereotype(element, ALLOCATE_NAME);
   }
 
   public static boolean isBindingConnector(Element element) {

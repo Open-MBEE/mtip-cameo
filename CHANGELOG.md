@@ -1,5 +1,8 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.6
+* Fixed client/supplier point mismatch in diagramConnector relationship metadata
+
 ### 2022x v1.0.5
 * Added check to prevent PrimitiveValueTypes from being exported explicitly as referenced elements
 * Removed `hasParent` from `<relationships>` in `<data>` tags of Metaclasses
