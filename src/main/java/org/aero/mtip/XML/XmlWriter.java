@@ -1,5 +1,6 @@
 package org.aero.mtip.XML;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.Iterator;
 import java.util.List;
@@ -109,16 +110,22 @@ public class XmlWriter {
 	public static void createMetadataTag() {
       Element metadata = createTag(XmlTagConstants.MTIP_METADATA);
       
-      Element mtipVersionTag = createTag(XmlTagConstants.MTIP_VERSION);      
-      Element cameoVersionTag = createTag(XmlTagConstants.CAMEO_VERSION);
-      Element exportTimeTag = createTag(XmlTagConstants.EXPORT_TIME);
+      Element mtipVersionTag = createTag(XmlTagConstants.MTIP_VERSION, XmlTagConstants.ATTRIBUTE_TYPE_STRING);      
+      Element cameoVersionTag = createTag(XmlTagConstants.CAMEO_VERSION, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
+      Element patchNumber = createTag(XmlTagConstants.CAMEO_PATCH_NUMBER, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
+      Element modelNameTag = createTag(XmlTagConstants.MODEL_NAME, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
+      Element exportTimeTag = createTag(XmlTagConstants.EXPORT_TIME, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
       
       mtipVersionTag.setTextContent(org.aero.mtip.menu.actions.AboutAction.VERSION);
       cameoVersionTag.setTextContent(Application.runtime().getFullVersion());
+      patchNumber.setTextContent(Application.runtimeInternal().getPatchNumber());
+      modelNameTag.setTextContent(Application.getInstance().getProject().getName());
       exportTimeTag.setTextContent(MtipUtils.utcNow());
       
       metadata.appendChild(mtipVersionTag);
       metadata.appendChild(cameoVersionTag);
+      metadata.appendChild(patchNumber);
+      metadata.appendChild(modelNameTag);
       metadata.appendChild(exportTimeTag);
       
 	  XmlWriter.addToRoot(metadata);
@@ -431,6 +438,24 @@ public class XmlWriter {
 	  
 	  return imageTag;
 	}
+    
+    public static Element createColorTag(String tagName, Color color) {
+      Element colorTag = createTag(tagName, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+      
+      Element redTag = createTag("red", XmlTagConstants.ATTRIBUTE_TYPE_INT);
+      Element greenTag = createTag("green", XmlTagConstants.ATTRIBUTE_TYPE_INT);
+      Element blueTag = createTag("blue", XmlTagConstants.ATTRIBUTE_TYPE_INT);
+      
+      redTag.setTextContent(Integer.toString(color.getRed()));
+      greenTag.setTextContent(Integer.toString(color.getGreen()));
+      blueTag.setTextContent(Integer.toString(color.getBlue()));
+      
+      colorTag.appendChild(redTag);
+      colorTag.appendChild(greenTag);
+      colorTag.appendChild(blueTag);
+      
+      return colorTag;
+    }
 	
 	public static Element createMtipRelationship(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element element, String xmlTag) {
 		Element relTag = createTag(xmlTag);

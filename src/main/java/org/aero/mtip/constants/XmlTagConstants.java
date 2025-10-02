@@ -13,7 +13,9 @@ public class XmlTagConstants {
     public static final String MTIP_METADATA = "metadata";
     public static final String MTIP_VERSION = "mtipVersion";
     public static final String CAMEO_VERSION = "cameoVersion";
+    public static final String CAMEO_PATCH_NUMBER = "patchNumber";
     public static final String EXPORT_TIME = "exportTime";
+    public static final String MODEL_NAME = "modelName";
     
 	// XML Tags
 	public static final String DATA = "data";
@@ -60,6 +62,15 @@ public class XmlTagConstants {
 	public static final String BREAK_POINT = "breakPoint";
 	public static final String X_COORDINATE = "xCoordinate";
 	public static final String Y_COORDINATE = "yCoordinate";
+	
+	// Presentation Element Property/Style Formatting Tags
+	public static final String PROPERTIES = "properties";
+	public static final String FILL_COLOR = "fillColor";
+	public static final String FONT = "font";
+	public static final String PEN_COLOR = "penColor";
+	public static final String TEXT_COLOR = "textColor";
+	public static final String USE_FILL_COLOR = "useFillColor";
+	
 	
 	// XML Tag Attributes
 	public static final String ATTRIBUTE_NAME = "name";

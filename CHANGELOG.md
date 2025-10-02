@@ -1,5 +1,11 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.8
+* Added display properties to `<relationshipMetadata>` tags for elements
+
+### 2022x v1.0.7
+* Added model name and patch number to top level `<metadata>` tag in exported XML
+
 ### 2022x v1.0.6
 * Fixed client/supplier point mismatch in diagramConnector relationship metadata
 
