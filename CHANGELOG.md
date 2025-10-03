@@ -1,5 +1,8 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.0.9
+* Fixed bug in PrimitiveValueType handling
+
 ### 2022x v1.0.8
 * Added display properties to `<relationshipMetadata>` tags for elements
 

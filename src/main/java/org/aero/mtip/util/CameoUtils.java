@@ -12,7 +12,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,23 +62,6 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Stat
 import com.nomagic.uml2.impl.ElementsFactory;
 
 public class CameoUtils {
-	@SuppressWarnings("serial")
-	public static HashMap<String, String> primitiveValueTypes = new HashMap<String, String>() {{
-		put(SysmlConstants.BOOLEAN, "16_5_1_12c903cb_1245415335546_39033_4086");
-		put(SysmlConstants.INTEGER, "_16_5_1_12c903cb_1245415335546_8641_4088");
-		put(SysmlConstants.REAL, "_11_5EAPbeta_be00301_1147431819399_50461_1671");
-	    put(SysmlConstants.STRING, "_16_5_1_12c903cb_1245415335546_479030_4092");
-	}};
-	
-	@SuppressWarnings("serial")
-	public static HashMap<String, String> primitiveValueTypesByID = new HashMap<String, String>() {{
-		put("16_5_1_12c903cb_1245415335546_39033_4086", SysmlConstants.BOOLEAN);
-		put("_16_5_1_12c903cb_1245415335546_8641_4088", SysmlConstants.INTEGER);
-		put("_11_5EAPbeta_be00301_1147431819399_50461_1671", SysmlConstants.REAL);
-	    put("_16_5_1_12c903cb_1245415335546_479030_4092", SysmlConstants.STRING);
-	    put("_9_0_2_91a0295_1110274713995_297054_0", SysmlConstants.STRING); 		// UML Metamodel String representation
-	}};
-	
 	public static void logGui(String text) {
 		Application.getInstance().getGUILog().log(text);
 	}
@@ -324,8 +306,8 @@ public class CameoUtils {
 	}
 	
 	public static boolean isPrimitiveValueType(String valueTypeIdentifier) {
-		if (SysmlConstants.primitiveValueTypeNames.contains(valueTypeIdentifier)
-				|| SysmlConstants.primitiveValueTypeIDs.contains(valueTypeIdentifier)) {
+		if (SysmlConstants.primitiveValueTypeIdsByName.containsKey(valueTypeIdentifier)
+				|| SysmlConstants.primitiveValueTypeNamesByID.containsKey(valueTypeIdentifier)) {
 			return true;
 		}
 		
@@ -333,7 +315,7 @@ public class CameoUtils {
 	}
 	
 	public static boolean isPrimitiveValueType(Element element) {
-		if(SysmlConstants.primitiveValueTypeIDs.contains(element.getID())) {
+		if(SysmlConstants.primitiveValueTypeNamesByID.containsKey(element.getID())) {
 			return true;
 		}
 		

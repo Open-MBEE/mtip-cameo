@@ -8,6 +8,7 @@ import javax.annotation.CheckForNull;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
@@ -361,7 +362,7 @@ public class XmlWriter {
 		org.w3c.dom.Element value = createTag(
 				XmlTagConstants.ID, 
 				XmlTagConstants.ATTRIBUTE_TYPE_STRING,
-				CameoUtils.primitiveValueTypesByID.get(element.getLocalID()));
+				SysmlConstants.primitiveValueTypeNamesByID.get(element.getLocalID()));
 
 		org.w3c.dom.Element type = createTag(
 				XmlTagConstants.TYPE, 
