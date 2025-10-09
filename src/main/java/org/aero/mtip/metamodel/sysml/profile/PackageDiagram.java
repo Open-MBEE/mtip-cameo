@@ -12,8 +12,8 @@ import com.nomagic.magicdraw.sysml.util.SysMLConstants;
 
 public class PackageDiagram  extends AbstractDiagram{
 
-	public PackageDiagram(String name, String EAID) {
-		 super(name, EAID);
+	public PackageDiagram(String name, String importId) {
+		 super(name, importId);
 		 metamodelConstant = SysMLConstants.SYSML_PACKAGE_DIAGRAM;
 		 xmlConstant = XmlTagConstants.PACKAGEDIAGRAM;
 	}

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualPerson extends InstanceSpecification {
 	
-	public ActualPerson(String name, String EAID) {
-		super(name, EAID);
+	public ActualPerson(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_PERSON;
 		this.xmlConstant = XmlTagConstants.ACTUAL_PERSON;
 	}

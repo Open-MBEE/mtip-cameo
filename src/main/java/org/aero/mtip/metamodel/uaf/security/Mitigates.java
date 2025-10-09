@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class Mitigates extends Dependency {
 
-	public Mitigates(String name, String EAID) {
-		super(name, EAID);
+	public Mitigates(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.MITIGATES;
 		this.xmlConstant = XmlTagConstants.MITIGATES;
 	}

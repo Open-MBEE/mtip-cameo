@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class ClassifierBehaviorProperty extends CommonElement {
 
-	public ClassifierBehaviorProperty(String name, String EAID) {
-		super(name, EAID);
+	public ClassifierBehaviorProperty(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.CLASSIFIER_BEHAVIOR_PROPERTY;
 		this.metamodelConstant = SysmlConstants.CLASSIFIER_BEHAVIOR_PROPERTY;

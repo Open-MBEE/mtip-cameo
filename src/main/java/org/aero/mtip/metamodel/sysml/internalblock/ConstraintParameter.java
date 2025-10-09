@@ -27,8 +27,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 public class ConstraintParameter extends CommonElement {
 	static final String DIRECTED_FEATURE = "DirectedFeature";
 	
-	public ConstraintParameter(String name, String EAID) {
-		super(name, EAID);
+	public ConstraintParameter(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.CONSTRAINT_PARAMETER;
 		this.metamodelConstant = SysmlConstants.CONSTRAINT_PARAMETER;

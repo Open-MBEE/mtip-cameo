@@ -30,8 +30,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class Connector extends CommonRelationship {
-	public Connector(String name, String EAID) {
-		super(name, EAID);
+	public Connector(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.CONNECTOR;
 		this.metamodelConstant = SysmlConstants.CONNECTOR;
@@ -42,13 +42,13 @@ public class Connector extends CommonRelationship {
 	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector connector = (com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector) element;
 		
-		// Cameo considers client as the second connector end [ends.get(1)] and supplier as first. Must reverse to fit supplier/client defined in Huddle.
+		// Cameo considers client as the second connector end [ends.get(1)] and supplier as first. Must reverse to fit supplier/client defined in MTIP.
 		try {
 			ModelHelper.setClientElement(element, supplier);
 			ModelHelper.setSupplierElement(element, client);
 			
-		}catch(ClassCastException cce) {
-			Logger.log("Invalid supplier/client for connector with id: " + this.EAID + ". Supplier/client must be ConnectableElements.");
+		} catch(ClassCastException cce) {
+			Logger.log("Invalid supplier/client for connector with id: " + this.importId + ". Supplier/client must be ConnectableElements.");
 			ModelHelper.dispose(Arrays.asList(element));
 			return null;
 		}
@@ -62,7 +62,7 @@ public class Connector extends CommonRelationship {
 //			connector.getEnd().get(0).setRole((ConnectableElement) supplier);
 //			connector.getEnd().get(1).setRole((ConnectableElement) client);
 //		} else {
-//			Logger.log("Unable to create connector with id: " + this.EAID + ". Supplier or client not a ConnectableElement (Part, port, etc.)");
+//			Logger.log("Unable to create connector with id: " + this.importId + ". Supplier or client not a ConnectableElement (Part, port, etc.)");
 //			sysmlElement.dispose();
 //			return null;
 //		}
@@ -73,25 +73,23 @@ public class Connector extends CommonRelationship {
 		Element supplierPart = (Element) project.getElementByID(Importer.idConversion(xmlElement.getAttribute(XmlTagConstants.SUPPLIER_PART_WITH_PORT)));
 
 		if(supplierPart != null) {
-			CameoUtils.logGui("Supplier part found with id: " + MtipUtils.getId(supplierPart));
 			firstMemberEnd.setPartWithPort((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property)supplierPart);
 			firstMemberEnd.setRole((ConnectableElement) supplier);
 			StereotypesHelper.addStereotype(firstMemberEnd, nestedConnectorEndStereotype);
 			StereotypesHelper.setStereotypePropertyValue(firstMemberEnd, elementPropertyPathStereotype, "propertyPath", supplierPart);
 		} else {
-			CameoUtils.logGui("Supplier port not from part property.");
+		  Logger.log(String.format("Supplier port not from part property when creating connector with name: %s; id: %s.", name, importId));
 			firstMemberEnd.setRole((ConnectableElement) supplier);
 		}
 		
 		Element clientPart = (Element) project.getElementByID(Importer.idConversion(xmlElement.getAttribute(XmlTagConstants.CLIENT_PART_WITH_PORT)));
 		if(clientPart != null) {
-			CameoUtils.logGui("Client part found with id: " + MtipUtils.getId(clientPart));
 			secondMemberEnd.setPartWithPort((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property)clientPart);
 			secondMemberEnd.setRole(((List<ConnectorEnd>) ((com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) clientPart).get_connectorEndOfPartWithPort()).get(0).getRole());
 			StereotypesHelper.addStereotype(secondMemberEnd, nestedConnectorEndStereotype);
 			StereotypesHelper.setStereotypePropertyValue(secondMemberEnd, elementPropertyPathStereotype, "propertyPath", clientPart);
 		} else {
-			CameoUtils.logGui("Client port not from part property.");
+			Logger.log(String.format("Client port not from part property when creating connector with name: %s; id: %s.", name, importId));
 			secondMemberEnd.setRole((ConnectableElement)client);
 		}		
 		
@@ -101,7 +99,7 @@ public class Connector extends CommonRelationship {
 				connector.setType((Association) typeElement);
 				CameoUtils.logGui("Connector type set to element with id " + MtipUtils.getId(typeElement));
 			} catch(ClassCastException cce) {
-				CameoUtils.logGui("Connector type is not an association. Type not set for connector with id " + this.EAID);
+				CameoUtils.logGui("Connector type is not an association. Type not set for connector with id " + this.importId);
 			}
 		}
 
@@ -115,14 +113,14 @@ public class Connector extends CommonRelationship {
 		}
 		
 		if(owner == null) {
-			Logger.log(String.format("Invalid parent. Parent must be block %s with id %s. No parents found in ancestors. Element could not be placed in model.", name, EAID));
+			Logger.log(String.format("Invalid parent. Parent must be block %s with id %s. No parents found in ancestors. Element could not be placed in model.", name, importId));
 			return;
 		}
 		
 		try {
 			element.setOwner(owner);
 		} catch(IllegalArgumentException iae) {
-			Logger.log(String.format("Invalid parent. Parent must be block %s with id %s. Element could not be placed in model.", name, EAID));
+			Logger.log(String.format("Invalid parent. Parent must be block %s with id %s. Element could not be placed in model.", name, importId));
 		}
 	}
 	
@@ -149,7 +147,6 @@ public class Connector extends CommonRelationship {
 	
 	@Override
 	public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-		CameoUtils.logGui("\t...Creating dependent elements for connector with id: " + modelElement.getImportId());
 		String supplierPartWithPortID = modelElement.getAttribute(XmlTagConstants.SUPPLIER_PART_WITH_PORT);
 		String clientPartWithPortID = modelElement.getAttribute(XmlTagConstants.CLIENT_PART_WITH_PORT);
 		String typedByID = modelElement.getAttribute(XmlTagConstants.TYPED_BY);

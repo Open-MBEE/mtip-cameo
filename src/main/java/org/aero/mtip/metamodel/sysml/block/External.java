@@ -13,8 +13,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class External extends CommonElement {
 
-	public External(String name, String EAID) {
-		super(name, EAID);
+	public External(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.EXTERNAL;
 		this.xmlConstant = XmlTagConstants.BLOCK;

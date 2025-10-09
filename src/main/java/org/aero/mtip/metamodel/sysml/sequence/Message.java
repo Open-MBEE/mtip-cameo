@@ -24,8 +24,8 @@ import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.MessageSo
 import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.OccurrenceSpecification;
 
 public class Message extends CommonRelationship {
-	public Message(String name, String EAID) {
-		super(name, EAID);
+	public Message(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.MESSAGE;
 		this.xmlConstant = XmlTagConstants.MESSAGE;
@@ -108,7 +108,7 @@ public class Message extends CommonRelationship {
 	@Override
 	public void setSupplier(Element supplier) {
 		if (supplier == null) {
-			Logger.log(String.format("Supplier null for message with import id %s", EAID));
+			Logger.log(String.format("Supplier null for message with import id %s", importId));
 			return;
 		}
 		
@@ -139,7 +139,7 @@ public class Message extends CommonRelationship {
 	@Override
 	public void setClient(Element client) {
 		if (client == null) {
-			Logger.log(String.format("Client null for message with import id %s", EAID));
+			Logger.log(String.format("Client null for message with import id %s", importId));
 			return;
 		}
 		

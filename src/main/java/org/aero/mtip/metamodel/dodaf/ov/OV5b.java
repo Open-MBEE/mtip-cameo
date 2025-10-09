@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
 
 public class OV5b extends ActivityDiagram {
 
-	public OV5b(String name, String EAID) {
-		super(name, EAID);
+	public OV5b(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV5B;
 		this.xmlConstant = XmlTagConstants.OV5B;
 		this.cameoDiagramConstant = "OV-5b Operational Activity Model";

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class Affects extends Dependency {
 
-	public Affects(String name, String EAID) {
-		super(name, EAID);
+	public Affects(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.AFFECTS;
 		this.xmlConstant = XmlTagConstants.AFFECTS;
 	}

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class CapabilityProperty extends Property {
 
-	public CapabilityProperty(String name, String EAID) {
-		super(name, EAID);
+	public CapabilityProperty(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = UAFConstants.CAPABILITY_PROPERTY;
 		this.xmlConstant = XmlTagConstants.CAPABILITY_PROPERTY;

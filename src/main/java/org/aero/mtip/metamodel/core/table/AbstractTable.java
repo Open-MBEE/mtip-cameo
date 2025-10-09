@@ -29,8 +29,8 @@ public class AbstractTable extends CommonElement {
 //		   columns.add(GenericTableManager.getColumnIDByTag(p.getName(), resultStereotype));
 //		}
 //	GenericTableManager.addColumnsById(resultsTable, columns);
-	public AbstractTable(String name, String EAID) {
-		super(name, EAID);
+	public AbstractTable(String name, String importId) {
+		super(name, importId);
 	}
 	
 	@Override

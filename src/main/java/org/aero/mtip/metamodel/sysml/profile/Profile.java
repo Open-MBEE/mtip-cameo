@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Profile extends CommonElement {
 
-	public Profile(String name, String EAID) {
-		super(name, EAID);
+	public Profile(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PROFILE;
 		this.xmlConstant = XmlTagConstants.PROFILE;

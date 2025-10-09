@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 
 public class SysmlPackage extends CommonElement{
-	public SysmlPackage(String name, String EAID)  {
-		super(name, EAID);
+	public SysmlPackage(String name, String importId)  {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.PACKAGE;
 		this.metamodelConstant = SysmlConstants.PACKAGE;

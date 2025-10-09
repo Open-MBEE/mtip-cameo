@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.AbstractDiagram;
 
 public class OperationalConnectivity extends AbstractDiagram {
-	public OperationalConnectivity(String name, String EAID) {
-		super(name, EAID);
+	public OperationalConnectivity(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_CONNECTIVITY;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_CONNECTIVITY;
 		this.cameoDiagramConstant = CameoDiagramConstants.OPERATIONAL_CONNECTIVITY;

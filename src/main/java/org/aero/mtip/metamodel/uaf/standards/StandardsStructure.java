@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class StandardsStructure extends BlockDefinitionDiagram {
 	
-	public StandardsStructure(String name, String EAID) {
-		super(name, EAID);
+	public StandardsStructure(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.STANDARDS_STRUCTURE_DIAGRAM;
 		this.xmlConstant = XmlTagConstants.STANDARDS_STRUCTURE_DIAGRAM;
 		this.cameoDiagramConstant = CameoDiagramConstants.STANDARDS_STRUCTURE;

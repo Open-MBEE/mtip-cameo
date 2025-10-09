@@ -27,8 +27,8 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.FunctionB
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Vertex;
 
 public class Transition extends CommonDirectedRelationship {
-  public Transition(String name, String EAID) {
-    super(name, EAID);
+  public Transition(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.xmlConstant = XmlTagConstants.TRANSITION;
     this.metamodelConstant = SysmlConstants.TRANSITION;
@@ -62,7 +62,7 @@ public class Transition extends CommonDirectedRelationship {
       }
     } catch (NullPointerException npe) {
       Logger.log(
-          String.format("Error creating transition %s with id %s. See stack trace: ", name, EAID));
+          String.format("Error creating transition %s with id %s. See stack trace: ", name, importId));
       Logger.logException(npe);
 
       if (transition != null) {
@@ -78,7 +78,7 @@ public class Transition extends CommonDirectedRelationship {
     } catch (ClassCastException cce) {
       Logger.log(String.format(
           "Invalid supplier or client. Supplier and client must be sub-classes of Vertex. Transition %s with id %s not created. See stack trace: ",
-          name, EAID));
+          name, importId));
       Logger.logException(cce);
 
       if (transition != null) {
@@ -102,7 +102,7 @@ public class Transition extends CommonDirectedRelationship {
 
     if (trigger == null) {
       Logger.log(String.format("Trigger data found, but failed to create trigger for transition %s",
-          EAID));
+          importId));
       return;
     }
 

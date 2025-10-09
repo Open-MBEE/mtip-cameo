@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.matrix.AbstractMatrix;
 
 public class PV3 extends AbstractMatrix {
 
-	public PV3(String name, String EAID) {
-		super(name, EAID);		
+	public PV3(String name, String importId) {
+		super(name, importId);		
 		this.metamodelConstant = DoDAFConstants.PV3;
 		this.xmlConstant = XmlTagConstants.PV3;
 		this.cameoDiagramConstant = "";

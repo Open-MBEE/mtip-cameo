@@ -42,8 +42,8 @@ public class SequenceDiagram  extends AbstractDiagram {
 	// Used on Import
 	private HashMap<String, PresentationElement> presentationElementsById = new HashMap<String, PresentationElement>();
 	
-	public SequenceDiagram(String name, String EAID) {
-		 super(name, EAID);
+	public SequenceDiagram(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = SysMLConstants.SYSML_SEQUENCE_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SEQUENCEDIAGRAM;
 		 this.cameoDiagramConstant = SysMLConstants.SYSML_SEQUENCE_DIAGRAM;

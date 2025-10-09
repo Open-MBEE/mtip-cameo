@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ResourceRole extends Property {
 
-	public ResourceRole(String name, String EAID) {
-		super(name, EAID);
+	public ResourceRole(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_ROLE;
 		this.xmlConstant = XmlTagConstants.RESOURCE_ROLE;
 	}

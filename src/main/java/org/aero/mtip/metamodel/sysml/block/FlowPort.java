@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.VisibilityKindEnum;
 
 public class FlowPort extends Port {
 
-  public FlowPort(String name, String EAID) {
-    super(name, EAID);
+  public FlowPort(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.FLOW_PORT;
     this.xmlConstant = XmlTagConstants.FLOW_PORT;

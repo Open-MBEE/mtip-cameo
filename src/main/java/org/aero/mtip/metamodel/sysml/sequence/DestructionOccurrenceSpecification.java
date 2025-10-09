@@ -14,8 +14,8 @@ import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message;
 
 public class DestructionOccurrenceSpecification extends CommonElement {
 
-	public DestructionOccurrenceSpecification(String name, String EAID) {
-		super(name, EAID);
+	public DestructionOccurrenceSpecification(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DESTRUCTION_OCCURRENCE_SPECIFICATION;
 		this.xmlConstant = XmlTagConstants.DESTRUCTION_OCCURRENCE_SPECIFICATION;

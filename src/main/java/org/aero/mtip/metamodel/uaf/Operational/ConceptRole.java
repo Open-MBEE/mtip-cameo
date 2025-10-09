@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ConceptRole extends Property {
 
-	public ConceptRole(String name, String EAID) {
-		super(name, EAID);
+	public ConceptRole(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.CONCEPT_ROLE;
 		this.xmlConstant = XmlTagConstants.CONCEPT_ROLE;
 	}

@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class ServicesProcesses extends BlockDefinitionDiagram {
 
-	public ServicesProcesses(String name, String EAID) {
-		super(name, EAID);
+	public ServicesProcesses(String name, String importId) {
+		super(name, importId);
 
 		 this.metamodelConstant = UAFConstants.SERVICES_PROCESSES_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SERVICES_PROCESSES_DIAGRAM;

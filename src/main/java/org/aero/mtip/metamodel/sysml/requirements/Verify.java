@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class Verify extends CommonDirectedRelationship {
 
-	public Verify(String name, String EAID) {
-		super(name, EAID);
+	public Verify(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.VERIFY;
 		this.xmlConstant = XmlTagConstants.VERIFY;

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.ItemFlow;
 
 public class ActualResourceRelationship extends ItemFlow {
 
-	public ActualResourceRelationship(String name, String EAID) {
-		super(name, EAID);
+	public ActualResourceRelationship(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_RESOURCE_RELATIONSHIP;
 		this.xmlConstant = XmlTagConstants.ACTUAL_RESOURCE_RELATIONSHIP;
 	}

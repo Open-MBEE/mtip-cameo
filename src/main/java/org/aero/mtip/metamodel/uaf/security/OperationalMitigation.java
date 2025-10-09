@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class OperationalMitigation extends CommonElement {
 	
-	public OperationalMitigation(String name, String EAID) {
-		super(name, EAID);
+	public OperationalMitigation(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.OPERATIONAL_MITIGATION;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_MITIGATION;

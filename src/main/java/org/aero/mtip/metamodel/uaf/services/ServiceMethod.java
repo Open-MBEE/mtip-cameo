@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.Operation;
 
 public class ServiceMethod extends Operation {
 
-	public ServiceMethod(String name, String EAID) {
-		super(name, EAID);
+	public ServiceMethod(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_METHOD;
 		this.xmlConstant = XmlTagConstants.SERVICE_METHOD;
 	}

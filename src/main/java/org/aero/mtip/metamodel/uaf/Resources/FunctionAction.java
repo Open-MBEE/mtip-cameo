@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.CallBehaviorAction;
 
 public class FunctionAction extends CallBehaviorAction {
 	
-	public FunctionAction(String name, String EAID) {
-		super(name, EAID);
+	public FunctionAction(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.FUNCTION_ACTION;
 		this.xmlConstant = XmlTagConstants.FUNCTION_ACTION;
 	}

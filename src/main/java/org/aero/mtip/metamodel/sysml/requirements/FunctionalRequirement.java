@@ -12,8 +12,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class FunctionalRequirement extends Requirement {
 
-	public FunctionalRequirement(String name, String EAID) {
-		super(name, EAID);
+	public FunctionalRequirement(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.FUNCTIONAL_REQUIREMENT;
 		this.xmlConstant = XmlTagConstants.FUNCTIONAL_REQUIREMENT;

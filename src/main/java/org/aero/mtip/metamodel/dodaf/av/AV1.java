@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 
 public class AV1 extends AbstractDiagram {
 
-	public AV1(String name, String EAID) {
-		super(name, EAID);
+	public AV1(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.AV1;
 		this.xmlConstant = XmlTagConstants.AV1;
 		this.cameoDiagramConstant = "AV-1 Overview and Summary Information";

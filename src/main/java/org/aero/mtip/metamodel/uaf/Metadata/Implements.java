@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class Implements extends Abstraction {
 	
-	public Implements(String name, String EAID) {
-		super(name, EAID);
+	public Implements(String name, String importId) {
+		super(name, importId);
 		this.xmlConstant = XmlTagConstants.IMPLEMENTS;
 		this.metamodelConstant = UAFConstants.IMPLEMENTS;
 	}

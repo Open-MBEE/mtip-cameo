@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class SecurityControl extends CommonElement {
 
-	public SecurityControl(String name, String EAID) {
-		super(name, EAID);
+	public SecurityControl(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.SECURITY_CONTROL;
 		this.xmlConstant = XmlTagConstants.SECURITY_CONTROL;

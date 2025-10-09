@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ClassDiagram;
 
 public class CV2 extends ClassDiagram {
 
-	public CV2(String name, String EAID) {
-		super(name, EAID);
+	public CV2(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.CV2;
 		this.xmlConstant = XmlTagConstants.CV2;
 		this.cameoDiagramConstant = "CV-2 Capability Taxonomy";

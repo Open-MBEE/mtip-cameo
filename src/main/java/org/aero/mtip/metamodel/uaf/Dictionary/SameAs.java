@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class SameAs extends Dependency {
 
-	public SameAs(String name, String EAID) {
-		super(name, EAID);
+	public SameAs(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SAME_AS;
 		this.xmlConstant = XmlTagConstants.SAME_AS;
 	}

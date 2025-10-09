@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class InitialNode extends ActivityNode {
 
-	public InitialNode(String name, String EAID) {
-		super(name, EAID);
+	public InitialNode(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INITIAL_NODE;
 		this.xmlConstant = XmlTagConstants.INITIAL_NODE;

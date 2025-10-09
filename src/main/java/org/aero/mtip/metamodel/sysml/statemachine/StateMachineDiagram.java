@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 import com.nomagic.magicdraw.sysml.util.SysMLConstants;
 
 public class StateMachineDiagram extends AbstractDiagram {
-  public StateMachineDiagram(String name, String EAID) {
-    super(name, EAID);
+  public StateMachineDiagram(String name, String importId) {
+    super(name, importId);
     this.xmlConstant = XmlTagConstants.STATEMACHINEDIAGRAM;
     this.cameoDiagramConstant = SysMLConstants.SYSML_STATE_MACHINE_DIAGRAM;
   }

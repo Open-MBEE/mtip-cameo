@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualCondition extends InstanceSpecification {
 
-	public ActualCondition(String name, String EAID) {
-		super(name, EAID);
+	public ActualCondition(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_CONDITION;
 		this.xmlConstant = XmlTagConstants.ACTUAL_CONDITION;
 	}

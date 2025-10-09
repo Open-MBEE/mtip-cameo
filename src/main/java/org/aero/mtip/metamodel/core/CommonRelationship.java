@@ -22,7 +22,6 @@ import org.w3c.dom.NodeList;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.DirectedRelationship;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
 
@@ -30,8 +29,8 @@ public abstract class CommonRelationship extends CommonElement {
   public static String INVALID_CLIENT_SUPPLIER_MESSAGE =
       "Invalid Client or Supplier - Not SysML Compliant";
 
-  public CommonRelationship(String name, String EAID) {
-    super(name, EAID);
+  public CommonRelationship(String name, String importId) {
+    super(name, importId);
     this.f = Application.getInstance().getProject().getElementsFactory();
 
   }
@@ -41,16 +40,19 @@ public abstract class CommonRelationship extends CommonElement {
     try {
       super.createElement(project, owner, xmlElement);
       
+      setSupplier(supplier);
+      setClient(client);
+      
       return element;
     } catch (ClassCastException cce) {
       String logMessage =
-          "Invalid client/supplier for relationship " + name + " with id " + EAID + ".";
+          "Invalid client/supplier for relationship " + name + " with id " + importId + ".";
       CameoUtils.logGui(logMessage);
       Logger.log(logMessage);
       ModelHelper.dispose(Arrays.asList(element));
       return null;
     } catch (IllegalArgumentException iae) {
-      String logMessage = "Invalid parent. Parent invalid for element " + name + " with id " + EAID
+      String logMessage = "Invalid parent. Parent invalid for element " + name + " with id " + importId
           + ". Supplier and client are also invalid parents. Element could not be placed in model.";
       CameoUtils.logGui(logMessage);
       Logger.log(logMessage);
@@ -62,7 +64,7 @@ public abstract class CommonRelationship extends CommonElement {
   @Override
   public void setOwner(Element owner) {
     if (element == null) {
-      Logger.log(String.format("Failed to create element with id %s. Cannot set owner.", EAID));
+      Logger.log(String.format("Failed to create element with id %s. Cannot set owner.", importId));
       return;
     }
 
@@ -75,7 +77,7 @@ public abstract class CommonRelationship extends CommonElement {
 
     if (supplier != null && ModelHelper.canMoveChildInto(supplier, element)) {
       Logger.log(String.format("Setting supplier as owner for %s with id %s.",
-          element.getHumanType(), EAID));
+          element.getHumanType(), importId));
       element.setOwner(supplier);
       return;
     }
@@ -84,7 +86,7 @@ public abstract class CommonRelationship extends CommonElement {
 
     if (client != null && ModelHelper.canMoveChildInto(client, element)) {
       Logger.log(String.format("Setting client as owner for %s with id %s.",
-          element.getHumanType(), EAID));
+          element.getHumanType(), importId));
       element.setOwner(client);
     }
   }

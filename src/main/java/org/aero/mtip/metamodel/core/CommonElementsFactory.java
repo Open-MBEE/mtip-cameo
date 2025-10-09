@@ -375,1185 +375,1185 @@ import org.aero.mtip.metamodel.uml.Artifact;
 import org.aero.mtip.util.CameoUtils;
 
 public class CommonElementsFactory {
-  public CommonElement createElement(String type, String name, String EAID) {
+  public CommonElement createElement(String type, String name, String importId) {
     CommonElement element = null;
 
     switch (type) {
       case SysmlConstants.ACCEPT_EVENT_ACTION:
-        element = new AcceptEventAction(name, EAID);
+        element = new AcceptEventAction(name, importId);
         break;
       case SysmlConstants.ACTION:
-        element = new Action(name, EAID);
+        element = new Action(name, importId);
         break;
       case SysmlConstants.ACTIVITY:
-        element = new Activity(name, EAID);
+        element = new Activity(name, importId);
         break;
       case SysmlConstants.ACTIVITY_FINAL_NODE:
-        element = new ActivityFinalNode(name, EAID);
+        element = new ActivityFinalNode(name, importId);
         break;
       case SysmlConstants.ACTIVITY_PARAMETER_NODE:
-        element = new ActivityParameterNode(name, EAID);
+        element = new ActivityParameterNode(name, importId);
         break;
       case SysmlConstants.ACTIVITY_PARTITION:
-        element = new ActivityPartition(name, EAID);
+        element = new ActivityPartition(name, importId);
         break;
       case SysmlConstants.ACTOR:
-        element = new Actor(name, EAID);
+        element = new Actor(name, importId);
         break;
       case SysmlConstants.ANY_RECEIVE_EVENT:
-        element = new AnyReceiveEvent(name, EAID);
+        element = new AnyReceiveEvent(name, importId);
         break;
       case UmlConstants.ARTIFACT:
-        element = new Artifact(name, EAID);
+        element = new Artifact(name, importId);
         break;
       case SysmlConstants.ASSOCIATION_BLOCK:
-        element = new AssociationBlock(name, EAID);
+        element = new AssociationBlock(name, importId);
         break;
       case SysmlConstants.BOUND_REFERENCE:
-        element = new BoundReference(name, EAID);
+        element = new BoundReference(name, importId);
         break;
       case SysmlConstants.BLOCK:
-        element = new Block(name, EAID);
+        element = new Block(name, importId);
         break;
       case SysmlConstants.BUSINESS_REQUIREMENT:
-        element = new BusinessRequirement(name, EAID);
+        element = new BusinessRequirement(name, importId);
         break;
       case SysmlConstants.CALL_BEHAVIOR_ACTION:
-        element = new CallBehaviorAction(name, EAID);
+        element = new CallBehaviorAction(name, importId);
         break;
       case SysmlConstants.CALL_EVENT:
-        element = new CallEvent(name, EAID);
+        element = new CallEvent(name, importId);
         break;
       case SysmlConstants.CALL_OPERATION_ACTION:
-        element = new CallOperationAction(name, EAID);
+        element = new CallOperationAction(name, importId);
         break;
       case SysmlConstants.CENTRAL_BUFFER_NODE:
-        element = new CentralBufferNode(name, EAID);
+        element = new CentralBufferNode(name, importId);
         break;
       case SysmlConstants.CHOICE_PSEUDO_STATE:
-        element = new ChoicePseudoState(name, EAID);
+        element = new ChoicePseudoState(name, importId);
         break;
       case SysmlConstants.CHANGE_EVENT:
-        element = new ChangeEvent(name, EAID);
+        element = new ChangeEvent(name, importId);
         break;
       case SysmlConstants.CLASS:
-        element = new Class(name, EAID);
+        element = new Class(name, importId);
         break;
       case SysmlConstants.CLASSIFIER_BEHAVIOR_PROPERTY:
-        element = new ClassifierBehaviorProperty(name, EAID);
+        element = new ClassifierBehaviorProperty(name, importId);
         break;
       case SysmlConstants.COLLABORATION:
-        element = new Collaboration(name, EAID);
+        element = new Collaboration(name, importId);
         break;
       case SysmlConstants.COMBINED_FRAGMENT:
-        element = new CombinedFragment(name, EAID);
+        element = new CombinedFragment(name, importId);
         break;
       case SysmlConstants.COMMENT:
-        element = new Comment(name, EAID);
+        element = new Comment(name, importId);
         break;
       case SysmlConstants.CONDITIONAL_NODE:
-        element = new ConditionalNode(name, EAID);
+        element = new ConditionalNode(name, importId);
         break;
       case SysmlConstants.CONNECTION_POINT_REFERENCE:
-        element = new ConnectionPointReference(name, EAID);
+        element = new ConnectionPointReference(name, importId);
         break;
       case SysmlConstants.CONSTRAINT:
-        element = new Constraint(name, EAID);
+        element = new Constraint(name, importId);
         break;
       case SysmlConstants.CONSTRAINT_BLOCK:
-        element = new ConstraintBlock(name, EAID);
+        element = new ConstraintBlock(name, importId);
         break;
       case SysmlConstants.CONSTRAINT_PARAMETER:
-        element = new ConstraintParameter(name, EAID);
+        element = new ConstraintParameter(name, importId);
         break;
       case SysmlConstants.CONSTRAINT_PROPERTY:
-        element = new ConstraintProperty(name, EAID);
+        element = new ConstraintProperty(name, importId);
         break;
       case SysmlConstants.CREATE_OBJECT_ACTION:
-        element = new CreateObjectAction(name, EAID);
+        element = new CreateObjectAction(name, importId);
         break;
       case SysmlConstants.CUSTOMIZATION:
-        element = new Customization(name, EAID);
+        element = new Customization(name, importId);
         break;
       case SysmlConstants.DATA_STORE_NODE:
-        element = new DataStoreNode(name, EAID);
+        element = new DataStoreNode(name, importId);
         break;
       case SysmlConstants.DATA_TYPE:
-        element = new DataType(name, EAID);
+        element = new DataType(name, importId);
         break;
       case SysmlConstants.DECISION_NODE:
-        element = new DecisionNode(name, EAID);
+        element = new DecisionNode(name, importId);
         break;
       case SysmlConstants.DEEP_HISTORY:
-        element = new DeepHistory(name, EAID);
+        element = new DeepHistory(name, importId);
         break;
       case SysmlConstants.DESIGN_CONSTRAINT:
-        element = new DesignConstraint(name, EAID);
+        element = new DesignConstraint(name, importId);
         break;
       case SysmlConstants.DESTROY_OBJECT_ACTION:
-        element = new DestroyObjectAction(name, EAID);
+        element = new DestroyObjectAction(name, importId);
         break;
       case SysmlConstants.DESTRUCTION_OCCURRENCE_SPECIFICATION:
-        element = new DestructionOccurrenceSpecification(name, EAID);
+        element = new DestructionOccurrenceSpecification(name, importId);
         break;
       // case SysmlConstants.DURATION:
-      // element = new Duration(name, EAID);
+      // element = new Duration(name, importId);
       // break;
       case SysmlConstants.DURATION_CONSTRAINT:
-        element = new DurationConstraint(name, EAID);
+        element = new DurationConstraint(name, importId);
         break;
       case SysmlConstants.DURATION_INTERVAL:
-        element = new DurationInterval(name, EAID);
+        element = new DurationInterval(name, importId);
         break;
       case SysmlConstants.DURATION_OBSERVATION:
-        element = new DurationObservation(name, EAID);
+        element = new DurationObservation(name, importId);
         break;
       case SysmlConstants.ENTRY_POINT:
-        element = new EntryPoint(name, EAID);
+        element = new EntryPoint(name, importId);
         break;
       case SysmlConstants.ENUMERATION:
-        element = new Enumeration(name, EAID);
+        element = new Enumeration(name, importId);
         break;
       case SysmlConstants.ENUMERATION_LITERAL:
-        element = new EnumerationLiteral(name, EAID);
+        element = new EnumerationLiteral(name, importId);
         break;
       case SysmlConstants.EXIT_POINT:
-        element = new ExitPoint(name, EAID);
+        element = new ExitPoint(name, importId);
         break;
       case SysmlConstants.EXTENDED_REQUIREMENT:
-        element = new ExtendedRequirement(name, EAID);
+        element = new ExtendedRequirement(name, importId);
         break;
       case SysmlConstants.EXTENSION_POINT:
-        element = new ExtensionPoint(name, EAID);
+        element = new ExtensionPoint(name, importId);
         break;
       case SysmlConstants.FINAL_STATE:
-        element = new FinalState(name, EAID);
+        element = new FinalState(name, importId);
         break;
       case SysmlConstants.FLOW_FINAL_NODE:
-        element = new FlowFinalNode(name, EAID);
+        element = new FlowFinalNode(name, importId);
         break;
       case SysmlConstants.FORK:
-        element = new Fork(name, EAID);
+        element = new Fork(name, importId);
         break;
       case SysmlConstants.FLOW_PORT:
-        element = new FlowPort(name, EAID);
+        element = new FlowPort(name, importId);
         break;
       case SysmlConstants.FLOW_PROPERTY:
-        element = new FlowProperty(name, EAID);
+        element = new FlowProperty(name, importId);
         break;
       case SysmlConstants.FLOW_SPECFICATION:
-        element = new FlowSpecification(name, EAID);
+        element = new FlowSpecification(name, importId);
         break;
       case SysmlConstants.FORK_NODE:
-        element = new ForkNode(name, EAID);
+        element = new ForkNode(name, importId);
         break;
       case SysmlConstants.FULL_PORT:
-        element = new FullPort(name, EAID);
+        element = new FullPort(name, importId);
         break;
       case SysmlConstants.FUNCTIONAL_REQUIREMENT:
-        element = new FunctionalRequirement(name, EAID);
+        element = new FunctionalRequirement(name, importId);
         break;
       case SysmlConstants.FUNCTION_BEHAVIOR:
-        element = new FunctionBehavior(name, EAID);
+        element = new FunctionBehavior(name, importId);
         break;
       case SysmlConstants.INFORMATION_ITEM:
-        element = new InformationItem(name, EAID);
+        element = new InformationItem(name, importId);
         break;
       case SysmlConstants.INITIAL_NODE:
-        element = new InitialNode(name, EAID);
+        element = new InitialNode(name, importId);
         break;
       case SysmlConstants.INITIAL_PSEUDO_STATE:
-        element = new InitialPseudoState(name, EAID);
+        element = new InitialPseudoState(name, importId);
         break;
       case SysmlConstants.INPUT_PIN:
-        element = new InputPin(name, EAID);
+        element = new InputPin(name, importId);
         break;
       case SysmlConstants.INSTANCE_SPECIFICATION:
-        element = new InstanceSpecification(name, EAID);
+        element = new InstanceSpecification(name, importId);
         break;
       case SysmlConstants.INTERACTION:
-        element = new Interaction(name, EAID);
+        element = new Interaction(name, importId);
         break;
       case SysmlConstants.INTERACTION_OPERAND:
-        element = new InteractionOperand(name, EAID);
+        element = new InteractionOperand(name, importId);
         break;
       case SysmlConstants.INTERACTION_USE:
-        element = new InteractionUse(name, EAID);
+        element = new InteractionUse(name, importId);
         break;
       case SysmlConstants.INTERFACE:
-        element = new Interface(name, EAID);
+        element = new Interface(name, importId);
         break;
       case SysmlConstants.INTERFACE_BLOCK:
-        element = new InterfaceBlock(name, EAID);
+        element = new InterfaceBlock(name, importId);
         break;
       case SysmlConstants.INTERFACE_REALIZATION:
-        element = new InterfaceRealization(name, EAID);
+        element = new InterfaceRealization(name, importId);
         break;
       case SysmlConstants.INTERFACE_REQUIREMENT:
-        element = new InterfaceRequirement(name, EAID);
+        element = new InterfaceRequirement(name, importId);
         break;
       case SysmlConstants.INTERRUPTIBLE_ACTIVITY_REGION:
-        element = new InterruptibleActivityRegion(name, EAID);
+        element = new InterruptibleActivityRegion(name, importId);
         break;
       case SysmlConstants.ITEM_FLOW:
-        element = new ItemFlow(name, EAID);
+        element = new ItemFlow(name, importId);
         break;
       case SysmlConstants.JOIN:
-        element = new Join(name, EAID);
+        element = new Join(name, importId);
         break;
       case SysmlConstants.JOIN_NODE:
-        element = new JoinNode(name, EAID);
+        element = new JoinNode(name, importId);
         break;
       case SysmlConstants.LIFELINE:
-        element = new Lifeline(name, EAID);
+        element = new Lifeline(name, importId);
         break;
       case SysmlConstants.LINK:
-        element = new Link(name, EAID);
+        element = new Link(name, importId);
         break;
       case SysmlConstants.LOOP_NODE:
-        element = new LoopNode(name, EAID);
+        element = new LoopNode(name, importId);
         break;
       case SysmlConstants.METACLASS:
-        element = new MetaClass(name, EAID);
+        element = new MetaClass(name, importId);
         break;
       case SysmlConstants.MERGE_NODE:
-        element = new MergeNode(name, EAID);
+        element = new MergeNode(name, importId);
         break;
       case SysmlConstants.MESSAGE:
-        element = new Message(name, EAID);
+        element = new Message(name, importId);
         break;
       case SysmlConstants.MESSAGE_OCCURRENCE_SPECIFICATION:
-        element = new MessageOccurrenceSpecification(name, EAID);
+        element = new MessageOccurrenceSpecification(name, importId);
         break;
       case SysmlConstants.MODEL:
-        element = new Model(name, EAID);
+        element = new Model(name, importId);
         break;
       // case SysmlConstants.NOTE:
-      // element = new Note(name, EAID);
+      // element = new Note(name, importId);
       // break;
       case SysmlConstants.OPAQUE_ACTION:
-        element = new OpaqueAction(name, EAID);
+        element = new OpaqueAction(name, importId);
         break;
       case SysmlConstants.OPAQUE_BEHAVIOR:
-        element = new OpaqueBehavior(name, EAID);
+        element = new OpaqueBehavior(name, importId);
         break;
       case SysmlConstants.OPAQUE_EXPRESSION:
-        element = new OpaqueExpression(name, EAID);
+        element = new OpaqueExpression(name, importId);
         break;
       case SysmlConstants.OPERATION:
-        element = new Operation(name, EAID);
+        element = new Operation(name, importId);
         break;
       case SysmlConstants.OUTPUT_PIN:
-        element = new OutputPin(name, EAID);
+        element = new OutputPin(name, importId);
         break;
       case SysmlConstants.PACKAGE:
-        element = new SysmlPackage(name, EAID);
+        element = new SysmlPackage(name, importId);
         break;
       case SysmlConstants.PARAMETER:
-        element = new Parameter(name, EAID);
+        element = new Parameter(name, importId);
         break;
       case SysmlConstants.PARTICIPANT_PROPERTY:
-        element = new ParticipantProperty(name, EAID);
+        element = new ParticipantProperty(name, importId);
         break;
       case SysmlConstants.PART_PROPERTY:
-        element = new PartProperty(name, EAID);
+        element = new PartProperty(name, importId);
         break;
       case SysmlConstants.PERFORMANCE_REQUIREMENT:
-        element = new PerformanceRequirement(name, EAID);
+        element = new PerformanceRequirement(name, importId);
         break;
       case SysmlConstants.PHYSICAL_REQUIREMENT:
-        element = new PhysicalRequirement(name, EAID);
+        element = new PhysicalRequirement(name, importId);
         break;
       case SysmlConstants.PORT:
-        element = new Port(name, EAID);
+        element = new Port(name, importId);
         break;
       case SysmlConstants.PROFILE:
-        element = new Profile(name, EAID);
+        element = new Profile(name, importId);
         break;
       case SysmlConstants.PROPERTY:
-        element = new Property(name, EAID);
+        element = new Property(name, importId);
         break;
       case SysmlConstants.PROXY_PORT:
-        element = new ProxyPort(name, EAID);
+        element = new ProxyPort(name, importId);
         break;
       case SysmlConstants.QUANTITY_KIND:
-        element = new QuantityKind(name, EAID);
+        element = new QuantityKind(name, importId);
         break;
       case SysmlConstants.REFERENCE_PROPERTY:
-        element = new ReferenceProperty(name, EAID);
+        element = new ReferenceProperty(name, importId);
         break;
       case SysmlConstants.REGION:
-        element = new Region(name, EAID);
+        element = new Region(name, importId);
         break;
       // case SysmlConstants.REQUIRED_INTERFACE:
-      // element = new RequiredInterface(name, EAID);
+      // element = new RequiredInterface(name, importId);
       // break;
       case SysmlConstants.REQUIREMENT:
-        element = new Requirement(name, EAID);
+        element = new Requirement(name, importId);
         break;
       case SysmlConstants.SEND_SIGNAL_ACTION:
-        element = new SendSignalAction(name, EAID);
+        element = new SendSignalAction(name, importId);
         break;
       case SysmlConstants.SHALLOW_HISTORY:
-        element = new ShallowHistory(name, EAID);
+        element = new ShallowHistory(name, importId);
         break;
       case SysmlConstants.SIGNAL:
-        element = new Signal(name, EAID);
+        element = new Signal(name, importId);
         break;
       case SysmlConstants.SIGNAL_EVENT:
-        element = new SignalEvent(name, EAID);
+        element = new SignalEvent(name, importId);
         break;
       case SysmlConstants.SLOT:
-        element = new Slot(name, EAID);
+        element = new Slot(name, importId);
         break;
       case SysmlConstants.STAKEHOLDER:
-        element = new Stakeholder(name, EAID);
+        element = new Stakeholder(name, importId);
         break;
       case SysmlConstants.STATE:
-        element = new State(name, EAID);
+        element = new State(name, importId);
         break;
       case SysmlConstants.STATE_INVARIANT:
-        element = new StateInvariant(name, EAID);
+        element = new StateInvariant(name, importId);
         break;
       case SysmlConstants.STATE_MACHINE:
-        element = new StateMachine(name, EAID);
+        element = new StateMachine(name, importId);
         break;
       case SysmlConstants.STEREOTYPE:
-        element = new Stereotype(name, EAID);
+        element = new Stereotype(name, importId);
         break;
       case SysmlConstants.STRUCTURED_ACTIVITY_NODE:
-        element = new StructuredActivityNode(name, EAID);
+        element = new StructuredActivityNode(name, importId);
         break;
       case SysmlConstants.TERMINATE:
-        element = new Terminate(name, EAID);
+        element = new Terminate(name, importId);
         break;
       case SysmlConstants.TIME_CONSTRAINT:
-        element = new TimeConstraint(name, EAID);
+        element = new TimeConstraint(name, importId);
         break;
       case SysmlConstants.TIME_EVENT:
-        element = new TimeEvent(name, EAID);
+        element = new TimeEvent(name, importId);
         break;
       case SysmlConstants.TIME_EXPRESSION:
-        element = new TimeExpression(name, EAID);
+        element = new TimeExpression(name, importId);
         break;
       case SysmlConstants.TIME_OBSERVATION:
-        element = new TimeObservation(name, EAID);
+        element = new TimeObservation(name, importId);
         break;
       case SysmlConstants.TRIGGER:
-        element = new Trigger(name, EAID);
+        element = new Trigger(name, importId);
         break;
       case SysmlConstants.UNIT:
-        element = new Unit(name, EAID);
+        element = new Unit(name, importId);
         break;
       case SysmlConstants.USABILITY_REQUIREMENT:
-        element = new UsabilityRequirement(name, EAID);
+        element = new UsabilityRequirement(name, importId);
         break;
       case SysmlConstants.USE_CASE:
-        element = new UseCase(name, EAID);
+        element = new UseCase(name, importId);
         break;
       case SysmlConstants.VALUE_PROPERTY:
-        element = new ValueProperty(name, EAID);
+        element = new ValueProperty(name, importId);
         break;
       case SysmlConstants.VALUE_TYPE:
-        element = new ValueType(name, EAID);
+        element = new ValueType(name, importId);
         break;
       case SysmlConstants.VIEW:
-        element = new View(name, EAID);
+        element = new View(name, importId);
         break;
       case SysmlConstants.VIEWPOINT:
-        element = new Viewpoint(name, EAID);
+        element = new Viewpoint(name, importId);
         break;
 
       // Cameo Specific model Elements ************************************************
       case SysmlConstants.DOMAIN:
-        element = new Domain(name, EAID);
+        element = new Domain(name, importId);
         break;
       case SysmlConstants.EXTERNAL:
-        element = new External(name, EAID);
+        element = new External(name, importId);
         break;
       case SysmlConstants.SUBSYSTEM:
-        element = new Subsystem(name, EAID);
+        element = new Subsystem(name, importId);
         break;
       case SysmlConstants.SYSTEM:
-        element = new System(name, EAID);
+        element = new System(name, importId);
         break;
       case SysmlConstants.SYSTEM_CONTEXT:
-        element = new SystemContext(name, EAID);
+        element = new SystemContext(name, importId);
         break;
 
       // DIAGRAMS *********************************************************************
       case SysmlConstants.ACT:
-        element = new ActivityDiagram(name, EAID);
+        element = new ActivityDiagram(name, importId);
         break;
       case SysmlConstants.BDD:
-        element = new BlockDefinitionDiagram(name, EAID);
+        element = new BlockDefinitionDiagram(name, importId);
         break;
       case SysmlConstants.STM:
-        element = new StateMachineDiagram(name, EAID);
+        element = new StateMachineDiagram(name, importId);
         break;
       case SysmlConstants.IBD:
-        element = new InternalBlockDiagram(name, EAID);
+        element = new InternalBlockDiagram(name, importId);
         break;
       case SysmlConstants.UC:
-        element = new UseCaseDiagram(name, EAID);
+        element = new UseCaseDiagram(name, importId);
         break;
       case SysmlConstants.REQ:
-        element = new RequirementsDiagram(name, EAID);
+        element = new RequirementsDiagram(name, importId);
         break;
       case SysmlConstants.SEQ:
-        element = new SequenceDiagram(name, EAID);
+        element = new SequenceDiagram(name, importId);
         break;
       case SysmlConstants.PAR:
-        element = new ParametricDiagram(name, EAID);
+        element = new ParametricDiagram(name, importId);
         break;
       case SysmlConstants.PKG:
-        element = new PackageDiagram(name, EAID);
+        element = new PackageDiagram(name, importId);
         break;
       case SysmlConstants.PROFILEDIAGRAM:
-        element = new ProfileDiagram(name, EAID);
+        element = new ProfileDiagram(name, importId);
         break;
       case SysmlConstants.CLASSDIAGRAM:
-        element = new ClassDiagram(name, EAID);
+        element = new ClassDiagram(name, importId);
         break;
 
       case SysmlConstants.CUSTOM_DIAGRAM:
-        element = new CustomDiagram(name, EAID);
+        element = new CustomDiagram(name, importId);
         break;
 
       // Tables *********************************************************************
       case SysmlConstants.GENERIC_TABLE:
-        element = new GenericTable(name, EAID);
+        element = new GenericTable(name, importId);
         break;
       case CameoConstants.GLOSSARY_TABLE:
-        element = new GlossaryTable(name, EAID);
+        element = new GlossaryTable(name, importId);
         break;
       case SysmlConstants.INSTANCE_TABLE:
-        element = new InstanceTable(name, EAID);
+        element = new InstanceTable(name, importId);
         break;
       case SysmlConstants.METRIC_TABLE:
-        element = new MetricTable(name, EAID);
+        element = new MetricTable(name, importId);
         break;
       case SysmlConstants.REQUIREMENT_TABLE:
-        element = new RequirementTable(name, EAID);
+        element = new RequirementTable(name, importId);
         break;
       // Matrices *********************************************************************
       case SysmlConstants.ALLOCATION_MATRIX:
-        element = new AllocationMatrix(name, EAID);
+        element = new AllocationMatrix(name, importId);
         break;
       case SysmlConstants.DEPENDENCY_MATRIX:
-        element = new DependencyMatrix(name, EAID);
+        element = new DependencyMatrix(name, importId);
         break;
       case SysmlConstants.DERIVE_REQUIREMENT_MATRIX:
-        element = new DeriveRequirementMatrix(name, EAID);
+        element = new DeriveRequirementMatrix(name, importId);
         break;
       case SysmlConstants.REFINE_REQUIREMENT_MATRIX:
-        element = new RefineRequirementMatrix(name, EAID);
+        element = new RefineRequirementMatrix(name, importId);
         break;
       case SysmlConstants.SATISFY_REQUIREMENT_MATRIX:
-        element = new SatisfyRequirementMatrix(name, EAID);
+        element = new SatisfyRequirementMatrix(name, importId);
         break;
       case SysmlConstants.VERIFY_REQUIREMENT_MATRIX:
-        element = new VerifyRequirementMatrix(name, EAID);
+        element = new VerifyRequirementMatrix(name, importId);
         break;
 
       // UAF Elements ******************************************************************
       case UAFConstants.ACHIEVER:
-        element = new Achiever(name, EAID);
+        element = new Achiever(name, importId);
         break;
       case UAFConstants.ACTUAL_ENDURING_TASK:
-        element = new ActualEnduringTask(name, EAID);
+        element = new ActualEnduringTask(name, importId);
         break;
       case UAFConstants.ACTUAL_ENTERPRISE_PHASE:
-        element = new ActualEnterprisePhase(name, EAID);
+        element = new ActualEnterprisePhase(name, importId);
         break;
       case UAFConstants.ARCHITECTURAL_DESCRIPTION:
-        element = new ArchitecturalDescription(name, EAID);
+        element = new ArchitecturalDescription(name, importId);
         break;
       case UAFConstants.CAPABILITY:
-        element = new Capability(name, EAID);
+        element = new Capability(name, importId);
         break;
       case UAFConstants.CAPABILITY_PROPERTY:
-        element = new CapabilityProperty(name, EAID);
+        element = new CapabilityProperty(name, importId);
         break;
       case UAFConstants.DESIRER:
-        element = new Desirer(name, EAID);
+        element = new Desirer(name, importId);
         break;
       case UAFConstants.ENDURING_TASK:
-        element = new EnduringTask(name, EAID);
+        element = new EnduringTask(name, importId);
         break;
       case UAFConstants.ENTERPRISE_GOAL:
-        element = new EnterpriseGoal(name, EAID);
+        element = new EnterpriseGoal(name, importId);
         break;
       case UAFConstants.ENTERPRISE_PHASE:
-        element = new EnterprisePhase(name, EAID);
+        element = new EnterprisePhase(name, importId);
         break;
       case UAFConstants.ENTERPRISE_VISION:
-        element = new EnterpriseVision(name, EAID);
+        element = new EnterpriseVision(name, importId);
         break;
       // Not a part of the UAFP v1.1 Specification
       // case UAFConstants.STRATEGIC_TAXONOMY_PACKAGE:
-      // element = new StrategicTaxonomyPackage(name, EAID);
+      // element = new StrategicTaxonomyPackage(name, importId);
       // break;
       case UAFConstants.STRUCTURAL_PART:
-        element = new StructuralPart(name, EAID);
+        element = new StructuralPart(name, importId);
         break;
       case UAFConstants.TEMPORAL_PART:
-        element = new TemporalPart(name, EAID);
+        element = new TemporalPart(name, importId);
         break;
       case UAFConstants.VISION_STATEMENT:
-        element = new VisionStatement(name, EAID);
+        element = new VisionStatement(name, importId);
         break;
       case UAFConstants.WHOLE_LIFE_ENTERPRISE:
-        element = new WholeLifeEnterprise(name, EAID);
+        element = new WholeLifeEnterprise(name, importId);
         break;
       // Operational
       case UAFConstants.CONCEPT_ROLE:
-        element = new ConceptRole(name, EAID);
+        element = new ConceptRole(name, importId);
         break;
       case UAFConstants.OPERATIONAL_EXCHANGE_KIND:
-        element = new OperationalExchangeKind(name, EAID);
+        element = new OperationalExchangeKind(name, importId);
         break;
       case UAFConstants.HIGH_LEVEL_OPERATIONAL_CONCEPT:
-        element = new HighLevelOperationalConcept(name, EAID);
+        element = new HighLevelOperationalConcept(name, importId);
         break;
       case UAFConstants.INFORMATION_ELEMENT:
-        element = new InformationElement(name, EAID);
+        element = new InformationElement(name, importId);
         break;
       case UAFConstants.KNOWN_RESOURCE:
-        element = new KnownResource(name, EAID);
+        element = new KnownResource(name, importId);
         break;
       case UAFConstants.OPERATIONAL_ACTIVITY:
-        element = new OperationalActivity(name, EAID);
+        element = new OperationalActivity(name, importId);
         break;
       case UAFConstants.OPERATIONAL_ACTIVITY_ACTION:
-        element = new OperationalActivityAction(name, EAID);
+        element = new OperationalActivityAction(name, importId);
         break;
       case UAFConstants.OPERATIONAL_AGENT:
-        element = new OperationalAgent(name, EAID);
+        element = new OperationalAgent(name, importId);
         break;
       case UAFConstants.OPERATIONAL_ARCHITECTURE:
-        element = new OperationalArchitecture(name, EAID);
+        element = new OperationalArchitecture(name, importId);
         break;
       case UAFConstants.OPERATIONAL_INTERFACE:
-        element = new OperationalInterface(name, EAID);
+        element = new OperationalInterface(name, importId);
         break;
       case UAFConstants.OPERATIONAL_PERFORMER:
-        element = new OperationalPerformer(name, EAID);
+        element = new OperationalPerformer(name, importId);
         break;
       case UAFConstants.OPERATIONAL_ROLE:
-        element = new OperationalRole(name, EAID);
+        element = new OperationalRole(name, importId);
         break;
       case UAFConstants.OPERATIONAL_SIGNAL:
-        element = new OperationalSignal(name, EAID);
+        element = new OperationalSignal(name, importId);
         break;
       case UAFConstants.OPERATIONAL_SIGNAL_PROPERTY:
-        element = new OperationalSignalProperty(name, EAID);
+        element = new OperationalSignalProperty(name, importId);
         break;
       case UAFConstants.STANDARD_OPERATIONAL_ACTIVITY:
-        element = new StandardOperationalActivity(name, EAID);
+        element = new StandardOperationalActivity(name, importId);
         break;
       case UAFConstants.OPERATIONAL_METHOD:
-        element = new OperationalMethod(name, EAID);
+        element = new OperationalMethod(name, importId);
         break;
       case UAFConstants.PROBLEM_DOMAIN:
-        element = new ProblemDomain(name, EAID);
+        element = new ProblemDomain(name, importId);
         break;
       case UAFConstants.OPERATIONAL_PORT:
-        element = new OperationalPort(name, EAID);
+        element = new OperationalPort(name, importId);
         break;
 
       // UAF Actual Resources
       case UAFConstants.ACTUAL_ORGANIZATION:
-        element = new ActualOrganization(name, EAID);
+        element = new ActualOrganization(name, importId);
         break;
       case UAFConstants.ACTUAL_PERSON:
-        element = new ActualPerson(name, EAID);
+        element = new ActualPerson(name, importId);
         break;
       case UAFConstants.ACTUAL_POST:
-        element = new ActualPost(name, EAID);
+        element = new ActualPost(name, importId);
         break;
       case UAFConstants.ACTUAL_RESOURCE:
-        element = new ActualResource(name, EAID);
+        element = new ActualResource(name, importId);
         break;
       case UAFConstants.ACTUAL_RESPONSIBILITY:
-        element = new ActualResponsibility(name, EAID);
+        element = new ActualResponsibility(name, importId);
         break;
       case UAFConstants.ACTUAL_SERVICE:
-        element = new ActualService(name, EAID);
+        element = new ActualService(name, importId);
         break;
       case UAFConstants.FIELDED_CAPABILITY:
-        element = new FieldedCapability(name, EAID);
+        element = new FieldedCapability(name, importId);
         break;
       case UAFConstants.PROVIDED_SERVICE_LEVEL:
-        element = new ProvidedServiceLevel(name, EAID);
+        element = new ProvidedServiceLevel(name, importId);
         break;
       case UAFConstants.REQUIRED_SERVICE_LEVEL:
-        element = new RequiredServiceLevel(name, EAID);
+        element = new RequiredServiceLevel(name, importId);
         break;
 
       // Personnel
       case UAFConstants.COMPETENCE:
-        element = new Competence(name, EAID);
+        element = new Competence(name, importId);
         break;
       case UAFConstants.ORGANIZATION:
-        element = new Organization(name, EAID);
+        element = new Organization(name, importId);
         break;
       case UAFConstants.PERSON:
-        element = new Person(name, EAID);
+        element = new Person(name, importId);
         break;
       case UAFConstants.POST:
-        element = new Post(name, EAID);
+        element = new Post(name, importId);
         break;
       case UAFConstants.RESPONSIBILITY:
-        element = new Responsibility(name, EAID);
+        element = new Responsibility(name, importId);
         break;
 
       // Security
       case UAFConstants.ACTUAL_RISK:
-        element = new ActualRisk(name, EAID);
+        element = new ActualRisk(name, importId);
         break;
       case UAFConstants.ENHANCED_SECURITY_CONTROL:
-        element = new EnhancedSecurityControl(name, EAID);
+        element = new EnhancedSecurityControl(name, importId);
         break;
       case UAFConstants.OPERATIONAL_MITIGATION:
-        element = new OperationalMitigation(name, EAID);
+        element = new OperationalMitigation(name, importId);
         break;
       case UAFConstants.RESOURCE_MITIGATION:
-        element = new ResourceMitigation(name, EAID);
+        element = new ResourceMitigation(name, importId);
         break;
       case UAFConstants.RISK:
-        element = new Risk(name, EAID);
+        element = new Risk(name, importId);
         break;
       case UAFConstants.SECURITY_CONSTRAINT:
-        element = new SecurityConstraint(name, EAID);
+        element = new SecurityConstraint(name, importId);
         break;
       case UAFConstants.SECURITY_CONTROL:
-        element = new SecurityControl(name, EAID);
+        element = new SecurityControl(name, importId);
         break;
       case UAFConstants.SECURITY_CONTROL_FAMILY:
-        element = new SecurityControlFamily(name, EAID);
+        element = new SecurityControlFamily(name, importId);
         break;
       case UAFConstants.SECURITY_ENCLAVE:
-        element = new SecurityEnclave(name, EAID);
+        element = new SecurityEnclave(name, importId);
         break;
       case UAFConstants.SECURITY_PROCESS:
-        element = new SecurityProcess(name, EAID);
+        element = new SecurityProcess(name, importId);
         break;
       case UAFConstants.SECURITY_PROCESS_ACTION:
-        element = new SecurityProcessAction(name, EAID);
+        element = new SecurityProcessAction(name, importId);
         break;
 
       // Services
       case UAFConstants.SERVICE_FUNCTION:
-        element = new ServiceFunction(name, EAID);
+        element = new ServiceFunction(name, importId);
         break;
       case UAFConstants.SERVICE_FUNCTION_ACTION:
-        element = new ServiceFunctionAction(name, EAID);
+        element = new ServiceFunctionAction(name, importId);
         break;
       case UAFConstants.SERVICE_INTERFACE:
-        element = new ServiceInterface(name, EAID);
+        element = new ServiceInterface(name, importId);
         break;
       case UAFConstants.SERVICE_METHOD:
-        element = new ServiceMethod(name, EAID);
+        element = new ServiceMethod(name, importId);
         break;
       case UAFConstants.SERVICE_PARAMETER:
-        element = new ServiceParameter(name, EAID);
+        element = new ServiceParameter(name, importId);
         break;
       case UAFConstants.SERVICE_POLICY:
-        element = new ServicePolicy(name, EAID);
+        element = new ServicePolicy(name, importId);
         break;
       case UAFConstants.SERVICE_PORT:
-        element = new ServicePort(name, EAID);
+        element = new ServicePort(name, importId);
         break;
       case UAFConstants.SERVICE_SPECIFICATION:
-        element = new ServiceSpecification(name, EAID);
+        element = new ServiceSpecification(name, importId);
         break;
       case UAFConstants.SERVICE_SPECIFICATION_ROLE:
-        element = new ServiceSpecificationRole(name, EAID);
+        element = new ServiceSpecificationRole(name, importId);
         break;
       case UAFConstants.SERVICE_STATE_DESCRIPTION:
-        element = new ServiceStateDescription(name, EAID);
+        element = new ServiceStateDescription(name, importId);
         break;
       // UAF Diagrams
       // Actual Resources
       case UAFConstants.ACTUAL_RESOURCES_CONNECTIVITY_DIAGRAM:
-        element = new ActualResourcesConnectivity(name, EAID);
+        element = new ActualResourcesConnectivity(name, importId);
         break;
       case UAFConstants.ACTUAL_RESOURCES_STRUCTURE_DIAGRAM:
-        element = new ActualResourcesStructure(name, EAID);
+        element = new ActualResourcesStructure(name, importId);
         break;
       // Personnel
       case UAFConstants.PERSONNEL_CONNECTIVITY_DIAGRAM:
-        element = new PersonnelConnectivity(name, EAID);
+        element = new PersonnelConnectivity(name, importId);
         break;
       case UAFConstants.PERSONNEL_INTERACTION_SCENARIOS_DIAGRAM:
-        element = new PersonnelInteractionScenarios(name, EAID);
+        element = new PersonnelInteractionScenarios(name, importId);
         break;
       case UAFConstants.PERSONNEL_INTERNAL_CONNECTIVITY_DIAGRAM:
-        element = new PersonnelInternalConnectivity(name, EAID);
+        element = new PersonnelInternalConnectivity(name, importId);
       case UAFConstants.PERSONNEL_PROCESSES_DIAGRAM:
-        element = new PersonnelProcesses(name, EAID);
+        element = new PersonnelProcesses(name, importId);
         break;
       case UAFConstants.PERSONNEL_PROCESSES_FLOW_DIAGRAM:
-        element = new PersonnelProcesses(name, EAID);
+        element = new PersonnelProcesses(name, importId);
         break;
       case UAFConstants.PERSONNEL_STATES_DIAGRAM:
-        element = new PersonnelStates(name, EAID);
+        element = new PersonnelStates(name, importId);
         break;
       case UAFConstants.PERSONNEL_STRUCTURE_DIAGRAM:
-        element = new PersonnelStructure(name, EAID);
+        element = new PersonnelStructure(name, importId);
         break;
       case UAFConstants.PERSONNEL_TAXONOMY_DIAGRAM:
-        element = new PersonnelTaxonomy(name, EAID);
+        element = new PersonnelTaxonomy(name, importId);
         break;
       // Projects Diagrams
       // case UAFConstants.PROJECTS_TAXONOMY_DIAGRAM:
-      // element = new ProjectsTaxonomy(name, EAID);
+      // element = new ProjectsTaxonomy(name, importId);
       // break;
       // case UAFConstants.PROJECTS_STRUCTURE_DIAGRAM:
-      // element = new ProjectsStructure(name, EAID);
+      // element = new ProjectsStructure(name, importId);
       // break;
       // case UAFConstants.PROJECTS_CONNECTIVITY_DIAGRAM:
-      // element = new ProjectsConnectivity(name, EAID);
+      // element = new ProjectsConnectivity(name, importId);
       // break;
       // case UAFConstants.PROJECTS_PROCESSES_DIAGRAM:
-      // element = new ProjectsProcesses(name, EAID);
+      // element = new ProjectsProcesses(name, importId);
       // break;
       // Resources Diagrams
       // case UAFConstants.RESOURCES_CONNECTIVITY_DIAGRAM:
-      // element = new ResourcesConnectivity(name, EAID);
+      // element = new ResourcesConnectivity(name, importId);
       // break;
       // case UAFConstants.RESOURCES_INTERACTION_SCENARIOS_DIAGRAM:
-      // element = new ResourcesInteractionScenarios(name, EAID);
+      // element = new ResourcesInteractionScenarios(name, importId);
       // break;
       // case UAFConstants.RESOURCES_PROCESSES_DIAGRAM:
-      // element = new ResourcesProcesses(name, EAID);
+      // element = new ResourcesProcesses(name, importId);
       // break;
       // case UAFConstants.RESOURCES_STATES_DIAGRAM:
-      // element = new ResourcesStates(name, EAID);
+      // element = new ResourcesStates(name, importId);
       // break;
       // case UAFConstants.RESOURCES_STRUCTURE_DIAGRAM:
-      // element = new ResourcesStructure(name, EAID);
+      // element = new ResourcesStructure(name, importId);
       // break;
       // case UAFConstants.RESOURCES_TAXONOMY_DIAGRAM:
-      // element = new ResourcesTaxonomy(name, EAID);
+      // element = new ResourcesTaxonomy(name, importId);
       // break;
       // Strategic Diagrams
       case UAFConstants.STRATEGIC_STRUCTURE_DIAGRAM:
-        element = new StrategicStructure(name, EAID);
+        element = new StrategicStructure(name, importId);
         break;
       case UAFConstants.STRATEGIC_TAXONOMY_DIAGRAM:
-        element = new StrategicTaxonomy(name, EAID);
+        element = new StrategicTaxonomy(name, importId);
         break;
       case UAFConstants.STRATEGIC_CONNECTIVITY_DIAGRAM:
-        element = new StrategicConnectivity(name, EAID);
+        element = new StrategicConnectivity(name, importId);
         break;
       case UAFConstants.STRATEGIC_STATES_DIAGRAM:
-        element = new StrategicStates(name, EAID);
+        element = new StrategicStates(name, importId);
         break;
       case UAFConstants.STRATEGIC_CONSTRAINTS_DIAGRAM:
-        element = new StrategicConstraints(name, EAID);
+        element = new StrategicConstraints(name, importId);
         break;
       // Security
       case UAFConstants.SECURITY_TAXONOMY_DIAGRAM:
-        element = new SecurityTaxonomy(name, EAID);
+        element = new SecurityTaxonomy(name, importId);
         break;
       case UAFConstants.SECURITY_STRUCTURE_DIAGRAM:
-        element = new SecurityStructure(name, EAID);
+        element = new SecurityStructure(name, importId);
         break;
       case UAFConstants.SECURITY_CONNECTIVITY_DIAGRAM:
-        element = new SecurityConnectivity(name, EAID);
+        element = new SecurityConnectivity(name, importId);
         break;
       case UAFConstants.SECURITY_PROCESSES_DIAGRAM:
-        element = new SecurityProcesses(name, EAID);
+        element = new SecurityProcesses(name, importId);
         break;
       case UAFConstants.SECURITY_PROCESSES_FLOW_DIAGRAM:
-        element = new SecurityProcessesFlow(name, EAID);
+        element = new SecurityProcessesFlow(name, importId);
         break;
       case UAFConstants.SECURITY_CONSTRAINTS_DIAGRAM:
-        element = new SecurityConstraints(name, EAID);
+        element = new SecurityConstraints(name, importId);
         break;
 
       // Services Diagrams
       case UAFConstants.SERVICES_CONNECTIVITY_DIAGRAM:
-        element = new ServicesConnectivity(name, EAID);
+        element = new ServicesConnectivity(name, importId);
         break;
       case UAFConstants.SERVICES_CONSTRAINTS_DEFINITION_DIAGRAM:
-        element = new ServicesConstraintsDefinition(name, EAID);
+        element = new ServicesConstraintsDefinition(name, importId);
         break;
       case UAFConstants.SERVICES_INTERACTION_SCENARIOS_DIAGRAM:
-        element = new ServicesInteractionScenarios(name, EAID);
+        element = new ServicesInteractionScenarios(name, importId);
         break;
       case UAFConstants.SERVICES_PROCESSES_DIAGRAM:
-        element = new ServicesProcesses(name, EAID);
+        element = new ServicesProcesses(name, importId);
         break;
       case UAFConstants.SERVICES_STATES_DIAGRAM:
-        element = new ServicesStates(name, EAID);
+        element = new ServicesStates(name, importId);
         break;
       case UAFConstants.SERVICES_STRUCTURE_DIAGRAM:
-        element = new ServicesStructure(name, EAID);
+        element = new ServicesStructure(name, importId);
         break;
       case UAFConstants.SERVICES_TAXONOMY_DIAGRAM:
-        element = new ServicesTaxonomy(name, EAID);
+        element = new ServicesTaxonomy(name, importId);
         break;
       // Summary and Overview Diagrams
       case UAFConstants.SUMMARY_AND_OVERVIEW_DIAGRAM:
-        element = new SummaryAndOverview(name, EAID);
+        element = new SummaryAndOverview(name, importId);
         break;
       // DoDAF Diagram
       case DoDAFConstants.CV1:
-        element = new CV1(name, EAID);
+        element = new CV1(name, importId);
         break;
       case DoDAFConstants.CV2:
-        element = new CV2(name, EAID);
+        element = new CV2(name, importId);
         break;
       case DoDAFConstants.CV3:
-        element = new CV3(name, EAID);
+        element = new CV3(name, importId);
         break;
       case DoDAFConstants.CV4:
-        element = new CV4(name, EAID);
+        element = new CV4(name, importId);
         break;
       case DoDAFConstants.CV5:
-        element = new CV5(name, EAID);
+        element = new CV5(name, importId);
         break;
       case DoDAFConstants.CV6:
-        element = new CV6(name, EAID);
+        element = new CV6(name, importId);
         break;
       case DoDAFConstants.CV7:
-        element = new CV7(name, EAID);
+        element = new CV7(name, importId);
         break;
       case DoDAFConstants.SV1:
-        element = new SV1(name, EAID);
+        element = new SV1(name, importId);
         break;
       case DoDAFConstants.SV2:
-        element = new SV2(name, EAID);
+        element = new SV2(name, importId);
         break;
       case DoDAFConstants.SV4:
-        element = new SV4(name, EAID);
+        element = new SV4(name, importId);
         break;
       case DoDAFConstants.SV10A:
-        element = new SV10a(name, EAID);
+        element = new SV10a(name, importId);
         break;
       case DoDAFConstants.SV10B:
-        element = new SV10b(name, EAID);
+        element = new SV10b(name, importId);
         break;
       case DoDAFConstants.SV10C:
-        element = new SV10c(name, EAID);
+        element = new SV10c(name, importId);
         break;
       case DoDAFConstants.OV1:
-        element = new OV1(name, EAID);
+        element = new OV1(name, importId);
         break;
       case DoDAFConstants.OV2:
-        element = new OV2(name, EAID);
+        element = new OV2(name, importId);
         break;
       case DoDAFConstants.OV3:
-        element = new OV3(name, EAID);
+        element = new OV3(name, importId);
         break;
       case DoDAFConstants.OV4:
-        element = new OV4(name, EAID);
+        element = new OV4(name, importId);
         break;
       case DoDAFConstants.OV5A:
-        element = new OV5a(name, EAID);
+        element = new OV5a(name, importId);
         break;
       case DoDAFConstants.OV5B:
-        element = new OV5b(name, EAID);
+        element = new OV5b(name, importId);
         break;
       case DoDAFConstants.OV6A:
-        element = new OV6a(name, EAID);
+        element = new OV6a(name, importId);
         break;
       case DoDAFConstants.OV6B:
-        element = new OV6b(name, EAID);
+        element = new OV6b(name, importId);
         break;
       case DoDAFConstants.OV6C:
-        element = new OV6c(name, EAID);
+        element = new OV6c(name, importId);
         break;
       case DoDAFConstants.AV1:
-        element = new AV1(name, EAID);
+        element = new AV1(name, importId);
         break;
       case DoDAFConstants.AV2:
-        element = new AV2(name, EAID);
+        element = new AV2(name, importId);
         break;
       case DoDAFConstants.DIV1:
-        element = new DIV1(name, EAID);
+        element = new DIV1(name, importId);
         break;
       case DoDAFConstants.DIV2:
-        element = new DIV2(name, EAID);
+        element = new DIV2(name, importId);
         break;
       case DoDAFConstants.DIV3:
-        element = new DIV3(name, EAID);
+        element = new DIV3(name, importId);
         break;
       case DoDAFConstants.PV1:
-        element = new PV1(name, EAID);
+        element = new PV1(name, importId);
         break;
       case DoDAFConstants.PV2:
-        element = new PV2(name, EAID);
+        element = new PV2(name, importId);
         break;
       case DoDAFConstants.PV3:
-        element = new PV3(name, EAID);
+        element = new PV3(name, importId);
         break;
       case UAFConstants.OPERATIONAL_CONSTRAINT:
-        element = new OperationalConstraint(name, EAID);
+        element = new OperationalConstraint(name, importId);
         break;
       case UAFConstants.OPERATIONAL_STATE_DESCRIPTION:
-        element = new OperationalStateDescription(name, EAID);
+        element = new OperationalStateDescription(name, importId);
         break;
       case UAFConstants.OPERATIONAL_PARAMETER:
-        element = new OperationalParameter(name, EAID);
+        element = new OperationalParameter(name, importId);
         break;
       case UAFConstants.OPERATIONAL_ACTION:
-        element = new OperationalAction(name, EAID);
+        element = new OperationalAction(name, importId);
         break;
       // Operational Diagrams
       case UAFConstants.OPERATIONAL_PROCESS_FLOW:
-        element = new OperationalProcessFlow(name, EAID);
+        element = new OperationalProcessFlow(name, importId);
         break;
       case UAFConstants.OPERATIONAL_CONNECTIVITY:
-        element = new OperationalConnectivity(name, EAID);
+        element = new OperationalConnectivity(name, importId);
         break;
       case UAFConstants.OPERATIONAL_CONSTRAINTS_DEFINITION:
-        element = new OperationalConstraintsDefinition(name, EAID);
+        element = new OperationalConstraintsDefinition(name, importId);
         break;
       case UAFConstants.OPERATIONAL_FREE_FORM_TAXONOMY:
-        element = new OperationalFreeFormTaxonomy(name, EAID);
+        element = new OperationalFreeFormTaxonomy(name, importId);
         break;
       case UAFConstants.OPERATIONAL_PROCESSES_DIAGRAM:
-        element = new OperationalProcesses(name, EAID);
+        element = new OperationalProcesses(name, importId);
         break;
       case UAFConstants.OPERATIONAL_STRUCTURE:
-        element = new OperationalStructure(name, EAID);
+        element = new OperationalStructure(name, importId);
         break;
       case UAFConstants.OPERATIONAL_TAXONOMY:
-        element = new OperationalTaxonomy(name, EAID);
+        element = new OperationalTaxonomy(name, importId);
         break;
       case UAFConstants.OPERATIONAL_HIGH_LEVEL_TAXONOMY:
-        element = new OperationalHighLevelTaxonomy(name, EAID);
+        element = new OperationalHighLevelTaxonomy(name, importId);
         break;
       case UAFConstants.OPERATIONAL_INTERACTION_SCENARIOS:
-        element = new OperationalInteractionScenarios(name, EAID);
+        element = new OperationalInteractionScenarios(name, importId);
         break;
       case UAFConstants.OPERATIONAL_INTERNAL_CONNECTIVITY:
-        element = new OperationalInternalConnectivity(name, EAID);
+        element = new OperationalInternalConnectivity(name, importId);
         break;
       case UAFConstants.OPERATIONAL_PARAMETRIC:
-        element = new OperationalParametric(name, EAID);
+        element = new OperationalParametric(name, importId);
         break;
       case UAFConstants.OPERATIONAL_STATES:
-        element = new OperationalStates(name, EAID);
+        element = new OperationalStates(name, importId);
         break;
       // Parameter Diagrams
       case UAFConstants.ENVIRONMENT_DIAGRAM:
-        element = new EnvironmentDiagram(name, EAID);
+        element = new EnvironmentDiagram(name, importId);
         break;
       // Resources
       case UAFConstants.CAPABILITY_CONFIGURATION:
-        element = new CapabilityConfiguration(name, EAID);
+        element = new CapabilityConfiguration(name, importId);
         break;
       case UAFConstants.NATURAL_RESOURCE:
-        element = new NaturalResource(name, EAID);
+        element = new NaturalResource(name, importId);
         break;
       case UAFConstants.RESOURCE_ARCHITECTURE:
-        element = new ResourceArchitecture(name, EAID);
+        element = new ResourceArchitecture(name, importId);
         break;
       case UAFConstants.RESOURCE_ARTIFACT:
-        element = new ResourceArtifact(name, EAID);
+        element = new ResourceArtifact(name, importId);
         break;
       case UAFConstants.SOFTWARE:
-        element = new Software(name, EAID);
+        element = new Software(name, importId);
         break;
       // TODO: Fix conflcit between UAFConstants.SYSTEM and MD System
       // case UAFConstants.SYSTEM:
-      // element = new System(name, EAID);
+      // element = new System(name, importId);
       // break;
       case UAFConstants.RESOURCE_INTERFACE:
-        element = new ResourceInterface(name, EAID);
+        element = new ResourceInterface(name, importId);
         break;
       case UAFConstants.DATA_ELEMENT:
-        element = new DataElement(name, EAID);
+        element = new DataElement(name, importId);
         break;
       case UAFConstants.TECHNOLOGY:
-        element = new Technology(name, EAID);
+        element = new Technology(name, importId);
         break;
       case UAFConstants.WHOLE_LIFE_CONFIGURATION:
-        element = new WholeLifeConfiguration(name, EAID);
+        element = new WholeLifeConfiguration(name, importId);
         break;
       case UAFConstants.RESOURCE_METHOD:
-        element = new ResourceMethod(name, EAID);
+        element = new ResourceMethod(name, importId);
         break;
       case UAFConstants.RESOURCE_PARAMETER:
-        element = new ResourceParameter(name, EAID);
+        element = new ResourceParameter(name, importId);
         break;
       case UAFConstants.RESOURCE_PORT:
-        element = new ResourcePort(name, EAID);
+        element = new ResourcePort(name, importId);
         break;
       case UAFConstants.RESOURCE_ROLE:
-        element = new ResourceRole(name, EAID);
+        element = new ResourceRole(name, importId);
         break;
       case UAFConstants.ROLE_KIND:
-        element = new RoleKind(name, EAID);
+        element = new RoleKind(name, importId);
         break;
       case UAFConstants.RESOURCE_EXCHANGE_KIND:
-        element = new ResourceExchangeKind(name, EAID);
+        element = new ResourceExchangeKind(name, importId);
         break;
       case UAFConstants.RESOURCE_SIGNAL:
-        element = new ResourceSignal(name, EAID);
+        element = new ResourceSignal(name, importId);
         break;
       case UAFConstants.RESOURCE_SIGNAL_PROPERTY:
-        element = new ResourceSignalProperty(name, EAID);
+        element = new ResourceSignalProperty(name, importId);
         break;
       case UAFConstants.FUNCTION:
-        element = new Function(name, EAID);
+        element = new Function(name, importId);
         break;
       case UAFConstants.FUNCTION_ACTION:
-        element = new FunctionAction(name, EAID);
+        element = new FunctionAction(name, importId);
         break;
       case UAFConstants.RESOURCE_STATE_DESCRIPTION:
-        element = new ResourceStateDescription(name, EAID);
+        element = new ResourceStateDescription(name, importId);
         break;
       case UAFConstants.RESOURCE_CONSTRAINT:
-        element = new ResourceConstraint(name, EAID);
+        element = new ResourceConstraint(name, importId);
         break;
       case UAFConstants.VERSION_OF_CONFIGURATION:
-        element = new VersionOfConfiguration(name, EAID);
+        element = new VersionOfConfiguration(name, importId);
         break;
       case UAFConstants.WHOLE_LIFE_CONFIGURATION_KIND:
-        element = new WholeLifeConfigurationKind(name, EAID);
+        element = new WholeLifeConfigurationKind(name, importId);
         break;
       case UAFConstants.RESOURCE_ACTION:
-        element = new ResourceAction(name, EAID);
+        element = new ResourceAction(name, importId);
         break;
       case UAFConstants.RESOURCES_PROCESS_FLOW:
-        element = new ResourcesProcessFlow(name, EAID);
+        element = new ResourcesProcessFlow(name, importId);
         break;
       case UAFConstants.ACTUAL_MILESTONE_KIND:
-        element = new ActualMilestoneKind(name, EAID);
+        element = new ActualMilestoneKind(name, importId);
         break;
       case UAFConstants.PROJECT:
-        element = new Project(name, EAID);
+        element = new Project(name, importId);
         break;
       case UAFConstants.PROJECT_KIND:
-        element = new Project(name, EAID);
+        element = new Project(name, importId);
         break;
       case UAFConstants.PROJECT_MILESTONE:
-        element = new ProjectMilestone(name, EAID);
+        element = new ProjectMilestone(name, importId);
         break;
       case UAFConstants.PROJECT_MILESTONE_ROLE:
-        element = new ProjectMilestoneRole(name, EAID);
+        element = new ProjectMilestoneRole(name, importId);
         break;
       case UAFConstants.PROJECT_ROLE:
-        element = new ProjectRole(name, EAID);
+        element = new ProjectRole(name, importId);
         break;
       case UAFConstants.PROJECT_THEME:
-        element = new ProjectTheme(name, EAID);
+        element = new ProjectTheme(name, importId);
         break;
       case UAFConstants.PROJECT_ACTIVITY:
-        element = new ProjectActivity(name, EAID);
+        element = new ProjectActivity(name, importId);
         break;
       case UAFConstants.PROJECT_ACTIVITY_ACTION:
-        element = new ProjectActivityAction(name, EAID);
+        element = new ProjectActivityAction(name, importId);
         break;
       case UAFConstants.PROJECT_STATUS:
-        element = new ProjectStatus(name, EAID);
+        element = new ProjectStatus(name, importId);
         break;
       case UAFConstants.ACTUAL_PROJECT_MILESTONE_ROLE:
-        element = new ActualProjectMilestoneRole(name, EAID);
+        element = new ActualProjectMilestoneRole(name, importId);
         break;
       case UAFConstants.ACTUAL_PROJECT_ROLE:
-        element = new ActualProjectRole(name, EAID);
+        element = new ActualProjectRole(name, importId);
         break;
       case UAFConstants.STATUS_INDICATORS:
-        element = new StatusIndicators(name, EAID);
+        element = new StatusIndicators(name, importId);
         break;
       case UAFConstants.ACTUAL_PROJECT:
-        element = new ActualProject(name, EAID);
+        element = new ActualProject(name, importId);
         break;
       case UAFConstants.ACTUAL_PROJECT_MILESTONE:
-        element = new ActualProjectMilestone(name, EAID);
+        element = new ActualProjectMilestone(name, importId);
         break;
       // Definition
       case UAFConstants.DEFINITION:
-        element = new Definition(name, EAID);
+        element = new Definition(name, importId);
         break;
       case UAFConstants.ALIAS:
-        element = new Alias(name, EAID);
+        element = new Alias(name, importId);
         break;
       case UAFConstants.INFORMATION:
-        element = new Information(name, EAID);
+        element = new Information(name, importId);
         break;
       // Standards
       case UAFConstants.PROTOCOL:
-        element = new Protocol(name, EAID);
+        element = new Protocol(name, importId);
         break;
       case UAFConstants.PROTOCOL_STACK:
-        element = new ProtocolStack(name, EAID);
+        element = new ProtocolStack(name, importId);
         break;
       case UAFConstants.STANDARD:
-        element = new Standard(name, EAID);
+        element = new Standard(name, importId);
         break;
       case UAFConstants.PROTOCOL_LAYER:
-        element = new ProtocolLayer(name, EAID);
+        element = new ProtocolLayer(name, importId);
         break;
       case UAFConstants.STANDARDS_TAXONOMY_DIAGRAM:
-        element = new StandardsTaxonomy(name, EAID);
+        element = new StandardsTaxonomy(name, importId);
         break;
       case UAFConstants.STANDARDS_STRUCTURE_DIAGRAM:
-        element = new StandardsStructure(name, EAID);
+        element = new StandardsStructure(name, importId);
         break;
 
       // Parameters
       case UAFConstants.ACTUAL_CONDITION:
-        element = new ActualCondition(name, EAID);
+        element = new ActualCondition(name, importId);
         break;
       case UAFConstants.ACTUAL_ENVIRONMENT:
-        element = new ActualEnvironment(name, EAID);
+        element = new ActualEnvironment(name, importId);
         break;
       case UAFConstants.ACTUAL_LOCATION:
-        element = new ActualLocation(name, EAID);
+        element = new ActualLocation(name, importId);
         break;
       case UAFConstants.ACTUAL_MEASUREMENT_SET:
-        element = new ActualMeasurementSet(name, EAID);
+        element = new ActualMeasurementSet(name, importId);
         break;
       case UAFConstants.ACTUAL_PROPERTY_SET:
-        element = new ActualPropertySet(name, EAID);
+        element = new ActualPropertySet(name, importId);
         break;
       case UAFConstants.ENVIRONMENT_PROPERTY:
-        element = new EnvironmentProperty(name, EAID);
+        element = new EnvironmentProperty(name, importId);
         break;
       case UAFConstants.ACTUAL_MEASUREMENT:
-        element = new ActualMeasurement(name, EAID);
+        element = new ActualMeasurement(name, importId);
         break;
       case UAFConstants.ENVIRONMENT:
-        element = new Environment(name, EAID);
+        element = new Environment(name, importId);
         break;
       case UAFConstants.ENVIRONMENT_KIND:
-        element = new EnvironmentKind(name, EAID);
+        element = new EnvironmentKind(name, importId);
         break;
       case UAFConstants.CONDITION:
-        element = new Condition(name, EAID);
+        element = new Condition(name, importId);
         break;
       case UAFConstants.GEO_POLITICAL_EXTENT_TYPE:
-        element = new GeoPoliticalExtentType(name, EAID);
+        element = new GeoPoliticalExtentType(name, importId);
         break;
       case UAFConstants.LOCATION:
-        element = new Location(name, EAID);
+        element = new Location(name, importId);
         break;
       case UAFConstants.MEASUREMENT_SET:
-        element = new MeasurementSet(name, EAID);
+        element = new MeasurementSet(name, importId);
         break;
       case UAFConstants.MEASUREMENT:
-        element = new Measurement(name, EAID);
+        element = new Measurement(name, importId);
         break;
 
       // Metadata
       case UAFConstants.METADATA:
-        element = new Metadata(name, EAID);
+        element = new Metadata(name, importId);
         break;
       case UAFConstants.DATA_MODEL_KIND:
-        element = new DataModelKind(name, EAID);
+        element = new DataModelKind(name, importId);
         break;
 
       // Cameo-specific
       case CameoConstants.TERM:
-        element = new Term(name, EAID);
+        element = new Term(name, importId);
         break;
         
       default:

@@ -9,8 +9,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class CustomDiagram extends AbstractDiagram {
 
-	public CustomDiagram(String name, String EAID) {
-		super(name, EAID);
+	public CustomDiagram(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.CUSTOM_DIAGRAM;
 	}
 	

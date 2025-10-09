@@ -7,8 +7,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class Viewpoint extends CommonElement {
 
-	public Viewpoint(String name, String EAID) {
-		super(name, EAID);
+	public Viewpoint(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.VIEWPOINT;
 		this.xmlConstant = XmlTagConstants.VIEWPOINT;

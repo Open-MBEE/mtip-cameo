@@ -12,8 +12,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class InformationFlow extends CommonRelationship {
 
-	public InformationFlow(String name, String EAID) {
-		super(name, EAID);
+	public InformationFlow(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INFORMATION_FLOW;
 		this.xmlConstant = XmlTagConstants.INFORMATIONFLOW;

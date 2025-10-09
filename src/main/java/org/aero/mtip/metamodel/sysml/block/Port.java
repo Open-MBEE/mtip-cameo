@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TypedElement;
 
 public class Port extends CommonElement {
-	public Port(String name, String EAID)  {
-		super(name, EAID);
+	public Port(String name, String importId)  {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PORT;
 		this.xmlConstant = XmlTagConstants.PORT;
@@ -51,7 +51,7 @@ public class Port extends CommonElement {
 				element.setOwner(project.getPrimaryModel());
 			}
 		} catch(IllegalArgumentException iae) {
-			String logMessage = "Invalid parent. Parent must be block " + name + " with id " + EAID + ". Element could not be placed in model.";
+			String logMessage = "Invalid parent. Parent must be block " + name + " with id " + importId + ". Element could not be placed in model.";
 			Logger.log(logMessage);
 			ModelHelper.dispose(Arrays.asList(element));
 		}

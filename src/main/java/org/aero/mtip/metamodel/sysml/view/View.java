@@ -7,8 +7,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class View extends CommonElement {
 
-	public View(String name, String EAID) {
-		super(name, EAID);
+	public View(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.VIEW;
 		this.xmlConstant = XmlTagConstants.VIEW;

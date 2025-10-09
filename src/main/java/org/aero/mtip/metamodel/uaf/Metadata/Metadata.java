@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Comment;
 
 public class Metadata extends Comment {
 
-	public Metadata(String name, String EAID) {
-		super(name, EAID);
+	public Metadata(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.METADATA;
 		this.xmlConstant = XmlTagConstants.METADATA;
 	}

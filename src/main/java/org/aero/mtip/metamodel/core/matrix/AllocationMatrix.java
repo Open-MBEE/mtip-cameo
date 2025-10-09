@@ -14,8 +14,8 @@ import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class AllocationMatrix extends AbstractMatrix {
-	public AllocationMatrix(String name, String EAID) {
-		super(name, EAID);
+	public AllocationMatrix(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.ALLOCATION_MATRIX;
 		this.xmlConstant = XmlTagConstants.ALLOCATION_MATRIX;
 		this.cameoConstant = SysmlConstants.CAMEO_ALLOCATION_MATRIX;

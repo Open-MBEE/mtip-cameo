@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ClassDiagram;
 
 public class CV4 extends ClassDiagram {
 
-	public CV4(String name, String EAID) {
-		super(name, EAID);
+	public CV4(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.CV4;
 		this.xmlConstant = XmlTagConstants.CV4;
 		this.cameoDiagramConstant = "CV-4 Capability Dependencies";

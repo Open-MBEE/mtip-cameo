@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.Constraint;
 
 public class SecurityConstraint extends Constraint {
 
-	public SecurityConstraint(String name, String EAID) {
-		super(name, EAID);
+	public SecurityConstraint(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SECURITY_CONSTRAINT;
 		this.xmlConstant = XmlTagConstants.SECURITY_CONSTRAINT;
 	}

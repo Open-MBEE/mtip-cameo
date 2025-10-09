@@ -14,8 +14,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class ActivityParameterNode extends CommonElement {
-  public ActivityParameterNode(String name, String EAID) {
-    super(name, EAID);
+  public ActivityParameterNode(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.ACTIVITY_PARAMETER_NODE;
     this.xmlConstant = XmlTagConstants.ACTIVITY_PARAMETER_NODE;

@@ -20,8 +20,8 @@ import com.nomagic.magicdraw.uml.symbols.paths.PathElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Link extends CommonElement {
-	public Link(String name, String EAID) {
-		super(name, EAID);
+	public Link(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.LINK;
 		this.xmlConstant = XmlTagConstants.LINK;

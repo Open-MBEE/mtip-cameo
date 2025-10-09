@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.Slot;
 
 public class ProjectStatus extends Slot {
 	
-	public ProjectStatus(String name, String EAID) {
-		super(name, EAID);
+	public ProjectStatus(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.PROJECT_STATUS;
 		this.xmlConstant = XmlTagConstants.PROJECT_STATUS;
 	}

@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class StandardsTaxonomy extends BlockDefinitionDiagram {
 	
-	public StandardsTaxonomy(String name, String EAID) {
-		super(name, EAID);
+	public StandardsTaxonomy(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.STANDARDS_TAXONOMY_DIAGRAM;
 		this.xmlConstant = XmlTagConstants.STANDARDS_TAXONOMY_DIAGRAM;
 		this.cameoDiagramConstant = CameoDiagramConstants.STANDARDS_TAXONOMY;

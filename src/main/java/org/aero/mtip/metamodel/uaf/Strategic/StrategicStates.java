@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class StrategicStates extends BlockDefinitionDiagram {
 
-	public StrategicStates(String name, String EAID) {
-		 super(name, EAID);
+	public StrategicStates(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = UAFConstants.STRATEGIC_STATES_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.STRATEGIC_STATES_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.STRATEGIC_STATES;

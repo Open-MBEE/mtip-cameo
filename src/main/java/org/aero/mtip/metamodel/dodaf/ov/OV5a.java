@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 
 public class OV5a extends AbstractDiagram {
 
-	public OV5a(String name, String EAID) {
-		super(name, EAID);
+	public OV5a(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV5A;
 		this.xmlConstant = XmlTagConstants.OV5A;
 		this.cameoDiagramConstant = "OV-5a Operational Activity Decomposition Tree";

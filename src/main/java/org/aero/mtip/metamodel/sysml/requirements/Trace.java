@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class Trace extends CommonDirectedRelationship {
 
-	public Trace(String name, String EAID) {
-		super(name, EAID);
+	public Trace(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.TRACE;
 		this.xmlConstant = XmlTagConstants.TRACE;

@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonDirectedRelationship;
 
 public class Realization extends CommonDirectedRelationship {
 
-    public Realization(String name, String EAID) {
-        super(name, EAID);
+    public Realization(String name, String importId) {
+        super(name, importId);
         this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
         this.metamodelConstant = SysmlConstants.REALIZATION;
         this.xmlConstant = XmlTagConstants.REALIZATION;

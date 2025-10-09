@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Region extends CommonElement {
 
-	public Region(String name, String EAID) {
-		super(name, EAID);
+	public Region(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.REGION;
 		this.xmlConstant = XmlTagConstants.REGION;

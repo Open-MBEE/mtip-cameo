@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class TimeObservation extends CommonElement {
 
-	public TimeObservation(String name, String EAID) {
-		super(name, EAID);
+	public TimeObservation(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.TIME_OBSERVATION;
 		this.xmlConstant = XmlTagConstants.TIMEOBSERVATION;

@@ -5,8 +5,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.profile.DataType;
 
 public class Condition extends DataType {
-	public Condition (String name, String EAID) {
-		super(name, EAID);
+	public Condition (String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.CONDITION;
 		this.xmlConstant = XmlTagConstants.CONDITION;
 	}

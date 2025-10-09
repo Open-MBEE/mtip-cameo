@@ -26,8 +26,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 
 public class InternalBlockDiagram  extends AbstractDiagram{
 
-	public InternalBlockDiagram(String name, String EAID) {
-		 super(name, EAID);
+	public InternalBlockDiagram(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = SysMLConstants.SYSML_INTERNAL_BLOCK_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.INTERNALBLOCKDIAGRAM;
 		 this.cameoDiagramConstant = SysMLConstants.SYSML_INTERNAL_BLOCK_DIAGRAM;

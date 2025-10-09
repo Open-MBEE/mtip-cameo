@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class EntryPoint extends PseudoState {
 
-	public EntryPoint(String name, String EAID) {
-		super(name, EAID);
+	public EntryPoint(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.ENTRYPOINT;
 		this.metamodelConstant = SysmlConstants.ENTRY_POINT;
 		this.xmlConstant = XmlTagConstants.ENTRY_POINT;

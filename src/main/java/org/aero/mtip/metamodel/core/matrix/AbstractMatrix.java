@@ -16,8 +16,8 @@ public abstract class AbstractMatrix extends AbstractDiagram {
 	protected int columnElementTypeCount = 0;
 	protected int rowElementTypeCount = 0;
 	
-	public AbstractMatrix(String name, String EAID) {
-		super(name, EAID);
+	public AbstractMatrix(String name, String importId) {
+		super(name, importId);
 	}
 	
 //	public Element createElement(Project project, Element owner, XMLItem xmlElement) {

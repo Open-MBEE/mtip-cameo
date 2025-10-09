@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class ConstraintProperty extends CommonElement {
 
-	public ConstraintProperty(String name, String EAID) {
-		super(name, EAID);
+	public ConstraintProperty(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.CONSTRAINT_PROPERTY;
 		this.metamodelConstant = SysmlConstants.CONSTRAINT_PROPERTY;
@@ -39,7 +39,7 @@ public class ConstraintProperty extends CommonElement {
 			Element type = Importer.getInstance().buildElement(parsedXML, parsedXML.get(classifierID));
 			modelElement.addAttribute(XmlTagConstants.CLASSIFIER_TYPE, MtipUtils.getId(type));
 		} catch (NullPointerException npe) {
-			Logger.log(String.format("Failed to create/get typed by element for element with id %s", EAID));
+			Logger.log(String.format("Failed to create/get typed by element for element with id %s", importId));
 		}
 	}
 }

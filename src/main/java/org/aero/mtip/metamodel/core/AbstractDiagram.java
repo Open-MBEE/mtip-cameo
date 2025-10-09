@@ -9,7 +9,6 @@
 package org.aero.mtip.metamodel.core;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -87,8 +86,8 @@ public abstract class AbstractDiagram extends CommonElement {
     return cameoToMtipType.get(cameoDiagramConstant);
   }
 
-  public AbstractDiagram(String name, String EAID) {
-    super(name, EAID);
+  public AbstractDiagram(String name, String importId) {
+    super(name, importId);
   }
 
   public String getCameoDiagramConstant() {

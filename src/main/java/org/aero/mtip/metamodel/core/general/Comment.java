@@ -16,8 +16,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Comment extends CommonElement {
 
-	public Comment(String name, String EAID) {
-		super(name, EAID);
+	public Comment(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.COMMENT;
 		this.xmlConstant = XmlTagConstants.COMMENT;

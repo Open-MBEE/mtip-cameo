@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class Command extends Abstraction {
 
-	public Command(String name, String EAID) {
-		super(name, EAID);
+	public Command(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.COMMAND;
 		this.xmlConstant = XmlTagConstants.COMMAND;
 	}

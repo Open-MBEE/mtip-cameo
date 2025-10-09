@@ -4,8 +4,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class SecurityConstraintsDefinition extends BlockDefinitionDiagram {
 
-	public SecurityConstraintsDefinition(String name, String EAID) {
-		super(name, EAID);
+	public SecurityConstraintsDefinition(String name, String importId) {
+		super(name, importId);
 	}
 	
 }

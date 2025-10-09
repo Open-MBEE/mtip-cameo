@@ -21,8 +21,8 @@ import com.nomagic.uml2.ext.magicdraw.interactions.mdfragments.InteractionOperat
 
 public class CombinedFragment extends CommonElement {
 	public static final String newInteractionOperand = "newInteractionOperand";
-	public CombinedFragment(String name, String EAID) {
-		super(name, EAID);
+	public CombinedFragment(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.COMBINED_FRAGMENT;
 		this.xmlConstant = XmlTagConstants.COMBINED_FRAGMENT;

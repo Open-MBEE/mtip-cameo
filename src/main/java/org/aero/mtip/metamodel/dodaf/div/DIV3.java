@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 
 public class DIV3 extends AbstractDiagram {
 
-	public DIV3(String name, String EAID) {
-		super(name, EAID);		
+	public DIV3(String name, String importId) {
+		super(name, importId);		
 		this.metamodelConstant = DoDAFConstants.DIV3;
 		this.xmlConstant = XmlTagConstants.DIV3;
 		this.cameoDiagramConstant = "DIV-3 Physical Data Model";

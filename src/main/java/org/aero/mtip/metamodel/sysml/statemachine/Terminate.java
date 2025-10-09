@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class Terminate extends PseudoState {
 
-	public Terminate(String name, String EAID) {
-		super(name, EAID);
+	public Terminate(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.TERMINATE;		 
 		this.metamodelConstant = SysmlConstants.TERMINATE;
 		this.xmlConstant = XmlTagConstants.TERMINATE;

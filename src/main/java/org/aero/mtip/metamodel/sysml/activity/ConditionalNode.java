@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class ConditionalNode extends ActivityNode {
 
-	public ConditionalNode(String name, String EAID) {
-		super(name, EAID);
+	public ConditionalNode(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CONDITIONAL_NODE;
 		this.xmlConstant = XmlTagConstants.CONDITIONAL_NODE;

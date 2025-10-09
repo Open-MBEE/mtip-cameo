@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class TimeConstraint extends CommonElement {
 
-	public TimeConstraint(String name, String EAID) {
-		super(name, EAID);
+	public TimeConstraint(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.TIME_CONSTRAINT;
 		this.xmlConstant = XmlTagConstants.TIMECONSTRAINT;

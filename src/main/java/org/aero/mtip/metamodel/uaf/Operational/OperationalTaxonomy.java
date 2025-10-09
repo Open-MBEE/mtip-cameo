@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 
 public class OperationalTaxonomy extends AbstractDiagram {
 	
-	public OperationalTaxonomy(String name, String EAID) {
-		super(name, EAID);
+	public OperationalTaxonomy(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_TAXONOMY;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_TAXONOMY;
 		this.cameoDiagramConstant = CameoDiagramConstants.OPERATIONAL_TAXONOMY;

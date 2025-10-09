@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.CallBehaviorAction;
 
 public class ProjectActivityAction extends CallBehaviorAction {
 	
-	public ProjectActivityAction(String name, String EAID) {
-		super(name, EAID);
+	public ProjectActivityAction(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.PROJECT_ACTIVITY_ACTION;
 		this.xmlConstant = XmlTagConstants.PROJECT_ACTIVITY_ACTION;
 	}

@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class ActivityFinalNode extends ActivityNode {
 
-	public ActivityFinalNode(String name, String EAID) {
-		super(name, EAID);
+	public ActivityFinalNode(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.ACTIVITY_FINAL_NODE;
 		this.xmlConstant = XmlTagConstants.ACTIVITY_FINAL_NODE;

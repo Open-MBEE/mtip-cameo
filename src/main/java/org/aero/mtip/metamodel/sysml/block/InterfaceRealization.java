@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonDirectedRelationship;
 
 public class InterfaceRealization extends CommonDirectedRelationship {
 
-	public InterfaceRealization(String name, String EAID) {
-		super(name, EAID);
+	public InterfaceRealization(String name, String importId) {
+		super(name, importId);
 		creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		metamodelConstant = SysmlConstants.INTERFACE_REALIZATION;
 		xmlConstant = XmlTagConstants.INTERFACE_REALIZATION;

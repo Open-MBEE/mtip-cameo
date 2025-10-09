@@ -24,8 +24,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Generalization;
 
 public class ValueType extends CommonElement {
-	public ValueType(String name, String EAID)  {
-		super(name, EAID);
+	public ValueType(String name, String importId)  {
+		super(name, importId);
 		creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		metamodelConstant = SysmlConstants.VALUE_TYPE;
 		xmlConstant = XmlTagConstants.VALUETYPE;
@@ -60,7 +60,7 @@ public class ValueType extends CommonElement {
 	@Override
 	public void applyClassifier() {
 		if (xmlElement == null) {
-			Logger.log(String.format("ERROR: ValueType.xmlElement is null for value type %s. Unable to apply classifier", EAID));
+			Logger.log(String.format("ERROR: ValueType.xmlElement is null for value type %s. Unable to apply classifier", importId));
 			return;
 		}
 		

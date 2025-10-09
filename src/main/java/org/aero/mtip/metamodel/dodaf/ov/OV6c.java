@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.SequenceDiagram;
 
 public class OV6c extends SequenceDiagram {
 
-	public OV6c(String name, String EAID) {
-		super(name, EAID);
+	public OV6c(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV6C;
 		this.xmlConstant = XmlTagConstants.OV6C;
 		this.cameoDiagramConstant = "OV-6c Operational Event-Trace Description";

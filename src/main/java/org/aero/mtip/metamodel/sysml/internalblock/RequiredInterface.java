@@ -14,8 +14,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class RequiredInterface extends CommonElement {
 
-	public RequiredInterface(String name, String EAID) {
-		super(name, EAID);
+	public RequiredInterface(String name, String importId) {
+		super(name, importId);
 	}
 
 	@Override

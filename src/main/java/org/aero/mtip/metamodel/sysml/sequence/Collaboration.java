@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Collaboration extends CommonElement {
 
-	public Collaboration(String name, String EAID) {
-		super(name, EAID);
+	public Collaboration(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.COLLABORATION;
 		this.xmlConstant = XmlTagConstants.COLLABORATION;

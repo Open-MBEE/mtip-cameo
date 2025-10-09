@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class InitialPseudoState extends PseudoState {
 	
-	public InitialPseudoState(String name, String EAID) {
-		super(name, EAID);
+	public InitialPseudoState(String name, String importId) {
+		super(name, importId);
 		this.psKind =  PseudostateKindEnum.INITIAL;
 		this.metamodelConstant = SysmlConstants.INITIAL_PSEUDO_STATE;
 		this.xmlConstant = XmlTagConstants.INITIAL_PSEUDO_STATE;

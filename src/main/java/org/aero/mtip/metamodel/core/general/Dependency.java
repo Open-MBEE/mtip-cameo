@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonDirectedRelationship;
 
 public class Dependency extends CommonDirectedRelationship {
 
-	public Dependency(String name, String EAID) {
-		super(name, EAID);
+	public Dependency(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DEPENDENCY;
 		this.xmlConstant = XmlTagConstants.DEPENDENCY;

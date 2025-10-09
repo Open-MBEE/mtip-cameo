@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualMeasurementSet extends InstanceSpecification {
 
-	public ActualMeasurementSet(String name, String EAID) {
-		super(name, EAID);
+	public ActualMeasurementSet(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_MEASUREMENT_SET;
 		this.xmlConstant = XmlTagConstants.ACTUAL_MEASUREMENT_SET;
 	}

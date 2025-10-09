@@ -12,8 +12,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class PhysicalRequirement extends Requirement {
 
-	public PhysicalRequirement(String name, String EAID) {
-		super(name, EAID);
+	public PhysicalRequirement(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.PHYSICAL_REQUIREMENT;
 		this.xmlConstant = XmlTagConstants.PHYSICAL_REQUIREMENT;

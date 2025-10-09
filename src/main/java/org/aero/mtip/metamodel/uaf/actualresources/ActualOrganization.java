@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualOrganization extends InstanceSpecification {
 
-	public ActualOrganization(String name, String EAID) {
-		super(name, EAID);
+	public ActualOrganization(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_ORGANIZATION;
 		this.xmlConstant = XmlTagConstants.ACTUAL_ORGANIZATION;
 	}

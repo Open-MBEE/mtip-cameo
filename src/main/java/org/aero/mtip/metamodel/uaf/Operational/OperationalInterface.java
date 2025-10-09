@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class OperationalInterface extends CommonElement implements UAFElement {
 	
-	public OperationalInterface(String name, String EAID) {
-		super(name, EAID);
+	public OperationalInterface(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.OPERATIONAL_INTERFACE;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_INTERFACE;

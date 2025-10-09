@@ -23,8 +23,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class MetaClass extends CommonElement {
 
-  public MetaClass(String name, String EAID) {
-    super(name, EAID);
+  public MetaClass(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = SysmlConstants.METACLASS;
     this.xmlConstant = XmlTagConstants.METACLASS;
   }

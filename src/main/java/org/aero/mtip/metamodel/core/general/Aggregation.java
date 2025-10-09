@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Association;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Aggregation extends org.aero.mtip.metamodel.core.general.Association {
-	public Aggregation(String name, String EAID) {
-		super(name, EAID);
+	public Aggregation(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.AGGREGATION;
 		this.xmlConstant = XmlTagConstants.AGGREGATION;

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class InformationElement extends CommonElement implements UAFElement {
 	
-	public InformationElement(String name, String EAID) {
-		super(name, EAID);
+	public InformationElement(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.INFORMATION_ELEMENT;
 		this.xmlConstant = XmlTagConstants.INFORMATION_ELEMENT;

@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class DataStoreNode extends ActivityNode {
 
-	public DataStoreNode(String name, String EAID) {
-		super(name, EAID);
+	public DataStoreNode(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DATA_STORE_NODE;
 		this.xmlConstant = XmlTagConstants.DATA_STORE_NODE;

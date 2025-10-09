@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Risk extends CommonElement {
 
-	public Risk(String name, String EAID) {
-		super(name, EAID);
+	public Risk(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.RISK;
 		this.xmlConstant = XmlTagConstants.RISK;

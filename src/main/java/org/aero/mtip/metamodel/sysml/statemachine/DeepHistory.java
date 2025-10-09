@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class DeepHistory extends PseudoState {
 
-	public DeepHistory(String name, String EAID) {
-		super(name, EAID);
+	public DeepHistory(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.DEEPHISTORY;
 		this.metamodelConstant = SysmlConstants.DEEP_HISTORY;
 		this.xmlConstant = XmlTagConstants.DEEP_HISTORY;

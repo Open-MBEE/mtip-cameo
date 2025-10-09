@@ -560,12 +560,11 @@ public class XMLItem {
 	}
 	
 	public String toString() {
-		String allInfo = "\nParent: " + this.getParent()
+		return "\nParent: " + this.getParent()
 		+ "\nType: " + this.getType()
 		+ "\nName: " + this.getName()
 		+ "\nID: " + this.getImportId()
 		+ "\nOwner: " + this.getParent();
-		return allInfo;
 	}
 	
 	public void addDiagramParent(String id, String parentID) {
@@ -589,5 +588,17 @@ public class XMLItem {
 			return false;
 		}
 		return true;
+	}
+	
+	public boolean isProperty() {
+	  return getType().contentEquals(SysmlConstants.PROPERTY);
+	}
+	
+	public boolean isStereotype() {
+	  return getType().contentEquals(SysmlConstants.STEREOTYPE);
+	}
+	
+	public boolean isValid() {
+	  return this.getImportId() != null && !this.getImportId().isEmpty();
 	}
 }

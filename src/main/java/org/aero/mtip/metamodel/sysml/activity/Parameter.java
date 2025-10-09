@@ -25,8 +25,8 @@ public class Parameter extends CommonElement {
 	public static final String INOUT = "inout";
 	public static final String RETURN = "return";
 			
-	public Parameter(String name, String EAID) {
-		super(name, EAID);
+	public Parameter(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PARAMETER;
 		this.xmlConstant = XmlTagConstants.SYSML_PARAMETER;
@@ -77,7 +77,7 @@ public class Parameter extends CommonElement {
 					CameoUtils.logGui("Property type is null. Cannot set default value.");
 				}
 			} catch(Exception exception) {
-				Logger.log(String.format("Error assigning default value to property with id: %s see stack trace: ", EAID));
+				Logger.log(String.format("Error assigning default value to property with id: %s see stack trace: ", importId));
 				Logger.logException(exception);
 			}
 		}

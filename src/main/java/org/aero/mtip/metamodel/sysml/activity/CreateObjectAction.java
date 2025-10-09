@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class CreateObjectAction extends ActivityNode {
 
-	public CreateObjectAction(String name, String EAID) {
-		super(name, EAID);
+	public CreateObjectAction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CREATE_OBJECT_ACTION;
 		this.xmlConstant = XmlTagConstants.CREATE_OBJECT_ACTION;

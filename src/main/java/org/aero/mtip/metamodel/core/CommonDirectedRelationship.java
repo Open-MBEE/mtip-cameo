@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public abstract class CommonDirectedRelationship extends CommonRelationship {
 
-	public CommonDirectedRelationship(String name, String EAID) {
-		super(name, EAID);
+	public CommonDirectedRelationship(String name, String importId) {
+		super(name, importId);
 	}
 	
 	@CheckForNull

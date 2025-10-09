@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ProjectRole extends Property {
 	
-	public ProjectRole(String name, String EAID) {
-		super(name, EAID);
+	public ProjectRole(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.PROJECT_ROLE;
 		this.xmlConstant = XmlTagConstants.PROJECT_ROLE;
 	}

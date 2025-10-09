@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Association;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Composition extends org.aero.mtip.metamodel.core.general.Association {
-	public Composition(String name, String EAID) {
-		super(name, EAID);
+	public Composition(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.COMPOSITION;
 		this.xmlConstant = XmlTagConstants.COMPOSITION;

@@ -14,8 +14,8 @@ import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class SatisfyRequirementMatrix extends AbstractMatrix {
-	public SatisfyRequirementMatrix(String name, String EAID) {
-		super(name, EAID);
+	public SatisfyRequirementMatrix(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.SATISFY_REQUIREMENT_MATRIX;
 		this.xmlConstant = XmlTagConstants.SATISFY_REQUIREMENT_MATRIX;
 		this.cameoConstant = SysmlConstants.CAMEO_SATISFY_REQUIREMENT_MATRIX;

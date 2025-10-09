@@ -12,8 +12,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class InterfaceRequirement extends Requirement {
 
-	public InterfaceRequirement(String name, String EAID) {
-		super(name, EAID);
+	public InterfaceRequirement(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.INTERFACE_REQUIREMENT;
 		this.xmlConstant = XmlTagConstants.INTERFACE_REQUIREMENT;

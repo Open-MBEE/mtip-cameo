@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.Behavior;
 
 public class DecisionNode extends ActivityNode {
 
-	public DecisionNode(String name, String EAID) {
-		super(name, EAID);
+	public DecisionNode(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DECISION_NODE;
 		this.xmlConstant = XmlTagConstants.DECISION_NODE;

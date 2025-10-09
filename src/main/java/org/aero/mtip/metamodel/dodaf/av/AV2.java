@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.table.AbstractTable;
 
 public class AV2 extends AbstractTable {
 
-	public AV2(String name, String EAID) {
-		super(name, EAID);
+	public AV2(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.AV2;
 		this.xmlConstant = XmlTagConstants.AV2;
 //		this.cameoDiagramConstant = "AV-1 Overview and Summary Information";

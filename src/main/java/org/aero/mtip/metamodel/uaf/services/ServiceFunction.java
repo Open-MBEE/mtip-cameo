@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.Activity;
 
 public class ServiceFunction extends Activity {
 
-	public ServiceFunction(String name, String EAID) {
-		super(name, EAID);
+	public ServiceFunction(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_FUNCTION;
 		this.xmlConstant = XmlTagConstants.SERVICE_FUNCTION;
 	}

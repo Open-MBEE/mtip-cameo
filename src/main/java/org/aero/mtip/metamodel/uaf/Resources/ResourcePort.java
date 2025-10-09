@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.Port;
 
 public class ResourcePort extends Port {
 
-	public ResourcePort(String name, String EAID) {
-		super(name, EAID);
+	public ResourcePort(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_PORT;
 		this.xmlConstant = XmlTagConstants.RESOURCE_PORT;
 	}

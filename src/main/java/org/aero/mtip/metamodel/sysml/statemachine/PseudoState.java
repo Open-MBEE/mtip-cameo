@@ -23,8 +23,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Stat
 public abstract class PseudoState extends CommonElement {
 	protected PseudostateKind psKind;
 	
-	public PseudoState(String name, String EAID) {
-		super(name, EAID);
+	public PseudoState(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.element = f.createPseudostateInstance();
 	}

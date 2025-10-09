@@ -18,8 +18,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 public class DependencyMatrix extends AbstractMatrix {
 	
 
-	public DependencyMatrix(String name, String EAID) {
-		super(name, EAID);
+	public DependencyMatrix(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.DEPENDENCY_MATRIX;
 		this.xmlConstant = XmlTagConstants.DEPENDENCY_MATRIX;
 		this.cameoConstant = DependencyMatrixDiagramDescriptor.DEFAULT_DEPENDENCY_MATRIX_DIAGRAM_TYPE;

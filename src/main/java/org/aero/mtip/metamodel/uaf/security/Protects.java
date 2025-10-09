@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class Protects extends Dependency {
 
-	public Protects(String name, String EAID) {
-		super(name, EAID);
+	public Protects(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.PROTECTS;
 		this.xmlConstant = XmlTagConstants.PROTECTS;
 	}

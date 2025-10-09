@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class Forecast extends Dependency {
 
-	public Forecast(String name, String EAID) {
-		super(name, EAID);
+	public Forecast(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.FORECAST;
 		this.xmlConstant = XmlTagConstants.FORECAST;
 	}

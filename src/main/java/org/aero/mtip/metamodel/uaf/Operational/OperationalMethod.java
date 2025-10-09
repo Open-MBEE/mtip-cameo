@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.Operation;
 
 public class OperationalMethod extends Operation {
 
-	public OperationalMethod(String name, String EAID) {
-		super(name, EAID);
+	public OperationalMethod(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_METHOD;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_METHOD;
 	}

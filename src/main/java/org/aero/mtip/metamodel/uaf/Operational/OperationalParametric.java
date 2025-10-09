@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 
 public class OperationalParametric extends AbstractDiagram {
 	
-	public OperationalParametric(String name, String EAID) {
-		super(name, EAID);
+	public OperationalParametric(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_PARAMETRIC;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_PARAMETRIC;
 		this.cameoDiagramConstant = CameoDiagramConstants.OPERATIONAL_PARAMETRIC;

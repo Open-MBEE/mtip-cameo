@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonDirectedRelationship;
 
 public class Generalization extends CommonDirectedRelationship {
-	public Generalization(String name, String EAID) {
-		super(name, EAID);
+	public Generalization(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.GENERALIZATION;
 		this.xmlConstant = XmlTagConstants.GENERALIZATION;

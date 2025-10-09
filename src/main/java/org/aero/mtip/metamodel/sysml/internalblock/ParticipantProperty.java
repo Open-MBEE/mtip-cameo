@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class ParticipantProperty extends CommonElement {
 
-	public ParticipantProperty(String name, String EAID) {
-		super(name, EAID);	
+	public ParticipantProperty(String name, String importId) {
+		super(name, importId);	
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.PARTICIPANT_PROPERTY;
 		this.metamodelConstant = SysmlConstants.PARTICIPANT_PROPERTY;

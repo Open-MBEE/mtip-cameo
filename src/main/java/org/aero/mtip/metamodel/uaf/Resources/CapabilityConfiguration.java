@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class CapabilityConfiguration extends CommonElement implements UAFElement {
 	
-	public CapabilityConfiguration(String name, String EAID) {
-		super(name, EAID);
+	public CapabilityConfiguration(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.CAPABILITY_CONFIGURATION;
 		this.xmlConstant = XmlTagConstants.CAPABILITY_CONFIGURATION;

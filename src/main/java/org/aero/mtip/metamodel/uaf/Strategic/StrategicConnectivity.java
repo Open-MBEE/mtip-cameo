@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class StrategicConnectivity extends BlockDefinitionDiagram {
 
-	public StrategicConnectivity(String name, String EAID) {
-		 super(name, EAID);
+	public StrategicConnectivity(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = UAFConstants.STRATEGIC_CONNECTIVITY_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.STRATEGIC_CONNECTIVITY_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.STRATEGIC_CONNECTIVITY;

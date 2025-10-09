@@ -24,8 +24,8 @@ import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.C
 import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.InteractionFragment;
 
 public class Lifeline extends CommonElement {
-	public Lifeline(String name, String EAID) {
-		super(name, EAID);
+	public Lifeline(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.LIFELINE;
 		this.xmlConstant = XmlTagConstants.LIFELINE;

@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
 
 public class OperationalStructure extends ActivityDiagram {
-	public OperationalStructure(String name, String EAID) {
-		super(name, EAID);
+	public OperationalStructure(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_STRUCTURE;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_STRUCTURE;
 		this.cameoDiagramConstant = CameoDiagramConstants.OPERATIONAL_STRUCTURE;

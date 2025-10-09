@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class FieldedCapability extends InstanceSpecification {
 	
-	public FieldedCapability(String name, String EAID) {
-		super(name, EAID);
+	public FieldedCapability(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.FIELDED_CAPABILITY;
 		this.xmlConstant = XmlTagConstants.FIELDED_CAPABILITY;
 	}

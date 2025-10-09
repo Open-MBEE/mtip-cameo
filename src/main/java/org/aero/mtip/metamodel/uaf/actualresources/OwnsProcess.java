@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class OwnsProcess extends Abstraction {
 
-	public OwnsProcess(String name, String EAID) {
-		super(name, EAID);
+	public OwnsProcess(String name, String importId) {
+		super(name, importId);
 		this.xmlConstant = XmlTagConstants.OWNS_PROCESS;
 		this.metamodelConstant = UAFConstants.OWNS_PROCESS;
 	}

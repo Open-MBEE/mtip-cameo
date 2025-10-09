@@ -22,8 +22,8 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.Observation;
 
 public class TimeExpression extends CommonElement {
 
-	public TimeExpression(String name, String EAID) {
-		super(name, EAID);
+	public TimeExpression(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.TIME_EXPRESSION;
 		this.xmlConstant = XmlTagConstants.TIMEEXPRESSION;

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class RequiresCompetence extends Abstraction {
 
-	public RequiresCompetence(String name, String EAID) {
-		super(name, EAID);
+	public RequiresCompetence(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.REQUIRES_COMPETENCE;
 		this.xmlConstant = XmlTagConstants.REQUIRES_COMPETENCE;
 	}

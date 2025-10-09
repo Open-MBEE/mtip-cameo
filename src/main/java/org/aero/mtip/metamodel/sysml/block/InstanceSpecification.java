@@ -23,8 +23,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class InstanceSpecification extends CommonElement {
 	protected List<Classifier> classifiers = new ArrayList<Classifier> ();
-	public InstanceSpecification(String name, String EAID) {
-		super(name, EAID);
+	public InstanceSpecification(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INSTANCE_SPECIFICATION;
 		this.xmlConstant = XmlTagConstants.INSTANCESPECIFICATION;

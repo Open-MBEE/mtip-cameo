@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.profiles.SysML;
 
 public class ProxyPort extends Port {
-	public ProxyPort(String name, String EAID) {
-		super(name, EAID);
+	public ProxyPort(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PROXY_PORT;
 		this.xmlConstant = XmlTagConstants.PROXY_PORT;

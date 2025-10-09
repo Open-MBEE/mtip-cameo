@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class ProjectsTaxonomy extends BlockDefinitionDiagram {
-  public ProjectsTaxonomy(String name, String EAID) {
-    super(name, EAID);
+  public ProjectsTaxonomy(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = UAFConstants.PROJECTS_TAXONOMY_DIAGRAM;
     this.xmlConstant = XmlTagConstants.PROJECTS_TAXONOMY_DIAGRAM;
     this.cameoDiagramConstant = CameoDiagramConstants.PROJECTS_TAXONOMY;

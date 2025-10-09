@@ -10,8 +10,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Signal extends CommonElement{
-	public Signal(String name, String EAID) {
-		super(name, EAID);
+	public Signal(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.SIGNAL;
 		this.xmlConstant = XmlTagConstants.SIGNAL;

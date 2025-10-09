@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ClassDiagram;
 
 public class CV3 extends ClassDiagram {
 
-	public CV3(String name, String EAID) {
-		super(name, EAID);
+	public CV3(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.CV3;
 		this.xmlConstant = XmlTagConstants.CV3;
 		this.cameoDiagramConstant = "CV-3";

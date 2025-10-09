@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
 
 public class PersonnelProcessesFlow extends ActivityDiagram {
 
-	public PersonnelProcessesFlow(String name, String EAID) {
-		 super(name, EAID);
+	public PersonnelProcessesFlow(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = UAFConstants.PERSONNEL_PROCESSES_FLOW_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.PERSONNEL_PROCESSES_FLOW_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.PERSONNEL_PROCESS_FLOW;

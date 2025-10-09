@@ -21,8 +21,8 @@ public class SignalEvent extends CommonElement {
 	private Signal signalElement;
 	private final String signalElementTag = "signalElement";
 
-	public SignalEvent(String name, String EAID) {
-		super(name, EAID);
+	public SignalEvent(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.SIGNAL_EVENT;
 		this.xmlConstant = XmlTagConstants.SIGNAL_EVENT;

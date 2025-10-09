@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.Signal;
 
 public class ResourceSignal extends Signal {
 
-	public ResourceSignal(String name, String EAID) {
-		super(name, EAID);
+	public ResourceSignal(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_SIGNAL;
 		this.xmlConstant = XmlTagConstants.RESOURCE_SIGNAL;
 	}

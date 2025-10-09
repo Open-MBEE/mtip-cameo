@@ -26,8 +26,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ValueSpecification;
 
 public class ControlFlow extends CommonRelationship {
 
-	public ControlFlow(String name, String EAID) {
-		super(name, EAID);
+	public ControlFlow(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CONTROL_FLOW;
 		this.xmlConstant = XmlTagConstants.CONTROLFLOW;

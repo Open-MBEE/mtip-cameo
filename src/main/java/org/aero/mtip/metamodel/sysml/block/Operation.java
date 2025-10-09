@@ -10,8 +10,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Operation extends CommonElement {
-	public Operation(String name, String EAID) {
-		super(name, EAID);
+	public Operation(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.OPERATION;
 		this.xmlConstant = XmlTagConstants.OPERATION;

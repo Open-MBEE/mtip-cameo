@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class InteractionOperand extends CommonElement {
 
-	public InteractionOperand(String name, String EAID) {
-		super(name, EAID);
+	public InteractionOperand(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INTERACTION_OPERAND;
 		this.xmlConstant = XmlTagConstants.INTERACTION_OPERAND;

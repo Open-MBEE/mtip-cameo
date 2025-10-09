@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.table.AbstractTable;
 
 public class OV3 extends AbstractTable {
 
-	public OV3(String name, String EAID) {
-		super(name, EAID);
+	public OV3(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV3;
 		this.xmlConstant = XmlTagConstants.OV3;
 		//this.cameoDiagramConstant = "OV-3 Operational Resource Flow Description";

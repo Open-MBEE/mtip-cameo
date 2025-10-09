@@ -18,8 +18,8 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdcommunications.Signal;
 
 public class SendSignalAction extends ActivityNode {
 
-	public SendSignalAction(String name, String EAID) {
-		super(name, EAID);
+	public SendSignalAction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.SEND_SIGNAL_ACTION;
 		this.xmlConstant = XmlTagConstants.SEND_SIGNAL_ACTION;

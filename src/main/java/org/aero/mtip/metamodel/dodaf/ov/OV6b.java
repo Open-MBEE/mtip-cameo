@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.statemachine.StateMachineDiagram;
 
 public class OV6b extends StateMachineDiagram {
 
-	public OV6b(String name, String EAID) {
-		super(name, EAID);
+	public OV6b(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV6B;
 		this.xmlConstant = XmlTagConstants.OV6B;
 		this.cameoDiagramConstant = "OV-6b Operational State Transition Description";

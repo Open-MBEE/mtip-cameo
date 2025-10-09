@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.matrix.DependencyMatrix;
 
 public class CV6 extends DependencyMatrix {
 
-	public CV6(String name, String EAID) {
-		super(name, EAID);
+	public CV6(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.CV6;
 		this.xmlConstant = XmlTagConstants.CV6;
 		this.cameoDiagramConstant = "CV-6 Capability to Operational Activities Mapping";

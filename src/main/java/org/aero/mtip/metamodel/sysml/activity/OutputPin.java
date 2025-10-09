@@ -18,8 +18,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class OutputPin extends CommonElement {
 
-	public OutputPin(String name, String EAID) {
-		super(name, EAID);
+	public OutputPin(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.OUTPUT_PIN;
 		this.xmlConstant = XmlTagConstants.OUTPUT_PIN;

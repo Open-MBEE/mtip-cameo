@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class VersionSuccession extends Dependency {
 
-	public VersionSuccession(String name, String EAID) {
-		super(name, EAID);
+	public VersionSuccession(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.VERSION_SUCCESSION;
 		this.xmlConstant = XmlTagConstants.VERSION_SUCCESSION;
 	}

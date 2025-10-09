@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.CallBehaviorAction;
 
 public class ResourceAction extends CallBehaviorAction {
 	
-	public ResourceAction(String name, String EAID) {
-		super(name, EAID);
+	public ResourceAction(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_ACTION;
 		this.xmlConstant = XmlTagConstants.RESOURCE_ACTION;
 	}

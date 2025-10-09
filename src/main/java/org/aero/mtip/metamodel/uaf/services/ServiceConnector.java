@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.Connector;
 
 public class ServiceConnector extends Connector {
 
-	public ServiceConnector(String name, String EAID) {
-		super(name, EAID);
+	public ServiceConnector(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_CONNECTOR;
 		this.xmlConstant = XmlTagConstants.SERVICE_CONNECTOR;
 	}

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ParametricDiagram;
 
 public class SV10a extends ParametricDiagram {
 
-	public SV10a(String name, String EAID) {
-		super(name, EAID);
+	public SV10a(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.SV10A;
 		this.xmlConstant = XmlTagConstants.SV10A;
 		this.cameoDiagramConstant = "SV-10a Systems Parametric";

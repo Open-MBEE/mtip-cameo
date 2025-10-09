@@ -13,8 +13,8 @@ import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Link extends CommonRelationship {
-	public Link(String name, String EAID) {
-		super(name, EAID);
+	public Link(String name, String importId) {
+		super(name, importId);
 	}
 	/**
 		CURRENTLY NOT SUPPORTED - MAY BE DEPRECATED

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonRelationship;
 
 public class PackageImport extends CommonRelationship {
 
-	public PackageImport(String name, String EAID) {
-		super(name, EAID);
+	public PackageImport(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PACKAGE_IMPORT;
 		this.xmlConstant = XmlTagConstants.PACKAGEIMPORT;

@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class OpaqueBehavior extends CommonElement {
 
-	public OpaqueBehavior(String name, String EAID) {
-		super(name, EAID);
+	public OpaqueBehavior(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.OPAQUE_BEHAVIOR;
 		this.xmlConstant = XmlTagConstants.OPAQUE_BEHAVIOR;

@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.statemachine.StateMachineDiagram;
 
 public class ServicesStates extends StateMachineDiagram {
 
-	public ServicesStates(String name, String EAID) {
-		super(name, EAID);
+	public ServicesStates(String name, String importId) {
+		super(name, importId);
 		 this.metamodelConstant = UAFConstants.SERVICES_STATES_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SERVICES_STATES_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.SERVICES_STATES;

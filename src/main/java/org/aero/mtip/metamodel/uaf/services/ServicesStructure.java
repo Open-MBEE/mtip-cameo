@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class ServicesStructure extends BlockDefinitionDiagram {
 
-	public ServicesStructure(String name, String EAID) {
-		super(name, EAID);
+	public ServicesStructure(String name, String importId) {
+		super(name, importId);
 
 		 this.metamodelConstant = UAFConstants.SERVICES_STRUCTURE_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SERVICES_STRUCTURE_DIAGRAM;

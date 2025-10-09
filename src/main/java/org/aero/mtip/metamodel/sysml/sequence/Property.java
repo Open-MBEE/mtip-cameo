@@ -27,8 +27,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.VisibilityKindEnum;
 
 public class Property extends CommonElement {
 
-  public Property(String name, String EAID) {
-    super(name, EAID);
+  public Property(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.PROPERTY;
     this.xmlConstant = XmlTagConstants.PROPERTY;
@@ -82,7 +82,7 @@ public class Property extends CommonElement {
         }
       } catch (Exception exception) {
         Logger.log(String.format(
-            "Error assigning default value to property with id: %s see stack trace:", EAID));
+            "Error assigning default value to property with id: %s see stack trace:", importId));
         Logger.logException(exception);
       }
     }

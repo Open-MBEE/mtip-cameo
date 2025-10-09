@@ -27,8 +27,8 @@ public class AssociationBlock extends CommonElement {
 	protected Element supplier;
 	protected Element client;
 	
-	public AssociationBlock(String name, String EAID) {
-		super(name, EAID);
+	public AssociationBlock(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.ASSOCIATION_BLOCK;
 		this.xmlConstant = XmlTagConstants.ASSOCIATION_BLOCK;
@@ -76,7 +76,7 @@ public class AssociationBlock extends CommonElement {
 	
 	public void createClient(Project project, XMLItem modelElement, HashMap<String, XMLItem> parsedXML) {
 		if (!modelElement.hasClient()) {
-			Logger.log(String.format("No client found for association block with id %s.", EAID));
+			Logger.log(String.format("No client found for association block with id %s.", importId));
 			return;
 		}
 		
@@ -94,7 +94,7 @@ public class AssociationBlock extends CommonElement {
 	
 	public void createSupplier(Project project, XMLItem modelElement, HashMap<String, XMLItem> parsedXML) {
 		if(!modelElement.hasSupplier()) {
-			Logger.log(String.format("No supplier found for association block with id %s.", EAID));
+			Logger.log(String.format("No supplier found for association block with id %s.", importId));
 			return;
 		}
 		

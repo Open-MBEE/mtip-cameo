@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class CallBehaviorAction extends Action {
 
-	public CallBehaviorAction(String name, String EAID) {
-		super(name, EAID);
+	public CallBehaviorAction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CALL_BEHAVIOR_ACTION;
 		this.xmlConstant = XmlTagConstants.CALL_BEHAVIOR_ACTION;

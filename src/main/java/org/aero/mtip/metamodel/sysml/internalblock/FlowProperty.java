@@ -18,8 +18,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class FlowProperty extends CommonElement {
 
-	public FlowProperty(String name, String EAID) {
-		super(name, EAID);
+	public FlowProperty(String name, String importId) {
+		super(name, importId);
 		creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		metamodelConstant = SysmlConstants.FLOW_PROPERTY;
 		xmlConstant = XmlTagConstants.FLOW_PROPERTY;

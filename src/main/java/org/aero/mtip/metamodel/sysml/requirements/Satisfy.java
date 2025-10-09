@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class Satisfy extends CommonDirectedRelationship {
 
-	public Satisfy(String name, String EAID) {
-		super(name, EAID);
+	public Satisfy(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.SATISFY;
 		this.xmlConstant = XmlTagConstants.SATISFY;

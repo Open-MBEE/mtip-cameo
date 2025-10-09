@@ -5,8 +5,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ProjectMilestoneRole extends Property {
-	public ProjectMilestoneRole(String name, String EAID) {
-		super(name, EAID);
+	public ProjectMilestoneRole(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.PROJECT_MILESTONE_ROLE;
 		this.xmlConstant = XmlTagConstants.PROJECT_MILESTONE_ROLE;
 	}

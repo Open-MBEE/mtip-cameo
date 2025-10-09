@@ -25,8 +25,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Regi
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.StateMachine;
 
 public class State extends CommonElement {
-	public State(String name, String EAID) {
-		super(name, EAID);
+	public State(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.STATE;
 		this.xmlConstant = XmlTagConstants.STATE;
@@ -79,7 +79,7 @@ public class State extends CommonElement {
 	
 	public void setOwner(Project project, Element owner) {
 		if (owner == null) {
-			Logger.log(String.format("Owner for state %s is null.", EAID));
+			Logger.log(String.format("Owner for state %s is null.", importId));
 			return;
 		}
 		

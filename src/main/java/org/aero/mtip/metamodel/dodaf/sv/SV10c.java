@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class SV10c extends BlockDefinitionDiagram {
 
-	public SV10c(String name, String EAID) {
-		super(name, EAID);
+	public SV10c(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.SV10C;
 		this.xmlConstant = XmlTagConstants.SV10C;
 		this.cameoDiagramConstant = "SV-10c Systems Event-Trace Description";

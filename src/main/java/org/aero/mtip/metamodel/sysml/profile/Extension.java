@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Extension extends CommonRelationship {
 
-	public Extension(String name, String EAID) {
-		super(name, EAID);
+	public Extension(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.EXTENSION;
 		this.xmlConstant = XmlTagConstants.EXTENSION;
@@ -40,7 +40,7 @@ public class Extension extends CommonRelationship {
 			ModelHelper.setNavigable(firstMemberEnd, true);
 			firstMemberEnd.setOwner(client);
 		} else {
-			Logger.log("First member end not created for extension " + this.EAID);
+			Logger.log("First member end not created for extension " + this.importId);
 		}
 		
 		if(secondMemberEnd != null) {
@@ -48,7 +48,7 @@ public class Extension extends CommonRelationship {
 			ModelHelper.setNavigable(secondMemberEnd, true);
 			secondMemberEnd.setOwner(extension);
 		} else {
-			Logger.log("Second member end not created for extension " + this.EAID);
+			Logger.log("Second member end not created for extension " + this.importId);
 		}
 
 		return extension;

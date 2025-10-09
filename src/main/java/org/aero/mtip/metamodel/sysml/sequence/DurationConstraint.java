@@ -23,8 +23,8 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.Duration;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationInterval;
 
 public class DurationConstraint extends CommonElement {
-	public DurationConstraint(String name, String EAID) {
-		super(name, EAID);
+	public DurationConstraint(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DURATION_CONSTRAINT;
 		this.xmlConstant = XmlTagConstants.DURATION_CONSTRAINT;

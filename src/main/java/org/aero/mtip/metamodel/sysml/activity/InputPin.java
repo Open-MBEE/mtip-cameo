@@ -18,8 +18,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 public class InputPin extends ActivityNode {
 
 
-	public InputPin(String name, String EAID) {
-		super(name, EAID);
+	public InputPin(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INPUT_PIN;
 		this.xmlConstant = XmlTagConstants.INPUT_PIN;

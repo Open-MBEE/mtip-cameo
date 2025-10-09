@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class OperationalAgent extends CommonElement implements UAFElement {
 	
-	public OperationalAgent(String name, String EAID) {
-		super(name, EAID);
+	public OperationalAgent(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.OPERATIONAL_AGENT;
 		this.xmlConstant = XmlTagConstants.CLASS_WITH_STEREOTYPE;

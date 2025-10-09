@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.profiles.SysML;
 
 public class Block extends CommonElement {
-	public Block(String name, String EAID) {
-		super(name, EAID);
+	public Block(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.BLOCK;
 		this.xmlConstant = XmlTagConstants.BLOCK;

@@ -5,8 +5,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.block.Enumeration;
 
 public class ResourceExchangeKind extends Enumeration{
-	public ResourceExchangeKind(String name, String EAID) {
-		super(name, EAID);
+	public ResourceExchangeKind(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.RESOURCE_EXCHANGE_KIND;
 		this.xmlConstant = XmlTagConstants.RESOURCE_EXCHANGE_KIND;

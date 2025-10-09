@@ -23,8 +23,8 @@ import com.nomagic.uml2.impl.ElementsFactory;
 public class OpaqueExpression extends CommonElement {
 	public final static String CHECK_CLASSES_START = "self.oclIsKindOf(";
 	
-	public OpaqueExpression(String name, String EAID) {
-		super(name, EAID);
+	public OpaqueExpression(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.OPAQUE_EXPRESSION;
 		this.xmlConstant = XmlTagConstants.OPAQUE_EXPRESSION;

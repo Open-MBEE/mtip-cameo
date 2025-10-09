@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class BoundReference extends CommonElement {
 
-	public BoundReference(String name, String EAID) {
-		super(name, EAID);
+	public BoundReference(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.BOUND_REFERENCE;
 		this.metamodelConstant = SysmlConstants.BOUND_REFERENCE;

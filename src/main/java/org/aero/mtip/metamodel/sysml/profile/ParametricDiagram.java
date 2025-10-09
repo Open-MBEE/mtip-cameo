@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.AbstractDiagram;
 import com.nomagic.magicdraw.sysml.util.SysMLConstants;
 
 public class ParametricDiagram extends AbstractDiagram {
-	public ParametricDiagram(String name, String EAID) {
-		super(name, EAID);
+	public ParametricDiagram(String name, String importId) {
+		super(name, importId);
 		 this.metamodelConstant = SysMLConstants.SYSML_PARAMETERIC_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.PARAMETRICDIAGRAM;
 	}

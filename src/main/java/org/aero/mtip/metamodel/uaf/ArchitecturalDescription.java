@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class ArchitecturalDescription extends CommonElement {
 
-    public ArchitecturalDescription(String name, String EAID) {
-        super(name, EAID);
+    public ArchitecturalDescription(String name, String importId) {
+        super(name, importId);
         this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
         this.metamodelConstant = UAFConstants.ARCHITECTURAL_DESCRIPTION;
         this.xmlConstant = XmlTagConstants.ARCHITECTURAL_DESCRIPTION;

@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class Refine extends CommonDirectedRelationship {
 
-	public Refine(String name, String EAID) {
-		super(name, EAID);
+	public Refine(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.REFINE;
 		this.xmlConstant = XmlTagConstants.REFINE;

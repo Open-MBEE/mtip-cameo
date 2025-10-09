@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class Responsibility extends CommonElement implements UAFElement{
-	public Responsibility(String name, String EAID) {
-		super(name, EAID);
+	public Responsibility(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.RESPONSIBILITY;
 		this.xmlConstant = XmlTagConstants.RESPONSIBILITY;

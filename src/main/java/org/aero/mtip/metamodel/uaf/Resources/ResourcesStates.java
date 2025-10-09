@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.statemachine.StateMachineDiagram;
 
 public class ResourcesStates extends StateMachineDiagram {
-  public ResourcesStates(String name, String EAID) {
-    super(name, EAID);
+  public ResourcesStates(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = UAFConstants.RESOURCES_STATES_DIAGRAM;
     this.xmlConstant = XmlTagConstants.RESOURCES_STATES_DIAGRAM;
     this.cameoDiagramConstant = CameoDiagramConstants.RESOURCES_STATES;
