@@ -8,7 +8,7 @@ package org.aero.mtip.metamodel.core.table;
 
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.generictable.GenericTableManager;
 import com.nomagic.magicdraw.core.Project;
@@ -34,7 +34,7 @@ public class AbstractTable extends CommonElement {
 	}
 	
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		try {
 			element = GenericTableManager.createGenericTable(project, this.name);
 			table = (Diagram)element;

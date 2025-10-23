@@ -102,6 +102,7 @@ public class XmlTagConstants {
 	public static final String ATTRIBUTE_INDEX_2 = "2";
 	public static final String ATTRIBUTE_KEY_INSTANCE_VALUE = "instanceValue";
 	
+	public static final String ATTRIBUTE_NAME_INTERACTION = "interaction";
 	public static final String ATTRIBUTE_NAME_INTERACTION_OPERATOR_KIND = "interactionOperatorKind";
 	public static final String ATTRIBUTE_NAME_INTERACTION_OPERAND = "interactionOperand";
 	public static final String ATTRIBUTE_NAME_MESSAGE_KIND = "messageKind";
@@ -147,6 +148,8 @@ public class XmlTagConstants {
 	
 	// UML element text for type tag
 	public static final String ARTIFACT = "uml.Artifact";
+	public static final String LEGEND = "cameo.Legend";
+	public static final String LEGEND_ITEM = "cameo.LegendItem";
 	
 	// SysML element text for type tag
 	public static final String ACCEPT_EVENT_ACTION = "sysml.AcceptEventAction";
@@ -295,7 +298,7 @@ public class XmlTagConstants {
 	public static final String INFORMATIONFLOW = "sysml.InformationFlow";
 	public static final String ITEMFLOW = "sysml.ItemFlow";
 	public static final String OBJECTFLOW = "sysml.ObjectFlow";
-	public static final String PACKAGEIMPORT = "sysml.PackageImport";
+	public static final String PACKAGE_IMPORT = "sysml.PackageImport";
 	public static final String REFINE = "sysml.Refine";
 	public static final String SATISFY = "sysml.Satisfy";
 	public static final String TRACE = "sysml.Trace";
@@ -752,17 +755,4 @@ public class XmlTagConstants {
 	
 	//Type Prefixes
 	public static final String CUSTOM = "custom.Diagram";
-	
-	//List of sysmlTags
-	public static final String[] sysmlElementList = {
-			ACTIVITY,
-			ACTIVITY_PARAMETER_NODE,
-			BLOCK,
-			CLASS,
-			PACKAGE,
-			PROFILE,
-			STEREOTYPE,
-			PROPERTY,
-			PARAMETER
-	};
 }

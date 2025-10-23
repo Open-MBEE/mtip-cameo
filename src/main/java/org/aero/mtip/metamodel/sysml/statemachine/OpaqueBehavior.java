@@ -10,7 +10,7 @@ import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
@@ -25,7 +25,7 @@ public class OpaqueBehavior extends CommonElement {
 		this.element = f.createOpaqueBehaviorInstance();
 	}
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.OpaqueBehavior ob = (com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.OpaqueBehavior)super.createElement(project, owner, xmlElement);
 		
 		if(xmlElement.hasAttribute(XmlTagConstants.BODY)) {

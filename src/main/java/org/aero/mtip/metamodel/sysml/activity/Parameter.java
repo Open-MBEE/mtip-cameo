@@ -6,7 +6,7 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
@@ -33,7 +33,7 @@ public class Parameter extends CommonElement {
 		this.element = f.createParameterInstance();
 	}
 	
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Parameter parameter = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Parameter)element;
 		

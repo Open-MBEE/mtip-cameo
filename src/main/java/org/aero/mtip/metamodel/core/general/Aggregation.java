@@ -8,7 +8,7 @@ package org.aero.mtip.metamodel.core.general;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
@@ -26,7 +26,7 @@ public class Aggregation extends org.aero.mtip.metamodel.core.general.Associatio
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData xmlElement) {
 		Association association = (Association) super.createElement(project, owner, client, supplier, xmlElement);
 		
 		if(association != null) {

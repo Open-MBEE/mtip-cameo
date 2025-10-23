@@ -50,7 +50,7 @@ public class SequenceDiagram  extends AbstractDiagram {
 	}
 	
 	@Override
-	public void addRelationships(Project project, Diagram diagram, List<Element> relationships) {
+	public void addRelationshipsToDiagram(Project project, Diagram diagram) {
 		if (!diagram.isEditable()) {
 			Logger.log(String.format("Diagram %s with id %s is not editable.", diagram.getHumanName(), MtipUtils.getId(diagram)));
 			return;
@@ -62,7 +62,7 @@ public class SequenceDiagram  extends AbstractDiagram {
 		Message previousMessage = null;
 		List<Element> createLater = new ArrayList<Element> ();
 		
-		for (Element relationship : relationships) {
+		for (Element relationship : relationshipsOnDiagram) {
 			if (relationship instanceof com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint) {
 				createLater.add(relationship);
 				continue;

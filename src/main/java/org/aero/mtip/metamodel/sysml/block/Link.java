@@ -7,7 +7,7 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 package org.aero.mtip.metamodel.sysml.block;
 
 import org.aero.mtip.metamodel.core.CommonRelationship;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
@@ -20,7 +20,7 @@ public class Link extends CommonRelationship {
 		CURRENTLY NOT SUPPORTED - MAY BE DEPRECATED
 	*/
 	@Override
-	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData xmlElement) {
 		return null;
 	}
 	

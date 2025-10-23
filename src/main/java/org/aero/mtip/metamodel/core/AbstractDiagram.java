@@ -32,15 +32,14 @@ import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.general.Link;
 import org.aero.mtip.profiles.MagicDraw;
 import org.aero.mtip.profiles.SysML;
+import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
-import org.aero.mtip.util.XMLItem;
 import org.w3c.dom.Document;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.openapi.uml.ModelElementsManager;
 import com.nomagic.magicdraw.openapi.uml.PresentationElementsManager;
 import com.nomagic.magicdraw.openapi.uml.ReadOnlyElementException;
-import com.nomagic.magicdraw.properties.PropertyManager;
 import com.nomagic.magicdraw.sysml.util.SysMLConstants;
 import com.nomagic.magicdraw.uml.symbols.DiagramPresentationElement;
 import com.nomagic.magicdraw.uml.symbols.NoRectangleDefinedException;
@@ -48,7 +47,10 @@ import com.nomagic.magicdraw.uml.symbols.PresentationElement;
 import com.nomagic.magicdraw.uml.symbols.paths.LinkView;
 import com.nomagic.magicdraw.uml.symbols.paths.PathElement;
 import com.nomagic.magicdraw.uml.symbols.paths.TransitionView;
+import com.nomagic.magicdraw.uml.symbols.shapes.ExtensionPointView;
 import com.nomagic.magicdraw.uml.symbols.shapes.ImageView;
+import com.nomagic.magicdraw.uml.symbols.shapes.LegendItemView;
+import com.nomagic.magicdraw.uml.symbols.shapes.RoleView;
 import com.nomagic.magicdraw.uml.symbols.shapes.ShapeElement;
 import com.nomagic.magicdraw.uml.symbols.shapes.TransitionToSelfView;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
@@ -62,14 +64,15 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Regi
 
 public abstract class AbstractDiagram extends CommonElement {
   private static Map<String, String> cameoToMtipType = createCameoToMtipMap();
-  private static Collection<String> reversedEndsRelationships =
-      new HashSet<>(Arrays.asList(SysmlConstants.ABSTRACTION, SysmlConstants.CONTROL_FLOW,
-          SysmlConstants.COPY, SysmlConstants.DEPENDENCY, SysmlConstants.EXTEND,
-          SysmlConstants.GENERALIZATION, SysmlConstants.INCLUDE, SysmlConstants.INFORMATION_FLOW,
-          SysmlConstants.INTERFACE_REALIZATION, SysmlConstants.ITEM_FLOW, SysmlConstants.MESSAGE,
-          SysmlConstants.OBJECT_FLOW, SysmlConstants.REFINE, SysmlConstants.SATISFY,
-          SysmlConstants.TRACE, SysmlConstants.TRANSITION, SysmlConstants.USAGE,
-          SysmlConstants.VERIFY));
+  private static Collection<String> reversedEndsRelationships = new HashSet<>(Arrays.asList(SysmlConstants.ABSTRACTION,
+      SysmlConstants.CONTROL_FLOW, SysmlConstants.COPY, SysmlConstants.DEPENDENCY, SysmlConstants.EXTEND, SysmlConstants.GENERALIZATION,
+      SysmlConstants.INCLUDE, SysmlConstants.INFORMATION_FLOW, SysmlConstants.INTERFACE_REALIZATION, SysmlConstants.ITEM_FLOW,
+      SysmlConstants.MESSAGE, SysmlConstants.OBJECT_FLOW, SysmlConstants.REFINE, SysmlConstants.SATISFY, SysmlConstants.TRACE,
+      SysmlConstants.TRANSITION, SysmlConstants.USAGE, SysmlConstants.VERIFY));
+
+  public HashMap<Element, Rectangle> elementsOnDiagram;
+  public List<Element> relationshipsOnDiagram;
+  public List<CommonPresentationElement> noElementPresentationElements;
 
   protected int elementCount = 0;
   protected int relationshipCount = 0;
@@ -99,23 +102,19 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   @Override
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, ElementData xmlElement) {
     if (getCameoDiagramConstant() == null) {
-      Logger.log(String.format("Internal error. No diagram constant defined for %s",
-          xmlElement.getType()));
+      Logger.log(String.format("Internal error. No diagram constant defined for %s", xmlElement.getType()));
       return null;
     }
 
     try {
-      element = ModelElementsManager.getInstance().createDiagram(getCameoDiagramConstant(),
-          (Namespace) owner);
+      element = ModelElementsManager.getInstance().createDiagram(getCameoDiagramConstant(), (Namespace) owner);
     } catch (ReadOnlyElementException e) {
-      Logger.log(String.format("ReadOnlyElementException encountered creating diagram %s.",
-          getCameoDiagramConstant()));
+      Logger.log(String.format("ReadOnlyElementException encountered creating diagram %s.", getCameoDiagramConstant()));
     } catch (NullPointerException npe) {
-      Logger.log(
-          String.format("Failed to create diagram based on cameo diagram constant %s for id %s",
-              getCameoDiagramConstant(), xmlElement.getImportId()));
+      Logger.log(String.format("Failed to create diagram based on cameo diagram constant %s for id %s", getCameoDiagramConstant(),
+          xmlElement.getImportId()));
       return null;
     }
 
@@ -123,29 +122,26 @@ public abstract class AbstractDiagram extends CommonElement {
     return element;
   }
 
-  public void addElements(Project project, Diagram diagram, HashMap<Element, Rectangle> elements,
-      XMLItem xmlElement) {
+  public void addElementsToDiagram(Project project, Diagram diagram) {
     DiagramPresentationElement presentationDiagram = project.getDiagram(diagram);
 
-    for (Map.Entry<Element, Rectangle> entry : elements.entrySet()) {
+    for (Map.Entry<Element, Rectangle> entry : elementsOnDiagram.entrySet()) {
       createPresentationElement(project, entry.getKey(), entry.getValue(), presentationDiagram);
     }
   }
 
-  public void createPresentationElement(Project project, Element element, Rectangle location,
-      PresentationElement presentationDiagram) {
+  public void createPresentationElement(Project project, Element element, Rectangle location, PresentationElement presentationDiagram) {
     ShapeElement shape = null;
     boolean hasLocation = hasLocation(location);
 
     try {
       if (hasLocation) {
-        shape = PresentationElementsManager.getInstance().createShapeElement(element,
-            presentationDiagram, true, new Point(location.x, location.y));
+        shape = PresentationElementsManager.getInstance().createShapeElement(element, presentationDiagram, true,
+            new Point(location.x, location.y));
         PresentationElementsManager.getInstance().reshapeShapeElement(shape, location);
         hasNoPositionData = false;
       } else {
-        shape = PresentationElementsManager.getInstance().createShapeElement(element,
-            presentationDiagram, true);
+        shape = PresentationElementsManager.getInstance().createShapeElement(element, presentationDiagram, true);
       }
     } catch (NullPointerException npe) {
       Logger.logException(npe);
@@ -159,33 +155,27 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
 
-  public void addRelationships(Project project, Diagram diagram, List<Element> relationships) {
+  public void addRelationshipsToDiagram(Project project, Diagram diagram) {
     DiagramPresentationElement presentationDiagram = project.getDiagram(diagram);
     removeAutopopulatedPathElements(presentationDiagram);
 
-    for (Element relationship : relationships) {
+    for (Element relationship : relationshipsOnDiagram) {
       Element client = ModelHelper.getClientElement(relationship);
       Element supplier = ModelHelper.getSupplierElement(relationship);
-      PresentationElement clientPE =
-          presentationDiagram.findPresentationElementForPathConnecting(client, null);
-      PresentationElement supplierPE =
-          presentationDiagram.findPresentationElementForPathConnecting(supplier, null);
+      PresentationElement clientPE = presentationDiagram.findPresentationElementForPathConnecting(client, null);
+      PresentationElement supplierPE = presentationDiagram.findPresentationElementForPathConnecting(supplier, null);
 
       try {
         if (clientPE != null && supplierPE != null) {
-          PresentationElementsManager.getInstance().createPathElement(relationship, clientPE,
-              supplierPE);
+          PresentationElementsManager.getInstance().createPathElement(relationship, clientPE, supplierPE);
         } else {
-          Logger.log(
-              "Client or supplier presentation element does not exist. Could not create representation of relationship on diagram.");
+          Logger.log("Client or supplier presentation element does not exist. Could not create representation of relationship on diagram.");
         }
       } catch (ClassCastException cce) {
-        Logger.log(String.format("Class cast exception creating path element %s.",
-            relationship.getHumanName()));
+        Logger.log(String.format("Class cast exception creating path element %s.", relationship.getHumanName()));
         Logger.logException(cce);
       } catch (NullPointerException npe) {
-        Logger.log(String.format("Null pointer exception creating path element %s.",
-            relationship.getHumanName()));
+        Logger.log(String.format("Null pointer exception creating path element %s.", relationship.getHumanName()));
         Logger.logException(npe);
       } catch (ReadOnlyElementException roee) {
         Logger.logException(roee);
@@ -195,8 +185,7 @@ public abstract class AbstractDiagram extends CommonElement {
 
   protected void removeAutopopulatedPathElements(DiagramPresentationElement presentationDiagram) {
     try {
-      for (PresentationElement presentationElement : presentationDiagram
-          .getPresentationElements()) {
+      for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
         if (presentationElement instanceof PathElement) {
           PresentationElementsManager.getInstance().deletePresentationElement(presentationElement);
         }
@@ -207,19 +196,13 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   @Override
-  public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-    List<String> diagramElements = modelElement.getChildElements(parsedXML);
-
-    for (String diagramElement : diagramElements) {
-      XMLItem diagramElementXML = parsedXML.get(diagramElement);
-      Importer.getInstance().buildElement(parsedXML, diagramElementXML);
+  public void createDependentElements(ElementData modelElement) {
+    for (String diagramElementImportId : modelElement.getDiagramElements()) {
+      Importer.getInstance().buildEntity(diagramElementImportId);
     }
 
-    List<String> diagramRelationships = modelElement.getChildRelationships(parsedXML);
-
-    for (String diagramRelationship : diagramRelationships) {
-      XMLItem diagramRelationshipXML = parsedXML.get(diagramRelationship);
-      Importer.getInstance().buildRelationship(parsedXML, diagramRelationshipXML);
+    for (String diagramConnectorImportId : modelElement.getDiagramConnectors()) {
+      Importer.getInstance().buildEntity(diagramConnectorImportId);
     }
   }
 
@@ -227,17 +210,13 @@ public abstract class AbstractDiagram extends CommonElement {
   public org.w3c.dom.Element writeToXML(Element element) {
     org.w3c.dom.Element data = super.writeToXML(element);
     org.w3c.dom.Element attributes = getAttributes(data.getChildNodes());
-    org.w3c.dom.Element relationships =
-        getType(data.getChildNodes(), XmlTagConstants.RELATIONSHIPS);
+    org.w3c.dom.Element relationships = getType(data.getChildNodes(), XmlTagConstants.RELATIONSHIPS);
 
-    org.w3c.dom.Element displayTag = XmlWriter.createMtipStringAttribute(XmlTagConstants.DISPLAY_AS,
-        XmlTagConstants.DISPLAY_AS_DIAGRAM);
+    org.w3c.dom.Element displayTag = XmlWriter.createMtipStringAttribute(XmlTagConstants.DISPLAY_AS, XmlTagConstants.DISPLAY_AS_DIAGRAM);
     XmlWriter.add(attributes, displayTag);
 
-    org.w3c.dom.Element elementListTag =
-        XmlWriter.createTag(XmlTagConstants.ELEMENT, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
-    org.w3c.dom.Element relationshipListTag =
-        XmlWriter.createTag(XmlTagConstants.DIAGRAM_CONNECTOR, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
+    org.w3c.dom.Element elementListTag = XmlWriter.createTag(XmlTagConstants.ELEMENT, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
+    org.w3c.dom.Element relationshipListTag = XmlWriter.createTag(XmlTagConstants.DIAGRAM_CONNECTOR, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
 
     writeDiagramEntities(elementListTag, relationshipListTag, element);
 
@@ -247,29 +226,22 @@ public abstract class AbstractDiagram extends CommonElement {
     return data;
   }
 
-  protected void writeDiagramEntities(org.w3c.dom.Element elementListTag,
-      org.w3c.dom.Element relationshipListTag, Element element) {
+  protected void writeDiagramEntities(org.w3c.dom.Element elementListTag, org.w3c.dom.Element relationshipListTag, Element element) {
     Diagram diagram = (Diagram) element;
     DiagramPresentationElement presentationDiagram = project.getDiagram(diagram);
     presentationDiagram.open();
 
-    for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
-      writeDiagramElementRecursively(elementListTag, relationshipListTag, presentationElement,
-          null);
+    for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {      
+      writeDiagramElementRecursively(elementListTag, relationshipListTag, presentationElement, null);
     }
 
     presentationDiagram.close();
   }
 
-  public void writeDiagramElementRecursively(org.w3c.dom.Element elementListTag,
-      org.w3c.dom.Element relationshipListTag, PresentationElement presentationElement,
-      PresentationElement parentPresentationElement) {
+  public void writeDiagramElementRecursively(org.w3c.dom.Element elementListTag, org.w3c.dom.Element relationshipListTag,
+      PresentationElement presentationElement, PresentationElement parentPresentationElement) {
     if (presentationElement instanceof PathElement || presentationElement instanceof TransitionView
         || presentationElement instanceof TransitionToSelfView) {
-      if (presentationElement instanceof LinkView) {
-        // exportLink(presentationElement);
-        return;
-      }
 
       writeDiagramRelationship(relationshipListTag, presentationElement);
       return;
@@ -277,38 +249,33 @@ public abstract class AbstractDiagram extends CommonElement {
 
     writeDiagramElement(elementListTag, presentationElement, parentPresentationElement);
 
-    for (PresentationElement subPresentationElement : presentationElement
-        .getPresentationElements()) {
-      if (!isValidPresentationElement(presentationElement)) {
-        continue;
-      }
-
-      writeDiagramElementRecursively(elementListTag, relationshipListTag, subPresentationElement,
-          presentationElement);
+    for (PresentationElement subPresentationElement : presentationElement.getPresentationElements()) {
+      writeDiagramElementRecursively(elementListTag, relationshipListTag, subPresentationElement, presentationElement);
     }
   }
 
-  protected org.w3c.dom.Element exportLink(Document xmlDoc,
-      PresentationElement presentationElement) {
+  protected org.w3c.dom.Element exportLink(Document xmlDoc, PresentationElement presentationElement) {
     Element element = presentationElement.getElement();
     InstanceSpecification link = (InstanceSpecification) element;
     Link commonLink = new Link(link.getName(), MtipUtils.getId(link));
-    org.w3c.dom.Element data =
-        commonLink.writeToXML(element, this.project, xmlDoc, presentationElement);
+    org.w3c.dom.Element data = commonLink.writeToXML(element, this.project, xmlDoc, presentationElement);
     return data;
   }
 
-  protected void writeDiagramElement(org.w3c.dom.Element elementListTag,
-      PresentationElement presentationElement, PresentationElement parentPresentationElement) {
+  protected void writeDiagramElement(org.w3c.dom.Element elementListTag, PresentationElement presentationElement,
+      PresentationElement parentPresentationElement) {
+    if (!isValidPresentationElement(presentationElement)) {
+      return;
+    }
+    
     Element element = presentationElement.getElement();
 
     // Presentation elements without an element attached will not be exported. This includes
     // TextViews and other diagram info and styling not currently supported.
     if (element == null || !isValidDiagramElement(element) || !MtipUtils.isSupported(element)) {
       if (element != null && !(element instanceof Diagram)) {
-        Logger.log(String.format(
-            "Not exporting diagram element %s. Not supported explicitly: ConnectorEnd, Region.",
-            element.getHumanName()));
+        Logger.log(
+            String.format("Not exporting diagram element %s. Not supported explicitly: ConnectorEnd, Region.", element.getHumanName()));
       }
       return;
     }
@@ -323,9 +290,6 @@ public abstract class AbstractDiagram extends CommonElement {
       Logger.log(String.format("Not exporting element %s. No bounds.", element.getHumanName()));
       return;
     }
-
-    PropertyManager propMan = presentationElement.getPropertyManager();
-
 
     diagramElementIDs.add(MtipUtils.getId(element));
 
@@ -342,9 +306,8 @@ public abstract class AbstractDiagram extends CommonElement {
     elementCount++;
   }
 
-  protected void writeDiagramElementNoElement(org.w3c.dom.Element elementListTag,
-      PresentationElement presentationElement, PresentationElement parentPresentationElement,
-      String type) {
+  protected void writeDiagramElementNoElement(org.w3c.dom.Element elementListTag, PresentationElement presentationElement,
+      PresentationElement parentPresentationElement, String type) {
     Rectangle bounds = getBounds(presentationElement);
 
     if (bounds == null) {
@@ -364,8 +327,11 @@ public abstract class AbstractDiagram extends CommonElement {
     elementCount++;
   }
 
-  protected void writeDiagramRelationship(org.w3c.dom.Element relationshipListTag,
-      PresentationElement presentationElement) {
+  protected void writeDiagramRelationship(org.w3c.dom.Element relationshipListTag, PresentationElement presentationElement) {
+    if (!isValidPresentationElement(presentationElement)) {
+      return;
+    }
+    
     Element relationship = presentationElement.getElement();
 
     if (relationship == null || isAdded(relationship) || !MtipUtils.isSupported(relationship)) {
@@ -379,8 +345,7 @@ public abstract class AbstractDiagram extends CommonElement {
     org.w3c.dom.Element typeTag = XmlWriter.createSimpleTypeTag(relationship);
 
     if (presentationElement instanceof PathElement) {
-      writeRelationshipMetadataConnector(relationship, relationshipTag,
-          (PathElement) presentationElement);
+      writeRelationshipMetadataConnector(relationship, relationshipTag, (PathElement) presentationElement);
     }
 
     XmlWriter.add(relationshipTag, idTag);
@@ -392,21 +357,17 @@ public abstract class AbstractDiagram extends CommonElement {
     relationshipCount++;
   }
 
-  protected void writeRelationshipMetadata(org.w3c.dom.Element diagramElementTag,
-      PresentationElement presentationElement) {
-    org.w3c.dom.Element relDataTag = XmlWriter.createTag(XmlTagConstants.RELATIONSHIP_METADATA,
-        XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+  protected void writeRelationshipMetadata(org.w3c.dom.Element diagramElementTag, PresentationElement presentationElement) {
+    org.w3c.dom.Element relDataTag = XmlWriter.createTag(XmlTagConstants.RELATIONSHIP_METADATA, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
 
     Rectangle bounds = presentationElement.getBounds();
 
-    org.w3c.dom.Element topTag = XmlWriter.createTag(XmlTagConstants.TOP,
-        XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(-bounds.y));
-    org.w3c.dom.Element bottomTag = XmlWriter.createTag(XmlTagConstants.BOTTOM,
-        XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(-bounds.y - bounds.height));
-    org.w3c.dom.Element leftTag = XmlWriter.createTag(XmlTagConstants.LEFT,
-        XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(bounds.x));
-    org.w3c.dom.Element rightTag = XmlWriter.createTag(XmlTagConstants.RIGHT,
-        XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(bounds.x + bounds.width));
+    org.w3c.dom.Element topTag = XmlWriter.createTag(XmlTagConstants.TOP, XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(-bounds.y));
+    org.w3c.dom.Element bottomTag =
+        XmlWriter.createTag(XmlTagConstants.BOTTOM, XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(-bounds.y - bounds.height));
+    org.w3c.dom.Element leftTag = XmlWriter.createTag(XmlTagConstants.LEFT, XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(bounds.x));
+    org.w3c.dom.Element rightTag =
+        XmlWriter.createTag(XmlTagConstants.RIGHT, XmlTagConstants.ATTRIBUTE_TYPE_INT, String.valueOf(bounds.x + bounds.width));
 
     XmlWriter.add(relDataTag, topTag);
     XmlWriter.add(relDataTag, bottomTag);
@@ -419,8 +380,7 @@ public abstract class AbstractDiagram extends CommonElement {
     XmlWriter.add(diagramElementTag, relDataTag);
   }
 
-  protected void writeImageMetadata(org.w3c.dom.Element relDataTag,
-      PresentationElement presentationElement) {
+  protected void writeImageMetadata(org.w3c.dom.Element relDataTag, PresentationElement presentationElement) {
     if (!hasImage(presentationElement)) {
       return;
     }
@@ -433,70 +393,66 @@ public abstract class AbstractDiagram extends CommonElement {
 
     XmlWriter.add(relDataTag, imageTag);
   }
-  
+
   protected void writePropertyMetadata(org.w3c.dom.Element relDataTag, PresentationElement presentationElement) {
     CommonPresentationElement cpe = new CommonPresentationElement(presentationElement);
-    
+
     Color fillColor = cpe.getFillColor();
     Color penColor = cpe.getPencolor();
     Color textColor = cpe.getTextColor();
-//    Font font = cpe.getFont();
+    // Font font = cpe.getFont();
     boolean useFillColor = cpe.getUseFillColor();
-    
+
     org.w3c.dom.Element propertiesTag = XmlWriter.createTag(XmlTagConstants.PROPERTIES, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
 
     if (fillColor != null) {
       org.w3c.dom.Element fillColorTag = XmlWriter.createColorTag(XmlTagConstants.FILL_COLOR, fillColor);
       propertiesTag.appendChild(fillColorTag);
     }
-    
+
     if (penColor != null) {
       org.w3c.dom.Element penColorTag = XmlWriter.createColorTag(XmlTagConstants.PEN_COLOR, penColor);
       propertiesTag.appendChild(penColorTag);
     }
-    
+
     if (textColor != null) {
       org.w3c.dom.Element textColorTag = XmlWriter.createColorTag(XmlTagConstants.TEXT_COLOR, textColor);
       propertiesTag.appendChild(textColorTag);
     }
-    
-//    if (font != null) {
-//      org.w3c.dom.Element fontTag = XmlWriter.createTag(XmlTagConstants.FONT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
-//      propertiesTag.appendChild(fontTag);
-//    }
-    
+
+    // if (font != null) {
+    // org.w3c.dom.Element fontTag = XmlWriter.createTag(XmlTagConstants.FONT,
+    // XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+    // propertiesTag.appendChild(fontTag);
+    // }
+
     if (useFillColor) {
       org.w3c.dom.Element useFillColorTag = XmlWriter.createTag(XmlTagConstants.USE_FILL_COLOR, XmlTagConstants.ATTRIBUTE_TYPE_BOOL);
       useFillColorTag.setTextContent(Boolean.toString(useFillColor));
       propertiesTag.appendChild(useFillColorTag);
     }
-    
+
     relDataTag.appendChild(propertiesTag);
   }
 
-  protected void writeRelationshipMetadataConnector(Element relationship,
-      org.w3c.dom.Element diagramRelationshipTag, PathElement pathElement) {
+  protected void writeRelationshipMetadataConnector(Element relationship, org.w3c.dom.Element diagramRelationshipTag,
+      PathElement pathElement) {
     if (pathElement.getSupplierPoint() == null || pathElement.getClientPoint() == null) {
       return;
     }
 
-    org.w3c.dom.Element relDataTag = XmlWriter.createTag(XmlTagConstants.RELATIONSHIP_METADATA,
-        XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+    org.w3c.dom.Element relDataTag = XmlWriter.createTag(XmlTagConstants.RELATIONSHIP_METADATA, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
 
-    org.w3c.dom.Element supplierPointTag =
-        XmlWriter.createTag(XmlTagConstants.SUPPLIER_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
-    org.w3c.dom.Element clientPointTag =
-        XmlWriter.createTag(XmlTagConstants.CLIENT_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+    org.w3c.dom.Element supplierPointTag = XmlWriter.createTag(XmlTagConstants.SUPPLIER_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+    org.w3c.dom.Element clientPointTag = XmlWriter.createTag(XmlTagConstants.CLIENT_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
 
     writeCoordinates(supplierPointTag, getSupplierPoint(relationship, pathElement));
     writeCoordinates(clientPointTag, getClientPoint(relationship, pathElement));
 
-    org.w3c.dom.Element breakPointsTag =
-        XmlWriter.createTag(XmlTagConstants.BREAK_POINT, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
+    org.w3c.dom.Element breakPointsTag = XmlWriter.createTag(XmlTagConstants.BREAK_POINT, XmlTagConstants.ATTRIBUTE_TYPE_LIST);
 
     for (int i = 0; i < pathElement.getBreakPoints().size(); i++) {
-      org.w3c.dom.Element breakPointTag =
-          XmlWriter.createTag(XmlTagConstants.BREAK_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
+      org.w3c.dom.Element breakPointTag = XmlWriter.createTag(XmlTagConstants.BREAK_POINT, XmlTagConstants.ATTRIBUTE_TYPE_DICT);
       XmlWriter.addAttributeKey(breakPointTag, Integer.toString(i));
 
       writeCoordinates(breakPointTag, pathElement.getBreakPoints().get(i));
@@ -511,12 +467,10 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   protected void writeCoordinates(org.w3c.dom.Element pointTag, Point point) {
-    org.w3c.dom.Element xCoordTag =
-        XmlWriter.createTag(XmlTagConstants.X_COORDINATE, XmlTagConstants.ATTRIBUTE_TYPE_INT);
+    org.w3c.dom.Element xCoordTag = XmlWriter.createTag(XmlTagConstants.X_COORDINATE, XmlTagConstants.ATTRIBUTE_TYPE_INT);
     XmlWriter.setText(xCoordTag, Integer.toString(point.x));
 
-    org.w3c.dom.Element yCoordTag =
-        XmlWriter.createTag(XmlTagConstants.Y_COORDINATE, XmlTagConstants.ATTRIBUTE_TYPE_INT);
+    org.w3c.dom.Element yCoordTag = XmlWriter.createTag(XmlTagConstants.Y_COORDINATE, XmlTagConstants.ATTRIBUTE_TYPE_INT);
     XmlWriter.setText(yCoordTag, Integer.toString(point.y));
 
     XmlWriter.add(pointTag, xCoordTag);
@@ -524,8 +478,7 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   protected boolean isValidDiagramElement(Element element) {
-    if (element.getHumanType().contentEquals("Diagram") || element instanceof ConnectorEnd
-        || element instanceof Region) {
+    if (element.getHumanType().contentEquals("Diagram") || element instanceof ConnectorEnd || element instanceof Region) {
       return false;
     }
 
@@ -533,7 +486,8 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   protected boolean isValidPresentationElement(PresentationElement presentationElement) {
-    if (presentationElement instanceof com.nomagic.magicdraw.uml.symbols.shapes.RoleView) {
+    if (presentationElement instanceof RoleView || presentationElement instanceof LegendItemView
+        || presentationElement instanceof LinkView || presentationElement instanceof ExtensionPointView) {
       return false;
     }
 
@@ -552,8 +506,7 @@ public abstract class AbstractDiagram extends CommonElement {
   @CheckForNull
   protected ImageView getImageView(PresentationElement presentationElement) {
     return (ImageView) presentationElement.getPresentationElements().stream()
-        .filter(x -> x instanceof ImageView && ((ImageView) x).getBounds().width != 0).findFirst()
-        .orElseGet(() -> null);
+        .filter(x -> x instanceof ImageView && ((ImageView) x).getBounds().width != 0).findFirst().orElseGet(() -> null);
   }
 
   protected boolean isAdded(Element element) {
@@ -561,8 +514,8 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   protected boolean hasLocation(Rectangle location) {
-    if (location.x == -999 && location.y == -999 && location.width == -999
-        && location.height == -999 && !SysML.isAssociationBlock(element)) {
+    if (location.x == -999 && location.y == -999 && location.width == -999 && location.height == -999
+        && !SysML.isAssociationBlock(element)) {
       return false;
     }
 
@@ -661,42 +614,30 @@ public abstract class AbstractDiagram extends CommonElement {
     // Operational
     aMap.put(CameoDiagramConstants.OPERATIONAL_PROCESS_FLOW, UAFConstants.OPERATIONAL_PROCESS_FLOW);
     aMap.put(CameoDiagramConstants.OPERATIONAL_CONNECTIVITY, UAFConstants.OPERATIONAL_CONNECTIVITY);
-    aMap.put(CameoDiagramConstants.OPERATIONAL_CONSTRAINTS_DEFINITION,
-        UAFConstants.OPERATIONAL_CONSTRAINTS_DEFINITION);
-    aMap.put(CameoDiagramConstants.OPERATIONAL_FREE_FORM_TAXONOMY,
-        UAFConstants.OPERATIONAL_FREE_FORM_TAXONOMY);
-    aMap.put(CameoDiagramConstants.OPERATIONAL_PROCESSES,
-        UAFConstants.OPERATIONAL_PROCESSES_DIAGRAM);
+    aMap.put(CameoDiagramConstants.OPERATIONAL_CONSTRAINTS_DEFINITION, UAFConstants.OPERATIONAL_CONSTRAINTS_DEFINITION);
+    aMap.put(CameoDiagramConstants.OPERATIONAL_FREE_FORM_TAXONOMY, UAFConstants.OPERATIONAL_FREE_FORM_TAXONOMY);
+    aMap.put(CameoDiagramConstants.OPERATIONAL_PROCESSES, UAFConstants.OPERATIONAL_PROCESSES_DIAGRAM);
 
     aMap.put(CameoDiagramConstants.OPERATIONAL_STRUCTURE, UAFConstants.OPERATIONAL_STRUCTURE);
     aMap.put(CameoDiagramConstants.OPERATIONAL_TAXONOMY, UAFConstants.OPERATIONAL_TAXONOMY);
-    aMap.put(CameoDiagramConstants.OPERATIONAL_HIGH_LEVEL_TAXONOMY,
-        UAFConstants.OPERATIONAL_HIGH_LEVEL_TAXONOMY);
-    aMap.put(CameoDiagramConstants.OPERATIONAL_INTERACTION_SCENARIOS,
-        UAFConstants.OPERATIONAL_INTERACTION_SCENARIOS);
-    aMap.put(CameoDiagramConstants.OPERATIONAL_INTERNAL_CONNECTIVITY,
-        UAFConstants.OPERATIONAL_INTERNAL_CONNECTIVITY);
+    aMap.put(CameoDiagramConstants.OPERATIONAL_HIGH_LEVEL_TAXONOMY, UAFConstants.OPERATIONAL_HIGH_LEVEL_TAXONOMY);
+    aMap.put(CameoDiagramConstants.OPERATIONAL_INTERACTION_SCENARIOS, UAFConstants.OPERATIONAL_INTERACTION_SCENARIOS);
+    aMap.put(CameoDiagramConstants.OPERATIONAL_INTERNAL_CONNECTIVITY, UAFConstants.OPERATIONAL_INTERNAL_CONNECTIVITY);
     aMap.put(CameoDiagramConstants.OPERATIONAL_PARAMETRIC, UAFConstants.OPERATIONAL_PARAMETRIC);
     aMap.put(CameoDiagramConstants.OPERATIONAL_STATES, UAFConstants.OPERATIONAL_STATES);
 
     // Actual Resources
-    aMap.put(CameoDiagramConstants.ACTUAL_RESOURCES_CONNECTIVITY,
-        UAFConstants.ACTUAL_RESOURCES_CONNECTIVITY_DIAGRAM);
-    aMap.put(CameoDiagramConstants.ACTUAL_RESOURCES_STRUCTURE,
-        UAFConstants.ACTUAL_RESOURCES_STRUCTURE_DIAGRAM);
+    aMap.put(CameoDiagramConstants.ACTUAL_RESOURCES_CONNECTIVITY, UAFConstants.ACTUAL_RESOURCES_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.ACTUAL_RESOURCES_STRUCTURE, UAFConstants.ACTUAL_RESOURCES_STRUCTURE_DIAGRAM);
 
     // Parameters
     aMap.put(CameoDiagramConstants.ENVIRONMENT, UAFConstants.ENVIRONMENT_DIAGRAM);
 
     // Personnel
-    aMap.put(CameoDiagramConstants.PERSONNEL_CONNECTIVITY,
-        UAFConstants.PERSONNEL_CONNECTIVITY_DIAGRAM);
-    aMap.put(CameoDiagramConstants.PERSONNEL_INTERACTION_SCENARIOS,
-        UAFConstants.PERSONNEL_INTERACTION_SCENARIOS_DIAGRAM);
-    aMap.put(CameoDiagramConstants.PERSONNEL_INTERNAL_CONNECTIVITY,
-        UAFConstants.PERSONNEL_INTERNAL_CONNECTIVITY_DIAGRAM);
-    aMap.put(CameoDiagramConstants.PERSONNEL_PROCESS_FLOW,
-        UAFConstants.PERSONNEL_PROCESSES_FLOW_DIAGRAM);
+    aMap.put(CameoDiagramConstants.PERSONNEL_CONNECTIVITY, UAFConstants.PERSONNEL_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.PERSONNEL_INTERACTION_SCENARIOS, UAFConstants.PERSONNEL_INTERACTION_SCENARIOS_DIAGRAM);
+    aMap.put(CameoDiagramConstants.PERSONNEL_INTERNAL_CONNECTIVITY, UAFConstants.PERSONNEL_INTERNAL_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.PERSONNEL_PROCESS_FLOW, UAFConstants.PERSONNEL_PROCESSES_FLOW_DIAGRAM);
     aMap.put(CameoDiagramConstants.PERSONNEL_PROCESSES, UAFConstants.PERSONNEL_PROCESSES_DIAGRAM);
     aMap.put(CameoDiagramConstants.PERSONNEL_STATES, UAFConstants.PERSONNEL_STATES_DIAGRAM);
     aMap.put(CameoDiagramConstants.PERSONNEL_STRUCTURE, UAFConstants.PERSONNEL_STRUCTURE_DIAGRAM);
@@ -705,15 +646,12 @@ public abstract class AbstractDiagram extends CommonElement {
     // Projects
     aMap.put(CameoDiagramConstants.PROJECTS_TAXONOMY, UAFConstants.PROJECTS_TAXONOMY_DIAGRAM);
     aMap.put(CameoDiagramConstants.PROJECTS_STRUCTURE, UAFConstants.PROJECTS_STRUCTURE_DIAGRAM);
-    aMap.put(CameoDiagramConstants.PROJECTS_CONNECTIVITY,
-        UAFConstants.PROJECTS_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.PROJECTS_CONNECTIVITY, UAFConstants.PROJECTS_CONNECTIVITY_DIAGRAM);
     aMap.put(CameoDiagramConstants.PROJECTS_PROCESSES, UAFConstants.PROJECTS_PROCESSES_DIAGRAM);
 
     // Resources
-    aMap.put(CameoDiagramConstants.RESOURCES_CONNECTIVITY,
-        UAFConstants.RESOURCES_CONNECTIVITY_DIAGRAM);
-    aMap.put(CameoDiagramConstants.RESOURCES_INTERACTION_SCENARIOS,
-        UAFConstants.RESOURCES_INTERACTION_SCENARIOS_DIAGRAM);
+    aMap.put(CameoDiagramConstants.RESOURCES_CONNECTIVITY, UAFConstants.RESOURCES_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.RESOURCES_INTERACTION_SCENARIOS, UAFConstants.RESOURCES_INTERACTION_SCENARIOS_DIAGRAM);
     aMap.put(CameoDiagramConstants.RESOURCES_PROCESSES, UAFConstants.RESOURCES_PROCESSES_DIAGRAM);
     aMap.put(CameoDiagramConstants.RESOURCES_STATES, UAFConstants.RESOURCES_STATES_DIAGRAM);
     aMap.put(CameoDiagramConstants.RESOURCES_STRUCTURE, UAFConstants.RESOURCES_STRUCTURE_DIAGRAM);
@@ -723,20 +661,15 @@ public abstract class AbstractDiagram extends CommonElement {
     // Security
     aMap.put(CameoDiagramConstants.SECURITY_TAXONOMY, UAFConstants.SECURITY_TAXONOMY_DIAGRAM);
     aMap.put(CameoDiagramConstants.SECURITY_STRUCTURE, UAFConstants.SECURITY_STRUCTURE_DIAGRAM);
-    aMap.put(CameoDiagramConstants.SECURITY_CONNECTIVITY,
-        UAFConstants.SECURITY_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.SECURITY_CONNECTIVITY, UAFConstants.SECURITY_CONNECTIVITY_DIAGRAM);
     aMap.put(CameoDiagramConstants.SECURITY_PROCESSES, UAFConstants.SECURITY_PROCESSES_DIAGRAM);
-    aMap.put(CameoDiagramConstants.SECURITY_PROCESSES_FLOW,
-        UAFConstants.SECURITY_PROCESSES_FLOW_DIAGRAM);
+    aMap.put(CameoDiagramConstants.SECURITY_PROCESSES_FLOW, UAFConstants.SECURITY_PROCESSES_FLOW_DIAGRAM);
     aMap.put(CameoDiagramConstants.SECURITY_CONSTRAINTS, UAFConstants.SECURITY_CONSTRAINTS_DIAGRAM);
 
     // Services
-    aMap.put(CameoDiagramConstants.SERVICES_CONNECTIVITY,
-        UAFConstants.SERVICES_CONNECTIVITY_DIAGRAM);
-    aMap.put(CameoDiagramConstants.SERVICES_CONSTRAINTS_DEFINITION,
-        UAFConstants.SERVICES_CONSTRAINTS_DEFINITION_DIAGRAM);
-    aMap.put(CameoDiagramConstants.SERVICES_INTERACTION_SCENARIOS,
-        UAFConstants.SERVICES_INTERACTION_SCENARIOS_DIAGRAM);
+    aMap.put(CameoDiagramConstants.SERVICES_CONNECTIVITY, UAFConstants.SERVICES_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.SERVICES_CONSTRAINTS_DEFINITION, UAFConstants.SERVICES_CONSTRAINTS_DEFINITION_DIAGRAM);
+    aMap.put(CameoDiagramConstants.SERVICES_INTERACTION_SCENARIOS, UAFConstants.SERVICES_INTERACTION_SCENARIOS_DIAGRAM);
     aMap.put(CameoDiagramConstants.SERVICES_PROCESSES, UAFConstants.SERVICES_PROCESSES_DIAGRAM);
     aMap.put(CameoDiagramConstants.SERVICES_STATES, UAFConstants.SERVICES_STATES_DIAGRAM);
     aMap.put(CameoDiagramConstants.SERVICES_STRUCTURE, UAFConstants.SERVICES_STRUCTURE_DIAGRAM);
@@ -749,11 +682,9 @@ public abstract class AbstractDiagram extends CommonElement {
     // Strategic
     aMap.put(CameoDiagramConstants.STRATEGIC_TAXONOMY, UAFConstants.STRATEGIC_TAXONOMY_DIAGRAM);
     aMap.put(CameoDiagramConstants.STRATEGIC_STRUCTURE, UAFConstants.STRATEGIC_STRUCTURE_DIAGRAM);
-    aMap.put(CameoDiagramConstants.STRATEGIC_CONNECTIVITY,
-        UAFConstants.STRATEGIC_CONNECTIVITY_DIAGRAM);
+    aMap.put(CameoDiagramConstants.STRATEGIC_CONNECTIVITY, UAFConstants.STRATEGIC_CONNECTIVITY_DIAGRAM);
     aMap.put(CameoDiagramConstants.STRATEGIC_STATES, UAFConstants.STRATEGIC_STATES_DIAGRAM);
-    aMap.put(CameoDiagramConstants.STRATEGIC_CONSTRAINTS,
-        UAFConstants.STRATEGIC_CONSTRAINTS_DIAGRAM);
+    aMap.put(CameoDiagramConstants.STRATEGIC_CONSTRAINTS, UAFConstants.STRATEGIC_CONSTRAINTS_DIAGRAM);
 
     // Summary and Overview
     aMap.put(CameoDiagramConstants.SUMMARY_AND_OVERVIEW, UAFConstants.SUMMARY_AND_OVERVIEW_DIAGRAM);

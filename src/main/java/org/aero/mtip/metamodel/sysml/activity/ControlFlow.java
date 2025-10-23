@@ -14,7 +14,7 @@ import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ActivityEdge;
@@ -35,7 +35,7 @@ public class ControlFlow extends CommonRelationship {
 	}
 	
 	@Override
-	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData xmlElement) {
 		super.createElement(project,owner, client, supplier, xmlElement);
 		
 		if(xmlElement.hasAttribute(XmlTagConstants.GUARD)) {
@@ -45,7 +45,7 @@ public class ControlFlow extends CommonRelationship {
 		return element;
 	}
 	
-	private void setGuard(XMLItem xmlElement) {
+	private void setGuard(ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ControlFlow cf = (com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ControlFlow)element;
 		ValueSpecification guard = cf.getGuard();
 		

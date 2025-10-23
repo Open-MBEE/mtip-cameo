@@ -15,7 +15,7 @@ import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity;
@@ -41,7 +41,7 @@ public class ActivityPartition extends CommonElement {
   }
 
   @Override
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, ElementData xmlElement) {
     super.createElement(project, owner, xmlElement);
 
     setRepresents();
@@ -51,12 +51,12 @@ public class ActivityPartition extends CommonElement {
   }
 
   private void setRepresents() {
-    if (!xmlElement.hasAttribute(XML_TAG_REPRESENTS)) {
+    if (!elementData.hasAttribute(XML_TAG_REPRESENTS)) {
       return;
     }
 
     Element represents =
-        Importer.getInstance().getImportedElement(xmlElement.getAttribute(XML_TAG_REPRESENTS));
+        Importer.getInstance().getImportedElement(elementData.getAttribute(XML_TAG_REPRESENTS));
 
     if (represents == null) {
       return;
@@ -66,12 +66,12 @@ public class ActivityPartition extends CommonElement {
   }
 
   private void setSuperPartition() {
-    if (!xmlElement.hasAttribute(XML_TAG_SUPER_PARTITION)) {
+    if (!elementData.hasAttribute(XML_TAG_SUPER_PARTITION)) {
       return;
     }
 
     Element superPartition =
-        Importer.getInstance().getImportedElement(xmlElement.getAttribute(XML_TAG_SUPER_PARTITION));
+        Importer.getInstance().getImportedElement(elementData.getAttribute(XML_TAG_SUPER_PARTITION));
 
     if (superPartition == null
         || !(superPartition instanceof com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition)) {

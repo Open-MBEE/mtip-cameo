@@ -71,14 +71,14 @@ public abstract class ActivityNode extends CommonElement {
       return;
     }
 
-    if (!xmlElement.hasListAttributes(XML_TAG_IN_PARTITION)) {
+    if (!elementData.hasListAttributes(XML_TAG_IN_PARTITION)) {
       return;
     }
 
     Collection<com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition> inPartitionElements =
         new ArrayList<com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition>();
 
-    for (String inPartitionId : xmlElement.getListAttributes(XML_TAG_IN_PARTITION)) {
+    for (String inPartitionId : elementData.getListAttributes(XML_TAG_IN_PARTITION)) {
       Element inPartitionElement = Importer.getInstance().getImportedElement(inPartitionId);
 
       if (inPartitionElement == null) {

@@ -91,7 +91,7 @@ public class Config {
 
   private Config() {
     properties = new Properties();
-    setIdMode(ID_MODE_CLOUD);
+    setIdMode(ID_MODE_LOCAL);
   }
 
   private Config(Properties properties) {

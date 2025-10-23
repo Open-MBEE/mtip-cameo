@@ -11,7 +11,7 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import org.w3c.dom.NodeList;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.uml.Finder;
@@ -30,7 +30,7 @@ public class MetaClass extends CommonElement {
   }
 
   @Override
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, ElementData xmlElement) {
     com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Class metaclass = StereotypesHelper.getMetaClassByName(project, this.name);
 
     // TODO: Confirm that this method gets Metaclasses from all profiles.

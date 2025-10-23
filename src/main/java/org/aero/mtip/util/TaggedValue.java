@@ -7,7 +7,6 @@
 
 package org.aero.mtip.util;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.aero.mtip.XML.XmlUtils;
 import org.aero.mtip.constants.XmlTagConstants;

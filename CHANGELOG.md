@@ -1,5 +1,12 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.1.1
+* Fixed bug with Cameo-speicifc elements being filtered out
+
+### 2022x v1.1.0
+* Updated ActivityNode and ActivityPartition handling
+* Updated import logic
+
 ### 2022x v1.0.9
 * Fixed bug in PrimitiveValueType handling
 

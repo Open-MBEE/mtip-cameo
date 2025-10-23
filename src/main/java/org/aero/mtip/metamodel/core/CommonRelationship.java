@@ -8,15 +8,13 @@
 package org.aero.mtip.metamodel.core;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import javax.annotation.CheckForNull;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.XmlTagConstants;
-import org.aero.mtip.util.CameoUtils;
+import org.aero.mtip.io.Importer;
+import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
-import org.aero.mtip.util.XMLItem;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import com.nomagic.magicdraw.core.Application;
@@ -26,8 +24,7 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
 
 public abstract class CommonRelationship extends CommonElement {
-  public static String INVALID_CLIENT_SUPPLIER_MESSAGE =
-      "Invalid Client or Supplier - Not SysML Compliant";
+  public static String INVALID_CLIENT_SUPPLIER_MESSAGE = "Invalid Client or Supplier - Not SysML Compliant";
 
   public CommonRelationship(String name, String importId) {
     super(name, importId);
@@ -35,27 +32,20 @@ public abstract class CommonRelationship extends CommonElement {
 
   }
 
-  public Element createElement(Project project, Element owner, Element client, Element supplier,
-      XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData elementData) {
     try {
-      super.createElement(project, owner, xmlElement);
-      
+      super.createElement(project, owner, elementData);
+
       setSupplier(supplier);
       setClient(client);
-      
+
       return element;
     } catch (ClassCastException cce) {
-      String logMessage =
-          "Invalid client/supplier for relationship " + name + " with id " + importId + ".";
-      CameoUtils.logGui(logMessage);
-      Logger.log(logMessage);
+      Logger.log(String.format("Invalid client/supplier for relationship. Type: %s; Id: %s", element.getClass().getSimpleName(), importId));
       ModelHelper.dispose(Arrays.asList(element));
       return null;
     } catch (IllegalArgumentException iae) {
-      String logMessage = "Invalid parent. Parent invalid for element " + name + " with id " + importId
-          + ". Supplier and client are also invalid parents. Element could not be placed in model.";
-      CameoUtils.logGui(logMessage);
-      Logger.log(logMessage);
+      Logger.log(String.format("Invalid parent for relationship. Type: %s; Id: %s", element.getClass().getSimpleName(), importId));
       ModelHelper.dispose(Arrays.asList(element));
       return null;
     }
@@ -72,31 +62,26 @@ public abstract class CommonRelationship extends CommonElement {
       element.setOwner(owner);
       return;
     }
-    
-    Element supplier = getSupplier();
+
+    Element supplier = Importer.getInstance().getImportedElement(elementData.getSupplierImportId());
 
     if (supplier != null && ModelHelper.canMoveChildInto(supplier, element)) {
-      Logger.log(String.format("Setting supplier as owner for %s with id %s.",
-          element.getHumanType(), importId));
+      Logger.log(String.format("Setting supplier as owner for %s with id %s.", element.getHumanType(), importId));
       element.setOwner(supplier);
       return;
     }
-    
-    Element client = getClient();
+
+    Element client = Importer.getInstance().getImportedElement(elementData.getClientImportId());
 
     if (client != null && ModelHelper.canMoveChildInto(client, element)) {
-      Logger.log(String.format("Setting client as owner for %s with id %s.",
-          element.getHumanType(), importId));
+      Logger.log(String.format("Setting client as owner for %s with id %s.", element.getHumanType(), importId));
       element.setOwner(client);
     }
   }
 
-  public org.w3c.dom.Element createBaseXML(Element element, Project project, Document xmlDoc) {
-    return null;
-  }
-
-  public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-
+  @Override
+  public void createDependentElements(ElementData elementData) {
+    super.createDependentElements(elementData);
   }
 
   public org.w3c.dom.Element getAttributes(NodeList dataNodes) {
@@ -131,13 +116,12 @@ public abstract class CommonRelationship extends CommonElement {
     Element supplier = getSupplier();
 
     if (supplier == null) {
-      Logger.log(String.format("No supplier element found for relationship of type %s with id %s.",
-          element.getHumanType(), MtipUtils.getId(element)));
+      Logger.log(String.format("No supplier element found for relationship of type %s with id %s.", element.getHumanType(),
+          MtipUtils.getId(element)));
       return;
     }
 
-    org.w3c.dom.Element supplierTag =
-        XmlWriter.createMtipRelationship(supplier, XmlTagConstants.SUPPLIER);
+    org.w3c.dom.Element supplierTag = XmlWriter.createMtipRelationship(supplier, XmlTagConstants.SUPPLIER);
     XmlWriter.add(relationships, supplierTag);
   }
 
@@ -145,13 +129,12 @@ public abstract class CommonRelationship extends CommonElement {
     Element client = getClient();
 
     if (client == null) {
-      Logger.log(String.format("No client element found for relationship of type %s with id %s.",
-          element.getHumanType(), MtipUtils.getId(element)));
+      Logger.log(String.format("No client element found for relationship of type %s with id %s.", element.getHumanType(),
+          MtipUtils.getId(element)));
       return;
     }
 
-    org.w3c.dom.Element clientTag =
-        XmlWriter.createMtipRelationship(client, XmlTagConstants.CLIENT);
+    org.w3c.dom.Element clientTag = XmlWriter.createMtipRelationship(client, XmlTagConstants.CLIENT);
     XmlWriter.add(relationships, clientTag);
   }
 
@@ -160,8 +143,7 @@ public abstract class CommonRelationship extends CommonElement {
       return;
     }
 
-    org.w3c.dom.Element multiplicityTag =
-        XmlWriter.createMtipStringAttribute(XmlTagConstants.SUPPLIER_MULTIPLICITY, multiplicity);
+    org.w3c.dom.Element multiplicityTag = XmlWriter.createMtipStringAttribute(XmlTagConstants.SUPPLIER_MULTIPLICITY, multiplicity);
     XmlWriter.add(attributes, multiplicityTag);
   }
 

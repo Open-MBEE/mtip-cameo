@@ -10,7 +10,7 @@ public class PackageImport extends CommonRelationship {
 		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PACKAGE_IMPORT;
-		this.xmlConstant = XmlTagConstants.PACKAGEIMPORT;
+		this.xmlConstant = XmlTagConstants.PACKAGE_IMPORT;
 		this.element = f.createPackageImportInstance();
 	}
 }

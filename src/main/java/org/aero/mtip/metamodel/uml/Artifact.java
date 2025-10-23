@@ -7,6 +7,7 @@ import org.aero.mtip.metamodel.core.CommonElement;
 public class Artifact extends CommonElement {
   public Artifact(String name, String importId) {
     super(name, importId);
+    
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = UmlConstants.ARTIFACT;
     this.xmlConstant = XmlTagConstants.ARTIFACT;

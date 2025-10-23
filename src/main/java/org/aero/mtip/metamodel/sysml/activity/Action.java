@@ -33,12 +33,12 @@ public class Action extends ActivityNode {
 	}
 	
 	protected void setBehavior() {
-	  if (!xmlElement.hasAttribute(XmlTagConstants.BEHAVIOR)) {
+	  if (!elementData.hasAttribute(XmlTagConstants.BEHAVIOR)) {
 	    return;
 	  }
 	  
 	  Element behavior =
-	        Importer.getInstance().getImportedElement(xmlElement.getAttribute(XML_TAG_BEHAVIOR));
+	        Importer.getInstance().getImportedElement(elementData.getAttribute(XML_TAG_BEHAVIOR));
 
 	    if (behavior == null) {
 	      return;

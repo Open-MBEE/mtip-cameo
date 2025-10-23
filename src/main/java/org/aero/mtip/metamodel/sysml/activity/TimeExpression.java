@@ -7,14 +7,13 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 package org.aero.mtip.metamodel.sysml.activity;
 
 import java.util.Collection;
-import java.util.HashMap;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
+import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ValueSpecification;
@@ -31,7 +30,7 @@ public class TimeExpression extends CommonElement {
 	}
 	
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		
 		setExpr(project, xmlElement);
@@ -40,12 +39,7 @@ public class TimeExpression extends CommonElement {
 		return element;
 	}
 	
-	@Override
-	public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-		
-	}
-	
-	private void setExpr(Project project, XMLItem xmlElement) {
+	private void setExpr(Project project, ElementData xmlElement) {
 		if(!xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_NAME_EXPR)) {
 			return;
 		}
@@ -65,7 +59,7 @@ public class TimeExpression extends CommonElement {
 		timeExpression.setExpr(vs);
 	}
 	
-	private void setObservation(Project project, XMLItem xmlElement) {
+	private void setObservation(Project project, ElementData xmlElement) {
 		if (!xmlElement.hasListAttributes(XmlTagConstants.ATTRIBUTE_NAME_OBSERVATION)) {
 			return;
 		}

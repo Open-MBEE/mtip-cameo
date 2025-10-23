@@ -372,6 +372,8 @@ import org.aero.mtip.metamodel.uaf.standards.StandardsStructure;
 import org.aero.mtip.metamodel.uaf.standards.StandardsTaxonomy;
 import org.aero.mtip.metamodel.uaf.summaryandoverview.SummaryAndOverview;
 import org.aero.mtip.metamodel.uml.Artifact;
+import org.aero.mtip.metamodel.uml.Legend;
+import org.aero.mtip.metamodel.uml.LegendItem;
 import org.aero.mtip.util.CameoUtils;
 
 public class CommonElementsFactory {
@@ -603,6 +605,12 @@ public class CommonElementsFactory {
         break;
       case SysmlConstants.JOIN_NODE:
         element = new JoinNode(name, importId);
+        break;
+      case UmlConstants.LEGEND:
+        element = new Legend(name, importId);
+        break;
+      case UmlConstants.LEGEND_ITEM:
+        element = new LegendItem(name, importId);
         break;
       case SysmlConstants.LIFELINE:
         element = new Lifeline(name, importId);

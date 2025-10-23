@@ -9,8 +9,10 @@ public class UmlConstants {
 
   // Element Constants
   public static final String ARTIFACT = "Artifact";
+  public static final String LEGEND = "Legend";
+  public static final String LEGEND_ITEM = "LegendItem";
 
-  public static final String[] UML_ELEMENTS_VALUES = {ARTIFACT};
+  public static final String[] UML_ELEMENTS_VALUES = {ARTIFACT, LEGEND, LEGEND_ITEM};
   public static final String[] UML_RELATIONSHIPS_VALUES = {};
   public static final String[] UML_DIAGRAMS_VALUES = {};
 

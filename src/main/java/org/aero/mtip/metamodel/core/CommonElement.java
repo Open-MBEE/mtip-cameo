@@ -8,6 +8,7 @@
 package org.aero.mtip.metamodel.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
 import org.aero.mtip.util.TaggedValue;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import com.nomagic.magicdraw.core.Application;
@@ -70,12 +71,12 @@ public abstract class CommonElement {
   protected List<Stereotype> initialStereotypes;
   protected Element classifier;
   protected Project project;
-  protected XMLItem xmlElement;
+  protected ElementData elementData;
 
-  protected List<String> attributeDependencies = new ArrayList<String>();
+  protected List<String> attributeDependencies = new ArrayList<String>(Arrays.asList(XmlTagConstants.CLASSIFIED_BY));
   protected List<String> attributeListDependencies = new ArrayList<String>();
 
-  protected List<String> attributeReferences = new ArrayList<String>();
+  protected List<String> attributeReferences = new ArrayList<String>(Arrays.asList(XmlTagConstants.SYNC_ELEMENT));
   protected List<String> attributeListReferences = new ArrayList<String>();
 
   public CommonElement(String name, String importId) {
@@ -88,9 +89,9 @@ public abstract class CommonElement {
 
   }
 
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, ElementData elementData) {
     this.project = project;
-    this.xmlElement = xmlElement;
+    this.elementData = elementData;
 
     setBaseElement();
     setName();
@@ -99,9 +100,9 @@ public abstract class CommonElement {
     addMetamodelConstantStereotype();
     setClassifier();
     applyClassifier();
-    addDocumentation(xmlElement);
-    addMultiplicity(xmlElement);
-    addType(xmlElement);
+    addDocumentation();
+    addMultiplicity();
+    addType();
 
     return element;
   }
@@ -136,29 +137,30 @@ public abstract class CommonElement {
 
   public void setOwner(Element owner) {
     if (element == null) {
-      Logger.log("Sysml Element was not created. Cannot set owner");
+      Logger.log("Element was not created. Cannot set owner");
       return;
     }
 
-    if (owner == null) {
-      if (ModelHelper.canMoveChildInto(project.getPrimaryModel(), element)) {
-        element.setOwner(project.getPrimaryModel());
-        return;
-      }
-
-      ModelHelper.dispose(Collections.singletonList(element));
-      return;
-    }
-
-
-    if (ModelHelper.canMoveChildInto(owner, element)) {
+    if (owner != null && ModelHelper.canMoveChildInto(owner, element)) {
       element.setOwner(owner);
       return;
     }
 
+    Logger.log(String.format("Owner is null or invalid. Attempting owner as primary model. Type: %s; Id: %s", elementData.getType(),
+        elementData.getImportId()));
+
+    if (ModelHelper.canMoveChildInto(project.getPrimaryModel(), element)) {
+      element.setOwner(project.getPrimaryModel());
+      return;
+    }
+
+    Logger.log(String.format("Attempting to find acceptable parent. Type: %s; Id: %s", elementData.getType(), elementData.getType()));
+
     owner = ModelHelper.findAcceptableParentFor(element, owner);
 
     if (owner == null) {
+      Logger.log(String.format("No owner could be found. Element not created. Type: %s; Id: %s", elementData.getType(),
+          elementData.getImportId()));
       ModelHelper.dispose(Collections.singletonList(element));
       return;
     }
@@ -166,101 +168,102 @@ public abstract class CommonElement {
     element.setOwner(owner);
   }
 
-  public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-    createTaggedValues(parsedXML, modelElement);
-    createTypedBy(parsedXML, modelElement);
+  public void createDependentElements(ElementData elementData) {
+    createTaggedValues(elementData);
+    createTypedBy(elementData);
 
     for (String attributeName : attributeDependencies) {
-      createDependentElementByAttributeName(parsedXML, modelElement, attributeName);
+      createDependentElementByAttributeName(elementData, attributeName);
     }
 
     for (String attributeName : attributeListDependencies) {
-      createDependentListElementByAttributeName(parsedXML, modelElement, attributeName);
+      createDependentListElementByAttributeName(elementData, attributeName);
     }
   }
 
-  protected void createDependentElementByAttributeName(HashMap<String, XMLItem> parsedXML, XMLItem modelElement, String attributeName) {
-    if (!modelElement.hasAttribute(attributeName)) {
+  protected void createDependentElementByAttributeName(ElementData elementData, String attributeName) {
+    if (!elementData.hasAttribute(attributeName)) {
       return;
     }
 
-    Importer.getInstance().buildEntity(parsedXML, parsedXML.get(modelElement.getAttribute(attributeName)));
+    Importer.getInstance().buildEntity(elementData.getAttribute(attributeName));
   }
 
-  protected void createDependentListElementByAttributeName(HashMap<String, XMLItem> parsedXML, XMLItem modelElement, String attributeName) {
-    if (!modelElement.hasListAttributes(attributeName)) {
+  protected void createDependentListElementByAttributeName(ElementData elementData, String attributeName) {
+    if (!elementData.hasListAttributes(attributeName)) {
       return;
     }
 
-    for (String elementId : modelElement.getListAttributes(attributeName)) {
-      Importer.getInstance().buildEntity(parsedXML, parsedXML.get(elementId));
+    for (String attributeElementId : elementData.getListAttributes(attributeName)) {
+      Importer.getInstance().buildEntity(elementData.getAttribute(attributeElementId));
     }
   }
 
-  public void createReferencedElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
+  public void createReferencedElements(ElementData elementData) {
     for (String attributeName : attributeReferences) {
-      createReferencedElementByAttributeName(parsedXML, modelElement, attributeName);
+      createReferencedElementByAttributeName(elementData, attributeName);
     }
 
     for (String attributeName : attributeListReferences) {
-      createReferencedListElementByAttributeName(parsedXML, modelElement, attributeName);
+      createReferencedListElementByAttributeName(elementData, attributeName);
     }
   }
 
-  protected void createReferencedElementByAttributeName(HashMap<String, XMLItem> parsedXML, XMLItem modelElement, String attributeName) {
-    if (!modelElement.hasAttribute(attributeName)) {
+  protected void createReferencedElementByAttributeName(ElementData elementData, String attributeName) {
+    if (!elementData.hasAttribute(attributeName)) {
       return;
     }
 
-    Importer.getInstance().buildEntity(parsedXML, parsedXML.get(modelElement.getAttribute(attributeName)));
+    Importer.getInstance().buildEntity(elementData.getAttribute(attributeName));
   }
 
-  protected void createReferencedListElementByAttributeName(HashMap<String, XMLItem> parsedXML, XMLItem modelElement,
-      String attributeName) {
+  protected void createReferencedListElementByAttributeName(ElementData modelElement, String attributeName) {
     if (!modelElement.hasListAttributes(attributeName)) {
       return;
     }
 
-    for (String elementId : modelElement.getListAttributes(attributeName)) {
-      Importer.getInstance().buildEntity(parsedXML, parsedXML.get(elementId));
+    for (String attributeElementId : modelElement.getListAttributes(attributeName)) {
+      Importer.getInstance().buildEntity(attributeElementId);
     }
   }
 
-  public void addReferences() {}
+  public void addReferences() {
+    setSyncElement();
+  }
 
-  public void createTaggedValues(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-    if (!modelElement.hasTaggedValues()) {
+  public void setSyncElement() {
+
+  }
+
+  public void createTaggedValues(ElementData elementData) {
+    if (!elementData.hasTaggedValues()) {
       return;
     }
 
-    for (TaggedValue tv : modelElement.getTaggedValues()) {
+    for (TaggedValue tv : elementData.getTaggedValues()) {
       if (!tv.getValueType().contentEquals(SysmlConstants.ELEMENT)) {
         continue;
       }
 
       if (!tv.isMultiValue()) {
-        Importer.getInstance().buildElement(parsedXML, parsedXML.get(tv.getValue()));
+        Importer.getInstance().buildEntity(tv.getValue());
         continue;
       }
 
       List<String> values = tv.getValues();
 
       for (String value : values) {
-        Importer.getInstance().buildElement(parsedXML, parsedXML.get(value));
+        Importer.getInstance().buildEntity(value);
       }
     }
   }
 
-  public void createTypedBy(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
+  public void createTypedBy(ElementData modelElement) {
     if (!modelElement.hasAttribute(XmlTagConstants.TYPED_BY)) {
       return;
     }
 
-    if (!parsedXML.containsKey(modelElement.getAttribute(XmlTagConstants.TYPED_BY))) {
-      return;
-    }
-
-    Importer.getInstance().buildElement(parsedXML, parsedXML.get(modelElement.getAttribute(XmlTagConstants.TYPED_BY)));
+    Importer.getInstance().buildEntity(modelElement.getAttribute(XmlTagConstants.TYPED_BY));
   }
 
   @CheckForNull
@@ -300,6 +303,7 @@ public abstract class CommonElement {
     org.w3c.dom.Element relationshipsTag = XmlWriter.createMtipRelationshipsTag();
 
     writeParent(relationshipsTag);
+    writeSyncElement(relationshipsTag);
     writeTypedBy(relationshipsTag);
 
     XmlWriter.add(data, relationshipsTag);
@@ -320,6 +324,10 @@ public abstract class CommonElement {
 
     org.w3c.dom.Element parentTag = XmlWriter.createMtipHasParentTag(element.getOwner());
     XmlWriter.add(relationships, parentTag);
+  }
+
+  protected void writeSyncElement(org.w3c.dom.Element realtionships) {
+    // TODO:Write Sync element
   }
 
   protected void writeTypedBy(org.w3c.dom.Element relationships) {
@@ -463,7 +471,7 @@ public abstract class CommonElement {
 
     XmlWriter.add(relationships, relationshipListTag);
   }
-
+  
   @CheckForNull
   public String getTaggedValueType(com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TaggedValue taggedValue) {
     if (taggedValue instanceof BooleanTaggedValue) {
@@ -797,18 +805,20 @@ public abstract class CommonElement {
     return attributes;
   }
 
-  protected void addDocumentation(XMLItem xmlElement) {
-    if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_DOCUMENTATION)) {
-      ModelHelper.setComment(element, xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_DOCUMENTATION));
+  protected void addDocumentation() {
+    if (!elementData.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_DOCUMENTATION)) {
+      return;
     }
+
+    ModelHelper.setComment(element, elementData.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_DOCUMENTATION));
   }
 
-  protected void addMultiplicity(XMLItem xmlElement) {
-    if (element instanceof MultiplicityElement) {
-      if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_MULTIPLICITY)) {
-        ModelHelper.setMultiplicity(xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_MULTIPLICITY), (MultiplicityElement) element);
-      }
+  protected void addMultiplicity() {
+    if (!(element instanceof MultiplicityElement) || !elementData.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_MULTIPLICITY)) {
+      return;
     }
+
+    ModelHelper.setMultiplicity(elementData.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_MULTIPLICITY), (MultiplicityElement) element);
   }
 
   /**
@@ -816,18 +826,14 @@ public abstract class CommonElement {
    * relationships. Checks for element in model with project.getElementByID() with the import ID, then
    * checks for newly created element with ImportXmlSysml.idConversion().
    * 
-   * @param xmlElement XMLItem containing attributes in memory from XML file such as typed by.
    */
-  protected void addType(XMLItem xmlElement) {
+  protected void addType() {
     try {
-      if (!(element instanceof TypedElement)) {
-        return;
-      }
-      if (!xmlElement.hasAttribute(XmlTagConstants.TYPED_BY)) {
+      if (!(element instanceof TypedElement) || !elementData.hasAttribute(XmlTagConstants.TYPED_BY)) {
         return;
       }
 
-      Element typeElement = getTypeElement(xmlElement.getAttribute(XmlTagConstants.TYPED_BY));
+      Element typeElement = getTypeElement(elementData.getAttribute(XmlTagConstants.TYPED_BY));
 
       if (typeElement == null) {
         return;
@@ -851,7 +857,7 @@ public abstract class CommonElement {
     }
 
     if (importID.startsWith("_9_")) {
-      // TODO return CameoUtils.getUmlPrimitiveValueType(importID);
+      return (Element) project.getElementByID(importID);
     }
 
     Element importElement = (Element) project.getElementByID(importID);
@@ -860,7 +866,7 @@ public abstract class CommonElement {
       return importElement;
     }
 
-    return (Element) project.getElementByID(Importer.idConversion(importID));
+    return (Element) Importer.getInstance().getImportedElement(importId);
 
   }
 
@@ -920,7 +926,7 @@ public abstract class CommonElement {
         (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.InstanceSpecification) element, true);
   }
 
-  public void addStereotypeTaggedValues(XMLItem xmlElement) {
+  public void addStereotypeTaggedValues(ElementData xmlElement) {
     for (TaggedValue tv : xmlElement.getTaggedValues()) {
       try {
         Profile profile = StereotypesHelper.getProfile(Application.getInstance().getProject(), tv.getProfileName());
@@ -1000,6 +1006,10 @@ public abstract class CommonElement {
     }
 
     return null;
+  }
+
+  public Element getElement() {
+    return element;
   }
 
   public String getElementType() {

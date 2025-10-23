@@ -146,6 +146,7 @@ public class MtipUtils {
 
   public static boolean isSupportedElement(String commonElementType) {
     if (!UmlConstants.UML_ELEMENTS.contains(commonElementType)
+        && !CameoConstants.CAMEO_ELEMENTS.contains(commonElementType)
         && !SysmlConstants.SYSML_ELEMENTS.contains(commonElementType)
         && !UAFConstants.UAF_ELEMENTS.contains(commonElementType)) {
       return false;
@@ -156,6 +157,7 @@ public class MtipUtils {
 
   public static boolean isSupportedRelationship(String commonRelationshipType) {
     if (!SysmlConstants.SYSML_RELATIONSHIPS.contains(commonRelationshipType)
+        && !CameoConstants.CAMEO_RELATIONSHIPS.contains(commonRelationshipType)
         && !UAFConstants.UAF_RELATIONSHIPS.contains(commonRelationshipType)) {
       return false;
     }
@@ -165,6 +167,7 @@ public class MtipUtils {
 
   public static boolean isSupportedDiagram(String commonElementType) {
     if (!SysmlConstants.SYSML_DIAGRAMS.contains(commonElementType)
+        && !CameoConstants.CAMEO_DIAGRAMS.contains(commonElementType)
         && !UAFConstants.UAF_DIAGRAMS.contains(commonElementType)
         && !DoDAFConstants.DODAF_DIAGRAMS.contains(commonElementType)) {
       return false;
@@ -306,8 +309,6 @@ public class MtipUtils {
       return SysmlConstants.CONDITIONAL_NODE;
     } else if (element instanceof ConnectionPointReference) {
       return SysmlConstants.CONNECTION_POINT_REFERENCE;
-    } else if (element instanceof Constraint) {
-      return SysmlConstants.CONSTRAINT;
     } else if (SysML.isConstraintBlock(element)) {
       return SysmlConstants.CONSTRAINT_BLOCK;
     } else if (MDCustomizationForSysML.isConstraintParameter(element)) {
@@ -388,6 +389,10 @@ public class MtipUtils {
       return SysmlConstants.INTERRUPTIBLE_ACTIVITY_REGION;
     } else if (element instanceof JoinNode) {
       return SysmlConstants.JOIN_NODE;
+    } else if (MagicDraw.hasLegendStereotype(element)) {
+      return UmlConstants.LEGEND;
+    } else if (MagicDraw.hasLegendItemStereotype(element)) {
+      return UmlConstants.LEGEND_ITEM;
     } else if (element instanceof Lifeline) {
       return SysmlConstants.LIFELINE;
     } else if (element instanceof LoopNode) {
@@ -792,10 +797,9 @@ public class MtipUtils {
    * Cameo element or a user-defined element.
    * 
    * @param elementId id of the element specified in the XML being imported.
-   * @param elementType type of the element specified in the XML being imported.
    * @return true if element id and type correspond to a standard library element. Otherwise, false.
    */
-  public static boolean isStandardLibraryElement(String elementId, String elementType) {
+  public static boolean isStandardLibraryElement(String elementId) {
     Element element = (Element) Application.getInstance().getProject().getElementByID(elementId);
 
     if (element == null) {
