@@ -33,8 +33,8 @@ public class ActivityDiagram extends AbstractDiagram {
   protected Map<String, PresentationElement> presentationElementById =
       new HashMap<String, PresentationElement>();
       
-  public ActivityDiagram(String name, String EAID) {
-    super(name, EAID);
+  public ActivityDiagram(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = SysMLConstants.SYSML_ACTIVITY_DIAGRAM;
     this.xmlConstant = XmlTagConstants.ACTIVITYDIAGRAM;
     this.cameoDiagramConstant = SysMLConstants.SYSML_ACTIVITY_DIAGRAM;

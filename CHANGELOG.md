@@ -1,7 +1,42 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.1.1
+* Fixed bug with Cameo-speicifc elements being filtered out
+
+### 2022x v1.1.0
+* Updated ActivityNode and ActivityPartition handling
+* Updated import logic
+
+### 2022x v1.0.9
+* Fixed bug in PrimitiveValueType handling
+
+### 2022x v1.0.8
+* Added display properties to `<relationshipMetadata>` tags for elements
+
+### 2022x v1.0.7
+* Added model name and patch number to top level `<metadata>` tag in exported XML
+
+### 2022x v1.0.6
+* Fixed client/supplier point mismatch in diagramConnector relationship metadata
+
+### 2022x v1.0.5
+* Added check to prevent PrimitiveValueTypes from being exported explicitly as referenced elements
+* Removed `hasParent` from `<relationships>` in `<data>` tags of Metaclasses
+
+### 2022x v1.0.4
+* Added explicit reference for ArchitecturalDescription
+* Added metadata to export log
+* Fixed NPE on no file selected
+* Fixed CommonRelationship `getSupplier()` and `getClient()` methods
+
+### 2022x v1.0.3
+* Added missing Realization relationship
+
+### 2022x v1.0.2
+* Fixed term identification by referencing DSLCustomiztaion profile
+
 ### 2022x v1.0.1
-* Added Cameop-specific Term and GlossaryTable support
+* Added Cameo-specific Term and GlossaryTable support
 * Added ActivityNode and ActivityPartition properties to exported relationships
 
 ### 2022x v1.0.0

@@ -5,15 +5,15 @@ This product includes software developed at
 The Aerospace Corporation (http://www.aerospace.org/). */
 package org.aero.mtip.metamodel.sysml.sequence;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonRelationship;
+import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
@@ -24,16 +24,21 @@ import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.MessageSo
 import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.OccurrenceSpecification;
 
 public class Message extends CommonRelationship {
-	public Message(String name, String EAID) {
-		super(name, EAID);
+    public static final String INTERACTION = "interaction";
+    public static final String SIGNATURE = "signature";
+    
+	public Message(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.MESSAGE;
 		this.xmlConstant = XmlTagConstants.MESSAGE;
 		this.element = f.createMessageInstance();
+		
+		this.attributeDependencies.addAll(Arrays.asList(INTERACTION, SIGNATURE));
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		
 		com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message message = (com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message)element;
@@ -51,19 +56,13 @@ public class Message extends CommonRelationship {
 		return element;
 	}
 	
-	public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-		if(modelElement.hasAttribute(XmlTagConstants.SIGNATURE_TAG)) {
-			String signatureID = modelElement.getAttribute(XmlTagConstants.SIGNATURE_TAG);
-			Importer.getInstance().buildElement(parsedXML, parsedXML.get(signatureID));
-		}
-	}
-	
 	@Override
 	public org.w3c.dom.Element writeToXML(Element element) {
 		org.w3c.dom.Element data = super.writeToXML(element);
 		org.w3c.dom.Element relationships = getRelationships(data.getChildNodes());
 		org.w3c.dom.Element attributes = getAttributes(data.getChildNodes());
 		
+		writeInteraction(relationships, element);
 		writeMessageKind(attributes, element);
 		writeMessageSort(attributes, element);
 		writeSignature(relationships, element);
@@ -75,6 +74,14 @@ public class Message extends CommonRelationship {
 //		message.getTarget();
 
 		return data;
+	}
+	
+	protected void writeInteraction(org.w3c.dom.Element relationships, Element element) {
+	  com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message message = (com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message)element;
+	  com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Interaction interaction = message.getInteraction();
+      
+      org.w3c.dom.Element interactionTag = XmlWriter.createMtipRelationship(interaction, INTERACTION);
+      XmlWriter.add(relationships, interactionTag);
 	}
 	
 	protected void writeMessageKind(org.w3c.dom.Element attributes, Element element) {
@@ -101,14 +108,14 @@ public class Message extends CommonRelationship {
 			return;
 		}
 		
-		org.w3c.dom.Element signalTag = XmlWriter.createMtipRelationship(signature, XmlTagConstants.SIGNATURE_TAG);
-		XmlWriter.add(relationships, signalTag);
+		org.w3c.dom.Element signatureTag = XmlWriter.createMtipRelationship(signature, SIGNATURE);
+		XmlWriter.add(relationships, signatureTag);
 	}
 	
 	@Override
-	public void setSupplier() {
+	public void setSupplier(Element supplier) {
 		if (supplier == null) {
-			Logger.log(String.format("Supplier null for message with import id %s", EAID));
+			Logger.log(String.format("Supplier null for message with import id %s", importId));
 			return;
 		}
 		
@@ -137,9 +144,9 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public void setClient() {
+	public void setClient(Element client) {
 		if (client == null) {
-			Logger.log(String.format("Client null for message with import id %s", EAID));
+			Logger.log(String.format("Client null for message with import id %s", importId));
 			return;
 		}
 		
@@ -169,7 +176,7 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message message = (com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message)element;
 		if(message.getSendEvent() instanceof OccurrenceSpecification) {
 			OccurrenceSpecification sendEvent = (OccurrenceSpecification) message.getSendEvent();
@@ -180,7 +187,7 @@ public class Message extends CommonRelationship {
 	}
 	
 	@Override
-	public Element getClient(Element element) {
+	public Element getClient() {
 		com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message message = (com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.Message)element;
 		if(message.getReceiveEvent() instanceof OccurrenceSpecification) {
 			OccurrenceSpecification sendEvent = (OccurrenceSpecification) message.getReceiveEvent();

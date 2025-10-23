@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class FillsPost extends Abstraction {
 
-	public FillsPost(String name, String EAID) {
-		super(name, EAID);
+	public FillsPost(String name, String importId) {
+		super(name, importId);
 		this.xmlConstant = XmlTagConstants.FILLS_POST;
 		this.metamodelConstant = UAFConstants.FILLS_POST;
 	}

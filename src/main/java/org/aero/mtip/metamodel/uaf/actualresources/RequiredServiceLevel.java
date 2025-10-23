@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class RequiredServiceLevel extends InstanceSpecification {
 
-	public RequiredServiceLevel(String name, String EAID) {
-		super(name, EAID);
+	public RequiredServiceLevel(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.REQUIRED_SERVICE_LEVEL;
 		this.xmlConstant = XmlTagConstants.REQUIRED_SERVICE_LEVEL;
 	}

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.Signal;
 
 public class OperationalSignal extends Signal {
 
-	public OperationalSignal(String name, String EAID) {
-		super(name, EAID);
+	public OperationalSignal(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_SIGNAL;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_SIGNAL;
 	}

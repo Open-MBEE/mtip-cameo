@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.InternalBlockDiagram;
 
 public class SecurityConnectivity extends InternalBlockDiagram {
 
-	public SecurityConnectivity(String name, String EAID) {
-		super(name, EAID);
+	public SecurityConnectivity(String name, String importId) {
+		super(name, importId);
 		 this.metamodelConstant = UAFConstants.SECURITY_CONNECTIVITY_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SECURITY_CONNECTIVITY_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.SECURITY_CONNECTIVITY;

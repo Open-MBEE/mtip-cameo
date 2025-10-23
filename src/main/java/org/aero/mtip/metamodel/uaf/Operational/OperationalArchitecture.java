@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class OperationalArchitecture extends CommonElement implements UAFElement {
 	
-	public OperationalArchitecture(String name, String EAID) {
-		super(name, EAID);
+	public OperationalArchitecture(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.OPERATIONAL_ARCHITECTURE;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_ARCHITECTURE;

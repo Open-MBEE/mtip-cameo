@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.SysmlPackage;
 
 public class StrategicTaxonomyPackage extends SysmlPackage{
 
-	public StrategicTaxonomyPackage(String name, String EAID) {
-		super(name, EAID);
+	public StrategicTaxonomyPackage(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.STRATEGIC_TAXONOMY_PACKAGE;
 		this.xmlConstant = XmlTagConstants.STRATEGIC_TAXONOMY_PACKAGE;
 	}

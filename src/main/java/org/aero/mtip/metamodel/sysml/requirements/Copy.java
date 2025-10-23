@@ -14,8 +14,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class Copy extends CommonDirectedRelationship {
 
-  public Copy(String name, String EAID) {
-    super(name, EAID);
+  public Copy(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.COPY;
     this.xmlConstant = XmlTagConstants.COPY;

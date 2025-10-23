@@ -12,14 +12,14 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.profiles.SysML;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class FlowProperty extends CommonElement {
 
-	public FlowProperty(String name, String EAID) {
-		super(name, EAID);
+	public FlowProperty(String name, String importId) {
+		super(name, importId);
 		creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		metamodelConstant = SysmlConstants.FLOW_PROPERTY;
 		xmlConstant = XmlTagConstants.FLOW_PROPERTY;
@@ -27,7 +27,7 @@ public class FlowProperty extends CommonElement {
 		creationStereotype = SysML.getFlowPropertyStereotype();
 	}
 	
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		
 //		TODO Find if flowproperty direction property exists in 2022x

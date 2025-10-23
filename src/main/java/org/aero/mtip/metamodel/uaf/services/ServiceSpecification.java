@@ -5,8 +5,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 
 public class ServiceSpecification extends CommonElement {
-	public ServiceSpecification(String name, String EAID) {
-		super(name, EAID);
+	public ServiceSpecification(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.SERVICE_SPECIFICATION;
 		this.xmlConstant = XmlTagConstants.SERVICE_SPECIFICATION;

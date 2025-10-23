@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.matrix.AbstractMatrix;
 
 public class SV3 extends AbstractMatrix {
 
-	public SV3(String name, String EAID) {
-		super(name, EAID);
+	public SV3(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.SV3;
 		this.xmlConstant = XmlTagConstants.SV3;
 		this.cameoDiagramConstant = "SV-3 Systems-Systems Matrix";

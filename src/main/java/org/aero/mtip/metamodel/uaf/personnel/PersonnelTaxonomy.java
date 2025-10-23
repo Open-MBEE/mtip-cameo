@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class PersonnelTaxonomy extends BlockDefinitionDiagram {
 
-	public PersonnelTaxonomy(String name, String EAID) {
-		 super(name, EAID);
+	public PersonnelTaxonomy(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = UAFConstants.PERSONNEL_TAXONOMY_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.PERSONNEL_TAXONOMY_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.PERSONNEL_TAXONOMY;

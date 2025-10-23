@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.CallBehaviorAction;
 
 public class ServiceFunctionAction extends CallBehaviorAction {
 
-	public ServiceFunctionAction(String name, String EAID) {
-		super(name, EAID);
+	public ServiceFunctionAction(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_FUNCTION_ACTION;
 		this.xmlConstant = XmlTagConstants.SERVICE_FUNCTION_ACTION;
 	}

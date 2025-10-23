@@ -14,8 +14,8 @@ import com.nomagic.magicdraw.uml.DiagramTypeConstants;
 
 public class ClassDiagram extends AbstractDiagram {
 
-  public ClassDiagram(String name, String EAID) {
-    super(name, EAID);
+  public ClassDiagram(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = SysmlConstants.CLASSDIAGRAM;
     this.xmlConstant = XmlTagConstants.CLASSDIAGRAM;
     this.cameoDiagramConstant = DiagramTypeConstants.UML_PROFILE_DIAGRAM;

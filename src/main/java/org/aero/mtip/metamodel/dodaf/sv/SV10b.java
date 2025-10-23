@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.statemachine.StateMachineDiagram;
 
 public class SV10b extends StateMachineDiagram {
 
-	public SV10b(String name, String EAID) {
-		super(name, EAID);
+	public SV10b(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.SV10B;
 		this.xmlConstant = XmlTagConstants.SV10B;
 	}

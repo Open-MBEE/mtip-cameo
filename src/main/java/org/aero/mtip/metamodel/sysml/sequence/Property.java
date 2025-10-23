@@ -12,7 +12,7 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.Interface;
@@ -27,8 +27,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.VisibilityKindEnum;
 
 public class Property extends CommonElement {
 
-  public Property(String name, String EAID) {
-    super(name, EAID);
+  public Property(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.PROPERTY;
     this.xmlConstant = XmlTagConstants.PROPERTY;
@@ -36,7 +36,7 @@ public class Property extends CommonElement {
   }
 
   @Override
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, ElementData xmlElement) {
     super.createElement(project, owner, xmlElement);
     com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property =
         (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
@@ -82,7 +82,7 @@ public class Property extends CommonElement {
         }
       } catch (Exception exception) {
         Logger.log(String.format(
-            "Error assigning default value to property with id: %s see stack trace:", EAID));
+            "Error assigning default value to property with id: %s see stack trace:", importId));
         Logger.logException(exception);
       }
     }

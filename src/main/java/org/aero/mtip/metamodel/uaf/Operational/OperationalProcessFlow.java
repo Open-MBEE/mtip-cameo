@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
 
 public class OperationalProcessFlow extends ActivityDiagram {
-	public OperationalProcessFlow(String name, String EAID) {
-		super(name, EAID);
+	public OperationalProcessFlow(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_PROCESS_FLOW;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_PROCESS_FLOW;
 		this.cameoDiagramConstant = CameoDiagramConstants.OPERATIONAL_PROCESS_FLOW;

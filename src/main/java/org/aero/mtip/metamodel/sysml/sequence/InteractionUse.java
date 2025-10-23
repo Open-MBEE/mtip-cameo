@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class InteractionUse extends CommonElement {
 
-	public InteractionUse(String name, String EAID) {
-		super(name, EAID);
+	public InteractionUse(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INTERACTION_USE;
 		this.xmlConstant = XmlTagConstants.INTERACTION_USE;

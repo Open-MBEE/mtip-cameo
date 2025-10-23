@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class PersonnelConnectivity extends BlockDefinitionDiagram {
 
-	public PersonnelConnectivity(String name, String EAID) {
-		 super(name, EAID);
+	public PersonnelConnectivity(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = UAFConstants.PERSONNEL_CONNECTIVITY_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.PERSONNEL_CONNECTIVITY_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.PERSONNEL_CONNECTIVITY;

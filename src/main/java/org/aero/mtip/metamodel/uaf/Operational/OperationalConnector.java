@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.Connector;
 
 public class OperationalConnector extends Connector {
 
-	public OperationalConnector(String name, String EAID) {
-		super(name, EAID);
+	public OperationalConnector(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_CONNECTOR;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_CONNECTOR;
 	}

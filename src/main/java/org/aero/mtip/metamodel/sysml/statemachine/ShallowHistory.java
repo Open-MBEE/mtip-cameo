@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class ShallowHistory extends PseudoState {
 
-	public ShallowHistory(String name, String EAID) {
-		super(name, EAID);
+	public ShallowHistory(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.SHALLOWHISTORY;
 		this.metamodelConstant = SysmlConstants.SHALLOW_HISTORY;
 		this.xmlConstant = XmlTagConstants.SHALLOW_HISTORY;

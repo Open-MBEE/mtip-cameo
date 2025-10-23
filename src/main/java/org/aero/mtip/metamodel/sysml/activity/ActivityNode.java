@@ -7,15 +7,14 @@
 
 package org.aero.mtip.metamodel.sysml.activity;
 
-import java.util.HashMap;
-import org.aero.mtip.XML.XmlWriter;
-import org.aero.mtip.constants.XmlTagConstants;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import javax.annotation.CheckForNull;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
-import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
@@ -30,38 +29,80 @@ public abstract class ActivityNode extends CommonElement {
   public static final String XML_TAG_REDEFINED_NODE = "redefinedNode";
 
 
-  public ActivityNode(String name, String EAID) {
-    super(name, EAID);
-  }
+  public ActivityNode(String name, String importId) {
+    super(name, importId);
 
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
-    super.createElement(project, owner, xmlElement);
-    if (xmlElement != null) {
-      if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_NAME_INTERRUPTIBLE_ACTIVITY_REGION)) {
-        // com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode
-        // activityNode =
-        // (com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode) element;
-        // Add In Interruptible Region here if possible - may need to nest in diagram to achieve
-        // this.
-      }
-    }
-    return element;
+    this.attributeReferences.addAll(Arrays.asList(XML_TAG_ACTIVITY, XML_TAG_IN_STRUCTURED_NODE));
+    this.attributeListReferences.addAll(Arrays.asList(XML_TAG_INCOMING, XML_TAG_IN_GROUP, XML_TAG_IN_PARTITION,
+        XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION, XML_TAG_OUTGOING, XML_TAG_REDEFINED_NODE));
   }
-
+  
   @Override
-  public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-    super.createDependentElements(parsedXML, modelElement);
+  public void addReferences() {
+    setActivity();
+    setInStructuredNode();
 
-    if (modelElement.hasAttribute(XML_TAG_ACTIVITY)) {
-      String activityId = modelElement.getAttribute(XML_TAG_ACTIVITY);
-      Importer.getInstance().buildElement(parsedXML, parsedXML.get(activityId));
+    setIncoming();
+    setInGroup();
+    setInPartition();
+    setInterruptibleActivityRegion();
+    setOutgoing();
+  }
+
+  private void setActivity() {
+
+  }
+
+  private void setInStructuredNode() {
+
+  }
+
+  private void setIncoming() {
+
+  }
+
+  private void setInGroup() {
+
+  }
+
+  private void setInPartition() {
+    if (getElementAsActivityNode() == null) {
+      Logger.log(String.format("Could not set inPartition. Element %s could not be cast to ActivityNode.", element.getClass().getName()));
+      return;
     }
 
-    if (modelElement.hasAttribute(XmlTagConstants.ATTRIBUTE_NAME_INTERRUPTIBLE_ACTIVITY_REGION)) {
-      String iarID =
-          modelElement.getAttribute(XmlTagConstants.ATTRIBUTE_NAME_INTERRUPTIBLE_ACTIVITY_REGION);
-      Importer.getInstance().buildElement(parsedXML, parsedXML.get(iarID));
+    if (!elementData.hasListAttributes(XML_TAG_IN_PARTITION)) {
+      return;
     }
+
+    Collection<com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition> inPartitionElements =
+        new ArrayList<com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition>();
+
+    for (String inPartitionId : elementData.getListAttributes(XML_TAG_IN_PARTITION)) {
+      Element inPartitionElement = Importer.getInstance().getImportedElement(inPartitionId);
+
+      if (inPartitionElement == null) {
+        continue;
+      }
+
+      if (!(inPartitionElement instanceof com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition)) {
+        Logger.log(String.format("Cannot set inPartition. inPartition must be ActivityPartition not: %s; id: %s", element.getClass().getSimpleName(), inPartitionId));
+        continue;
+      }
+
+      inPartitionElements.add((com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition) inPartitionElement);
+
+    }
+
+    getElementAsActivityNode().getInPartition().addAll(inPartitionElements);
+  }
+
+  private void setInterruptibleActivityRegion() {
+
+  }
+
+  private void setOutgoing() {
+
   }
 
   @Override
@@ -78,51 +119,27 @@ public abstract class ActivityNode extends CommonElement {
     org.w3c.dom.Element data = super.writeToXML(element);
     org.w3c.dom.Element relationships = getRelationships(data.getChildNodes());
 
-    com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode activityNode =
-        getElementAsActivityNode();
+    com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode activityNode = getElementAsActivityNode();
 
-    if (activityNode == null) {
-      Logger.log(String.format(
-          "Unable to cast %s to ActivityNode. Cannot export relationship elements of ActivityNode.",
-          this.getClass().toString()));
-      return data;
+    if (activityNode != null) {
+      writeRelationship(relationships, activityNode.getActivity(), XML_TAG_ACTIVITY);
+      writeRelationship(relationships, activityNode.getInStructuredNode(), XML_TAG_IN_STRUCTURED_NODE);
+
+      writeRelationships(relationships, activityNode.getIncoming(), XML_TAG_INCOMING);
+      writeRelationships(relationships, activityNode.getInGroup(), XML_TAG_IN_GROUP);
+      writeRelationships(relationships, activityNode.getInPartition(), XML_TAG_IN_PARTITION);
+      writeRelationships(relationships, activityNode.getInInterruptibleRegion(), XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION);
+      writeRelationships(relationships, activityNode.getOutgoing(), XML_TAG_OUTGOING);
+      writeRelationships(relationships, activityNode.getRedefinedNode(), XML_TAG_REDEFINED_NODE);
     }
-
-    writeRelationship(relationships, activityNode.getActivity(), XML_TAG_ACTIVITY);
-    writeRelationship(relationships, activityNode.getInStructuredNode(),
-        XML_TAG_IN_STRUCTURED_NODE);
-
-    writeRelationships(relationships, activityNode.getIncoming(), XML_TAG_INCOMING);
-    writeRelationships(relationships, activityNode.getInGroup(), XML_TAG_IN_GROUP);
-    writeRelationships(relationships, activityNode.getInPartition(), XML_TAG_IN_PARTITION);
-    writeRelationships(relationships, activityNode.getInInterruptibleRegion(),
-        XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION);
-    writeRelationships(relationships, activityNode.getOutgoing(), XML_TAG_OUTGOING);
-    writeRelationships(relationships, activityNode.getRedefinedNode(), XML_TAG_REDEFINED_NODE);
 
     return data;
   }
 
-  public void writeActivity(org.w3c.dom.Element relationships, Element element) {
-    if (!(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode)) {
-      return; // ActivityParameterNodes are ActivityNodes but cannot be cast.
-    }
-
-    com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode activityNode =
-        (com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode) element;
-    Activity activity = activityNode.getActivity();
-
-    if (activity == null) {
-      return;
-    }
-
-    org.w3c.dom.Element activityTag = XmlWriter.createMtipRelationship(activity, XML_TAG_ACTIVITY);
-    XmlWriter.add(relationships, activityTag);
-  }
-
+  @CheckForNull
   private com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode getElementAsActivityNode() {
     if (!(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode)) {
-      return null; // ActivityParameterNodes are ActivityNodes but cannot be cast.
+      return null;
     }
 
     return (com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.ActivityNode) element;

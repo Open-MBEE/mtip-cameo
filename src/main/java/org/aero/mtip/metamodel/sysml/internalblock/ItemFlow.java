@@ -13,8 +13,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class ItemFlow extends CommonDirectedRelationship {
 
-	public ItemFlow(String name, String EAID) {
-		super(name, EAID);
+	public ItemFlow(String name, String importId) {
+		super(name, importId);
 		creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		metamodelConstant = SysmlConstants.ITEM_FLOW;
 		xmlConstant = XmlTagConstants.ITEMFLOW;

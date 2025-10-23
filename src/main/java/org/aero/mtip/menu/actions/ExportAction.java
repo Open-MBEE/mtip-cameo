@@ -36,7 +36,6 @@ public class ExportAction extends MDAction {
       File file = FileSelect.chooseXMLFile();
 
       if (file == null) {
-        Logger.log("Failed to select file. Export aborted.");
         return;
       }
 

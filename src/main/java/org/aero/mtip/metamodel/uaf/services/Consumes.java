@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class Consumes extends Abstraction {
 
-	public Consumes(String name, String EAID) {
-		super(name, EAID);
+	public Consumes(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.CONSUMES;
 		this.xmlConstant = XmlTagConstants.CONSUMES;
 	}

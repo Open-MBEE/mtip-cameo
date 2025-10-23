@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.Activity;
 
 public class StandardOperationalActivity extends Activity {
 
-	public StandardOperationalActivity(String name, String EAID) {
-		super(name, EAID);
+	public StandardOperationalActivity(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.STANDARD_OPERATIONAL_ACTIVITY;
 		this.xmlConstant = XmlTagConstants.STANDARD_OPERATIONAL_ACTIVITY;
 	}

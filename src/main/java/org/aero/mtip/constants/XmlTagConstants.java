@@ -13,7 +13,9 @@ public class XmlTagConstants {
     public static final String MTIP_METADATA = "metadata";
     public static final String MTIP_VERSION = "mtipVersion";
     public static final String CAMEO_VERSION = "cameoVersion";
+    public static final String CAMEO_PATCH_NUMBER = "patchNumber";
     public static final String EXPORT_TIME = "exportTime";
+    public static final String MODEL_NAME = "modelName";
     
 	// XML Tags
 	public static final String DATA = "data";
@@ -61,6 +63,15 @@ public class XmlTagConstants {
 	public static final String X_COORDINATE = "xCoordinate";
 	public static final String Y_COORDINATE = "yCoordinate";
 	
+	// Presentation Element Property/Style Formatting Tags
+	public static final String PROPERTIES = "properties";
+	public static final String FILL_COLOR = "fillColor";
+	public static final String FONT = "font";
+	public static final String PEN_COLOR = "penColor";
+	public static final String TEXT_COLOR = "textColor";
+	public static final String USE_FILL_COLOR = "useFillColor";
+	
+	
 	// XML Tag Attributes
 	public static final String ATTRIBUTE_NAME = "name";
 	public static final String ATTRIBUTE_KEY = "key";
@@ -91,6 +102,7 @@ public class XmlTagConstants {
 	public static final String ATTRIBUTE_INDEX_2 = "2";
 	public static final String ATTRIBUTE_KEY_INSTANCE_VALUE = "instanceValue";
 	
+	public static final String ATTRIBUTE_NAME_INTERACTION = "interaction";
 	public static final String ATTRIBUTE_NAME_INTERACTION_OPERATOR_KIND = "interactionOperatorKind";
 	public static final String ATTRIBUTE_NAME_INTERACTION_OPERAND = "interactionOperand";
 	public static final String ATTRIBUTE_NAME_MESSAGE_KIND = "messageKind";
@@ -136,6 +148,8 @@ public class XmlTagConstants {
 	
 	// UML element text for type tag
 	public static final String ARTIFACT = "uml.Artifact";
+	public static final String LEGEND = "cameo.Legend";
+	public static final String LEGEND_ITEM = "cameo.LegendItem";
 	
 	// SysML element text for type tag
 	public static final String ACCEPT_EVENT_ACTION = "sysml.AcceptEventAction";
@@ -236,6 +250,7 @@ public class XmlTagConstants {
 	public static final String PROPERTY = "sysml.Property";
 	public static final String PROXY_PORT = "sysml.ProxyPort";
 	public static final String QUANTITY_KIND = "sysml.QuantityKind";
+	public static final String REALIZATION = "sysml.Realization";
 	public static final String REFERENCE_PROPERTY = "sysml.ReferenceProperty";
 	public static final String REGION = "sysml.Region";
 	public static final String REQUIREMENT = "sysml.Requirement";
@@ -251,7 +266,7 @@ public class XmlTagConstants {
 	public static final String STEREOTYPE = "sysml.Stereotype";
 	public static final String STRUCTURED_ACTIVITY_NODE = "sysml.StructuredActivityNode";
 	public static final String TERMINATE = "sysml.Terminate";
-	public static final String TERM = "sysml.Term";
+	public static final String TERM = "cameo.Term";
 	public static final String TIMECONSTRAINT = "sysml.TimeConstraint";
 	public static final String TIMEEVENT = "sysml.TimeEvent";
 	public static final String TIMEEXPRESSION = "sysml.TimeExpression";
@@ -283,7 +298,7 @@ public class XmlTagConstants {
 	public static final String INFORMATIONFLOW = "sysml.InformationFlow";
 	public static final String ITEMFLOW = "sysml.ItemFlow";
 	public static final String OBJECTFLOW = "sysml.ObjectFlow";
-	public static final String PACKAGEIMPORT = "sysml.PackageImport";
+	public static final String PACKAGE_IMPORT = "sysml.PackageImport";
 	public static final String REFINE = "sysml.Refine";
 	public static final String SATISFY = "sysml.Satisfy";
 	public static final String TRACE = "sysml.Trace";
@@ -334,6 +349,7 @@ public class XmlTagConstants {
 	public static final String ACHIEVER = "uaf.Achiever";
 	public static final String ACTUAL_ENDURING_TASK = "uaf.ActualEnduringTask";
 	public static final String ACTUAL_ENTERPRISE_PHASE = "uaf.ActualEnterprisePhase";
+	public static final String ARCHITECTURAL_DESCRIPTION = "uaf.ArchitecturalDescription";
 	public static final String CAPABILITY = "uaf.Capability";
 	public static final String CAPABILITY_PROPERTY = "uaf.CapabilityProperty";
 	public static final String DESIRER = "uaf.Desirer";
@@ -739,17 +755,4 @@ public class XmlTagConstants {
 	
 	//Type Prefixes
 	public static final String CUSTOM = "custom.Diagram";
-	
-	//List of sysmlTags
-	public static final String[] sysmlElementList = {
-			ACTIVITY,
-			ACTIVITY_PARAMETER_NODE,
-			BLOCK,
-			CLASS,
-			PACKAGE,
-			PROFILE,
-			STEREOTYPE,
-			PROPERTY,
-			PARAMETER
-	};
 }

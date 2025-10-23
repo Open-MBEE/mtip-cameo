@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class OpaqueAction extends CommonElement {
 
-	public OpaqueAction(String name, String EAID) {
-		super(name, EAID);
+	public OpaqueAction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.OPAQUE_ACTION;
 		this.xmlConstant = XmlTagConstants.OPAQUE_ACTION;

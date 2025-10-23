@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.statemachine.StateMachine;
 
 public class OperationalStateDescription extends StateMachine {
 
-	public OperationalStateDescription(String name, String EAID) {
-		super(name, EAID);
+	public OperationalStateDescription(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_STATE_DESCRIPTION;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_STATE_DESCRIPTION;
 	}

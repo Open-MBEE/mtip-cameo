@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Association;
 
 public class OperationalAssociation extends Association {
 
-	public OperationalAssociation(String name, String EAID) {
-		super(name, EAID);
+	public OperationalAssociation(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_ASSOCIATION;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_ASSOCIATION;
 	}

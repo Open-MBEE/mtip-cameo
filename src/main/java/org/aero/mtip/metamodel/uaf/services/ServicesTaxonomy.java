@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class ServicesTaxonomy extends BlockDefinitionDiagram {
 
-	public ServicesTaxonomy(String name, String EAID) {
-		super(name, EAID);
+	public ServicesTaxonomy(String name, String importId) {
+		super(name, importId);
 
 		 this.metamodelConstant = UAFConstants.SERVICES_TAXONOMY_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SERVICES_TAXONOMY_DIAGRAM;

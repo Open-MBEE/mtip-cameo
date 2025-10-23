@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class Achiever extends InstanceSpecification {
 
-	public Achiever(String name, String EAID) {
-		super(name, EAID);
+	public Achiever(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACHIEVER;
 		this.xmlConstant = XmlTagConstants.ACHIEVER;
 	}

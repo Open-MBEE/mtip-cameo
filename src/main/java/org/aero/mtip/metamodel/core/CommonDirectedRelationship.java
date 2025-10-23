@@ -7,23 +7,45 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 package org.aero.mtip.metamodel.core;
 
 import java.util.Collection;
-
+import javax.annotation.CheckForNull;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.DirectedRelationship;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public abstract class CommonDirectedRelationship extends CommonRelationship {
 
-	public CommonDirectedRelationship(String name, String EAID) {
-		super(name, EAID);
+	public CommonDirectedRelationship(String name, String importId) {
+		super(name, importId);
 	}
 	
-	public Element getSupplier(Element element) {
+	@CheckForNull
+	public Element getSupplier() {
 		Collection<Element> sources = ((DirectedRelationship)element).getSource();
+		
+		if (sources.isEmpty()) {
+		  return null;
+		}
+		
 		return sources.iterator().next();
 	}
 	
-	public Element getClient(Element element) {
+	@CheckForNull
+	public Element getClient() {
 		Collection<Element> targets = ((DirectedRelationship)element).getTarget();
+	      
+        if (targets.isEmpty()) {
+          return null;
+        }
+        
 		return targets.iterator().next();
+	}
+	
+	public void setSupplier(Element supplier) {
+	  DirectedRelationship directedRelationship = (DirectedRelationship)element;
+      directedRelationship.getSource().add(supplier);
+	}
+	
+	public void setClient(Element client) {
+	  DirectedRelationship directedRelationship = (DirectedRelationship)element;
+      directedRelationship.getTarget().add(client);
 	}
 }

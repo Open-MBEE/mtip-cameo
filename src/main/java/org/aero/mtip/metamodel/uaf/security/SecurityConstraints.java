@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.profile.ParametricDiagram;
 
 public class SecurityConstraints extends ParametricDiagram {
 
-	public SecurityConstraints(String name, String EAID) {
-		super(name, EAID);
+	public SecurityConstraints(String name, String importId) {
+		super(name, importId);
 		 this.metamodelConstant = UAFConstants.SECURITY_CONSTRAINTS_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SECURITY_CONSTRAINTS_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.SECURITY_CONSTRAINTS;

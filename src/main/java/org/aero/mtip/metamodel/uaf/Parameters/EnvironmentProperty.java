@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class EnvironmentProperty extends Property {
 
-	public EnvironmentProperty(String name, String EAID) {
-		super(name, EAID);
+	public EnvironmentProperty(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ENVIRONMENT_PROPERTY;
 		this.xmlConstant = XmlTagConstants.ENVIRONMENT_PROPERTY;
 	}

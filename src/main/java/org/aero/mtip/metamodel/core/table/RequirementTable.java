@@ -10,8 +10,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class RequirementTable extends AbstractTable {
 
-	public RequirementTable(String name, String EAID) {
-		super(name, EAID);
+	public RequirementTable(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.REQUIREMENT_TABLE;
 		this.xmlConstant = XmlTagConstants.REQUIREMENT_TABLE;
 		this.cameoConstant = SysmlConstants.CAMEO_REQUIREMENT_TABLE;

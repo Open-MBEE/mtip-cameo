@@ -30,8 +30,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 
 public class BlockDefinitionDiagram  extends AbstractDiagram {
 
-	public BlockDefinitionDiagram(String name, String EAID) {
-		 super(name, EAID);
+	public BlockDefinitionDiagram(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = SysmlConstants.BDD;
 		 this.xmlConstant = XmlTagConstants.BLOCKDEFINITIONDIAGRAM;
 		 this.cameoDiagramConstant = SysMLConstants.SYSML_BLOCK_DEFINITION_DIAGRAM;

@@ -5,8 +5,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.profile.DataType;
 
 public class MeasurementSet extends DataType {
-	public MeasurementSet (String name, String EAID) {
-		super(name, EAID);
+	public MeasurementSet (String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.MEASUREMENT_SET;
 		this.xmlConstant = XmlTagConstants.MEASUREMENT_SET;
 	}

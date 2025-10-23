@@ -9,8 +9,8 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 
 public class GenericTable extends AbstractTable {
-	public GenericTable(String name, String EAID) {
-		super(name, EAID);
+	public GenericTable(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.GENERIC_TABLE;
 		this.xmlConstant = XmlTagConstants.GENERIC_TABLE;
 	}

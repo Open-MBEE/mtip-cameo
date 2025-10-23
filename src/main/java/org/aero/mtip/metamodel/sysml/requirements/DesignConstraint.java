@@ -12,8 +12,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class DesignConstraint extends Requirement {
 
-	public DesignConstraint(String name, String EAID) {
-		super(name, EAID);
+	public DesignConstraint(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.DESIGN_CONSTRAINT;
 		this.xmlConstant = XmlTagConstants.DESIGN_CONSTRAINT; 

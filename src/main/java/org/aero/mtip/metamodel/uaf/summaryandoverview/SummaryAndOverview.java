@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class SummaryAndOverview extends BlockDefinitionDiagram {
-  public SummaryAndOverview(String name, String EAID) {
-    super(name, EAID);
+  public SummaryAndOverview(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = UAFConstants.SUMMARY_AND_OVERVIEW_DIAGRAM;
     this.xmlConstant = XmlTagConstants.SUMMARY_AND_OVERVIEW_DIAGRAM;
     this.cameoDiagramConstant = CameoDiagramConstants.SUMMARY_AND_OVERVIEW;

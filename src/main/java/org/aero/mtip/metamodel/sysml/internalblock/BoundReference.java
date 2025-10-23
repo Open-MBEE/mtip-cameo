@@ -9,7 +9,7 @@ package org.aero.mtip.metamodel.sysml.internalblock;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
 public class BoundReference extends CommonElement {
 
-	public BoundReference(String name, String EAID) {
-		super(name, EAID);
+	public BoundReference(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.BOUND_REFERENCE;
 		this.metamodelConstant = SysmlConstants.BOUND_REFERENCE;
@@ -28,7 +28,7 @@ public class BoundReference extends CommonElement {
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		Profile sysmlProfile = StereotypesHelper.getProfile(project, "SysML"); 
 		Stereotype boundReferenceStereotype = StereotypesHelper.getStereotype(project, "BoundReference", sysmlProfile);

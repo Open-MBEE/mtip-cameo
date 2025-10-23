@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
 
 public class OV2 extends ActivityDiagram {
 
-	public OV2(String name, String EAID) {
-		super(name, EAID);
+	public OV2(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV2;
 		this.xmlConstant = XmlTagConstants.OV2;
 		this.cameoDiagramConstant = "OV-2 Operational Resource Flow Description";

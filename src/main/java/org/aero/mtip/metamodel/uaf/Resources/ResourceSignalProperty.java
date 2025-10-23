@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ResourceSignalProperty extends Property {
 
-	public ResourceSignalProperty(String name, String EAID) {
-		super(name, EAID);
+	public ResourceSignalProperty(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_SIGNAL_PROPERTY;
 		this.xmlConstant = XmlTagConstants.RESOURCE_SIGNAL_PROPERTY;
 	}

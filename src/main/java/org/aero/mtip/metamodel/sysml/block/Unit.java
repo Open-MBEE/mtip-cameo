@@ -12,8 +12,8 @@ import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.uml.Finder;
 
 public class Unit extends InstanceSpecification {
-	public Unit(String name, String EAID) {
-		super(name, EAID);
+	public Unit(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.UNIT;
 		this.xmlConstant = XmlTagConstants.UNIT;
 		this.creationStereotype = MDCustomizationForSysML.getUnitStereotype();

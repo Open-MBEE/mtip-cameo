@@ -10,15 +10,15 @@ package org.aero.mtip.metamodel.sysml.block;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.profiles.SysML;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.VisibilityKindEnum;
 
 public class FlowPort extends Port {
 
-  public FlowPort(String name, String EAID) {
-    super(name, EAID);
+  public FlowPort(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.FLOW_PORT;
     this.xmlConstant = XmlTagConstants.FLOW_PORT;
@@ -27,7 +27,7 @@ public class FlowPort extends Port {
   }
 
   @Override
-  public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+  public Element createElement(Project project, Element owner, ElementData xmlElement) {
     com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port port =
         (com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port) super.createElement(
             project, owner, xmlElement);

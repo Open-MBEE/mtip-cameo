@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Duration extends CommonElement {
 
-	public Duration(String name, String EAID) {
-		super(name, EAID);
+	public Duration(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DURATION;
 		this.xmlConstant = XmlTagConstants.DURATION;

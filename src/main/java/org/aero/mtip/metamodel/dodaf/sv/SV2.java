@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ClassDiagram;
 
 public class SV2 extends ClassDiagram {
 
-	public SV2(String name, String EAID) {
-		super(name, EAID);
+	public SV2(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.SV2;
 		this.xmlConstant = XmlTagConstants.SV2;
 		this.cameoDiagramConstant = "SV-2 Systems Communications Description";

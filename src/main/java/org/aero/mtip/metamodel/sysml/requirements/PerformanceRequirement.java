@@ -12,8 +12,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class PerformanceRequirement extends Requirement {
 
-	public PerformanceRequirement(String name, String EAID) {
-		super(name, EAID);
+	public PerformanceRequirement(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.PERFORMANCE_REQUIREMENT;
 		this.xmlConstant = XmlTagConstants.PERFORMANCE_REQUIREMENT;

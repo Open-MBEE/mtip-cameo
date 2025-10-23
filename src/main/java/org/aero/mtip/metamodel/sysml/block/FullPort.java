@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.profiles.SysML;
 
 public class FullPort extends Port {
-	public FullPort(String name, String EAID) {
-		super(name, EAID);
+	public FullPort(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.FULL_PORT;
 		this.xmlConstant = XmlTagConstants.FULL_PORT;

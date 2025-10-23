@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class TemporalPart extends Property {
 
-	public TemporalPart(String name, String EAID) {
-		super(name, EAID);
+	public TemporalPart(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.TEMPORAL_PART;
 		this.xmlConstant = XmlTagConstants.TEMPORAL_PART;
 	}

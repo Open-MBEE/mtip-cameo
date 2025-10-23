@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class Fork extends PseudoState {
 
-	public Fork(String name, String EAID) {
-		super(name, EAID);
+	public Fork(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.FORK;
 		this.metamodelConstant = SysmlConstants.FORK;
 		this.xmlConstant = XmlTagConstants.FORK;

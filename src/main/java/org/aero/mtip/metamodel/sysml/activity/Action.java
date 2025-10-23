@@ -6,46 +6,45 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 
 package org.aero.mtip.metamodel.sysml.activity;
 
-import java.util.HashMap;
+import javax.annotation.CheckForNull;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.io.Importer;
-import org.aero.mtip.util.XMLItem;
-import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.Behavior;
 
-public class Action extends ActivityNode {	
-	public Action(String name, String EAID) {
-		super(name, EAID);
+public class Action extends ActivityNode {
+    public static final String XML_TAG_BEHAVIOR = "behavior";
+    
+	public Action(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.ACTION;
 		this.xmlConstant = XmlTagConstants.ACTION;
 		this.element = f.createCallBehaviorActionInstance();
+		
+		this.attributeReferences.add(XML_TAG_BEHAVIOR);
 	}
 	
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
-		Element element = super.createElement(project, owner, xmlElement);
-		com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.CallBehaviorAction action = (com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.CallBehaviorAction)element;
-		if(xmlElement.hasAttribute(XmlTagConstants.BEHAVIOR)) {
-			String import_id = xmlElement.getAttribute(XmlTagConstants.BEHAVIOR);
-			String behavior_id = Importer.idConversion(import_id);
-			Element behavior = (Element) project.getElementByID(behavior_id);
-			if(behavior instanceof Behavior) {
-				action.setBehavior((Behavior) behavior);
-			}
-		}
-		return action;
+	public void addReferences() {
+	  setBehavior();
 	}
 	
-	@Override
-	public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-		super.createDependentElements(parsedXML, modelElement);
-		if(modelElement.hasAttribute(XmlTagConstants.BEHAVIOR)) {
-			Importer.getInstance().buildElement(parsedXML, parsedXML.get(modelElement.getAttribute(XmlTagConstants.BEHAVIOR)));
-		}
+	protected void setBehavior() {
+	  if (!elementData.hasAttribute(XmlTagConstants.BEHAVIOR)) {
+	    return;
+	  }
+	  
+	  Element behavior =
+	        Importer.getInstance().getImportedElement(elementData.getAttribute(XML_TAG_BEHAVIOR));
+
+	    if (behavior == null) {
+	      return;
+	    }
+
+	    getElementAsCallBehaviorAction().setBehavior((Behavior) behavior);
 	}
 	
 	@Override
@@ -66,7 +65,16 @@ public class Action extends ActivityNode {
 			return;
 		}
 		
-		org.w3c.dom.Element behaviorTag = XmlWriter.createMtipRelationship(behavior, XmlTagConstants.BEHAVIOR);
+		org.w3c.dom.Element behaviorTag = XmlWriter.createMtipRelationship(behavior, XML_TAG_BEHAVIOR);
 		XmlWriter.add(relationships, behaviorTag);
+	}
+	
+	@CheckForNull
+	private com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.CallBehaviorAction getElementAsCallBehaviorAction() {
+	  if (!(element instanceof com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.CallBehaviorAction)) {
+	      return null; // ActivityParameterNodes are ActivityNodes but cannot be cast.
+	    }
+
+	    return (com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.CallBehaviorAction) element;
 	}
 }

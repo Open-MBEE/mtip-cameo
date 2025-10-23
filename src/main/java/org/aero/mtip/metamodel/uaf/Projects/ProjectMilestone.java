@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class ProjectMilestone extends CommonElement implements UAFElement {
 	
-	public ProjectMilestone(String name, String EAID) {
-		super(name, EAID);
+	public ProjectMilestone(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.PROJECT_MILESTONE;
 		this.xmlConstant = XmlTagConstants.PROJECT_MILESTONE;

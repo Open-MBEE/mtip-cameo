@@ -6,8 +6,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class ProjectsStructure extends BlockDefinitionDiagram {
-  public ProjectsStructure(String name, String EAID) {
-    super(name, EAID);
+  public ProjectsStructure(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = UAFConstants.PROJECTS_STRUCTURE_DIAGRAM;
     this.xmlConstant = XmlTagConstants.PROJECTS_STRUCTURE_DIAGRAM;
     this.cameoDiagramConstant = CameoDiagramConstants.PROJECTS_STRUCTURE;

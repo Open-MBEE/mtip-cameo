@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class ServicesConstraintsDefinition extends BlockDefinitionDiagram {
 
-	public ServicesConstraintsDefinition(String name, String EAID) {
-		super(name, EAID);
+	public ServicesConstraintsDefinition(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICES_CONSTRAINTS_DEFINITION_DIAGRAM;
 		this.xmlConstant = XmlTagConstants.SERVICES_CONSTRAINTS_DEFINITION_DIAGRAM;
 		this.cameoDiagramConstant = CameoDiagramConstants.SERVICES_CONSTRAINTS_DEFINITION;

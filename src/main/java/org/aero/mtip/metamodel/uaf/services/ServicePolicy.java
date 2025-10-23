@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.Constraint;
 
 public class ServicePolicy extends Constraint {
 
-	public ServicePolicy(String name, String EAID) {
-		super(name, EAID);
+	public ServicePolicy(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_POLICY;
 		this.xmlConstant = XmlTagConstants.SERVICE_POLICY;
 	}

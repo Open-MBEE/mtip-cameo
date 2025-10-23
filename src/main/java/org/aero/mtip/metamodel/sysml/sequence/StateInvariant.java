@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ValueSpecification;
 
 public class StateInvariant extends CommonElement {
 
-	public StateInvariant(String name, String EAID) {
-		super(name, EAID);
+	public StateInvariant(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.STATE_INVARIANT;
 		this.xmlConstant = XmlTagConstants.STATEINVARIANT;

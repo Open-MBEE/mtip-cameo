@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualEnterprisePhase extends InstanceSpecification {
 
-	public ActualEnterprisePhase(String name, String EAID) {
-		super(name, EAID);
+	public ActualEnterprisePhase(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_ENTERPRISE_PHASE;
 		this.xmlConstant = XmlTagConstants.ACTUAL_ENTERPRISE_PHASE;
 	}	

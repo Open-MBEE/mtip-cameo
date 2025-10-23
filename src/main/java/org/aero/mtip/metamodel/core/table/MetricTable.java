@@ -10,8 +10,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class MetricTable extends AbstractTable {
 
-	public MetricTable(String name, String EAID) {
-		super(name, EAID);
+	public MetricTable(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.METRIC_TABLE;
 		this.xmlConstant = XmlTagConstants.METRIC_TABLE;
 		this.cameoConstant = SysmlConstants.CAMEO_METRIC_TABLE;

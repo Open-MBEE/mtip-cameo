@@ -12,8 +12,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class ExtendedRequirement extends Requirement {
 	
-	public ExtendedRequirement(String name, String EAID) {
-		super(name, EAID);
+	public ExtendedRequirement(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.EXTENDED_REQUIREMENT;
 		this.xmlConstant = XmlTagConstants.EXTENDED_REQUIREMENT;

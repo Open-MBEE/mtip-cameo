@@ -12,7 +12,7 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
 import org.aero.mtip.profiles.SysML;
 import org.aero.mtip.util.TaggedValue;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
@@ -27,8 +27,8 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 public class ConstraintParameter extends CommonElement {
 	static final String DIRECTED_FEATURE = "DirectedFeature";
 	
-	public ConstraintParameter(String name, String EAID) {
-		super(name, EAID);
+	public ConstraintParameter(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.CONSTRAINT_PARAMETER;
 		this.metamodelConstant = SysmlConstants.CONSTRAINT_PARAMETER;
@@ -37,7 +37,7 @@ public class ConstraintParameter extends CommonElement {
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		
 		StereotypesHelper.addStereotype(element, MDCustomizationForSysML.getConstraintParameterStereotype());
@@ -47,7 +47,7 @@ public class ConstraintParameter extends CommonElement {
 		return element;
 	}
 	
-	private void setDirectedFeatureValue(XMLItem xmlElement) {
+	private void setDirectedFeatureValue(ElementData xmlElement) {
 		TaggedValue directedFeatureTaggedValue = getDirectedFeatureTaggedValue(xmlElement);
 		
 		if (directedFeatureTaggedValue == null) {
@@ -82,7 +82,7 @@ public class ConstraintParameter extends CommonElement {
 		return null;
 	}
 	
-	private TaggedValue getDirectedFeatureTaggedValue(XMLItem xmlElement) {
+	private TaggedValue getDirectedFeatureTaggedValue(ElementData xmlElement) {
 		for(TaggedValue tv : xmlElement.getTaggedValues()) {
 			if (tv.getStereotypeName().contentEquals(DIRECTED_FEATURE)) {
 				return tv;

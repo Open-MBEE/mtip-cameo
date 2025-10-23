@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.block.BlockDefinitionDiagram;
 
 public class SecurityProcesses extends BlockDefinitionDiagram {
 
-	public SecurityProcesses(String name, String EAID) {
-		super(name, EAID);
+	public SecurityProcesses(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SECURITY_PROCESSES_DIAGRAM;
 		this.xmlConstant = XmlTagConstants.SECURITY_PROCESSES_DIAGRAM;
 		this.cameoDiagramConstant = CameoDiagramConstants.SECURITY_PROCESSES;

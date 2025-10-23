@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.matrix.DependencyMatrix;
 
 public class CV7 extends DependencyMatrix {
 
-	public CV7(String name, String EAID) {
-		super(name, EAID);
+	public CV7(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.CV7;
 		this.xmlConstant = XmlTagConstants.CV7;
 		this.cameoDiagramConstant = "CV-7 Capability to Services Mapping";

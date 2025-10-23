@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class ServiceInterface extends CommonElement {
 
-	public ServiceInterface(String name, String EAID) {
-		super(name, EAID);
+	public ServiceInterface(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.SERVICE_INTERFACE;
 		this.xmlConstant = XmlTagConstants.SERVICE_INTERFACE;

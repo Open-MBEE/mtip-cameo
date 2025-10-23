@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonDirectedRelationship;
 
 public class Abstraction extends CommonDirectedRelationship {
 
-	public Abstraction(String name, String EAID) {
-		super(name, EAID);
+	public Abstraction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.xmlConstant = XmlTagConstants.ABSTRACTION;
 		this.metamodelConstant = SysmlConstants.ABSTRACTION;

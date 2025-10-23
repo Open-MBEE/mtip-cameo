@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.sequence.SequenceDiagram;
 
 public class PersonnelInteractionScenarios extends SequenceDiagram {
 
-	public PersonnelInteractionScenarios(String name, String EAID) {
-		 super(name, EAID);
+	public PersonnelInteractionScenarios(String name, String importId) {
+		 super(name, importId);
 		 this.metamodelConstant = UAFConstants.PERSONNEL_INTERACTION_SCENARIOS_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.PERSONNEL_INTERACTION_SCENARIOS_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.PERSONNEL_INTERACTION_SCENARIOS;

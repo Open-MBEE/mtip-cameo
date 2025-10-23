@@ -9,14 +9,14 @@ package org.aero.mtip.metamodel.sysml.profile;
 import org.aero.mtip.constants.CameoConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.profiles.MagicDraw;
+import org.aero.mtip.profiles.DslCustomization;
 
 public class Term extends CommonElement {
-	public Term(String name, String EAID) {
-		super(name, EAID);
+	public Term(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = CameoConstants.TERM;
 		this.xmlConstant = XmlTagConstants.TERM;
-		this.creationStereotype = MagicDraw.getTermStereotype();
+		this.creationStereotype = DslCustomization.getTermStereotype();
 	}
 }

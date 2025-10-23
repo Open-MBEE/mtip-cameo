@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
@@ -34,6 +35,7 @@ import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.core.ProjectUtilities;
 import com.nomagic.magicdraw.uml.DiagramType;
 import com.nomagic.magicdraw.uml.symbols.DiagramPresentationElement;
+import com.nomagic.magicdraw.uml.symbols.PresentationElement;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.actions.mdbasicactions.ActionClass;
@@ -67,7 +69,9 @@ import com.nomagic.uml2.ext.magicdraw.activities.mdstructuredactivities.LoopNode
 import com.nomagic.uml2.ext.magicdraw.activities.mdstructuredactivities.StructuredActivityNode;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow;
 import com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationItem;
+import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Abstraction;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Dependency;
+import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Realization;
 import com.nomagic.uml2.ext.magicdraw.classes.mddependencies.Usage;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.Interface;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.InterfaceRealization;
@@ -131,7 +135,7 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Tran
 public class MtipUtils {
   static TimeZone tz = null;
   static DateFormat df = null;
-  
+
   public static boolean isSupported(Element element) {
     if (getEntityType(element) == null) {
       return false;
@@ -142,8 +146,9 @@ public class MtipUtils {
 
   public static boolean isSupportedElement(String commonElementType) {
     if (!UmlConstants.UML_ELEMENTS.contains(commonElementType)
-          && !SysmlConstants.SYSML_ELEMENTS.contains(commonElementType)
-          && !UAFConstants.UAF_ELEMENTS.contains(commonElementType)) {
+        && !CameoConstants.CAMEO_ELEMENTS.contains(commonElementType)
+        && !SysmlConstants.SYSML_ELEMENTS.contains(commonElementType)
+        && !UAFConstants.UAF_ELEMENTS.contains(commonElementType)) {
       return false;
     }
 
@@ -152,6 +157,7 @@ public class MtipUtils {
 
   public static boolean isSupportedRelationship(String commonRelationshipType) {
     if (!SysmlConstants.SYSML_RELATIONSHIPS.contains(commonRelationshipType)
+        && !CameoConstants.CAMEO_RELATIONSHIPS.contains(commonRelationshipType)
         && !UAFConstants.UAF_RELATIONSHIPS.contains(commonRelationshipType)) {
       return false;
     }
@@ -161,6 +167,7 @@ public class MtipUtils {
 
   public static boolean isSupportedDiagram(String commonElementType) {
     if (!SysmlConstants.SYSML_DIAGRAMS.contains(commonElementType)
+        && !CameoConstants.CAMEO_DIAGRAMS.contains(commonElementType)
         && !UAFConstants.UAF_DIAGRAMS.contains(commonElementType)
         && !DoDAFConstants.DODAF_DIAGRAMS.contains(commonElementType)) {
       return false;
@@ -177,7 +184,7 @@ public class MtipUtils {
     if (isUafEntity(commonElementType)) {
       return UAFConstants.METAMODEL_PREFIX;
     }
-    
+
     if (isUmlEntity(commonElementType)) {
       return UmlConstants.METAMODEL_PREFIX;
     }
@@ -204,7 +211,7 @@ public class MtipUtils {
 
     return false;
   }
-  
+
   public static boolean isUmlEntity(String commonElementType) {
     if (UmlConstants.UML_ELEMENTS.contains(commonElementType)
         || UmlConstants.UML_RELATIONSHIPS.contains(commonElementType)
@@ -240,7 +247,7 @@ public class MtipUtils {
     if (element == null) {
       return null;
     }
-    
+
     if (element instanceof Diagram) {
       return getDiagramType(element);
     }
@@ -256,7 +263,7 @@ public class MtipUtils {
   public static String getElementType(Element element) {
     if (isUafModel()) {
       String elementType = getUafElementType(element);
-      
+
       if (elementType != null) {
         return elementType;
       }
@@ -282,6 +289,8 @@ public class MtipUtils {
       return UmlConstants.ARTIFACT;
     } else if (SysML.isBoundReference(element)) {
       return SysmlConstants.BOUND_REFERENCE;
+    } else if (SysML.isBusinessRequirement(element)) {
+      return SysmlConstants.BUSINESS_REQUIREMENT;
     } else if (SysML.isClassifierBehavior(element)) {
       return SysmlConstants.CLASSIFIER_BEHAVIOR_PROPERTY;
     } else if (element instanceof CallBehaviorAction) {
@@ -294,16 +303,12 @@ public class MtipUtils {
       return SysmlConstants.COLLABORATION;
     } else if (element instanceof CombinedFragment) {
       return SysmlConstants.COMBINED_FRAGMENT;
-//    } else if (element instanceof Comment) {
-//      return SysmlConstants.COMMENT;
+      // } else if (element instanceof Comment) {
+      // return SysmlConstants.COMMENT;
     } else if (element instanceof ConditionalNode) {
       return SysmlConstants.CONDITIONAL_NODE;
     } else if (element instanceof ConnectionPointReference) {
       return SysmlConstants.CONNECTION_POINT_REFERENCE;
-    } else if (element instanceof Connector) {
-      return SysmlConstants.CONNECTOR;
-    } else if (element instanceof Constraint) {
-      return SysmlConstants.CONSTRAINT;
     } else if (SysML.isConstraintBlock(element)) {
       return SysmlConstants.CONSTRAINT_BLOCK;
     } else if (MDCustomizationForSysML.isConstraintParameter(element)) {
@@ -318,8 +323,6 @@ public class MtipUtils {
       return SysmlConstants.DATA_STORE_NODE;
     } else if (element instanceof DecisionNode) {
       return SysmlConstants.DECISION_NODE;
-    } else if (SysML.isDeriveRequirement(element)) {
-      return SysmlConstants.DERIVE_REQUIREMENT;
     } else if (SysML.isDesignConstraint(element)) {
       return SysmlConstants.DESIGN_CONSTRAINT;
     } else if (element instanceof DestroyObjectAction) {
@@ -386,6 +389,10 @@ public class MtipUtils {
       return SysmlConstants.INTERRUPTIBLE_ACTIVITY_REGION;
     } else if (element instanceof JoinNode) {
       return SysmlConstants.JOIN_NODE;
+    } else if (MagicDraw.hasLegendStereotype(element)) {
+      return UmlConstants.LEGEND;
+    } else if (MagicDraw.hasLegendItemStereotype(element)) {
+      return UmlConstants.LEGEND_ITEM;
     } else if (element instanceof Lifeline) {
       return SysmlConstants.LIFELINE;
     } else if (element instanceof LoopNode) {
@@ -429,8 +436,6 @@ public class MtipUtils {
       return SysmlConstants.REFERENCE_PROPERTY;
     } else if (element instanceof Region) {
       return SysmlConstants.REGION;
-    } else if (SysML.isRefine(element)) {
-      return SysmlConstants.REFINE;
     } else if (SysML.isRequirement(element)) {
       return SysmlConstants.REQUIREMENT;
     } else if (element instanceof SendSignalAction) {
@@ -477,9 +482,9 @@ public class MtipUtils {
       return SysmlConstants.VALUE_TYPE;
 
       // Cameo-specific constructs used in SysML and derivative models
-    } else if (MagicDraw.hasTermStereotype(element)) {
+    } else if (DslCustomization.hasTermStereotype(element)) {
       return CameoConstants.TERM;
-      
+
       // Super classes listed below as to not to override their children
     } else if (element instanceof Constraint) {
       return SysmlConstants.CONSTRAINT;
@@ -513,7 +518,7 @@ public class MtipUtils {
   public static String getRelationshipType(Element element) {
     if (MtipUtils.isUafModel()) {
       String elementType = getUafElementType(element);
-      
+
       if (elementType != null) {
         return elementType;
       }
@@ -524,7 +529,9 @@ public class MtipUtils {
 
   @CheckForNull
   public static String getSysmlRelationshipType(Element element) {
-    if (SysML.isAssociationBlock(element)) {
+    if (SysML.isAllocate(element)) {
+      return SysmlConstants.ALLOCATE;
+    } else if (SysML.isAssociationBlock(element)) {
       return SysmlConstants.ASSOCIATION_BLOCK;
     } else if (SysML.isBindingConnector(element)) {
       return SysmlConstants.BINDING_CONNECTOR;
@@ -534,6 +541,8 @@ public class MtipUtils {
       return SysmlConstants.CONNECTOR;
     } else if (element instanceof ControlFlow) {
       return SysmlConstants.CONTROL_FLOW;
+    } else if (SysML.isDeriveRequirement(element)) {
+      return SysmlConstants.DERIVE_REQUIREMENT;
     } else if (element instanceof Extend) {
       return SysmlConstants.EXTEND;
     } else if (element instanceof Extension) {
@@ -544,8 +553,6 @@ public class MtipUtils {
       return SysmlConstants.INCLUDE;
     } else if (element instanceof InterfaceRealization) {
       return SysmlConstants.INTERFACE_REALIZATION;
-    } else if (element instanceof InformationFlow) {
-      return SysmlConstants.INFORMATION_FLOW;
     } else if (SysML.isItemFlow(element)) {
       return SysmlConstants.ITEM_FLOW;
     } else if (element instanceof Message) {
@@ -554,8 +561,12 @@ public class MtipUtils {
       return SysmlConstants.OBJECT_FLOW;
     } else if (element instanceof PackageImport) {
       return SysmlConstants.PACKAGE_IMPORT;
+    } else if (SysML.isRefine(element)) {
+      return SysmlConstants.REFINE;
     } else if (SysML.isSatisfy(element)) {
       return SysmlConstants.SATISFY;
+    } else if (element instanceof Realization) {
+      return SysmlConstants.REALIZATION;
     } else if (SysML.isTrace(element)) {
       return SysmlConstants.TRACE;
     } else if (element instanceof Transition) {
@@ -566,25 +577,38 @@ public class MtipUtils {
       return SysmlConstants.VERIFY;
 
       // Elements that are supertype must be checked after their subtypes
+    } else if (element instanceof InformationFlow) {
+      return SysmlConstants.INFORMATION_FLOW;
     } else if (element instanceof Association) {
-      com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property firstMemberEnd =
-          ModelHelper.getFirstMemberEnd((Association) element);
-      com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property secondMemberEnd =
-          ModelHelper.getSecondMemberEnd((Association) element);
-      if (firstMemberEnd.getAggregation() == AggregationKindEnum.SHARED
-          || secondMemberEnd.getAggregation() == AggregationKindEnum.SHARED) {
-        return SysmlConstants.AGGREGATION;
-      } else if (firstMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE
-          || secondMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE) {
-        return SysmlConstants.COMPOSITION;
-      } else {
-        return SysmlConstants.ASSOCIATION;
-      }
+      return MtipUtils.getAssociationType((Association) element);
+    } else if (element instanceof Abstraction) {
+      return SysmlConstants.ABSTRACTION;
     } else if (element instanceof Dependency) {
       return SysmlConstants.DEPENDENCY;
     }
 
     return null;
+  }
+
+  public static String getAssociationType(Association association) {
+    if (association instanceof Extension) {
+      return SysmlConstants.EXTENSION;
+    }
+
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property firstMemberEnd =
+        ModelHelper.getFirstMemberEnd((Association) association);
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property secondMemberEnd =
+        ModelHelper.getSecondMemberEnd((Association) association);
+
+    if (firstMemberEnd.getAggregation() == AggregationKindEnum.SHARED
+        || secondMemberEnd.getAggregation() == AggregationKindEnum.SHARED) {
+      return SysmlConstants.AGGREGATION;
+    } else if (firstMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE
+        || secondMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE) {
+      return SysmlConstants.COMPOSITION;
+    } else {
+      return SysmlConstants.ASSOCIATION;
+    }
   }
 
   @CheckForNull
@@ -631,7 +655,7 @@ public class MtipUtils {
     List<Stereotype> stereotypes = StereotypesHelper.getStereotypes(element).stream()
         .filter(x -> UAF.isUafProfile(StereotypesHelper.getProfileForStereotype(x)))
         .collect(Collectors.toList());
-    
+
     if (stereotypes.size() == 0) {
       return null;
     }
@@ -659,12 +683,20 @@ public class MtipUtils {
     return SysmlConstants.PACKAGE;
   }
 
+  public static boolean isReferencedElement(Element element) {
+    Project project = Project.getProject(element);
+
+    if (Application.getInstance().getProject().equals(project)) {
+      return false;
+    }
+
+    return true;
+  }
+
   public static boolean isRelationship(Element element) {
-    if (element instanceof ActivityEdge 
-        || element instanceof InformationFlow
-        || element instanceof Message 
-        || element instanceof Relationship
-        || element instanceof Transition) {
+    if (element instanceof ActivityEdge || element instanceof Connector
+        || element instanceof InformationFlow || element instanceof Message
+        || element instanceof Relationship || element instanceof Transition) {
       return true;
     }
 
@@ -672,22 +704,143 @@ public class MtipUtils {
   }
 
   public static boolean isUafModel() {
-    return ProjectUtilities.getAllAttachedProjects(Application.getInstance().getProject())
-        .stream()
-        .map(IAttachedProject::getName)
-        .collect(Collectors.toSet())
+    return ProjectUtilities.getAllAttachedProjects(Application.getInstance().getProject()).stream()
+        .map(IAttachedProject::getName).collect(Collectors.toSet())
         .contains(UAF.getProfileModelName());
   }
-  
+
   public static String getId(Element element) {
     if (Config.isLocalId()) {
       return element.getLocalID();
     }
-    
+
     return element.getID();
   }
- 
+
   public static String utcNow() {
     return ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);
+  }
+
+  public static List<Element> getAllElementsRecursively(Element firstParent) {
+    List<Element> elements = new ArrayList<Element>();
+
+    for (Element element : firstParent.getOwnedElement()) {
+      if (MagicDraw.hasAuxiliaryResourceStereotype(element)) {
+        continue;
+      }
+
+      elements.add(element);
+      elements.addAll(MtipUtils.getAllElementsRecursively(element));
+    }
+
+    return elements;
+  }
+
+  /**
+   * Gets all elements considered relationships by MTIP beneath the given element. This includes
+   * classes which do not fit the cameo definition of relationship (i.e. ControlFlow, Message,
+   * ObjectFlow)
+   * 
+   * @param firstParent Top level parent to recursively get all relationships beneath
+   * @return List of elements MTIP considers relationships.
+   */
+  public static List<Element> getAllMtipRelationships(Element firstParent) {
+    List<Element> elements = MtipUtils.getAllElementsRecursively(firstParent);
+
+    List<Element> relationships = elements.stream()
+        .filter(item -> (item instanceof Relationship) || item instanceof ControlFlow
+            || item instanceof Message || item instanceof ObjectFlow)
+        .map(item -> (Element) item).collect(Collectors.toList());
+
+    return relationships;
+  }
+
+  public static List<Diagram> getAllDiagramsRecursively(Element firstParent) {
+    return MtipUtils.getAllElementsRecursively(firstParent).stream()
+        .filter(item -> item instanceof Diagram).map(item -> (Diagram) item)
+        .collect(Collectors.toList());
+  }
+
+  public static List<Element> getElementsOnDiagram(Project project, Diagram diagram) {
+    DiagramPresentationElement presentationDiagram = project.getDiagram(diagram);
+    List<Element> elementsOnDiagram = new ArrayList<Element>();
+
+    for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
+      elementsOnDiagram
+          .addAll(MtipUtils.getElementsFromPresentationElementRecursively(presentationElement));
+    }
+
+    return elementsOnDiagram;
+  }
+
+  public static List<Element> getElementsFromPresentationElementRecursively(
+      PresentationElement presentationElement) {
+    List<Element> elements = new ArrayList<Element>();
+
+    Element element = presentationElement.getElement();
+
+    if (element != null) {
+      elements.add(element);
+    }
+
+    for (PresentationElement nestedPresentationElement : presentationElement
+        .getPresentationElements()) {
+      elements.addAll(
+          MtipUtils.getElementsFromPresentationElementRecursively(nestedPresentationElement));
+    }
+
+    return elements;
+  }
+
+  /**
+   * Determines whether the element specified by the given import id and element type is a built in
+   * Cameo element or a user-defined element.
+   * 
+   * @param elementId id of the element specified in the XML being imported.
+   * @return true if element id and type correspond to a standard library element. Otherwise, false.
+   */
+  public static boolean isStandardLibraryElement(String elementId) {
+    Element element = (Element) Application.getInstance().getProject().getElementByID(elementId);
+
+    if (element == null) {
+      return false;
+    }
+
+    return isStandardLibraryElement(element);
+  }
+
+  public static boolean isStandardLibraryElement(Element element) {
+    return isChildOfAuxiliaryResource(element);
+  }
+
+  /**
+   * Searches recursively up from the given element to find if the 1st level owning element has the
+   * auxiliary resource stereotype
+   * 
+   * @param element Element from which to begin the search
+   * @return Returns true if the ancestor of element one-level below the primary model has the
+   *         auxiliary resource stereotype. Otherwsie, false.
+   */
+  public static boolean isChildOfAuxiliaryResource(Element element) {
+    while (element != null && element.getOwner() != null
+        && !element.getOwner().equals(Application.getInstance().getProject().getPrimaryModel())) {
+      element = element.getOwner();
+    }
+
+    if (MagicDraw.hasAuxiliaryResourceStereotype(element)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Gets the standard library element for the given id.
+   * 
+   * @param importId id of the standard library element to be retrieved
+   * @return The standard library element
+   */
+  public static Element getStandardLibraryElement(String importId) {
+    return (Element) Application.getInstance().getProject().getElementByID(importId);
   }
 }

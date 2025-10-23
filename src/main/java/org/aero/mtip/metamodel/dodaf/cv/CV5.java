@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ClassDiagram;
 
 public class CV5 extends ClassDiagram {
 
-	public CV5(String name, String EAID) {
-		super(name, EAID);
+	public CV5(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.CV5;
 		this.xmlConstant = XmlTagConstants.CV5;
 		this.cameoDiagramConstant = "DODAF2_CV-5";

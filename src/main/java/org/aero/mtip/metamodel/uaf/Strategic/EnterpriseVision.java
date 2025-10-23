@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class EnterpriseVision extends CommonElement implements UAFElement{
 
-	public EnterpriseVision(String name, String EAID) {
-		super(name, EAID);
+	public EnterpriseVision(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.ENTERPRISE_VISION;
 		this.xmlConstant = XmlTagConstants.ENTERPIRSE_VISION;

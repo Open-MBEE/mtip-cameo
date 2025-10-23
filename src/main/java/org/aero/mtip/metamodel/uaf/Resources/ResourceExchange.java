@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.InformationFlow;
 
 public class ResourceExchange extends InformationFlow {
 
-	public ResourceExchange(String name, String EAID) {
-		super(name, EAID);
+	public ResourceExchange(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_EXCHANGE;
 		this.xmlConstant = XmlTagConstants.RESOURCE_EXCHANGE;
 	}

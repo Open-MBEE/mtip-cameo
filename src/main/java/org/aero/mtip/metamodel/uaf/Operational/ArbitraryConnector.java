@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class ArbitraryConnector extends Dependency {
 
-	public ArbitraryConnector(String name, String EAID) {
-		super(name, EAID);
+	public ArbitraryConnector(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ARBITRARY_CONNECTOR;
 		this.xmlConstant = XmlTagConstants.ARBITRARY_CONNECTOR;
 	}

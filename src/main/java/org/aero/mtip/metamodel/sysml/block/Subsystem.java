@@ -13,8 +13,8 @@ import org.aero.mtip.profiles.SysML;
 
 public class Subsystem extends CommonElement {
 
-	public Subsystem(String name, String EAID) {
-		super(name, EAID);
+	public Subsystem(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.SUBSYSTEM;
 		this.xmlConstant = XmlTagConstants.BLOCK;

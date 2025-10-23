@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class AnyReceiveEvent extends CommonElement {
 
-  public AnyReceiveEvent(String name, String EAID) {
-      super(name, EAID);
+  public AnyReceiveEvent(String name, String importId) {
+      super(name, importId);
       this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
       this.metamodelConstant = SysmlConstants.ANY_RECEIVE_EVENT;
       this.xmlConstant = XmlTagConstants.ANY_RECEIVE_EVENT;

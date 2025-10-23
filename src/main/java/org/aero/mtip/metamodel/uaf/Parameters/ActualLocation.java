@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualLocation extends InstanceSpecification {
 
-	public ActualLocation(String name, String EAID) {
-		super(name, EAID);
+	public ActualLocation(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_LOCATION;
 		this.xmlConstant = XmlTagConstants.ACTUAL_LOCATION;
 	}

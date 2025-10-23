@@ -7,7 +7,7 @@ package org.aero.mtip.metamodel.core.matrix;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.dependencymatrix.diagram.DependencyMatrixDiagramDescriptor;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
@@ -18,15 +18,15 @@ import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 public class DependencyMatrix extends AbstractMatrix {
 	
 
-	public DependencyMatrix(String name, String EAID) {
-		super(name, EAID);
+	public DependencyMatrix(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.DEPENDENCY_MATRIX;
 		this.xmlConstant = XmlTagConstants.DEPENDENCY_MATRIX;
 		this.cameoConstant = DependencyMatrixDiagramDescriptor.DEFAULT_DEPENDENCY_MATRIX_DIAGRAM_TYPE;
 	}
 		
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		return super.createElement(project, owner, xmlElement);
 	}	
 	

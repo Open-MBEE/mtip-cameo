@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualEnduringTask extends InstanceSpecification {
 
-	public ActualEnduringTask(String name, String EAID) {
-		super(name, EAID);
+	public ActualEnduringTask(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = UAFConstants.ACTUAL_ENDURING_TASK;
 		this.xmlConstant = XmlTagConstants.ACTUAL_ENDURING_TASK;

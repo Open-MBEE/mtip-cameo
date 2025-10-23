@@ -18,8 +18,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Regi
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.StateMachine;
 
 public class FinalState extends CommonElement {
-	public FinalState(String name, String EAID) {
-		super(name, EAID);
+	public FinalState(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.FINAL_STATE;
 		this.xmlConstant = XmlTagConstants.FINAL_STATE;

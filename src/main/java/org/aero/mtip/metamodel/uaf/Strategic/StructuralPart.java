@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class StructuralPart extends Property {
 
-	public StructuralPart(String name, String EAID) {
-		super(name, EAID);
+	public StructuralPart(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.STRUCTURAL_PART;
 		this.xmlConstant = XmlTagConstants.STRUCTURAL_PART;
 	}

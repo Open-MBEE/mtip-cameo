@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.profile.ClassDiagram;
 
 public class SV1 extends ClassDiagram {
 
-	public SV1(String name, String EAID) {
-		super(name, EAID);
+	public SV1(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.SV1;
 		this.xmlConstant = XmlTagConstants.SV1;
 	}

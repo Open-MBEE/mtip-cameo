@@ -15,8 +15,8 @@ import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Requirement extends CommonElement {
-	public Requirement(String name, String EAID) {
-		super(name, EAID);		
+	public Requirement(String name, String importId) {
+		super(name, importId);		
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = SysmlConstants.REQUIREMENT;
 		this.xmlConstant = XmlTagConstants.REQUIREMENT; 

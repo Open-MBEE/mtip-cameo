@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Message;
 
 public class ServiceMessage extends Message {
 
-	public ServiceMessage(String name, String EAID) {
-		super(name, EAID);
+	public ServiceMessage(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_MESSAGE;
 		this.xmlConstant = XmlTagConstants.SERVICE_MESSAGE;
 	}

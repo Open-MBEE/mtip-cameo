@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class WholeLifeEnterprise extends CommonElement implements UAFElement{
 
-	public WholeLifeEnterprise(String name, String EAID) {
-		super(name, EAID);
+	public WholeLifeEnterprise(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.WHOLE_LIFE_ENTERPRISE;
 		this.xmlConstant = XmlTagConstants.WHOLE_LIFE_ENTERPRISE;

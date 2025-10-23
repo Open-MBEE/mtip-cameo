@@ -7,6 +7,7 @@
 
 package org.aero.mtip.menu;
 
+import org.aero.mtip.menu.actions.ElementInfoAction;
 import org.aero.mtip.menu.actions.ExportPackageAction;
 import org.aero.mtip.menu.actions.ImportPackageAction;
 import org.aero.mtip.menu.actions.ProfileAssessmentAction;
@@ -16,6 +17,7 @@ import com.nomagic.actions.ActionsManager;
 import com.nomagic.magicdraw.actions.BrowserContextAMConfigurator;
 import com.nomagic.magicdraw.actions.MDActionsCategory;
 import com.nomagic.magicdraw.ui.browser.Tree;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 
@@ -44,6 +46,10 @@ public class BrowserConfigurator implements BrowserContextAMConfigurator {
     
     if (selectedObj instanceof Package) {
       createImportExportCategory((Package) selectedObj, mtipCategory);      
+    }
+    
+    if (selectedObj instanceof Element) {
+      createElementTypeAction((Element)selectedObj, mtipCategory);
     }
   }
   
@@ -79,5 +85,12 @@ public class BrowserConfigurator implements BrowserContextAMConfigurator {
 
     importExportCategory.addAction(category);
     mtipCategory.addAction(importExportCategory);
+  }
+  
+  private void createElementTypeAction(Element element, ActionsCategory mtipCategory) {
+    ActionsCategory category = new ActionsCategory("", "");
+    
+    category.addAction(new ElementInfoAction(null, ElementInfoAction.NAME, element));
+    mtipCategory.addAction(category);
   }
 }

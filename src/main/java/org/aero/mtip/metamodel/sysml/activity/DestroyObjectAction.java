@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class DestroyObjectAction extends ActivityNode {
 
-	public DestroyObjectAction(String name, String EAID) {
-		super(name, EAID);
+	public DestroyObjectAction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DESTROY_OBJECT_ACTION;
 		this.xmlConstant = XmlTagConstants.DESTROY_OBJECT_ACTION;

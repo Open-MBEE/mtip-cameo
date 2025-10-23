@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
 
 public class ActualResource extends InstanceSpecification {
 
-	public ActualResource(String name, String EAID) {
-		super(name, EAID);
+	public ActualResource(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.ACTUAL_RESOURCE;
 		this.xmlConstant = XmlTagConstants.ACTUAL_RESOURCE;
 	}

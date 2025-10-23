@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.table.AbstractTable;
 
 public class OV6a extends AbstractTable {
 
-	public OV6a(String name, String EAID) {
-		super(name, EAID);
+	public OV6a(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV6A;
 		this.xmlConstant = XmlTagConstants.OV6A;
 //		this.cameoDiagramConstant = "OV-1 High-Level Operational Concept Graphic";

@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.uaf.UAFElement;
 
 public class ResourceArtifact extends CommonElement implements UAFElement {
 	
-	public ResourceArtifact(String name, String EAID) {
-		super(name, EAID);
+	public ResourceArtifact(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.RESOURCE_ARTIFACT;
 		this.xmlConstant = XmlTagConstants.RESOURCE_ARTIFACT;

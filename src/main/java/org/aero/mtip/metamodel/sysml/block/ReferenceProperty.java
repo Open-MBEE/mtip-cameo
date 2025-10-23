@@ -13,8 +13,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
 
 public class ReferenceProperty extends Property {
-  public ReferenceProperty(String name, String EAID) {
-    super(name, EAID);
+  public ReferenceProperty(String name, String importId) {
+    super(name, importId);
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.REFERENCE_PROPERTY;
     this.xmlConstant = XmlTagConstants.REFERENCE_PROPERTY;

@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.InternalBlockDiagram;
 
 public class PersonnelInternalConnectivity extends InternalBlockDiagram {
 
-  public PersonnelInternalConnectivity(String name, String EAID) {
-    super(name, EAID);
+  public PersonnelInternalConnectivity(String name, String importId) {
+    super(name, importId);
     this.metamodelConstant = UAFConstants.PERSONNEL_INTERNAL_CONNECTIVITY_DIAGRAM;
     this.xmlConstant = XmlTagConstants.PERSONNEL_INTERNAL_CONNECTIVITY;
     this.cameoDiagramConstant = CameoDiagramConstants.PERSONNEL_INTERNAL_CONNECTIVITY;

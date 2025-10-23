@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class CallEvent extends CommonElement {
 
-  public CallEvent(String name, String EAID) {
-      super(name, EAID);
+  public CallEvent(String name, String importId) {
+      super(name, importId);
       this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
       this.metamodelConstant = SysmlConstants.CALL_EVENT;
       this.xmlConstant = XmlTagConstants.CALL_EVENT;

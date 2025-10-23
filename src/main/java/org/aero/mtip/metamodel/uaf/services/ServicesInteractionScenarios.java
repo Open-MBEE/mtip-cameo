@@ -7,8 +7,8 @@ import org.aero.mtip.metamodel.sysml.sequence.SequenceDiagram;
 
 public class ServicesInteractionScenarios extends SequenceDiagram {
 
-	public ServicesInteractionScenarios(String name, String EAID) {
-		super(name, EAID);
+	public ServicesInteractionScenarios(String name, String importId) {
+		super(name, importId);
 
 		 this.metamodelConstant = UAFConstants.SERVICES_INTERACTION_SCENARIOS_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SERVICES_INTERACTION_SCENARIOS_DIAGRAM;

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Dependency;
 
 public class ProjectSequence extends Dependency {
 
-	public ProjectSequence(String name, String EAID) {
-		super(name, EAID);
+	public ProjectSequence(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.PROJECT_SEQUENCE;
 		this.xmlConstant = XmlTagConstants.PROJECT_SEQUENCE;
 	}

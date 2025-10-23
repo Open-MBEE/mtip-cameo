@@ -11,8 +11,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 
 public class ForkNode extends ActivityNode {
 
-	public ForkNode(String name, String EAID) {
-		super(name, EAID);
+	public ForkNode(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.FORK_NODE;
 		this.xmlConstant = XmlTagConstants.FORK_NODE;

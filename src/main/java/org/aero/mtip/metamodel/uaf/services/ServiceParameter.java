@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.Parameter;
 
 public class ServiceParameter extends Parameter {
 
-	public ServiceParameter(String name, String EAID) {
-		super(name, EAID);
+	public ServiceParameter(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_PARAMETER;
 		this.xmlConstant = XmlTagConstants.SERVICE_PARAMETER;
 	}

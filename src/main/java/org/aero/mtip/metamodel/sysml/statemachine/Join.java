@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class Join extends PseudoState {
 
-	public Join(String name, String EAID) {
-		super(name, EAID);
+	public Join(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.JOIN;
 		this.metamodelConstant = SysmlConstants.JOIN;
 		this.xmlConstant = XmlTagConstants.JOIN;

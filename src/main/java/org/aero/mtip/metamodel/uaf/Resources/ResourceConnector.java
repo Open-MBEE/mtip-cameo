@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.internalblock.Connector;
 
 public class ResourceConnector extends Connector {
 
-	public ResourceConnector(String name, String EAID) {
-		super(name, EAID);
+	public ResourceConnector(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.RESOURCE_CONNECTOR;
 		this.xmlConstant = XmlTagConstants.RESOURCE_CONNECTOR;
 	}

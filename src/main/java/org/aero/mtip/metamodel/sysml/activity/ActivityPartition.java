@@ -7,12 +7,16 @@
 
 package org.aero.mtip.metamodel.sysml.activity;
 
+import java.util.Arrays;
 import java.util.Collections;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
+import org.aero.mtip.util.ElementData;
+import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.activities.mdfundamentalactivities.Activity;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
@@ -24,12 +28,58 @@ public class ActivityPartition extends CommonElement {
   public static final String XML_TAG_SUBPARTITION = "subpartition";
   public static final String XML_TAG_SUPER_PARTITION = "superpartition";
 
-  public ActivityPartition(String name, String EAID) {
-    super(name, EAID);
+  public ActivityPartition(String name, String importId) {
+    super(name, importId);
+    
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.ACTIVITY_PARTITION;
     this.xmlConstant = XmlTagConstants.ACTIVITY_PARTITION;
     this.element = f.createActivityPartitionInstance();
+    
+    this.attributeDependencies = Arrays.asList(XML_TAG_REPRESENTS,
+        XML_TAG_SUPER_PARTITION, XML_TAG_EDGE, XML_TAG_NODE, XML_TAG_SUBPARTITION);
+  }
+
+  @Override
+  public Element createElement(Project project, Element owner, ElementData xmlElement) {
+    super.createElement(project, owner, xmlElement);
+
+    setRepresents();
+    setSuperPartition();
+
+    return element;
+  }
+
+  private void setRepresents() {
+    if (!elementData.hasAttribute(XML_TAG_REPRESENTS)) {
+      return;
+    }
+
+    Element represents =
+        Importer.getInstance().getImportedElement(elementData.getAttribute(XML_TAG_REPRESENTS));
+
+    if (represents == null) {
+      return;
+    }
+
+    getElementAsActivityPartition().setRepresents(represents);
+  }
+
+  private void setSuperPartition() {
+    if (!elementData.hasAttribute(XML_TAG_SUPER_PARTITION)) {
+      return;
+    }
+
+    Element superPartition =
+        Importer.getInstance().getImportedElement(elementData.getAttribute(XML_TAG_SUPER_PARTITION));
+
+    if (superPartition == null
+        || !(superPartition instanceof com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition)) {
+      return;
+    }
+
+    getElementAsActivityPartition().setSuperPartition(
+        (com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition) superPartition);
   }
 
   @Override
@@ -66,7 +116,8 @@ public class ActivityPartition extends CommonElement {
     }
 
     writeRelationship(relationships, activityPartition.getRepresents(), XML_TAG_REPRESENTS);
-    writeRelationship(relationships, activityPartition.getSuperPartition(), XML_TAG_SUPER_PARTITION);
+    writeRelationship(relationships, activityPartition.getSuperPartition(),
+        XML_TAG_SUPER_PARTITION);
 
     writeRelationships(relationships, activityPartition.getEdge(), XML_TAG_EDGE);
     writeRelationships(relationships, activityPartition.getNode(), XML_TAG_NODE);

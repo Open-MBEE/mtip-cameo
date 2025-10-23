@@ -13,8 +13,8 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 
 public class ExitPoint extends PseudoState {
 
-	public ExitPoint(String name, String EAID) {
-		super(name, EAID);
+	public ExitPoint(String name, String importId) {
+		super(name, importId);
 		this.psKind = PseudostateKindEnum.EXITPOINT;		
 		this.metamodelConstant = SysmlConstants.EXIT_POINT;
 		this.xmlConstant = XmlTagConstants.EXIT_POINT;

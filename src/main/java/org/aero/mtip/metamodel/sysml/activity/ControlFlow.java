@@ -14,7 +14,7 @@ import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ActivityEdge;
@@ -26,8 +26,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ValueSpecification;
 
 public class ControlFlow extends CommonRelationship {
 
-	public ControlFlow(String name, String EAID) {
-		super(name, EAID);
+	public ControlFlow(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CONTROL_FLOW;
 		this.xmlConstant = XmlTagConstants.CONTROLFLOW;
@@ -35,7 +35,7 @@ public class ControlFlow extends CommonRelationship {
 	}
 	
 	@Override
-	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData xmlElement) {
 		super.createElement(project,owner, client, supplier, xmlElement);
 		
 		if(xmlElement.hasAttribute(XmlTagConstants.GUARD)) {
@@ -45,7 +45,7 @@ public class ControlFlow extends CommonRelationship {
 		return element;
 	}
 	
-	private void setGuard(XMLItem xmlElement) {
+	private void setGuard(ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ControlFlow cf = (com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ControlFlow)element;
 		ValueSpecification guard = cf.getGuard();
 		
@@ -90,31 +90,32 @@ public class ControlFlow extends CommonRelationship {
 	@Override
 	public void setOwner(Element owner) {
 		if(!(owner instanceof Activity)) {
-			owner = CameoUtils.findNearestActivity(supplier);
+			owner = CameoUtils.findNearestActivity(getSupplier());
 		}
+		
 		element.setOwner(owner);
 	}
 	
 	@Override
-	public void setSupplier() {
+	public void setSupplier(Element supplier) {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		activityEdge.setSource((ActivityNode) supplier);
 	}
 	
 	@Override
-	public void setClient() {
+	public void setClient(Element client) {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		activityEdge.setTarget((ActivityNode) client);
 	}
 	
 	@Override
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		return activityEdge.getSource();
 	}
 	
 	@Override
-	public Element getClient(Element element) {
+	public Element getClient() {
 		ActivityEdge activityEdge = (ActivityEdge)element;
 		return activityEdge.getTarget();
 	}

@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public abstract class Parameter extends CommonElement {
 
-	public Parameter(String name, String EAID) {
-		super(name, EAID);
+	public Parameter(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.PARAMETER;
 		this.xmlConstant = XmlTagConstants.PARAMETER;

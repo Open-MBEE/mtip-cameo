@@ -11,7 +11,7 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 import org.w3c.dom.Document;
 
 import com.nomagic.magicdraw.core.Project;
@@ -20,8 +20,8 @@ import com.nomagic.magicdraw.uml.symbols.paths.PathElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Link extends CommonElement {
-	public Link(String name, String EAID) {
-		super(name, EAID);
+	public Link(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.LINK;
 		this.xmlConstant = XmlTagConstants.LINK;
@@ -29,7 +29,7 @@ public class Link extends CommonElement {
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		
 		return null;
 	}

@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class DurationObservation extends CommonElement {
 
-	public DurationObservation(String name, String EAID) {
-		super(name, EAID);
+	public DurationObservation(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DURATION_OBSERVATION;
 		this.xmlConstant = XmlTagConstants.DURATION_OBSERVATION;

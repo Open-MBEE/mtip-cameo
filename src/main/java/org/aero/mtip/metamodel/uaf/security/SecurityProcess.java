@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.activity.Activity;
 
 public class SecurityProcess extends Activity {
 
-	public SecurityProcess(String name, String EAID) {
-		super(name, EAID);
+	public SecurityProcess(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SECURITY_PROCESS;
 		this.xmlConstant = XmlTagConstants.SECURITY_PROCESS;
 	}

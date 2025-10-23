@@ -11,9 +11,6 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.profiles.DslCustomization;
-import org.aero.mtip.util.XMLItem;
-
-import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
@@ -31,8 +28,8 @@ public class Customization extends CommonElement {
 	private Profile dslCustomizationProfile = null;
 	private Stereotype customizationStereotype = null;
 	
-	public Customization(String name, String EAID) {
-		super(name, EAID);
+	public Customization(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.xmlConstant = XmlTagConstants.CUSTOMIZATION; 
 		this.creationStereotype = DslCustomization.getCustomizationStereotype();
@@ -40,12 +37,6 @@ public class Customization extends CommonElement {
 		this.dslCustomizationProfile = StereotypesHelper.getProfile(project,  "DSL Customization");
 		this.customizationStereotype = StereotypesHelper.getStereotype(project, SysmlConstants.CUSTOMIZATION, dslCustomizationProfile);
 		this.creationStereotype = this.customizationStereotype;
-	}
-	
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
-		Element customization = super.createElement(project, owner, xmlElement);
-				
-		return customization;
 	}
 	
 	public org.w3c.dom.Element writeToXML(Element element) {

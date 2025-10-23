@@ -17,8 +17,8 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdcommunications.Trigger;
 
 public class AcceptEventAction extends ActivityNode {
 
-	public AcceptEventAction(String name, String EAID) {
-		super(name, EAID);
+	public AcceptEventAction(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.ACCEPT_EVENT_ACTION;
 		this.xmlConstant = XmlTagConstants.ACCEPT_EVENT_ACTION;

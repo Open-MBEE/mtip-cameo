@@ -17,13 +17,15 @@ public class MagicDraw {
 
   private Project project;
   private Profile profile;
+  private Profile dslCustomizationProfile;
 
   public static final String NAME = "MagicDraw Profile";
+  public static final String ADDITIONAL_PACKAGE_IMPORT = "additionalPackageImport";
+  public static final String AUXILIARY_RESOURCE = "auxiliaryResource";
+  public static final String CUSTOM_IMAGE_HOLDER = "CustomImageHolder";
+  public static final String LEGEND = "Legend";
+  public static final String LEGEND_ITEM = "LegendItem";
 
-  static final String AUXILIARY_RESOURCE = "auxiliaryResource";
-  static final String CUSTOM_IMAGE_HOLDER = "CustomImageHolder";
-  static final String TERM_NAME = "Term";
-  
   // CustomImageHolder properties
   static final String LOCATION = "Location";
 
@@ -31,7 +33,7 @@ public class MagicDraw {
     project = Application.getInstance().getProject();
     profile = StereotypesHelper.getProfile(project, NAME);
   }
-  
+
   public static void clearProfile() {
     instance = null;
   }
@@ -69,52 +71,82 @@ public class MagicDraw {
 
     return true;
   }
-  
+
   @CheckForNull
   public static String getCustomImageName(Element element) {
-    List<?> locations = StereotypesHelper.getStereotypePropertyValue(element, getCustomImageHolderStereotypeLocationProperty());
-    
+    List<?> locations = StereotypesHelper.getStereotypePropertyValue(element,
+        getCustomImageHolderStereotypeLocationProperty());
+
     if (locations.isEmpty() || !(locations.get(0) instanceof String)) {
       return null;
     }
-    
-    String filename = new File((String)locations.get(0)).getName();
+
+    String filename = new File((String) locations.get(0)).getName();
     return filename.substring(0, filename.lastIndexOf('.'));
+  }
+  
+  public static Stereotype getAdditionalPackageImportStereotype() {
+    return getInstance().getStereotype(ADDITIONAL_PACKAGE_IMPORT);
   }
 
   public static Stereotype getAuxiliaryResourceStereotype() {
     return getInstance().getStereotype(AUXILIARY_RESOURCE);
   }
-  
+
   public static Stereotype getCustomImageHolderStereeotype() {
     return getInstance().getStereotype(CUSTOM_IMAGE_HOLDER);
   }
   
+  public static Stereotype getLegendStereotype() {
+    return getInstance().getStereotype(LEGEND);
+  }
+  
+  public static Stereotype getLegendItemStereotype() {
+    return getInstance().getStereotype(LEGEND_ITEM);
+  }
+
+  public static Profile getDslCustomizationProfile() {
+    return getInstance().dslCustomizationProfile;
+  }
+
   public static Property getCustomImageHolderStereotypeLocationProperty() {
     return StereotypesHelper.getPropertyByName(getCustomImageHolderStereeotype(), LOCATION);
   }
-
-  public static Stereotype getTermStereotype() {
-    return getInstance().getStereotype(TERM_NAME);
+  
+  
+  public static boolean hasAdditionalPackageImportStereotype(Element element) {
+    return getInstance().hasStereotype(element, ADDITIONAL_PACKAGE_IMPORT);
   }
-
-  public Stereotype getStereotype(String stereotypeName) {
-    return StereotypesHelper.getStereotype(project, stereotypeName, profile);
+  
+  public static boolean hasAuxiliaryResourceStereotype(Element element) {
+    return getInstance().hasStereotype(element, AUXILIARY_RESOURCE);
   }
-
+  
   public static boolean hasCustomImageHolderStereotype(Element element) {
     return getInstance().hasStereotype(element, CUSTOM_IMAGE_HOLDER);
   }
   
-  public static boolean hasTermStereotype(Element element) {
-    return getInstance().hasStereotype(element, TERM_NAME);
+  public static boolean hasLegendStereotype(Element element) {
+    return getInstance().hasStereotype(element, LEGEND);
   }
-
+  
+  public static boolean hasLegendItemStereotype(Element element) {
+    return getInstance().hasStereotype(element, LEGEND_ITEM);
+  }
+  
   public boolean isCurrentProject(Project activeProject) {
     if (project != activeProject) {
       return false;
     }
 
     return true;
+  }
+
+  public Stereotype getStereotype(String stereotypeName) {
+    return StereotypesHelper.getStereotype(project, stereotypeName, this.profile);
+  }
+
+  public Stereotype getStereotype(String stereotypeName, Profile profile) {
+    return StereotypesHelper.getStereotype(project, stereotypeName, profile);
   }
 }

@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonDirectedRelationship;
 
 public class Include extends CommonDirectedRelationship {
 
-	public Include(String name, String EAID) {
-		super(name, EAID);
+	public Include(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INCLUDE;
 		this.xmlConstant = XmlTagConstants.INCLUDE;

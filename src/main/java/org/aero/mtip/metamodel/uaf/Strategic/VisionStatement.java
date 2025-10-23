@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Comment;
 
 public class VisionStatement extends Comment {
 
-	public VisionStatement(String name, String EAID) {
-		super(name, EAID);
+	public VisionStatement(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.VISION_STATEMENT;
 		this.xmlConstant = XmlTagConstants.VISION_STATEMENT;
 	}

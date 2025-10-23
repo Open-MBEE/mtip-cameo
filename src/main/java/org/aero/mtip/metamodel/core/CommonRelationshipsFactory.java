@@ -10,10 +10,12 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.UAFConstants;
 import org.aero.mtip.metamodel.core.general.Abstraction;
 import org.aero.mtip.metamodel.core.general.Aggregation;
+import org.aero.mtip.metamodel.core.general.Allocate;
 import org.aero.mtip.metamodel.core.general.Association;
 import org.aero.mtip.metamodel.core.general.Composition;
 import org.aero.mtip.metamodel.core.general.Dependency;
 import org.aero.mtip.metamodel.core.general.Generalization;
+import org.aero.mtip.metamodel.core.general.Realization;
 import org.aero.mtip.metamodel.core.general.Usage;
 import org.aero.mtip.metamodel.sysml.activity.ControlFlow;
 import org.aero.mtip.metamodel.sysml.activity.ObjectFlow;
@@ -80,248 +82,254 @@ import org.aero.mtip.metamodel.uaf.services.ServiceConnector;
 import org.aero.mtip.metamodel.uaf.services.ServiceMessage;
 
 public class CommonRelationshipsFactory {
-	public CommonRelationship createElement(String type, String name, String EAID) {
+	public CommonRelationship createElement(String type, String name, String importId) {
 		CommonRelationship relationship = null;
 		switch(type) {
 			case SysmlConstants.ABSTRACTION:
-				relationship = new Abstraction(name, EAID);
+				relationship = new Abstraction(name, importId);
 				break;
+			case SysmlConstants.ALLOCATE:
+			    relationship = new Allocate(name, importId);
+			    break;
 			case SysmlConstants.AGGREGATION:
-				relationship = new Aggregation(name, EAID);
+				relationship = new Aggregation(name, importId);
 				break;
 			case SysmlConstants.ASSOCIATION:
-				relationship = new Association(name, EAID);
+				relationship = new Association(name, importId);
 				break;
 			case SysmlConstants.BINDING_CONNECTOR:
-				relationship = new BindingConnector(name, EAID);
+				relationship = new BindingConnector(name, importId);
 				break;
 			case SysmlConstants.COMPOSITION:
-				relationship = new Composition(name, EAID);
+				relationship = new Composition(name, importId);
 				break;
 			case SysmlConstants.COPY:
-				relationship = new Copy(name, EAID);
+				relationship = new Copy(name, importId);
 				break;
 			case SysmlConstants.CONNECTOR:
-				relationship = new Connector(name, EAID);
+				relationship = new Connector(name, importId);
 				break;
 			case SysmlConstants.CONTROL_FLOW:
-				relationship = new ControlFlow(name, EAID);
+				relationship = new ControlFlow(name, importId);
 				break;
 			case SysmlConstants.DERIVE_REQUIREMENT:
-				relationship = new DeriveRequirement(name, EAID);
+				relationship = new DeriveRequirement(name, importId);
 				break;
 			case SysmlConstants.DEPENDENCY:
-				relationship = new Dependency(name, EAID);
+				relationship = new Dependency(name, importId);
 				break;
 			case SysmlConstants.EXTEND:
-				relationship = new Extend(name, EAID);
+				relationship = new Extend(name, importId);
 				break;
 			case SysmlConstants.EXTENSION:
-				relationship = new Extension(name, EAID);
+				relationship = new Extension(name, importId);
 				break;
 			case SysmlConstants.GENERALIZATION:
-				relationship = new Generalization(name, EAID);
+				relationship = new Generalization(name, importId);
 				break;
 			case SysmlConstants.INCLUDE:
-				relationship = new Include(name, EAID);
+				relationship = new Include(name, importId);
 				break;
 			case SysmlConstants.INFORMATION_FLOW:
-				relationship = new InformationFlow(name, EAID);
+				relationship = new InformationFlow(name, importId);
 				break;
 			case SysmlConstants.INTERFACE_REALIZATION:
-				relationship = new InterfaceRealization(name, EAID);
+				relationship = new InterfaceRealization(name, importId);
 				break;
 			case SysmlConstants.ITEM_FLOW:
-				relationship = new ItemFlow(name, EAID);
+				relationship = new ItemFlow(name, importId);
 				break;
 			case SysmlConstants.MESSAGE:
-				relationship = new Message(name, EAID);
+				relationship = new Message(name, importId);
 				break;
 			case SysmlConstants.OBJECT_FLOW:
-				relationship = new ObjectFlow(name, EAID);
+				relationship = new ObjectFlow(name, importId);
 				break;
 			case SysmlConstants.PACKAGE_IMPORT:
-				relationship = new PackageImport(name, EAID);
+				relationship = new PackageImport(name, importId);
 				break;
+			case SysmlConstants.REALIZATION:
+			    relationship = new Realization(name, importId);
+			    break;
 			case SysmlConstants.REFINE:
-				relationship = new Refine(name, EAID);
+				relationship = new Refine(name, importId);
 				break;
 			case SysmlConstants.SATISFY:
-				relationship = new Satisfy(name, EAID);
+				relationship = new Satisfy(name, importId);
 				break;
 			case SysmlConstants.TRACE:
-				relationship = new Trace(name, EAID);
+				relationship = new Trace(name, importId);
 				break;
 			case SysmlConstants.TRANSITION:
-				relationship = new Transition(name, EAID);
+				relationship = new Transition(name, importId);
 				break;
 			case SysmlConstants.USAGE:
-				relationship = new Usage(name, EAID);
+				relationship = new Usage(name, importId);
 				break;
 			case SysmlConstants.VERIFY:
-				relationship = new Verify(name, EAID);
+				relationship = new Verify(name, importId);
 				break;
 				
 				
 			//UAF
 			case UAFConstants.ACHIEVED_EFFECT:
-				relationship = new AchievedEffect(name, EAID);
+				relationship = new AchievedEffect(name, importId);
 				break;
 			case UAFConstants.CAPABILITY_FOR_TASK:
-				relationship = new CapabilityForTask(name, EAID);
+				relationship = new CapabilityForTask(name, importId);
 				break;
 			case UAFConstants.DESIRED_EFFECT:
-				relationship = new DesiredEffect(name, EAID);
+				relationship = new DesiredEffect(name, importId);
 				break;
 
 			case UAFConstants.EXHIBITS:
-				relationship = new Exhibits(name, EAID);
+				relationship = new Exhibits(name, importId);
 				break;
 			case UAFConstants.MAPS_TO_CAPABILITY:
-				relationship = new MapsToCapability(name, EAID);
+				relationship = new MapsToCapability(name, importId);
 				break;
 			case UAFConstants.ORGANIZATION_IN_ENTERPRISE:
-				relationship = new OrganizationInEnterprise(name, EAID);
+				relationship = new OrganizationInEnterprise(name, importId);
 				break;
 			//Operational
 			/*
 			case UAFConstants.OPERATIONAL_CONNECTOR:
-				relationship = new OperationalConnector(name, EAID);
+				relationship = new OperationalConnector(name, importId);
 				break;*/
 		    /*case UAFConstants.INFORMATION_FLOW:
-				relationship = new uaf.Operational.InformationFlow(name, EAID);
+				relationship = new uaf.Operational.InformationFlow(name, importId);
 				break;
 			case UAFConstants.OBJECT_FLOW:
-				relationship = new uaf.Operational.ObjectFlow(name, EAID);
+				relationship = new uaf.Operational.ObjectFlow(name, importId);
 				break;*/
 			/*case UAFConstants.OPERATIONAL_MESSAGE:
-				relationship = new OperationalMessage(name, EAID);
+				relationship = new OperationalMessage(name, importId);
 				break;*/
 			case UAFConstants.OPERATIONAL_EXCHANGE:
-				relationship = new OperationalExchange(name, EAID);
+				relationship = new OperationalExchange(name, importId);
 				break;
 			case UAFConstants.OPERATIONAL_CONNECTOR:
-				relationship = new OperationalConnector(name, EAID);
+				relationship = new OperationalConnector(name, importId);
 				break;
 			case UAFConstants.OPERATIONAL_OBJECT_FLOW:
-				relationship = new OperationalObjectFlow(name, EAID);
+				relationship = new OperationalObjectFlow(name, importId);
 				break;
 			case UAFConstants.OPERATIONAL_CONTROL_FLOW:
-				relationship = new OperationalControlFlow(name, EAID);
+				relationship = new OperationalControlFlow(name, importId);
 				break;
 			case UAFConstants.OPERATIONAL_ASSOCIATION:
-				relationship = new OperationalAssociation(name, EAID);
+				relationship = new OperationalAssociation(name, importId);
 				break;
 			case UAFConstants.ARBITRARY_CONNECTOR:
-				relationship = new ArbitraryConnector(name, EAID);
+				relationship = new ArbitraryConnector(name, importId);
 				break;
 			case UAFConstants.RESOURCE_CONNECTOR:
-				relationship = new ResourceConnector(name, EAID);
+				relationship = new ResourceConnector(name, importId);
 				break;
 			case UAFConstants.RESOURCE_EXCHANGE:
-				relationship = new ResourceExchange(name, EAID);
+				relationship = new ResourceExchange(name, importId);
 				break;
 			case UAFConstants.FUNCTION_CONTROL_FLOW:
-				relationship = new FunctionControlFlow(name, EAID);
+				relationship = new FunctionControlFlow(name, importId);
 				break;
 			case UAFConstants.FUNCTION_OBJECT_FLOW:
-				relationship = new FunctionObjectFlow(name, EAID);
+				relationship = new FunctionObjectFlow(name, importId);
 				break;
 			/*case UAFConstants.RESOURCE_MESSAGE:
-				relationship = new ResourceMessage(name, EAID);
+				relationship = new ResourceMessage(name, importId);
 				break;*/
 			case UAFConstants.FORECAST:
-				relationship = new Forecast(name, EAID);
+				relationship = new Forecast(name, importId);
 				break;
 			case UAFConstants.VERSION_SUCCESSION:
-				relationship = new VersionSuccession(name, EAID);
+				relationship = new VersionSuccession(name, importId);
 				break;
 			case UAFConstants.MILESTONE_DEPENDENCY:
-				relationship = new MilestoneDependency(name, EAID);
+				relationship = new MilestoneDependency(name, importId);
 				break;
 			case UAFConstants.PROJECT_SEQUENCE:
-				relationship = new ProjectSequence(name, EAID);
+				relationship = new ProjectSequence(name, importId);
 				break;
 			case UAFConstants.SAME_AS:
-				relationship = new SameAs(name, EAID);
+				relationship = new SameAs(name, importId);
 				break;
 				
 			// Actual Resources
 			case UAFConstants.ACTUAL_RESOURCE_RELATIONSHIP:
-				relationship = new ActualResourceRelationship(name, EAID);
+				relationship = new ActualResourceRelationship(name, importId);
 				break;
 			case UAFConstants.FILLS_POST:
-				relationship = new FillsPost(name, EAID);
+				relationship = new FillsPost(name, importId);
 				break;
 			case UAFConstants.OWNS_PROCESS:
-				relationship = new OwnsProcess(name, EAID);
+				relationship = new OwnsProcess(name, importId);
 				break;
 			case UAFConstants.PROVIDES_COMPETENCE:
-				relationship = new ProvidesCompetence(name, EAID);
+				relationship = new ProvidesCompetence(name, importId);
 				break;
 			
 			// Personnel
 			case UAFConstants.COMMAND:
-				relationship = new Command(name, EAID);
+				relationship = new Command(name, importId);
 				break;
 			case UAFConstants.COMPETENCE_FOR_ROLE:
-				relationship = new CompetenceForRole(name, EAID);
+				relationship = new CompetenceForRole(name, importId);
 				break;
 			case UAFConstants.COMPETENCE_TO_CONDUCT:
-				relationship = new CompetenceToConduct(name, EAID);
+				relationship = new CompetenceToConduct(name, importId);
 				break;
 			case UAFConstants.CONTROL:
-				relationship = new Control(name, EAID);
+				relationship = new Control(name, importId);
 				break;
 			case UAFConstants.REQUIRES_COMPETENCE:
-				relationship = new RequiresCompetence(name, EAID);
+				relationship = new RequiresCompetence(name, importId);
 				break;
 				
 			// Security
 			case UAFConstants.AFFECTS:
-				relationship = new Affects(name, EAID);
+				relationship = new Affects(name, importId);
 				break;
 			case UAFConstants.AFFECTS_IN_CONTEXT:
-				relationship = new AffectsInContext(name, EAID);
+				relationship = new AffectsInContext(name, importId);
 				break;
 			case UAFConstants.ENHANCES:
-				relationship = new Enhances(name, EAID);
+				relationship = new Enhances(name, importId);
 				break;
 			case UAFConstants.MITIGATES:
-				relationship = new Mitigates(name, EAID);
+				relationship = new Mitigates(name, importId);
 				break;
 			case UAFConstants.OWNS_RISK:
-				relationship = new OwnsRisk(name, EAID);
+				relationship = new OwnsRisk(name, importId);
 				break;
 			case UAFConstants.OWNS_RISK_IN_CONTEXT:
-				relationship = new OwnsRiskInContext(name, EAID);
+				relationship = new OwnsRiskInContext(name, importId);
 				break;
 			case UAFConstants.PROTECTS:
-				relationship = new Protects(name, EAID);
+				relationship = new Protects(name, importId);
 				break;
 			case UAFConstants.PROTECTS_IN_CONTEXT:
-				relationship = new ProtectsInContext(name, EAID);
+				relationship = new ProtectsInContext(name, importId);
 				break;
 				
 			// Services
 			case UAFConstants.CONSUMES:
-				relationship = new Consumes(name, EAID);
+				relationship = new Consumes(name, importId);
 				break;
 			case UAFConstants.SERVICE_CONNECTOR:
-				relationship = new ServiceConnector(name, EAID);
+				relationship = new ServiceConnector(name, importId);
 				break;
 			case UAFConstants.SERVICE_MESSAGE:
-				relationship = new ServiceMessage(name, EAID);
+				relationship = new ServiceMessage(name, importId);
 				break;
 			//MetaData
 			case UAFConstants.IMPLEMENTS:
-				relationship = new Implements(name, EAID);
+				relationship = new Implements(name, importId);
 				break;
 			case UAFConstants.PERFORMS_IN_CONTEXT:
-				relationship = new PerformsInContext(name, EAID);
+				relationship = new PerformsInContext(name, importId);
 				break;
 			case UAFConstants.IS_CAPABLE_TO_PERFORM:
-				relationship = new IsCapableToPerform(name, EAID);
+				relationship = new IsCapableToPerform(name, importId);
 				break;				
 			default:
 				break;

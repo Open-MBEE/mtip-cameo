@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class ConnectionPointReference extends CommonElement {
 
-	public ConnectionPointReference(String name, String EAID) {
-		super(name, EAID);
+	public ConnectionPointReference(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CONNECTION_POINT_REFERENCE;
 		this.xmlConstant = XmlTagConstants.CONNECTION_POINT_REFERENCE;

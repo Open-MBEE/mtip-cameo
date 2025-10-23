@@ -13,8 +13,8 @@ import com.nomagic.magicdraw.uml.Finder;
 
 public class QuantityKind extends InstanceSpecification {
 
-	public QuantityKind(String name, String EAID) {
-		super(name, EAID);
+	public QuantityKind(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = SysmlConstants.QUANTITY_KIND;
 		this.xmlConstant = XmlTagConstants.QUANTITY_KIND;
 		this.creationStereotype = MDCustomizationForSysML.getQuantityKindStereotype();

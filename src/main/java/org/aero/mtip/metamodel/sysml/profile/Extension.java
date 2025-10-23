@@ -10,7 +10,7 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
@@ -19,8 +19,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class Extension extends CommonRelationship {
 
-	public Extension(String name, String EAID) {
-		super(name, EAID);
+	public Extension(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.EXTENSION;
 		this.xmlConstant = XmlTagConstants.EXTENSION;
@@ -28,7 +28,7 @@ public class Extension extends CommonRelationship {
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, Element client, Element supplier, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData xmlElement) {
 		super.createElement(project, owner, client, supplier, xmlElement);
 		
 		com.nomagic.uml2.ext.magicdraw.mdprofiles.Extension extension = (com.nomagic.uml2.ext.magicdraw.mdprofiles.Extension)element;
@@ -40,7 +40,7 @@ public class Extension extends CommonRelationship {
 			ModelHelper.setNavigable(firstMemberEnd, true);
 			firstMemberEnd.setOwner(client);
 		} else {
-			Logger.log("First member end not created for extension " + this.EAID);
+			Logger.log("First member end not created for extension " + this.importId);
 		}
 		
 		if(secondMemberEnd != null) {
@@ -48,7 +48,7 @@ public class Extension extends CommonRelationship {
 			ModelHelper.setNavigable(secondMemberEnd, true);
 			secondMemberEnd.setOwner(extension);
 		} else {
-			Logger.log("Second member end not created for extension " + this.EAID);
+			Logger.log("Second member end not created for extension " + this.importId);
 		}
 
 		return extension;

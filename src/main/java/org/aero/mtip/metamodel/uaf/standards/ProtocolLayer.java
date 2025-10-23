@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ProtocolLayer extends Property {
 	
-	public ProtocolLayer(String name, String EAID) {
-		super(name, EAID);
+	public ProtocolLayer(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = UAFConstants.PROTOCOL_LAYER;
 		this.xmlConstant = XmlTagConstants.PROTOCOL_LAYER;

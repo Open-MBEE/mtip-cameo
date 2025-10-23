@@ -6,16 +6,16 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 
 package org.aero.mtip.metamodel.sysml.sequence;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
+import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
-import org.aero.mtip.util.XMLItem;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralString;
@@ -23,15 +23,17 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.Duration;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationInterval;
 
 public class DurationConstraint extends CommonElement {
-	public DurationConstraint(String name, String EAID) {
-		super(name, EAID);
+	public DurationConstraint(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.DURATION_CONSTRAINT;
 		this.xmlConstant = XmlTagConstants.DURATION_CONSTRAINT;
 		this.element = f.createDurationConstraintInstance();
+		
+		this.attributeDependencies.addAll(Arrays.asList(XmlTagConstants.ATTRIBUTE_NAME_SPECIFICATION, XmlTagConstants.ATTRIBUTE_CONSTRAINED_ELEMENT));
 	}
 	
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		
 		if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_NAME_SPECIFICATION)) {
@@ -45,7 +47,7 @@ public class DurationConstraint extends CommonElement {
 		return element;
 	}
 	
-	private void setSpecification(XMLItem xmlElement) {
+	private void setSpecification(ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint dc = (com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint)element;
 		Element specificationElement = Importer.getInstance().getImportedElement(xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_NAME_SPECIFICATION));
 		
@@ -61,7 +63,7 @@ public class DurationConstraint extends CommonElement {
 		dc.setSpecification(di);
 	}
 	
-	private void setConstrainedElements(Project project, XMLItem xmlElement) {
+	private void setConstrainedElements(Project project, ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint dc = (com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint)element;
 		List<Element> constrainedElements = dc.getConstrainedElement();
 		
@@ -84,20 +86,7 @@ public class DurationConstraint extends CommonElement {
 		}
 	}
 	
-	@Override
-	public void createDependentElements(HashMap<String, XMLItem> parsedXML, XMLItem modelElement) {
-		if (modelElement.hasListAttributes(XmlTagConstants.ATTRIBUTE_CONSTRAINED_ELEMENT)) {
-			for (String importId : modelElement.getListAttributes(XmlTagConstants.ATTRIBUTE_CONSTRAINED_ELEMENT)) {
-				Importer.getInstance().buildEntity(parsedXML, parsedXML.get(importId));
-			}
-		}
-		
-		if (modelElement.hasAttribute(XmlTagConstants.ATTRIBUTE_NAME_SPECIFICATION)) {
-			Importer.getInstance().buildEntity(parsedXML, parsedXML.get(modelElement.getAttribute(XmlTagConstants.ATTRIBUTE_NAME_SPECIFICATION)));
-		}		
-	}
-	
-	private void createDurationInterval(XMLItem xmlElement) {
+	private void createDurationInterval(ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint dc = (com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint)element;
 		
 		DurationInterval di = f.createDurationIntervalInstance();
@@ -106,7 +95,7 @@ public class DurationConstraint extends CommonElement {
 		dc.setSpecification(di);
 	}
 	
-	private void setMinDuration(XMLItem xmlElement) {
+	private void setMinDuration(ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint dc = (com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint)element;
 		
 		String minDuration = xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_MIN);
@@ -128,7 +117,7 @@ public class DurationConstraint extends CommonElement {
 		dc.setSpecification(di);
 	}
 	
-	private void setMaxDuration(XMLItem xmlElement) {
+	private void setMaxDuration(ElementData xmlElement) {
 		com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint dc = (com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.DurationConstraint)element;
 		
 		String maxDuration = xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_MAX);

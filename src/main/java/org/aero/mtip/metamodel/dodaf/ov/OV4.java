@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.usecase.UseCaseDiagram;
 
 public class OV4 extends UseCaseDiagram {
 
-	public OV4(String name, String EAID) {
-		super(name, EAID);
+	public OV4(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = DoDAFConstants.OV4;
 		this.xmlConstant = XmlTagConstants.OV4;
 		this.cameoDiagramConstant = "OV-4 Organizational Relationships Chart";

@@ -11,7 +11,7 @@ import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.util.XMLItem;
+import org.aero.mtip.util.ElementData;
 
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ControlFlow;
@@ -23,8 +23,8 @@ import com.nomagic.uml2.impl.ElementsFactory;
 public class OpaqueExpression extends CommonElement {
 	public final static String CHECK_CLASSES_START = "self.oclIsKindOf(";
 	
-	public OpaqueExpression(String name, String EAID) {
-		super(name, EAID);
+	public OpaqueExpression(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.OPAQUE_EXPRESSION;
 		this.xmlConstant = XmlTagConstants.OPAQUE_EXPRESSION;
@@ -32,7 +32,7 @@ public class OpaqueExpression extends CommonElement {
 	}
 
 	@Override
-	public Element createElement(Project project, Element owner, XMLItem xmlElement) {
+	public Element createElement(Project project, Element owner, ElementData xmlElement) {
 		super.createElement(project, owner, xmlElement);
 		
 		com.nomagic.uml2.ext.magicdraw.classes.mdkernel.OpaqueExpression oe = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.OpaqueExpression)element;
@@ -71,7 +71,7 @@ public class OpaqueExpression extends CommonElement {
 	public org.w3c.dom.Element writeToXML(Element element) {
 		Element owner = element.getOwner();
 		// OpaqueExpressions of Control Flows and Object flows will be captured as attributes due to EA's limitations
-		// Abstract to list of elements that are treatd similarly in SysmlConstants.
+		// Abstract to list of elements that are treated similarly in SysmlConstants.
 		if(owner instanceof ControlFlow || owner instanceof ObjectFlow) {
 			return null;
 		}

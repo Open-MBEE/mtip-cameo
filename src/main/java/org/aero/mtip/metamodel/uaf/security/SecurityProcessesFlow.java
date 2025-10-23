@@ -8,8 +8,8 @@ import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
 public class SecurityProcessesFlow extends ActivityDiagram {
 
 	// Exports as Security Processes to match Sparx EA Security Processes
-	public SecurityProcessesFlow(String name, String EAID) {
-		super(name, EAID);
+	public SecurityProcessesFlow(String name, String importId) {
+		super(name, importId);
 		 this.metamodelConstant = UAFConstants.SECURITY_PROCESSES_FLOW_DIAGRAM;
 		 this.xmlConstant = XmlTagConstants.SECURITY_PROCESSES_FLOW_DIAGRAM;
 		 this.cameoDiagramConstant = CameoDiagramConstants.SECURITY_PROCESSES_FLOW;

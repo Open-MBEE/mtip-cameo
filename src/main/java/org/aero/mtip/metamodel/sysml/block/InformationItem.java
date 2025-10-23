@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class InformationItem extends CommonElement {
 
-	public InformationItem(String name, String EAID) {
-		super(name, EAID);
+	public InformationItem(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INFORMATION_ITEM;
 		this.xmlConstant = XmlTagConstants.INFORMATION_ITEM;

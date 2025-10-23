@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class ResourceMitigation extends CommonElement {
 
-	public ResourceMitigation(String name, String EAID) {
-		super(name, EAID);
+	public ResourceMitigation(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
 		this.metamodelConstant = UAFConstants.RESOURCE_MITIGATION;
 		this.xmlConstant = XmlTagConstants.RESOURCE_MITIGATION;

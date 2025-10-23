@@ -12,8 +12,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class ChangeEvent extends CommonElement {
-	public ChangeEvent(String name, String EAID) {
-		super(name, EAID);
+	public ChangeEvent(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.CHANGE_EVENT;
 		this.xmlConstant = XmlTagConstants.CHANGE_EVENT;

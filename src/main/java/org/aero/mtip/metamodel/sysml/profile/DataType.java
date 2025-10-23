@@ -5,8 +5,8 @@ import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.metamodel.core.CommonElement;
 
 public class DataType extends CommonElement {
-	public DataType(String name, String EAID) {
-		super(name, EAID);
+	public DataType(String name, String importId) {
+		super(name, importId);
 		creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		metamodelConstant = SysmlConstants.DATA_TYPE;
 		xmlConstant = XmlTagConstants.DATA_TYPE;

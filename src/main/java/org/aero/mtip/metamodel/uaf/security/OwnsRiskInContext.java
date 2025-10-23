@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.core.general.Abstraction;
 
 public class OwnsRiskInContext extends Abstraction {
 
-	public OwnsRiskInContext(String name, String EAID) {
-		super(name, EAID);
+	public OwnsRiskInContext(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OWNS_RISK_IN_CONTEXT;
 		this.xmlConstant = XmlTagConstants.OWNS_RISK_IN_CONTEXT;
 	}

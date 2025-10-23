@@ -11,8 +11,8 @@ import org.aero.mtip.metamodel.core.CommonElement;
 
 public class Actor extends CommonElement {
 
-	public Actor(String name, String EAID) {
-		super(name, EAID);
+	public Actor(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.ACTOR;
 		this.xmlConstant = XmlTagConstants.ACTOR;

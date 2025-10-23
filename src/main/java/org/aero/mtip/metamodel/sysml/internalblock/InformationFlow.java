@@ -12,8 +12,8 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class InformationFlow extends CommonRelationship {
 
-	public InformationFlow(String name, String EAID) {
-		super(name, EAID);
+	public InformationFlow(String name, String importId) {
+		super(name, importId);
 		this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
 		this.metamodelConstant = SysmlConstants.INFORMATION_FLOW;
 		this.xmlConstant = XmlTagConstants.INFORMATIONFLOW;
@@ -21,25 +21,25 @@ public class InformationFlow extends CommonRelationship {
 	}
 	
 	@Override
-	public void setSupplier() {
+	public void setSupplier(Element supplier) {
 		com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow informationFlow = (com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow)element;
 		informationFlow.getSource().add(supplier);
 	}
 	
 	@Override 
-	public void setClient() {
+	public void setClient(Element client) {
 		com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow informationFlow = (com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow)element;
 		informationFlow.getTarget().add(client);
 	}
 	
 	@Override
-	public Element getSupplier(Element element) {
+	public Element getSupplier() {
 		com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow informationFlow = (com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow)element;
 		return informationFlow.getSource().iterator().next();
 	}
 	
 	@Override
-	public Element getClient(Element element) {
+	public Element getClient() {
 		com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow informationFlow = (com.nomagic.uml2.ext.magicdraw.auxiliaryconstructs.mdinformationflows.InformationFlow)element;
 		return informationFlow.getTarget().iterator().next();
 	}

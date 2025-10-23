@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class OperationalSignalProperty extends Property {
 
-	public OperationalSignalProperty(String name, String EAID) {
-		super(name, EAID);
+	public OperationalSignalProperty(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.OPERATIONAL_SIGNAL_PROPERTY;
 		this.xmlConstant = XmlTagConstants.OPERATIONAL_SIGNAL_PROPERTY;
 	}

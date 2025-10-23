@@ -6,8 +6,8 @@ import org.aero.mtip.metamodel.sysml.sequence.Property;
 
 public class ServiceSpecificationRole extends Property {
 
-	public ServiceSpecificationRole(String name, String EAID) {
-		super(name, EAID);
+	public ServiceSpecificationRole(String name, String importId) {
+		super(name, importId);
 		this.metamodelConstant = UAFConstants.SERVICE_SPECIFICATION_ROLE;
 		this.xmlConstant = XmlTagConstants.SERVICE_SPECIFICATION_ROLE;
 	}
