@@ -14,7 +14,7 @@ Development is currently active on the 2022x version. Please see below for avail
 | -------- | ------- | -------- | -------- |
 | 19.0 | Yes | No | [19.0 v1.0.9](https://github.com/Open-MBEE/mtip-cameo/releases/tag/v1.0.9)|
 | 2021x | Yes | No | [2021x v1.0.0](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2021x_v1.0.0)|
-| 2022x | Yes | Yes | [2022x v1.0.0](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2022x_v1.0.0)|
+| 2022x | Yes | Yes | [2022x v1.1.1](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2022x_v1.1.1)|
 | 2024x | No | No | |
 
 ### Installation
