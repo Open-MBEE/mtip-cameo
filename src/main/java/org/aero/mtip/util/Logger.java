@@ -182,13 +182,13 @@ public class Logger {
 	  String commitId = CameoUtils.getCommitId(project);
 	  
 	  if (commitId != null) {
-	    log(String.format("TWC Commit: %s", commitId));
+	    log(String.format("Commit Verison: %s", commitId));
 	  }
 	  
 	  String createdDate = CameoUtils.getCreatedDate(project);
 	  
 	  if (createdDate != null) {
-	    log(String.format("Commit Creation: %s", createdDate));
+	    log(String.format("Commit Date: %s", createdDate));
 	  }
 	  
 	  log("\n---------------------------------\n");
