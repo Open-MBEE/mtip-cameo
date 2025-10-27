@@ -10,9 +10,9 @@ package org.aero.mtip.util;
 import java.awt.Rectangle;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +24,12 @@ import org.aero.mtip.profiles.MagicDraw;
 import org.aero.mtip.profiles.SysML;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import com.nomagic.ci.persistence.versioning.IVersionDescriptor;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
+import com.nomagic.magicdraw.core.project.ProjectDescriptor;
+import com.nomagic.magicdraw.core.project.ProjectDescriptorsFactory;
+import com.nomagic.magicdraw.esi.EsiUtils;
 import com.nomagic.magicdraw.openapi.uml.SessionManager;
 import com.nomagic.magicdraw.ui.dialogs.MDDialogParentProvider;
 import com.nomagic.magicdraw.uml.symbols.PresentationElement;
@@ -60,7 +64,6 @@ import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Pseu
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.PseudostateKindEnum;
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.Region;
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.StateMachine;
-import com.nomagic.uml2.impl.ElementsFactory;
 
 public class CameoUtils {
   public static void logGui(String text) {
@@ -101,25 +104,25 @@ public class CameoUtils {
     if (owner == null) {
       return null;
     }
-    
+
     if (owner instanceof Region) {
       return owner;
     }
-    
-    if (owner instanceof StateMachine && getRegion((StateMachine)owner) != null) {
-      return getRegion((StateMachine)owner);
+
+    if (owner instanceof StateMachine && getRegion((StateMachine) owner) != null) {
+      return getRegion((StateMachine) owner);
     }
 
     return findNearestRegion(project, owner.getOwner());
   }
-  
+
   @CheckForNull
   public static Region getRegion(StateMachine sm) {
     if (sm.getRegion() == null) {
       Logger.log("No regions in state machine to retunr as owner.");
       return null;
-    } 
-    
+    }
+
     return sm.getRegion().iterator().next();
   }
 
@@ -472,5 +475,56 @@ public class CameoUtils {
     }
 
     SessionManager.getInstance().closeSession(project);
+  }
+
+  /**
+   * Finds the commit id of the given project if it's a Teamwork Cloud project. Converts the commit
+   * long into a string and returns
+   * 
+   * @param project Project to find the commit id of
+   * @return String value of the long commit id
+   */
+  @CheckForNull
+  public static String getCommitId(Project project) {
+    if (!Application.getInstance().getProject().isEsiProject()) {
+      return null;
+    }
+
+    ProjectDescriptor pd = ProjectDescriptorsFactory.getDescriptorForProject(Application.getInstance().getProject());
+
+    if (pd == null) {
+      return null;
+    }
+
+    return Long.toString(EsiUtils.getLastVersion(pd));
+  }
+
+  /**
+   * Finds the created date of the latest commit of the given project if it's a Teamwork Cloud
+   * project. Converts the date to a string in the form yyyy-MM-dd HH:mm:ss
+   * 
+   * @param project Project to find the created date
+   * @return String value of the created date
+   */
+  @CheckForNull
+  public static String getCreatedDate(Project project) {
+    if (!Application.getInstance().getProject().isEsiProject()) {
+      return null;
+    }
+
+    ProjectDescriptor pd = ProjectDescriptorsFactory.getDescriptorForProject(Application.getInstance().getProject());
+
+    if (pd == null) {
+      return null;
+    }
+
+    IVersionDescriptor versionDescriptor = EsiUtils.getVersions(pd).stream()
+        .filter(x -> x.getName().equals(Long.toString(EsiUtils.getLastVersion(pd)))).findFirst().orElse(null);
+
+    if (versionDescriptor == null) {
+      return null;
+    }
+
+    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(versionDescriptor.getDate());
   }
 }

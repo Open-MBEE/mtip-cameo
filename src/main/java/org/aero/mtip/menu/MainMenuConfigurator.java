@@ -8,6 +8,7 @@ package org.aero.mtip.menu;
 
 import org.aero.mtip.menu.actions.AboutAction;
 import org.aero.mtip.menu.actions.ExportAction;
+import org.aero.mtip.menu.actions.FindElementByIdAction;
 import org.aero.mtip.menu.actions.ImportAction;
 import org.aero.mtip.menu.actions.OpenConfigAction;
 import com.nomagic.actions.AMConfigurator;
@@ -42,6 +43,7 @@ public class MainMenuConfigurator implements AMConfigurator
 		category.addAction(new ImportAction("", "Import"));
 		category.addAction(new ExportAction("", "Export"));
 		category.addAction(new OpenConfigAction("", "Config"));
+		category.addAction(new FindElementByIdAction("", "Find Element"));
 		category.addAction(new AboutAction("","About"));
 		
 		aCategory.addAction(category);

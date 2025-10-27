@@ -93,9 +93,9 @@ public class Exporter {
 
   public void buildXML(File file, Package packageElement) {
     if (packageElement == null) {
-       packageElement = project.getPrimaryModel();
+      packageElement = project.getPrimaryModel();
     }
-    
+
     this.exportRoot = packageElement;
     exportPackageRecursive((Package) packageElement);
   }
@@ -212,13 +212,13 @@ public class Exporter {
       addImplicitElement(element);
       return;
     }
-    
+
     if (isExplicitlyUnsupported(element)) {
       unsupportedElements.add(MtipUtils.getId(element));
       Logger.log(String.format("%s is explicitly unsupported.", MtipUtils.getCameoElementType(element)));
       return;
     }
-    
+
     String commonElementType = MtipUtils.getEntityType(element);
 
     if (commonElementType == null) {
@@ -292,12 +292,16 @@ public class Exporter {
 
     // Check if supplier and client are created - important for UML Metaclasses and SysML Profile
     // objects referenced in extension and generalization relationships
-    if (commonRelationship.getSupplier() != null && !exportedElements.contains(MtipUtils.getId(commonRelationship.getSupplier()))) {
+    if (commonRelationship.getSupplier() != null) {
       exportEntity(commonRelationship.getSupplier());
+    } else {
+      Logger.log(String.format("Supplier is null for commonRelationship type %s", commonRelationship.getMetamodelConstant()));
     }
 
-    if (commonRelationship.getClient() != null && !exportedElements.contains(MtipUtils.getId(commonRelationship.getClient()))) {
+    if (commonRelationship.getClient() != null) {
       exportEntity(commonRelationship.getClient());
+    } else {
+      Logger.log(String.format("Client is null for commonRelationship type %s", commonRelationship.getMetamodelConstant()));
     }
   }
 
@@ -350,11 +354,10 @@ public class Exporter {
     if (element instanceof ElementValue || element instanceof LiteralReal || element instanceof LiteralBoolean
         || element instanceof LiteralInteger || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
         || element instanceof InstanceValue || element instanceof ConnectorEnd || element instanceof Comment
-        || element instanceof TaggedValue
-        || MDCustomizationForSysML.isReferenceProperty(element)) {
+        || element instanceof TaggedValue || MDCustomizationForSysML.isReferenceProperty(element)) {
       return true;
     }
-    
+
     if (MtipUtils.isStandardLibraryElement(element) && !CameoUtils.isMetaclass(element) && !isProfileExport) {
       return true;
     }
@@ -377,19 +380,20 @@ public class Exporter {
 
     return false;
   }
-  
+
   /***
    * Determines if the given package is supported for exporting.
+   * 
    * @param pkg Package for export.
-   * @param isProfileExport boolean override to allow export of auxiliary resources. 
+   * @param isProfileExport boolean override to allow export of auxiliary resources.
    * @return True if the given package is supported.
    */
   public boolean isSupportedPackage(Package pkg, boolean isProfileExport) {
     if (isProfileExport) {
       return true;
     }
-    
-    
+
+
     return !isExternalPackage(pkg);
   }
 
@@ -401,12 +405,12 @@ public class Exporter {
 
     return false;
   }
-  
+
   public boolean isProfileExport() {
     if (MtipUtils.isChildOfAuxiliaryResource(exportRoot)) {
       return true;
     }
-    
+
     return false;
   }
 

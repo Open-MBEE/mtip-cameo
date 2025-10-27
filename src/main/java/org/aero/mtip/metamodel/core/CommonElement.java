@@ -1022,4 +1022,8 @@ public abstract class CommonElement {
     }
     return "";
   }
+  
+  public String getMetamodelConstant() {
+    return this.metamodelConstant;
+  }
 }
