@@ -18,5 +18,6 @@ public class Abstraction extends CommonDirectedRelationship {
 		this.xmlConstant = XmlTagConstants.ABSTRACTION;
 		this.metamodelConstant = SysmlConstants.ABSTRACTION;
 		this.element = f.createAbstractionInstance();
+		this.isReversedEndsRelationship = true;
 	}
 }

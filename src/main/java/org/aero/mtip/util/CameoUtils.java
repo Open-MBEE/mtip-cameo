@@ -22,6 +22,7 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
 import org.aero.mtip.profiles.MagicDraw;
 import org.aero.mtip.profiles.SysML;
+import org.aero.mtip.profiles.UAF;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import com.nomagic.ci.persistence.versioning.IVersionDescriptor;
@@ -340,7 +341,7 @@ public class CameoUtils {
         || element instanceof LiteralInteger || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
         || element instanceof InstanceValue || element instanceof BooleanTaggedValue || element instanceof ElementTaggedValue
         || element instanceof IntegerTaggedValue || element instanceof RealTaggedValue || element instanceof StringTaggedValue
-        || element instanceof Comment || element instanceof ConnectorEnd || MDCustomizationForSysML.isReferenceProperty(element)) {
+        || (element instanceof Comment && !UAF.isDefinition(element)) || element instanceof ConnectorEnd || MDCustomizationForSysML.isReferenceProperty(element)) {
 
       return true;
     }

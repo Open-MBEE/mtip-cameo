@@ -21,5 +21,6 @@ public class Copy extends CommonDirectedRelationship {
     this.xmlConstant = XmlTagConstants.COPY;
     this.element = f.createAbstractionInstance();
     this.creationStereotype = SysML.getCopyStereotype();
+    this.isReversedEndsRelationship = true;
   }
 }

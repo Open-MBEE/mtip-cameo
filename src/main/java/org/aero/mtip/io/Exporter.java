@@ -19,6 +19,7 @@ import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.metamodel.core.CommonRelationshipsFactory;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
 import org.aero.mtip.profiles.MagicDraw;
+import org.aero.mtip.profiles.UAF;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
@@ -47,6 +48,7 @@ import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.C
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 
 public class Exporter {
+  private static Exporter exporter;
   Project project;
   Package exportRoot;
 
@@ -66,15 +68,16 @@ public class Exporter {
   public static void exportModelFromPackage(File file, Package packageElement) {
     XmlWriter.initialize();
 
-    Exporter exporter = new Exporter();
+    exporter = new Exporter();
     exporter.buildXML(file, packageElement);
+    
     Logger.logSummary(exporter);
   }
 
   public static void exportModelFromDiagram(File file, DiagramPresentationElement diagramPresentationElement) {
     XmlWriter.initialize();
 
-    Exporter exporter = new Exporter();
+    exporter = new Exporter();
     exporter.buildXMLFromDiagram(file, diagramPresentationElement);
   }
 
@@ -353,7 +356,7 @@ public class Exporter {
   public boolean isImplicitlySupported(Element element, boolean isProfileExport) {
     if (element instanceof ElementValue || element instanceof LiteralReal || element instanceof LiteralBoolean
         || element instanceof LiteralInteger || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
-        || element instanceof InstanceValue || element instanceof ConnectorEnd || element instanceof Comment
+        || element instanceof InstanceValue || element instanceof ConnectorEnd || (element instanceof Comment && !UAF.isDefinition(element))
         || element instanceof TaggedValue || MDCustomizationForSysML.isReferenceProperty(element)) {
       return true;
     }
@@ -366,7 +369,7 @@ public class Exporter {
   }
 
   public boolean isExplicitlyUnsupported(Element element) {
-    if (element instanceof Comment || MagicDraw.hasAdditionalPackageImportStereotype(element)) {
+    if ((element instanceof Comment && !UAF.isDefinition(element)) || MagicDraw.hasAdditionalPackageImportStereotype(element)) {
       return true;
     }
 
@@ -432,5 +435,9 @@ public class Exporter {
 
   public HashSet<String> getUnsupportedElements() {
     return unsupportedElements;
+  }
+  
+  public static CommonRelationshipsFactory getCommonRelationshipsFactory() {
+    return exporter.crf;
   }
 }

@@ -80,8 +80,15 @@ import org.aero.mtip.metamodel.uaf.security.ProtectsInContext;
 import org.aero.mtip.metamodel.uaf.services.Consumes;
 import org.aero.mtip.metamodel.uaf.services.ServiceConnector;
 import org.aero.mtip.metamodel.uaf.services.ServiceMessage;
+import org.aero.mtip.util.CameoUtils;
+import org.aero.mtip.util.MtipUtils;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 public class CommonRelationshipsFactory {
+    public CommonRelationship createElement(Element relationship) {
+      return createElement(MtipUtils.getEntityType(relationship), CameoUtils.getElementName(relationship), relationship.getID());
+    }
+    
 	public CommonRelationship createElement(String type, String name, String importId) {
 		CommonRelationship relationship = null;
 		switch(type) {

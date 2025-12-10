@@ -145,10 +145,8 @@ public class MtipUtils {
   }
 
   public static boolean isSupportedElement(String commonElementType) {
-    if (!UmlConstants.UML_ELEMENTS.contains(commonElementType)
-        && !CameoConstants.CAMEO_ELEMENTS.contains(commonElementType)
-        && !SysmlConstants.SYSML_ELEMENTS.contains(commonElementType)
-        && !UAFConstants.UAF_ELEMENTS.contains(commonElementType)) {
+    if (!UmlConstants.UML_ELEMENTS.contains(commonElementType) && !CameoConstants.CAMEO_ELEMENTS.contains(commonElementType)
+        && !SysmlConstants.SYSML_ELEMENTS.contains(commonElementType) && !UAFConstants.UAF_ELEMENTS.contains(commonElementType)) {
       return false;
     }
 
@@ -166,10 +164,8 @@ public class MtipUtils {
   }
 
   public static boolean isSupportedDiagram(String commonElementType) {
-    if (!SysmlConstants.SYSML_DIAGRAMS.contains(commonElementType)
-        && !CameoConstants.CAMEO_DIAGRAMS.contains(commonElementType)
-        && !UAFConstants.UAF_DIAGRAMS.contains(commonElementType)
-        && !DoDAFConstants.DODAF_DIAGRAMS.contains(commonElementType)) {
+    if (!SysmlConstants.SYSML_DIAGRAMS.contains(commonElementType) && !CameoConstants.CAMEO_DIAGRAMS.contains(commonElementType)
+        && !UAFConstants.UAF_DIAGRAMS.contains(commonElementType) && !DoDAFConstants.DODAF_DIAGRAMS.contains(commonElementType)) {
       return false;
     }
 
@@ -193,8 +189,7 @@ public class MtipUtils {
   }
 
   public static boolean isSysmlEntity(String commonElementType) {
-    if (SysmlConstants.SYSML_ELEMENTS.contains(commonElementType)
-        || SysmlConstants.SYSML_RELATIONSHIPS.contains(commonElementType)
+    if (SysmlConstants.SYSML_ELEMENTS.contains(commonElementType) || SysmlConstants.SYSML_RELATIONSHIPS.contains(commonElementType)
         || SysmlConstants.SYSML_DIAGRAMS.contains(commonElementType)) {
       return true;
     }
@@ -203,8 +198,7 @@ public class MtipUtils {
   }
 
   public static boolean isUafEntity(String commonElementType) {
-    if (UAFConstants.UAF_ELEMENTS.contains(commonElementType)
-        || UAFConstants.UAF_RELATIONSHIPS.contains(commonElementType)
+    if (UAFConstants.UAF_ELEMENTS.contains(commonElementType) || UAFConstants.UAF_RELATIONSHIPS.contains(commonElementType)
         || UAFConstants.UAF_DIAGRAMS.contains(commonElementType)) {
       return true;
     }
@@ -213,8 +207,7 @@ public class MtipUtils {
   }
 
   public static boolean isUmlEntity(String commonElementType) {
-    if (UmlConstants.UML_ELEMENTS.contains(commonElementType)
-        || UmlConstants.UML_RELATIONSHIPS.contains(commonElementType)
+    if (UmlConstants.UML_ELEMENTS.contains(commonElementType) || UmlConstants.UML_RELATIONSHIPS.contains(commonElementType)
         || UmlConstants.UML_DIAGRAMS.contains(commonElementType)) {
       return true;
     }
@@ -225,8 +218,7 @@ public class MtipUtils {
   public static Package createMTIPProfile(Project project) {
     CommonElementsFactory cef = new CommonElementsFactory();
     CommonElement profileClass = cef.createElement(SysmlConstants.PROFILE, "MTIP Stereotypes", "");
-    Profile mtipProfile =
-        (Profile) profileClass.createElement(project, project.getPrimaryModel(), null);
+    Profile mtipProfile = (Profile) profileClass.createElement(project, project.getPrimaryModel(), null);
 
     addMTIPImportedStereotype(project, mtipProfile);
 
@@ -235,8 +227,7 @@ public class MtipUtils {
 
   private static Element addMTIPImportedStereotype(Project project, Profile huddleProfile) {
     CommonElementsFactory cef = new CommonElementsFactory();
-    CommonElement stereotypeClass =
-        cef.createElement(SysmlConstants.STEREOTYPE, "MTIP Imported", "");
+    CommonElement stereotypeClass = cef.createElement(SysmlConstants.STEREOTYPE, "MTIP Imported", "");
     Element stereotype = stereotypeClass.createElement(project, huddleProfile, null);
 
     return stereotype;
@@ -490,8 +481,7 @@ public class MtipUtils {
       return SysmlConstants.CONSTRAINT;
     } else if (MDCustomizationForSysML.isProperty(element)) {
       return SysmlConstants.PROPERTY;
-    } else if (element instanceof InstanceSpecification
-        && CameoUtils.isSupportedInstanceSpecification(element)) {
+    } else if (element instanceof InstanceSpecification && CameoUtils.isSupportedInstanceSpecification(element)) {
       return SysmlConstants.INSTANCE_SPECIFICATION;
       // Check ActionClass last as any child action class will be an instance of ActionClass
     } else if (element instanceof ActionClass) {
@@ -595,13 +585,10 @@ public class MtipUtils {
       return SysmlConstants.EXTENSION;
     }
 
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property firstMemberEnd =
-        ModelHelper.getFirstMemberEnd((Association) association);
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property secondMemberEnd =
-        ModelHelper.getSecondMemberEnd((Association) association);
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property firstMemberEnd = ModelHelper.getFirstMemberEnd((Association) association);
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property secondMemberEnd = ModelHelper.getSecondMemberEnd((Association) association);
 
-    if (firstMemberEnd.getAggregation() == AggregationKindEnum.SHARED
-        || secondMemberEnd.getAggregation() == AggregationKindEnum.SHARED) {
+    if (firstMemberEnd.getAggregation() == AggregationKindEnum.SHARED || secondMemberEnd.getAggregation() == AggregationKindEnum.SHARED) {
       return SysmlConstants.AGGREGATION;
     } else if (firstMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE
         || secondMemberEnd.getAggregation() == AggregationKindEnum.COMPOSITE) {
@@ -617,13 +604,11 @@ public class MtipUtils {
       return null;
     }
 
-    DiagramPresentationElement presentationDiagram =
-        Application.getInstance().getProject().getDiagram((Diagram) element);
+    DiagramPresentationElement presentationDiagram = Application.getInstance().getProject().getDiagram((Diagram) element);
 
     if (presentationDiagram == null) {
-      Logger.log(String.format(
-          "Diagram type not found. Could not find DiagramPresentationElement for diagram %s.",
-          MtipUtils.getId(element)));
+      Logger.log(
+          String.format("Diagram type not found. Could not find DiagramPresentationElement for diagram %s.", MtipUtils.getId(element)));
       return null;
     }
 
@@ -638,8 +623,7 @@ public class MtipUtils {
 
   public static String getCameoElementType(Element element) {
     if (element instanceof Diagram) {
-      DiagramPresentationElement presentationDiagram =
-          Application.getInstance().getProject().getDiagram((Diagram) element);
+      DiagramPresentationElement presentationDiagram = Application.getInstance().getProject().getDiagram((Diagram) element);
 
       if (presentationDiagram == null) {
         return element.getHumanType();
@@ -653,8 +637,7 @@ public class MtipUtils {
 
   public static String getUafElementType(Element element) {
     List<Stereotype> stereotypes = StereotypesHelper.getStereotypes(element).stream()
-        .filter(x -> UAF.isUafProfile(StereotypesHelper.getProfileForStereotype(x)))
-        .collect(Collectors.toList());
+        .filter(x -> UAF.isUafProfile(StereotypesHelper.getProfileForStereotype(x))).collect(Collectors.toList());
 
     if (stereotypes.size() == 0) {
       return null;
@@ -665,8 +648,7 @@ public class MtipUtils {
     }
 
     Logger.logMultipleUafStereotypes(stereotypes, element);
-    Logger.log(String.format(
-        "UAF type nout found. Ambiguous type for element with id %s. Multiple UAF stereotypes found",
+    Logger.log(String.format("UAF type nout found. Ambiguous type for element with id %s. Multiple UAF stereotypes found",
         MtipUtils.getId(element)));
     return null;
   }
@@ -694,8 +676,7 @@ public class MtipUtils {
   }
 
   public static boolean isRelationship(Element element) {
-    if (element instanceof ActivityEdge || element instanceof Connector
-        || element instanceof InformationFlow || element instanceof Message
+    if (element instanceof ActivityEdge || element instanceof Connector || element instanceof InformationFlow || element instanceof Message
         || element instanceof Relationship || element instanceof Transition) {
       return true;
     }
@@ -704,9 +685,8 @@ public class MtipUtils {
   }
 
   public static boolean isUafModel() {
-    return ProjectUtilities.getAllAttachedProjects(Application.getInstance().getProject()).stream()
-        .map(IAttachedProject::getName).collect(Collectors.toSet())
-        .contains(UAF.getProfileModelName());
+    return ProjectUtilities.getAllAttachedProjects(Application.getInstance().getProject()).stream().map(IAttachedProject::getName)
+        .collect(Collectors.toSet()).contains(UAF.getProfileModelName());
   }
 
   public static String getId(Element element) {
@@ -748,16 +728,15 @@ public class MtipUtils {
     List<Element> elements = MtipUtils.getAllElementsRecursively(firstParent);
 
     List<Element> relationships = elements.stream()
-        .filter(item -> (item instanceof Relationship) || item instanceof ControlFlow
-            || item instanceof Message || item instanceof ObjectFlow)
+        .filter(
+            item -> (item instanceof Relationship) || item instanceof ControlFlow || item instanceof Message || item instanceof ObjectFlow)
         .map(item -> (Element) item).collect(Collectors.toList());
 
     return relationships;
   }
 
   public static List<Diagram> getAllDiagramsRecursively(Element firstParent) {
-    return MtipUtils.getAllElementsRecursively(firstParent).stream()
-        .filter(item -> item instanceof Diagram).map(item -> (Diagram) item)
+    return MtipUtils.getAllElementsRecursively(firstParent).stream().filter(item -> item instanceof Diagram).map(item -> (Diagram) item)
         .collect(Collectors.toList());
   }
 
@@ -766,15 +745,13 @@ public class MtipUtils {
     List<Element> elementsOnDiagram = new ArrayList<Element>();
 
     for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
-      elementsOnDiagram
-          .addAll(MtipUtils.getElementsFromPresentationElementRecursively(presentationElement));
+      elementsOnDiagram.addAll(MtipUtils.getElementsFromPresentationElementRecursively(presentationElement));
     }
 
     return elementsOnDiagram;
   }
 
-  public static List<Element> getElementsFromPresentationElementRecursively(
-      PresentationElement presentationElement) {
+  public static List<Element> getElementsFromPresentationElementRecursively(PresentationElement presentationElement) {
     List<Element> elements = new ArrayList<Element>();
 
     Element element = presentationElement.getElement();
@@ -783,10 +760,8 @@ public class MtipUtils {
       elements.add(element);
     }
 
-    for (PresentationElement nestedPresentationElement : presentationElement
-        .getPresentationElements()) {
-      elements.addAll(
-          MtipUtils.getElementsFromPresentationElementRecursively(nestedPresentationElement));
+    for (PresentationElement nestedPresentationElement : presentationElement.getPresentationElements()) {
+      elements.addAll(MtipUtils.getElementsFromPresentationElementRecursively(nestedPresentationElement));
     }
 
     return elements;

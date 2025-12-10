@@ -18,6 +18,7 @@ public class InformationFlow extends CommonRelationship {
 		this.metamodelConstant = SysmlConstants.INFORMATION_FLOW;
 		this.xmlConstant = XmlTagConstants.INFORMATIONFLOW;
 		this.element = f.createInformationFlowInstance();
+		this.isReversedEndsRelationship = true;
 	}
 	
 	@Override

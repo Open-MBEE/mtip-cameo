@@ -33,6 +33,7 @@ public class Message extends CommonRelationship {
 		this.metamodelConstant = SysmlConstants.MESSAGE;
 		this.xmlConstant = XmlTagConstants.MESSAGE;
 		this.element = f.createMessageInstance();
+		this.isReversedEndsRelationship = true;
 		
 		this.attributeDependencies.addAll(Arrays.asList(INTERACTION, SIGNATURE));
 	}

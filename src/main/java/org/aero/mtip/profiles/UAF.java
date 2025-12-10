@@ -1,9 +1,11 @@
 package org.aero.mtip.profiles;
 
 import javax.annotation.CheckForNull;
+import org.aero.mtip.util.Logger;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
@@ -14,6 +16,8 @@ public class UAF {
 	static final String NAME = "UAF";
 	static final String PROJECT_NAME = "UAF Profile";
 	static final String UPDM_NAME = "UPDM Customization";
+	
+	public static final String DEFINITION_NAME = "Definition";
 	
 	Project project;
 	Profile uafProfile;
@@ -49,6 +53,32 @@ public class UAF {
 		return instance;
 	}
 	
+	boolean hasStereotype(Element element, String stereotypeName) {
+	    if (uafProfile == null) {
+	      Logger.log(String.format("Profile not initialized when looking for stereotype name %s",
+	          stereotypeName));
+	      return false;
+	    }
+	    
+	    if (element == null) {
+	      return false;
+	    }
+
+	    Stereotype stereotype = StereotypesHelper.getStereotype(project, stereotypeName, uafProfile);
+
+	    if (stereotype == null) {
+	      Logger.log(String.format("Stereotype %s not found in profile %s", stereotypeName,
+	          uafProfile.getHumanName()));
+	      return false;
+	    }
+
+	    if (!StereotypesHelper.hasStereotype(element, stereotype)) {
+	      return false;
+	    }
+
+	    return true;
+	  }
+	
 	@CheckForNull
 	public static Stereotype getStereotype(String stereotypeName) {
 		Stereotype stereotype = StereotypesHelper.getStereotype(getInstance().getProject(), stereotypeName, getInstance().getUafProfile());
@@ -67,6 +97,12 @@ public class UAF {
 		}
 		
 		return false;
+	}
+	
+	
+	
+	public static boolean isDefinition(Element element) {
+	  return getInstance().hasStereotype(element, DEFINITION_NAME);
 	}
 	
 	public static String getProfileModelName() {

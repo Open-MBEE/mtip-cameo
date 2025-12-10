@@ -17,5 +17,6 @@ public class Extend extends CommonDirectedRelationship {
 		this.metamodelConstant = SysmlConstants.EXTEND;
 		this.xmlConstant = XmlTagConstants.EXTEND;
 		this.element = f.createExtendInstance();
+		this.isReversedEndsRelationship = true;
 	}
 }
