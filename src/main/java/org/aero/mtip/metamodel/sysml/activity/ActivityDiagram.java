@@ -87,7 +87,10 @@ public class ActivityDiagram extends AbstractDiagram {
 	  }
 			
 	  if(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition) {
-		shape = PresentationElementsManager.getInstance().createSwimlane(Collections.emptyList(), (List<? extends com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition>) Arrays.asList(element), (DiagramPresentationElement)presentationDiagram);
+		com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition activityPartition = (com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition)element;
+		List<? extends com.nomagic.uml2.ext.magicdraw.activities.mdintermediateactivities.ActivityPartition> activityPartitions = Arrays.asList(activityPartition);
+		
+		shape = PresentationElementsManager.getInstance().createSwimlane(Collections.emptyList(), activityPartitions, (DiagramPresentationElement)presentationDiagram);
 		PresentationElementsManager.getInstance().reshapeShapeElement(shape, location);
 		return;
 	  }

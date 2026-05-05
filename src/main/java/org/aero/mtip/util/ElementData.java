@@ -99,7 +99,7 @@ public class ElementData {
       return listAttributes.get(key);
     }
 
-    return null;
+    return new ArrayList<String>();
   }
 
   public boolean hasListAttributes(String key) {

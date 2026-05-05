@@ -14,7 +14,6 @@ import com.nomagic.magicdraw.tests.MagicDrawTestCase;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
 
-
 @ExtendWith(MagicDrawApplication.class)
 public class RelationshipValidationTest {
   public static Project sysmlTestingProject;
