@@ -30,6 +30,7 @@ public class ObjectFlow extends CommonRelationship {
 		this.metamodelConstant = SysmlConstants.OBJECT_FLOW;
 		this.xmlConstant = XmlTagConstants.OBJECTFLOW;
 		this.element = f.createObjectFlowInstance();
+		this.isReversedEndsRelationship = true;
 	}
 	
 	@Override

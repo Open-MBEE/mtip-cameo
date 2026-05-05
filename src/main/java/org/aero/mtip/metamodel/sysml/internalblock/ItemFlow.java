@@ -20,5 +20,6 @@ public class ItemFlow extends CommonDirectedRelationship {
 		xmlConstant = XmlTagConstants.ITEMFLOW;
 		element = f.createInformationFlowInstance();
 		creationStereotype = SysML.getItemFlowStereotype();
+		isReversedEndsRelationship = true;
 	}
 }

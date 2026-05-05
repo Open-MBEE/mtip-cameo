@@ -19,6 +19,7 @@ import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.metamodel.core.CommonRelationshipsFactory;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
 import org.aero.mtip.profiles.MagicDraw;
+import org.aero.mtip.profiles.UAF;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
@@ -47,6 +48,7 @@ import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.C
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 
 public class Exporter {
+  private static Exporter exporter;
   Project project;
   Package exportRoot;
 
@@ -66,15 +68,16 @@ public class Exporter {
   public static void exportModelFromPackage(File file, Package packageElement) {
     XmlWriter.initialize();
 
-    Exporter exporter = new Exporter();
+    exporter = new Exporter();
     exporter.buildXML(file, packageElement);
+    
     Logger.logSummary(exporter);
   }
 
   public static void exportModelFromDiagram(File file, DiagramPresentationElement diagramPresentationElement) {
     XmlWriter.initialize();
 
-    Exporter exporter = new Exporter();
+    exporter = new Exporter();
     exporter.buildXMLFromDiagram(file, diagramPresentationElement);
   }
 
@@ -93,9 +96,9 @@ public class Exporter {
 
   public void buildXML(File file, Package packageElement) {
     if (packageElement == null) {
-       packageElement = project.getPrimaryModel();
+      packageElement = project.getPrimaryModel();
     }
-    
+
     this.exportRoot = packageElement;
     exportPackageRecursive((Package) packageElement);
   }
@@ -212,13 +215,13 @@ public class Exporter {
       addImplicitElement(element);
       return;
     }
-    
+
     if (isExplicitlyUnsupported(element)) {
       unsupportedElements.add(MtipUtils.getId(element));
       Logger.log(String.format("%s is explicitly unsupported.", MtipUtils.getCameoElementType(element)));
       return;
     }
-    
+
     String commonElementType = MtipUtils.getEntityType(element);
 
     if (commonElementType == null) {
@@ -292,12 +295,16 @@ public class Exporter {
 
     // Check if supplier and client are created - important for UML Metaclasses and SysML Profile
     // objects referenced in extension and generalization relationships
-    if (commonRelationship.getSupplier() != null && !exportedElements.contains(MtipUtils.getId(commonRelationship.getSupplier()))) {
+    if (commonRelationship.getSupplier() != null) {
       exportEntity(commonRelationship.getSupplier());
+    } else {
+      Logger.log(String.format("Supplier is null for commonRelationship type %s", commonRelationship.getMetamodelConstant()));
     }
 
-    if (commonRelationship.getClient() != null && !exportedElements.contains(MtipUtils.getId(commonRelationship.getClient()))) {
+    if (commonRelationship.getClient() != null) {
       exportEntity(commonRelationship.getClient());
+    } else {
+      Logger.log(String.format("Client is null for commonRelationship type %s", commonRelationship.getMetamodelConstant()));
     }
   }
 
@@ -349,12 +356,11 @@ public class Exporter {
   public boolean isImplicitlySupported(Element element, boolean isProfileExport) {
     if (element instanceof ElementValue || element instanceof LiteralReal || element instanceof LiteralBoolean
         || element instanceof LiteralInteger || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
-        || element instanceof InstanceValue || element instanceof ConnectorEnd || element instanceof Comment
-        || element instanceof TaggedValue
-        || MDCustomizationForSysML.isReferenceProperty(element)) {
+        || element instanceof InstanceValue || element instanceof ConnectorEnd || (element instanceof Comment && !UAF.isDefinition(element))
+        || element instanceof TaggedValue || MDCustomizationForSysML.isReferenceProperty(element)) {
       return true;
     }
-    
+
     if (MtipUtils.isStandardLibraryElement(element) && !CameoUtils.isMetaclass(element) && !isProfileExport) {
       return true;
     }
@@ -363,7 +369,7 @@ public class Exporter {
   }
 
   public boolean isExplicitlyUnsupported(Element element) {
-    if (element instanceof Comment || MagicDraw.hasAdditionalPackageImportStereotype(element)) {
+    if ((element instanceof Comment && !UAF.isDefinition(element)) || MagicDraw.hasAdditionalPackageImportStereotype(element)) {
       return true;
     }
 
@@ -377,19 +383,20 @@ public class Exporter {
 
     return false;
   }
-  
+
   /***
    * Determines if the given package is supported for exporting.
+   * 
    * @param pkg Package for export.
-   * @param isProfileExport boolean override to allow export of auxiliary resources. 
+   * @param isProfileExport boolean override to allow export of auxiliary resources.
    * @return True if the given package is supported.
    */
   public boolean isSupportedPackage(Package pkg, boolean isProfileExport) {
     if (isProfileExport) {
       return true;
     }
-    
-    
+
+
     return !isExternalPackage(pkg);
   }
 
@@ -401,12 +408,12 @@ public class Exporter {
 
     return false;
   }
-  
+
   public boolean isProfileExport() {
     if (MtipUtils.isChildOfAuxiliaryResource(exportRoot)) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -428,5 +435,9 @@ public class Exporter {
 
   public HashSet<String> getUnsupportedElements() {
     return unsupportedElements;
+  }
+  
+  public static CommonRelationshipsFactory getCommonRelationshipsFactory() {
+    return exporter.crf;
   }
 }

@@ -32,6 +32,7 @@ public class ControlFlow extends CommonRelationship {
 		this.metamodelConstant = SysmlConstants.CONTROL_FLOW;
 		this.xmlConstant = XmlTagConstants.CONTROLFLOW;
 		this.element = f.createControlFlowInstance();
+		this.isReversedEndsRelationship = true;
 	}
 	
 	@Override

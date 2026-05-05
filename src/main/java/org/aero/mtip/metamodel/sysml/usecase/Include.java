@@ -17,5 +17,6 @@ public class Include extends CommonDirectedRelationship {
 		this.metamodelConstant = SysmlConstants.INCLUDE;
 		this.xmlConstant = XmlTagConstants.INCLUDE;
 		this.element = f.createIncludeInstance();
+		this.isReversedEndsRelationship = true;
 	}
 }

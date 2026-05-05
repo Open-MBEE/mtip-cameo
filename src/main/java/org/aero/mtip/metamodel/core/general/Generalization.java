@@ -17,5 +17,6 @@ public class Generalization extends CommonDirectedRelationship {
 		this.metamodelConstant = SysmlConstants.GENERALIZATION;
 		this.xmlConstant = XmlTagConstants.GENERALIZATION;
 		this.element = f.createGeneralizationInstance();
+		this.isReversedEndsRelationship = true;
 	}
 }

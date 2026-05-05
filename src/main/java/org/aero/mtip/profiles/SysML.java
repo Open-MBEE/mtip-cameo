@@ -182,9 +182,17 @@ public class SysML {
     return StereotypesHelper.getStereotype(getInstance().project, PROXY_PORT_NAME,
         getInstance().profile);
   }
+  
+  public static Stereotype getRefineStereotype() {
+    return getInstance().getStereotype(REFINE_NAME);
+  }
 
   public static Stereotype getRequirementStereotype() {
     return getInstance().getStereotype(REQUIREMENT_NAME);
+  }
+  
+  public static Stereotype getSatisfyStereotype() {
+    return getInstance().getStereotype(SATISFY_NAME);
   }
 
   public static Stereotype getSubsystemStereotype() {
@@ -199,8 +207,16 @@ public class SysML {
     return getInstance().getStereotype(SYSTEM_CONTEXT_NAME);
   }
   
+  public static Stereotype getTraceStereotype() {
+    return getInstance().getStereotype(TRACE_NAME);
+  }
+  
   public static Stereotype getValueTypeStereotype() {
     return getInstance().getStereotype(VALUE_TYPE_NAME);
+  }
+  
+  public static Stereotype getVerifyStereotype() {
+    return getInstance().getStereotype(VERIFY_NAME);
   }
 
   public static Stereotype getViewStereotype() {

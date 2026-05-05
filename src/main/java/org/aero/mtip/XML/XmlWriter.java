@@ -120,7 +120,7 @@ public class XmlWriter {
     Element patchNumber = createTag(XmlTagConstants.CAMEO_PATCH_NUMBER, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
     Element modelNameTag = createTag(XmlTagConstants.MODEL_NAME, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
     Element exportTimeTag = createTag(XmlTagConstants.EXPORT_TIME, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
-
+    
     mtipVersionTag.setTextContent(org.aero.mtip.menu.actions.AboutAction.VERSION);
     cameoVersionTag.setTextContent(Application.runtime().getFullVersion());
     patchNumber.setTextContent(Application.runtimeInternal().getPatchNumber());
@@ -132,7 +132,23 @@ public class XmlWriter {
     metadata.appendChild(patchNumber);
     metadata.appendChild(modelNameTag);
     metadata.appendChild(exportTimeTag);
-
+    
+    String commitId = CameoUtils.getCommitId(Application.getInstance().getProjectsManager().getActiveProject());
+    
+    if (commitId != null) {
+      Element twcCommitTag = createTag(XmlTagConstants.COMMIT_VERSION, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
+      twcCommitTag.setTextContent(commitId);
+      metadata.appendChild(twcCommitTag);
+    }
+    
+    String createdDate = CameoUtils.getCreatedDate(Application.getInstance().getProjectsManager().getActiveProject());
+    
+    if (createdDate != null) {
+      Element twcCreatedTag = createTag(XmlTagConstants.COMMIT_DATE, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
+      twcCreatedTag.setTextContent(createdDate);
+      metadata.appendChild(twcCreatedTag);
+    }
+    
     XmlWriter.addToRoot(metadata);
   }
 

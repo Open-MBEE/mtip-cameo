@@ -18,5 +18,6 @@ public class Dependency extends CommonDirectedRelationship {
 		this.metamodelConstant = SysmlConstants.DEPENDENCY;
 		this.xmlConstant = XmlTagConstants.DEPENDENCY;
 		this.element = f.createDependencyInstance();
+		this.isReversedEndsRelationship = true;
 	}
 }

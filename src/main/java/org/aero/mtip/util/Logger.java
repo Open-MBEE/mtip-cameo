@@ -17,6 +17,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,8 +27,12 @@ import org.aero.mtip.io.Exporter;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.menu.actions.AboutAction;
 import org.apache.commons.io.FilenameUtils;
+import com.nomagic.esi.api.info.TagInfo;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
+import com.nomagic.magicdraw.core.project.ProjectDescriptor;
+import com.nomagic.magicdraw.core.project.ProjectDescriptorsFactory;
+import com.nomagic.magicdraw.esi.EsiUtils;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Stereotype;
 
@@ -164,9 +169,29 @@ public class Logger {
 	
 	public static void logMetadata() {
 	  log("------------ Metadata -----------\n");
-	  log(String.format("Model name: %s\n", Application.getInstance().getProject().getHumanName()));
-	  log(String.format("MTIP-Cameo Version: %s\n", AboutAction.VERSION));
-	  log("---------------------------------\n");
+	  log(String.format("MTIP-Cameo Version: %s", AboutAction.VERSION));
+	  log(String.format("Model name: %s", Application.getInstance().getProject().getHumanName()));
+	  
+	  Project project = Application.getInstance().getProjectsManager().getActiveProject();
+	  
+	  if (project == null || !project.isEsiProject()) {
+	    log("\n---------------------------------\n");
+	    return;
+	  }
+	  
+	  String commitId = CameoUtils.getCommitId(project);
+	  
+	  if (commitId != null) {
+	    log(String.format("Commit Verison: %s", commitId));
+	  }
+	  
+	  String createdDate = CameoUtils.getCreatedDate(project);
+	  
+	  if (createdDate != null) {
+	    log(String.format("Commit Date: %s", createdDate));
+	  }
+	  
+	  log("\n---------------------------------\n");
 	}
 	
 	public static void logConfigOptions() {

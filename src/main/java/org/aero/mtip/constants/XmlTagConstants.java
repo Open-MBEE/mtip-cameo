@@ -17,6 +17,9 @@ public class XmlTagConstants {
     public static final String EXPORT_TIME = "exportTime";
     public static final String MODEL_NAME = "modelName";
     
+    public static final String COMMIT_VERSION = "commitVersion";
+    public static final String COMMIT_DATE = "commitDate";
+    
 	// XML Tags
 	public static final String DATA = "data";
 	public static final String ID = "id";

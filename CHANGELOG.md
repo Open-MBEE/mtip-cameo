@@ -1,7 +1,10 @@
 ## MTIP-Cameo Changelog
 
+### 2022x v1.1.2
+* Updated relationships and stereotype handling
+
 ### 2022x v1.1.1
-* Fixed bug with Cameo-speicifc elements being filtered out
+* Fixed bug with Cameo-specifc elements being filtered out
 
 ### 2022x v1.1.0
 * Updated ActivityNode and ActivityPartition handling

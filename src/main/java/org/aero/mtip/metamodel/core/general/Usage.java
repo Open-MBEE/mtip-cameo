@@ -18,5 +18,6 @@ public class Usage extends CommonDirectedRelationship {
 		this.metamodelConstant = SysmlConstants.USAGE;
 		this.xmlConstant = XmlTagConstants.USAGE;
 		this.element = f.createUsageInstance();
+		this.isReversedEndsRelationship = true;
 	}
 }

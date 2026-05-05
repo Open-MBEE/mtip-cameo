@@ -31,6 +31,7 @@ public class Transition extends CommonDirectedRelationship {
     this.xmlConstant = XmlTagConstants.TRANSITION;
     this.metamodelConstant = SysmlConstants.TRANSITION;
     this.element = f.createTransitionInstance();
+    this.isReversedEndsRelationship = true;
 
     this.attributeDependencies.add(CONTAINER);
     this.attributeReferences.add(TRIGGER);

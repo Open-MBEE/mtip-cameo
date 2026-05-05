@@ -7,7 +7,11 @@
 
 package org.aero.mtip.metamodel.core;
 
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import javax.annotation.CheckForNull;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.XmlTagConstants;
@@ -17,19 +21,18 @@ import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
+import com.nomagic.magicdraw.uml.symbols.paths.PathElement;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
 
 public abstract class CommonRelationship extends CommonElement {
   public static String INVALID_CLIENT_SUPPLIER_MESSAGE = "Invalid Client or Supplier - Not SysML Compliant";
-
+  protected boolean isReversedEndsRelationship = false;
+  
   public CommonRelationship(String name, String importId) {
     super(name, importId);
-    this.f = Application.getInstance().getProject().getElementsFactory();
-
   }
 
   public Element createElement(Project project, Element owner, Element client, Element supplier, ElementData elementData) {
@@ -179,5 +182,31 @@ public abstract class CommonRelationship extends CommonElement {
     }
 
     return element.getHumanName();
+  }
+  
+  public Point getSupplierPoint(PathElement pathElement) {
+    if (!isReversedEndsRelationship) {
+      return pathElement.getSupplierPoint();
+    }
+    
+    return pathElement.getClientPoint();
+  }
+  
+  public Point getClientPoint(PathElement pathElement) {
+    if (!isReversedEndsRelationship) {
+      return pathElement.getClientPoint();
+    }
+    
+    return pathElement.getSupplierPoint();
+  }
+  
+  public List<Point> getBreakPoints(PathElement pathElement) {
+    if (!isReversedEndsRelationship) {
+      return pathElement.getBreakPoints();
+    }
+    
+    List<Point> breakPoints = new ArrayList<Point>(pathElement.getBreakPoints());
+    Collections.reverse(breakPoints);
+    return breakPoints;
   }
 }

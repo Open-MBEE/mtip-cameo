@@ -25,6 +25,7 @@ public class InterfaceRealization extends CommonDirectedRelationship {
     metamodelConstant = SysmlConstants.INTERFACE_REALIZATION;
     xmlConstant = XmlTagConstants.INTERFACE_REALIZATION;
     element = f.createInterfaceRealizationInstance();
+    isReversedEndsRelationship = true;
   }
 
   @Override
