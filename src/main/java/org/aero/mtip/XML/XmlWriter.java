@@ -123,13 +123,11 @@ public class XmlWriter {
     
     mtipVersionTag.setTextContent(org.aero.mtip.menu.actions.AboutAction.VERSION);
     cameoVersionTag.setTextContent(Application.runtime().getFullVersion());
-    patchNumber.setTextContent(Application.runtimeInternal().getPatchNumber());
     modelNameTag.setTextContent(Application.getInstance().getProject().getName());
     exportTimeTag.setTextContent(MtipUtils.utcNow());
 
     metadata.appendChild(mtipVersionTag);
     metadata.appendChild(cameoVersionTag);
-    metadata.appendChild(patchNumber);
     metadata.appendChild(modelNameTag);
     metadata.appendChild(exportTimeTag);
     

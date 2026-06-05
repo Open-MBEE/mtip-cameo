@@ -367,10 +367,10 @@ public class CameoUtils {
     return true;
   }
 
-  public static void logExceptionToGui(Exception e) {
+  public static void logExceptionToGui(Throwable throwable) {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
-    e.printStackTrace(pw);
+    throwable.printStackTrace(pw);
 
     logGui(sw.toString());
   }

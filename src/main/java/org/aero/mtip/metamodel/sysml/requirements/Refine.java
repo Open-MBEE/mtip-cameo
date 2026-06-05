@@ -19,6 +19,7 @@ public class Refine extends CommonDirectedRelationship {
     this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
     this.metamodelConstant = SysmlConstants.REFINE;
     this.xmlConstant = XmlTagConstants.REFINE;
+    this.element = f.createAbstractionInstance();
     this.creationStereotype = SysML.getRefineStereotype();
   }
 }

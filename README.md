@@ -8,14 +8,15 @@ This project is the source code for a Java plugin written for Cameo Systems Mode
 
 ### Available Versions
 
-Development is currently active on the 2022x version. Please see below for available versions and status
+Development is currently active on the 2024x version. Please see below for available versions and status
 
 | Version | Open Source Available | In Development | Latest Release |
 | -------- | ------- | -------- | -------- |
-| 19.0 | Yes | No | [19.0 v1.0.9](https://github.com/Open-MBEE/mtip-cameo/releases/tag/v1.0.9)|
-| 2021x | Yes | No | [2021x v1.0.0](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2021x_v1.0.0)|
-| 2022x | Yes | Yes | [2022x v1.1.1](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2022x_v1.1.1)|
-| 2024x | No | No | |
+| 19.0  | Yes | No  | [19.0 v1.0.9](https://github.com/Open-MBEE/mtip-cameo/releases/tag/v1.0.9)|
+| 2021x | Yes | No  | [2021x v1.0.0](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2021x_v1.0.0)|
+| 2022x | Yes | No  | [2022x v1.1.1](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2022x_v1.1.1)|
+| 2024x | Yes | Yes | [2024x v1.0.0](https://github.com/Open-MBEE/mtip-cameo/releases/tag/2024x_v1.0.0)|
+| 2026x | No  | No  | 
 
 ### Installation
  

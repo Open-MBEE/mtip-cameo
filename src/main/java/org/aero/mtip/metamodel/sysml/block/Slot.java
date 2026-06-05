@@ -15,7 +15,6 @@ import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
@@ -37,67 +36,79 @@ public class Slot extends CommonElement {
     this.xmlConstant = XmlTagConstants.SLOT;
     this.element = f.createSlotInstance();
 
-    this.attributeDependencies.addAll(Arrays.asList(XmlTagConstants.RELATIONSHIP_PROPERTY, XmlTagConstants.RELATIONSHIP_DEFAULT_VALUE,
-        XmlTagConstants.ATTRIBUTE_KEY_INSTANCE_VALUE));
+    this.attributeDependencies.addAll(Arrays.asList(XmlTagConstants.RELATIONSHIP_PROPERTY,
+        XmlTagConstants.RELATIONSHIP_DEFAULT_VALUE, XmlTagConstants.ATTRIBUTE_KEY_INSTANCE_VALUE));
   }
 
   @Override
   public Element createElement(Project project, Element owner, ElementData xmlElement) {
-    Property property =
-        (Property) project.getElementByID(Importer.idConversion(xmlElement.getAttribute(XmlTagConstants.RELATIONSHIP_PROPERTY)));
+    Property property = (Property) project.getElementByID(
+        Importer.idConversion(xmlElement.getAttribute(XmlTagConstants.RELATIONSHIP_PROPERTY)));
+    
+    if (property == null) {
+      Logger.log(String.format("Property for slot is null for relationship property: %s", xmlElement.getAttribute(XmlTagConstants.RELATIONSHIP_PROPERTY)));
+      return this.element;
+    }
+    
     Type type = property.getType();
 
     com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot propertySlot =
         ModelHelper.createSlot((InstanceSpecification) owner, property, false);
 
     if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_INSTANCE_VALUE)) {
-      List<String> values = xmlElement.getListAttributes(XmlTagConstants.ATTRIBUTE_KEY_INSTANCE_VALUE);
+      List<String> values =
+          xmlElement.getListAttributes(XmlTagConstants.ATTRIBUTE_KEY_INSTANCE_VALUE);
       if (!values.isEmpty()) {
-        CameoUtils.logGui("Creating slot value for instance value.");
         for (String value : values) {
+          Collection<? extends ValueSpecification> emptyValueSpecifications =
+              Collections.<ValueSpecification>emptySet();
+          ValueSpecification valueSpecification = ModelHelper.createValueSpecification(
+              Project.getProject(propertySlot), type, "", emptyValueSpecifications);
 
-          Element instanceValue = (Element) project.getElementByID(Importer.idConversion(value));
-          ValueSpecification valueSpecification = ModelHelper.createValueSpecification(Project.getProject(propertySlot), type, "",
-              (Collection<? extends ValueSpecification>) Collections.emptySet());
-          ModelHelper.setValueSpecificationValue(valueSpecification, value);
+          ModelHelper.setValueSpecificationValue(valueSpecification, Importer.idConversion(value));
           propertySlot.getValue().add(valueSpecification);
         }
       }
     }
 
     if (xmlElement.hasListAttributes(XmlTagConstants.ATTRIBUTE_KEY_VALUE)) {
-      List<String> values = xmlElement.getListAttributes(XmlTagConstants.ATTRIBUTE_KEY_VALUE);
-      if (!values.isEmpty()) {
-        CameoUtils.logGui("Creating slot value for list of string values");
-        for (String value : values) {
-          ValueSpecification valueSpecification = ModelHelper.createValueSpecification(Project.getProject(propertySlot), type, "",
-              (Collection<? extends ValueSpecification>) Collections.emptySet());
-          ModelHelper.setValueSpecificationValue(valueSpecification, value);
-          propertySlot.getValue().add(valueSpecification);
-        }
+      for (String value : xmlElement.getListAttributes(XmlTagConstants.ATTRIBUTE_KEY_VALUE)) {
+        Collection<? extends ValueSpecification> emptyValueSpecifications =
+            Collections.<ValueSpecification>emptySet();
+        ValueSpecification valueSpecification = ModelHelper.createValueSpecification(
+            Project.getProject(propertySlot), type, "", emptyValueSpecifications);
+
+        ModelHelper.setValueSpecificationValue(valueSpecification, value);
+        propertySlot.getValue().add(valueSpecification);
       }
-    } else if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_VALUE)) {
+    }
+
+    if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_VALUE)) {
       String value = xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_VALUE);
+
       if (value != null) {
-        CameoUtils.logGui("Creating slot value for single value");
-        propertySlot = ModelHelper.createSlot((InstanceSpecification) owner, property, false);
-        ValueSpecification valueSpecification = ModelHelper.createValueSpecification(Project.getProject(propertySlot), type, "",
-            (Collection<? extends ValueSpecification>) Collections.emptySet());
+        Collection<? extends ValueSpecification> emptyValueSpecifications =
+            Collections.<ValueSpecification>emptySet();
+        ValueSpecification valueSpecification = ModelHelper.createValueSpecification(
+            Project.getProject(propertySlot), type, "", emptyValueSpecifications);
+
         if (valueSpecification != null) {
           propertySlot.getValue().add(valueSpecification);
           ModelHelper.setSlotValue(propertySlot, value);
         } else {
-          Logger.log("Value specification was null for slot with id:" + MtipUtils.getId(propertySlot));
+          Logger.log(
+              "Value specification was null for slot with id:" + MtipUtils.getId(propertySlot));
         }
-
       }
     }
 
     if (xmlElement.hasAttribute(XmlTagConstants.RELATIONSHIP_DEFAULT_VALUE)) {
       String valueElementID = xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_VALUE);
       String cameoValueElementID = Importer.idConversion(valueElementID);
+
       if (cameoValueElementID != null) {
-        CameoUtils.logGui("Add element value ValueSpecification here for element with id " + cameoValueElementID);
+        Logger.log(
+            "Add element value ValueSpecification here for element with id " + cameoValueElementID);
       }
     }
 
@@ -116,8 +127,10 @@ public class Slot extends CommonElement {
     return data;
   }
 
-  private void writeValue(org.w3c.dom.Element attributes, org.w3c.dom.Element relationships, Element element) {
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot slot = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot) element;
+  private void writeValue(org.w3c.dom.Element attributes, org.w3c.dom.Element relationships,
+      Element element) {
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot slot =
+        (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot) element;
 
     List<ValueSpecification> vss = slot.getValue();
 
@@ -128,28 +141,33 @@ public class Slot extends CommonElement {
         InstanceValue iv = (InstanceValue) vs;
         InstanceSpecification is = iv.getInstance();
 
-        org.w3c.dom.Element instanceValueTag = XmlWriter.createMtipRelationship(is, XmlTagConstants.ATTRIBUTE_NAME_INSTANCE_VALUE);
+        org.w3c.dom.Element instanceValueTag =
+            XmlWriter.createMtipRelationship(is, XmlTagConstants.ATTRIBUTE_NAME_INSTANCE_VALUE);
         XmlWriter.add(relationships, instanceValueTag);
         continue;
       }
 
-      org.w3c.dom.Element valueTag = XmlWriter.createAttributeFromValueSpecification(vs, XmlTagConstants.ATTRIBUTE_KEY_VALUE);
+      org.w3c.dom.Element valueTag =
+          XmlWriter.createAttributeFromValueSpecification(vs, XmlTagConstants.ATTRIBUTE_KEY_VALUE);
       XmlWriter.add(attributes, valueTag);
     }
   }
 
   private void writeDefiningFeature(org.w3c.dom.Element relationships, Element element) {
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot slot = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot) element;
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot slot =
+        (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot) element;
     StructuralFeature sf = slot.getDefiningFeature();
 
     if (sf instanceof com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration) {
-      org.w3c.dom.Element enumerationTag = XmlWriter.createMtipRelationship(sf, XmlTagConstants.RELATIONSHIP_ENUMERATION);
+      org.w3c.dom.Element enumerationTag =
+          XmlWriter.createMtipRelationship(sf, XmlTagConstants.RELATIONSHIP_ENUMERATION);
       XmlWriter.add(relationships, enumerationTag);
     }
 
     if (sf instanceof Property) {
       Property property = (Property) sf;
-      org.w3c.dom.Element propertyTag = XmlWriter.createMtipRelationship(property, XmlTagConstants.RELATIONSHIP_PROPERTY);
+      org.w3c.dom.Element propertyTag =
+          XmlWriter.createMtipRelationship(property, XmlTagConstants.RELATIONSHIP_PROPERTY);
       XmlWriter.add(relationships, propertyTag);
     }
   }
