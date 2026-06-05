@@ -33,7 +33,7 @@ public class UAF {
 		return project;
 	}
 	
-	Profile getUafProfile() {
+	public Profile getUafProfile() {
 		return uafProfile;
 	}
 	

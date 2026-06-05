@@ -7,6 +7,7 @@
 
 package org.aero.mtip.util;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -33,6 +34,8 @@ import com.nomagic.ci.persistence.IAttachedProject;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.core.ProjectUtilities;
+import com.nomagic.magicdraw.core.project.ProjectDescriptor;
+import com.nomagic.magicdraw.core.project.ProjectDescriptorsFactory;
 import com.nomagic.magicdraw.uml.DiagramType;
 import com.nomagic.magicdraw.uml.symbols.DiagramPresentationElement;
 import com.nomagic.magicdraw.uml.symbols.PresentationElement;
@@ -817,5 +820,12 @@ public class MtipUtils {
    */
   public static Element getStandardLibraryElement(String importId) {
     return (Element) Application.getInstance().getProject().getElementByID(importId);
+  }
+  
+  public static Project openProject(String filePath) {    
+    ProjectDescriptor projectDescriptor = ProjectDescriptorsFactory.createProjectDescriptor(new File(filePath).toURI());
+    Application.getInstance().getProjectsManager().loadProject(projectDescriptor, true);
+    
+    return Application.getInstance().getProject();
   }
 }
