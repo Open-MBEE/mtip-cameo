@@ -17,7 +17,6 @@ import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.metamodel.core.CommonElementsFactory;
 import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.metamodel.core.CommonRelationshipsFactory;
-import org.aero.mtip.profiles.MDCustomizationForSysML;
 import org.aero.mtip.profiles.MagicDraw;
 import org.aero.mtip.profiles.UAF;
 import org.aero.mtip.util.CameoUtils;
@@ -30,21 +29,12 @@ import com.nomagic.magicdraw.uml.symbols.PresentationElement;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Comment;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ElementValue;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.InstanceValue;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralBoolean;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralInteger;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralReal;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralString;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralUnlimitedNatural;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.NamedElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Relationship;
-import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TaggedValue;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Type;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.TypedElement;
-import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.ConnectorEnd;
 import com.nomagic.uml2.ext.magicdraw.mdprofiles.Profile;
 
 public class Exporter {
@@ -160,7 +150,6 @@ public class Exporter {
 
     for (Package nextPackage : pkg.getNestedPackage()) {
       if (!isSupportedPackage(nextPackage, isProfileExport())) {
-        Logger.log(String.format("Package not supported: Name: %s; Id: %s", CameoUtils.getElementName(nextPackage), nextPackage.getID()));
         continue;
       }
 
@@ -211,7 +200,7 @@ public class Exporter {
       return;
     }
 
-    if (isImplicitlySupported(element, isProfileExport())) {
+    if (MtipUtils.isImplicitlySupported(element, isProfileExport())) {
       addImplicitElement(element);
       return;
     }
@@ -338,34 +327,6 @@ public class Exporter {
     }
 
     return SysmlConstants.PACKAGE;
-  }
-
-  /**
-   * Determines if the provided element is implicitly supported. Elements are said to be implicitly
-   * supported if they are not written explicitly to output. This includes:
-   * <ul>
-   * <li>Any element referenced from standard profiles or libraries provided by Cameo</li>
-   * <li>Comments</li>
-   * <li>Literals of values, tagged values, etc.</li>
-   * <li>TaggedValues</li>
-   * </ul>
-   * 
-   * @param element
-   * @return
-   */
-  public boolean isImplicitlySupported(Element element, boolean isProfileExport) {
-    if (element instanceof ElementValue || element instanceof LiteralReal || element instanceof LiteralBoolean
-        || element instanceof LiteralInteger || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
-        || element instanceof InstanceValue || element instanceof ConnectorEnd || (element instanceof Comment && !UAF.isDefinition(element))
-        || element instanceof TaggedValue || MDCustomizationForSysML.isReferenceProperty(element)) {
-      return true;
-    }
-
-    if (MtipUtils.isStandardLibraryElement(element) && !CameoUtils.isMetaclass(element) && !isProfileExport) {
-      return true;
-    }
-
-    return false;
   }
 
   public boolean isExplicitlyUnsupported(Element element) {

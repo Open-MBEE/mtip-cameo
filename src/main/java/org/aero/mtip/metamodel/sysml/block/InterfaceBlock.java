@@ -14,9 +14,10 @@ import org.aero.mtip.profiles.SysML;
 public class InterfaceBlock extends CommonElement {
 	public InterfaceBlock(String name, String importId) {
 		super(name, importId);
-		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+
 		this.metamodelConstant = SysmlConstants.INTERFACE_BLOCK;
 		this.xmlConstant = XmlTagConstants.INTERFACE_BLOCK;
+		this.element = f.createClassInstance();
 		this.creationStereotype = SysML.getInterfaceBlockStereotype();
 	}
 }

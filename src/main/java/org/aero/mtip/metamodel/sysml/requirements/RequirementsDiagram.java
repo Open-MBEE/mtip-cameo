@@ -14,8 +14,9 @@ import com.nomagic.requirements.util.RequirementsConstants;
 public class RequirementsDiagram extends AbstractDiagram {
   public RequirementsDiagram(String name, String importId) {
     super(name, importId);
-    this.metamodelConstant = RequirementsConstants.SYSML_REQUIREMENTS_DIAGRAM;
-    this.xmlConstant = XmlTagConstants.REQUIREMENTSDIAGRAM;
-    this.cameoDiagramConstant = RequirementsConstants.SYSML_REQUIREMENTS_DIAGRAM;
+    
+    metamodelConstant = RequirementsConstants.SYSML_REQUIREMENTS_DIAGRAM;
+    xmlConstant = XmlTagConstants.REQUIREMENTSDIAGRAM;
+    cameoDiagramConstant = RequirementsConstants.SYSML_REQUIREMENTS_DIAGRAM;
   }
 }

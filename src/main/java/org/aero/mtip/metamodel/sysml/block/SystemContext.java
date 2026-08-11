@@ -15,9 +15,10 @@ public class SystemContext extends CommonElement {
 
 	public SystemContext(String name, String importId) {
 		super(name, importId);
-		creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+
 		metamodelConstant = SysmlConstants.SYSTEM_CONTEXT;
 		xmlConstant = XmlTagConstants.BLOCK;
+		element = f.createClassInstance();
 		creationStereotype = SysML.getSystemContextStereotype();
 	}
 }

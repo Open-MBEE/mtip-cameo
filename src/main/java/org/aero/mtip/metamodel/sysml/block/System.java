@@ -15,9 +15,10 @@ public class System extends CommonElement {
 
 	public System(String name, String importId) {
 		super(name, importId);
-		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+
 		this.metamodelConstant = SysmlConstants.SYSTEM;
 		this.xmlConstant = XmlTagConstants.BLOCK;
+		this.element = f.createClassInstance();
 		this.creationStereotype = SysML.getSystemStereotype();
 	}
 }

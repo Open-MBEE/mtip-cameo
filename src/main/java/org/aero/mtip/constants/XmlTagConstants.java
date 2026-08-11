@@ -36,6 +36,7 @@ public class XmlTagConstants {
 	public static final String HAS_PARENT = "hasParent";
 	public static final String HAS_REL = "hasRel";
 	public static final String STEREOTYPE_TAG = "stereotype";
+	public static final String DIAGRAM_FRAME = "diagramFrame";
 	public static final String DISPLAY_AS = "displayAs";
 	public static final String DISPLAY_AS_DIAGRAM = "Diagram";
 	public static final String ELEMENT = "element";
@@ -355,6 +356,7 @@ public class XmlTagConstants {
 	public static final String ARCHITECTURAL_DESCRIPTION = "uaf.ArchitecturalDescription";
 	public static final String CAPABILITY = "uaf.Capability";
 	public static final String CAPABILITY_PROPERTY = "uaf.CapabilityProperty";
+	public static final String CAPABILITY_ROLE = "uaf.CapabilityRole";
 	public static final String DESIRER = "uaf.Desirer";
 	public static final String ENDURING_TASK = "uaf.EnduringTask";
 	public static final String ENTERPRISE_PHASE = "uaf.EnterprisePhase";
@@ -374,6 +376,7 @@ public class XmlTagConstants {
 	public static final String OPERATIONAL_ACTIVITY_ACTION = "uaf.OperationalActivityAction";
 	public static final String OPERATIONAL_AGENT = "uaf.OperationalAgent";
 	public static final String OPERATIONAL_ARCHITECTURE = "uaf.OperationalArchitecture";
+	public static final String OPERATIONAL_INFORMATION = "uaf.OperationalInformation";
 	public static final String OPERATIONAL_INTERFACE = "uaf.OperationalInterface";
 	public static final String OPERATIONAL_PERFORMER = "uaf.OperationalPerformer";
 	public static final String OPERATIONAL_ROLE= "uaf.OperationalRole";
@@ -395,10 +398,11 @@ public class XmlTagConstants {
 	public static final String OPERATIONAL_CONNECTIVITY = "uaf.OperationalConnectivity";
 	public static final String OPERATIONAL_CONSTRAINTS_DEFINITION ="uaf.OperationalConstraintsDefinition";
 	public static final String OPERATIONAL_FREE_FORM_TAXONOMY="uaf.OperationalFreeFormTaxonomy";
-	
+
 	public static final String OPERATIONAL_STRUCTURE="uaf.OperationalStructure";
 	public static final String OPERATIONAL_TAXONOMY="uaf.OperationalTaxonomy";
 	public static final String OPERATIONAL_HIGH_LEVEL_TAXONOMY = "uaf.OperationalTaxonomy";
+	public static final String OPERATIONAL_INFORMATION_DIAGRAM = "uaf.OperationalInformationDiagram";
 	public static final String OPERATIONAL_INTERACTION_SCENARIOS = "uaf.OperationalInteractionScenarios";
 	public static final String OPERATIONAL_INTERNAL_CONNECTIVITY = "uaf.OperationalInternalConnectivity";
 	public static final String OPERATIONAL_PARAMETRIC = "uaf.OperationalParametric";
@@ -429,8 +433,11 @@ public class XmlTagConstants {
 	public static final String RESOURCE_CONSTRAINT = "uaf.ResourceConstraint";
 	public static final String WHOLE_LIFE_CONFIGURATION_KIND = "uaf.WholeLifeConfigurationKind";
 	public static final String RESOURCE_ACTION = "uaf.ResourceAction";
+	public static final String RESOURCE_INFORMATION = "uaf.ResourceInformation";
 	
+	public static final String RESOURCES_INFORMATION = "uaf.ResourcesInformation";
 	public static final String RESOURCES_PROCESS_FLOW = "uaf.ResourcesProcessFlow";
+
 	
 	//Projects
 	public static final String ACTUAL_MILESTONE_KIND = "uaf.ActualMilestoneKind";
@@ -741,6 +748,9 @@ public class XmlTagConstants {
 	public static final String GUARD = "guard";
 	public static final String PRIMITIVE_VALUE_TYPE = "PrimitiveValueType";
 	public static final String SWIMLANE = "swimlane";
+	public static final String SWIMLANE_ORIENTATION = "swimlaneOrientation";
+	public static final String SWIMLANE_ORIENTATION_HORIZONTAL = "horizontal";
+	public static final String SWIMLANE_ORIENTATION_VERTICAL = "vertical";
 	
 	//Model Creation Type Constants
 	public static final String ELEMENTS_FACTORY = "ElementsFactory";

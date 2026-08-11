@@ -12,6 +12,8 @@ import java.util.HashSet;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.MtipUtils;
 import com.nomagic.magicdraw.actions.MDAction;
+import com.nomagic.magicdraw.properties.Property;
+import com.nomagic.magicdraw.properties.PropertyManager;
 import com.nomagic.magicdraw.uml.symbols.DiagramPresentationElement;
 import com.nomagic.magicdraw.uml.symbols.PresentationElement;
 import com.nomagic.magicdraw.uml.symbols.shapes.ImageView;
@@ -31,6 +33,7 @@ public class InspectSelectedDiagramElementAction extends MDAction {
       PresentationElement[] selectedPresentationElements,
       PresentationElement requestorPresentationElement) {
     super(id, name, null, null);
+    
     this.diagramPresentationElement = diagramPresentationElement;
     this.selectedPresentationElements = selectedPresentationElements;
     this.requestorPresentationElement = requestorPresentationElement;
@@ -63,17 +66,28 @@ public class InspectSelectedDiagramElementAction extends MDAction {
       return;
     }
     
+    PropertyManager pm = presentationElement.getPropertyManager();
+    String propertyInfo = "";
+    
+    for (Property property : pm.getProperties()) {
+      propertyInfo += property.toString();
+    }
+    
     CameoUtils.logGui(String.format("Selected presentation element:\n "
         + "PresentationElement of type : %s\n"
         + "PresentationElement size: %s\n"
         + "PresetnationElement preferred dimension: %s\n"
         + "Element type: %s\n" 
-        + "Element id: %s\n",
+        + "Element id: %s\n"
+        + "Parent Presentation Element: %s"
+        + "Properties: [%s]",
         presentationElement.getClass().toString(),
         presentationElement.getBounds().toString(),
         presentationElement.getPreferredDimension().toString(),
         diagramElement.getHumanType(),
-        MtipUtils.getId(diagramElement)));
+        MtipUtils.getId(diagramElement),
+        presentationElement.getParent().getHumanName(),
+        propertyInfo));
   }
   
   private void logPresentationElementDetailsNoElement(PresentationElement presentationElement) {    

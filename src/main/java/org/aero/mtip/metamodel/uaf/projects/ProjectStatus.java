@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.projects;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.block.Slot;
+
+public class ProjectStatus extends Slot {
+	
+	public ProjectStatus(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.PROJECT_STATUS;
+		this.xmlConstant = XmlTagConstants.PROJECT_STATUS;
+	}
+}

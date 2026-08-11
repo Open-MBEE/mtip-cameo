@@ -80,19 +80,32 @@ import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.Interface;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.InterfaceRealization;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.AggregationKindEnum;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Association;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.BooleanTaggedValue;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Comment;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Constraint;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Diagram;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ElementTaggedValue;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.ElementValue;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Enumeration;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.EnumerationLiteral;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Generalization;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.InstanceSpecification;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.InstanceValue;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.IntegerTaggedValue;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralBoolean;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralInteger;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralReal;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralString;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.LiteralUnlimitedNatural;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Operation;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Package;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.PackageImport;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Parameter;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.RealTaggedValue;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Relationship;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Slot;
+import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.StringTaggedValue;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.FunctionBehavior;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdbasicbehaviors.OpaqueBehavior;
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdcommunications.ChangeEvent;
@@ -108,6 +121,7 @@ import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.TimeExpressio
 import com.nomagic.uml2.ext.magicdraw.commonbehaviors.mdsimpletime.TimeObservation;
 import com.nomagic.uml2.ext.magicdraw.compositestructures.mdcollaborations.Collaboration;
 import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.Connector;
+import com.nomagic.uml2.ext.magicdraw.compositestructures.mdinternalstructures.ConnectorEnd;
 import com.nomagic.uml2.ext.magicdraw.compositestructures.mdports.Port;
 import com.nomagic.uml2.ext.magicdraw.deployments.mdartifacts.Artifact;
 import com.nomagic.uml2.ext.magicdraw.interactions.mdbasicinteractions.DestructionOccurrenceSpecification;
@@ -638,6 +652,7 @@ public class MtipUtils {
     return element.getHumanType();
   }
 
+  	@CheckForNull
   public static String getUafElementType(Element element) {
     List<Stereotype> stereotypes = StereotypesHelper.getStereotypes(element).stream()
         .filter(x -> UAF.isUafProfile(StereotypesHelper.getProfileForStereotype(x))).collect(Collectors.toList());
@@ -768,6 +783,37 @@ public class MtipUtils {
     }
 
     return elements;
+  }
+  
+  /**
+   * Determines if the provided element is implicitly supported. Elements are said to be implicitly
+   * supported if they are not written explicitly with their own <data> tag to output. This includes:
+   * <ul>
+   * <li>Any element referenced from standard profiles or libraries provided by Cameo</li>
+   * <li>Comments</li>
+   * <li>Literals of values, tagged values, etc.</li>
+   * <li>TaggedValues</li>
+   * </ul>
+   * 
+   * @param element Element to check if MTIP supports
+   * @param isProfileExport Whether this is an export of a profile
+   * 
+   * @return
+   */
+  public static boolean isImplicitlySupported(Element element, boolean isProfileExport) {
+    if (element instanceof ElementValue || element instanceof LiteralReal || element instanceof LiteralBoolean
+        || element instanceof LiteralInteger || element instanceof LiteralString || element instanceof LiteralUnlimitedNatural
+        || element instanceof InstanceValue || element instanceof BooleanTaggedValue || element instanceof ElementTaggedValue
+        || element instanceof IntegerTaggedValue || element instanceof RealTaggedValue || element instanceof StringTaggedValue
+        || (element instanceof Comment && !UAF.isDefinition(element)) || element instanceof ConnectorEnd || MDCustomizationForSysML.isReferenceProperty(element)) {
+
+      return true;
+    }
+    if (MtipUtils.isStandardLibraryElement(element) && !CameoUtils.isMetaclass(element) && !isProfileExport) {
+      return true;
+    }
+
+    return false;
   }
 
   /**

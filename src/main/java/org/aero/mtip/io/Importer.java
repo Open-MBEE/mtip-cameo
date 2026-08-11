@@ -7,7 +7,6 @@
 
 package org.aero.mtip.io;
 
-import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +20,15 @@ import java.util.Set;
 import javax.annotation.CheckForNull;
 import javax.xml.parsers.ParserConfigurationException;
 import org.aero.mtip.constants.SysmlConstants;
+import org.aero.mtip.data.DiagramData;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.AbstractDiagram;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.metamodel.core.CommonElementsFactory;
 import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.metamodel.core.CommonRelationshipsFactory;
+import org.aero.mtip.profiles.MtipProfile;
 import org.aero.mtip.util.CameoUtils;
-import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.Logger;
 import org.aero.mtip.util.MtipUtils;
 import org.xml.sax.SAXException;
@@ -211,6 +212,7 @@ public class Importer {
 
     if (importedElement.getOwner() == null) {
       Logger.log("Owner failed to be set including any default owners. Element with id " + elementData.getImportId() + " not created.");
+      Logger.log(elementData.toString());
       unsupportedElementIds.add(elementData.getImportId());
       ModelHelper.dispose(Collections.singletonList(importedElement));
 
@@ -219,8 +221,9 @@ public class Importer {
 
     CameoUtils.closeSession(project);
 
-    trackIds(importedElement, elementData);
+    mapImportIdToCreatedId(importedElement, elementData);
     addStereotypes(importedElement, elementData);
+    addMtipImportStereotype(importedElement, elementData);
 
     element.addStereotypeTaggedValues(elementData);
     element.createReferencedElements(elementData);
@@ -229,8 +232,6 @@ public class Importer {
     element.addReferences();
     CameoUtils.closeSession(project);
 
-    // Logger.log(String.format("Created element %s of type: %s.", modelElement.getName(),
-    // modelElement.getType()));
     return importedElement;
   }
 
@@ -269,22 +270,22 @@ public class Importer {
     CameoUtils.createSession(project, String.format("Creating CommonRelationship of type %s.", elementData.getType()));
     CommonRelationship relationship = crf.createElement(elementData.getType(), elementData.getAttribute("name"), elementData.getImportId());
     CameoUtils.closeSession(project);
-    
+
     if (relationship == null) {
       Logger.log("Error. Element missing in common elements factory.");
       return null;
     }
-    
-//    if (!ModelHelper.canMoveChildInto(owner, relationship.getElement())) {
-//      owner = ModelHelper.findParent(relationship.getElement(), client, supplier, null);
-//    }
-    
+
+    // if (!ModelHelper.canMoveChildInto(owner, relationship.getElement())) {
+    // owner = ModelHelper.findParent(relationship.getElement(), client, supplier, null);
+    // }
+
     relationship.createDependentElements(elementData);
-    
+
     CameoUtils.createSession(project, String.format("Creating CommonRelationship of type %s.", elementData.getType()));
     Element importedRelationship = relationship.createElement(project, owner, client, supplier, elementData);
     CameoUtils.closeSession(project);
-    
+
     if (importedRelationship == null) {
       Logger.log(String.format("Relationship failed to be created with id %s.", elementData.getImportId()));
       return null;
@@ -305,7 +306,7 @@ public class Importer {
       return null;
     }
 
-    trackIds(importedRelationship, elementData);
+    mapImportIdToCreatedId(importedRelationship, elementData);
     relationship.createReferencedElements(elementData);
 
     return importedRelationship;
@@ -316,6 +317,10 @@ public class Importer {
     if (elementData == null) {
       Logger.log("Missing element data on Importer.buildDiagram().");
       return null;
+    }
+
+    if (!(elementData instanceof DiagramData)) {
+      Logger.log("ElementData not instanceof DiagramData.");
     }
 
     if (isImported(elementData)) {
@@ -351,13 +356,19 @@ public class Importer {
     }
 
     dpe.open();
-    trackIds(newDiagram, elementData);
+    mapImportIdToCreatedId(newDiagram, elementData);
 
     CameoUtils.closeSession(project);
 
     // Opens and closes its own session while populating the diagram
     populateDiagram(diagram, newDiagram, elementData);
     return newDiagram;
+  }
+
+  public void addMtipImportStereotype(Element newElement, ElementData elementData) {
+    StereotypesHelper.addStereotype(newElement, MtipProfile.getMtipImportStereotype());
+    StereotypesHelper.setStereotypePropertyValue(newElement, MtipProfile.getMtipImportStereotype(),
+        MtipProfile.getMtipImportPropertyImportId(), elementData.getImportId());
   }
 
   public void addStereotypes(Element newElement, ElementData elementData) {
@@ -463,66 +474,20 @@ public class Importer {
     return null;
   }
 
-  public void trackIds(Element newElement, ElementData modelElement) {
-    importIdToCameoId.put(modelElement.getImportId(), MtipUtils.getId(newElement));
-  }
-
-  public HashMap<Element, Rectangle> getImportedElementsOnDiagram(ElementData modelElement) {
-    HashMap<Element, Rectangle> elementsOnDiagram = new HashMap<Element, Rectangle>();
-
-    for (String importId : modelElement.getDiagramElements()) {
-      if (!isImported(importId)) {
-        Logger.log(String.format("Element with import id %s failed to be created before populating diagram.", importId));
-        continue;
-      }
-
-      Element elementOnDiagram = getImportedElement(importId);
-
-      if (elementOnDiagram == null) {
-        Logger.log(String.format("Failed to find created element with import id %s", importId));
-        continue;
-      }
-
-      elementsOnDiagram.put(elementOnDiagram, modelElement.getLocation(importId));
-    }
-
-    return elementsOnDiagram;
-  }
-
-  public List<Element> getImportedRelationshipsOnDiagram(ElementData elementData) {
-    List<Element> relationshipsOnDiagram = new ArrayList<Element>();
-
-    for (String importId : elementData.getDiagramConnectors()) {
-      if (!isImported(importId)) {
-        buildEntity(importId);
-      }
-
-      Element relationshipOnDiagram = getImportedElement(importId);
-
-      if (relationshipOnDiagram == null) {
-        Logger.log(String.format("Failed to find created element with import id %s", importId));
-        continue;
-      }
-
-      relationshipsOnDiagram.add(relationshipOnDiagram);
-    }
-
-    return relationshipsOnDiagram;
+  public void mapImportIdToCreatedId(Element newElement, ElementData elementData) {
+    importIdToCameoId.put(elementData.getImportId(), MtipUtils.getId(newElement));
   }
 
   public void populateDiagram(AbstractDiagram diagram, Diagram newDiagram, ElementData elementData) {
     diagram.createDependentElements(elementData);
 
-    diagram.elementsOnDiagram = getImportedElementsOnDiagram(elementData);
-    diagram.relationshipsOnDiagram = getImportedRelationshipsOnDiagram(elementData);
-    // diagram.noElementPresentationElements = getNoElementPresentationElements(modelElement);
-
     CameoUtils.createSession(project, String.format("Adding elements to diagram with type %s.", elementData.getType()));
 
-    diagram.addElementsToDiagram(project, newDiagram);
-    diagram.addRelationshipsToDiagram(project, newDiagram);
+    diagram.setDiagramFrameView(project, newDiagram, elementData);
+    diagram.createPresentationElements(project, newDiagram, elementData);
+    diagram.addRelationshipsToDiagram(project, newDiagram, elementData);
 
-    if (diagram.hasNoPositionData()) {
+    if (diagram.hasNoPositionData(elementData)) {
       Application.getInstance().getProject().getDiagram(newDiagram).layout(true,
           new com.nomagic.magicdraw.uml.symbols.layout.ClassDiagramLayouter());
     }

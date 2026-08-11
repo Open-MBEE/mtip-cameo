@@ -26,6 +26,7 @@ public class Profile {
 	  MagicDraw.clearProfile();
 	  MDCustomizationForSysML.clearProfile();
 	  SysML.clearProfile();
+	  MtipProfile.clearProfile();
 	  UAF.clearProfile();
 	  Validation.clearProfile();
 	}

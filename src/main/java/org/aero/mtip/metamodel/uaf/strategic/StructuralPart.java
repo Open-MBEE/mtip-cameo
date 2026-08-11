@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.strategic;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.sequence.Property;
+
+public class StructuralPart extends Property {
+
+	public StructuralPart(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.STRUCTURAL_PART;
+		this.xmlConstant = XmlTagConstants.STRUCTURAL_PART;
+	}
+}

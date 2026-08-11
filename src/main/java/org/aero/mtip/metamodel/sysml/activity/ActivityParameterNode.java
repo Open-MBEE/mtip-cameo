@@ -10,16 +10,17 @@ package org.aero.mtip.metamodel.sysml.activity;
 import javax.annotation.CheckForNull;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
-import org.aero.mtip.metamodel.core.CommonElement;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 
-public class ActivityParameterNode extends CommonElement {
+public class ActivityParameterNode extends ObjectNode {
+
   public ActivityParameterNode(String name, String importId) {
     super(name, importId);
-    this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
-    this.metamodelConstant = SysmlConstants.ACTIVITY_PARAMETER_NODE;
-    this.xmlConstant = XmlTagConstants.ACTIVITY_PARAMETER_NODE;
-    this.element = f.createActivityParameterNodeInstance();
+
+    creationType = XmlTagConstants.ELEMENTS_FACTORY;
+    metamodelConstant = SysmlConstants.ACTIVITY_PARAMETER_NODE;
+    xmlConstant = XmlTagConstants.ACTIVITY_PARAMETER_NODE;
+    element = f.createActivityParameterNodeInstance();
   }
 
   @Override
@@ -32,18 +33,15 @@ public class ActivityParameterNode extends CommonElement {
 
     if (activityParameterNode != null) {
       writeRelationship(relationships, activityParameterNode.getActivity(), ActivityNode.XML_TAG_ACTIVITY);
-      writeRelationship(relationships, activityParameterNode.getInStructuredNode(),
-          ActivityNode.XML_TAG_IN_STRUCTURED_NODE);
+      writeRelationship(relationships, activityParameterNode.getInStructuredNode(), ActivityNode.XML_TAG_IN_STRUCTURED_NODE);
 
       writeRelationships(relationships, activityParameterNode.getIncoming(), ActivityNode.XML_TAG_INCOMING);
       writeRelationships(relationships, activityParameterNode.getInGroup(), ActivityNode.XML_TAG_IN_GROUP);
-      writeRelationships(relationships, activityParameterNode.getInPartition(),
-          ActivityNode.XML_TAG_IN_PARTITION);
+      writeRelationships(relationships, activityParameterNode.getInPartition(), ActivityNode.XML_TAG_IN_PARTITION);
       writeRelationships(relationships, activityParameterNode.getInInterruptibleRegion(),
           ActivityNode.XML_TAG_INTERRUPTIBLE_ACTIVITY_REGION);
       writeRelationships(relationships, activityParameterNode.getOutgoing(), ActivityNode.XML_TAG_OUTGOING);
-      writeRelationships(relationships, activityParameterNode.getRedefinedNode(),
-          ActivityNode.XML_TAG_REDEFINED_NODE);
+      writeRelationships(relationships, activityParameterNode.getRedefinedNode(), ActivityNode.XML_TAG_REDEFINED_NODE);
     }
 
     return data;
@@ -54,7 +52,7 @@ public class ActivityParameterNode extends CommonElement {
     if (!(element instanceof com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ActivityParameterNode)) {
       return null;
     }
-    
+
     return (com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ActivityParameterNode) element;
 
   }

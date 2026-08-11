@@ -9,8 +9,9 @@ package org.aero.mtip.menu;
 
 import org.aero.mtip.menu.actions.ExportDiagramAction;
 import org.aero.mtip.menu.actions.GetMessageViewInfoAction;
-import org.aero.mtip.menu.actions.InspectSelectedDiagramElementAction;
+import org.aero.mtip.menu.actions.InspectDiagramPresentationElementAction;
 import org.aero.mtip.menu.actions.InspectDiagramElementNestedAction;
+import org.aero.mtip.menu.actions.InspectSelectedDiagramElementAction;
 import com.nomagic.actions.AMConfigurator;
 import com.nomagic.actions.ActionsCategory;
 import com.nomagic.actions.ActionsManager;
@@ -35,6 +36,7 @@ public class DiagramConfigurator implements DiagramContextAMConfigurator
 		ActionsCategory category = new ActionsCategory("","");
 		category.addAction(new InspectSelectedDiagramElementAction(null, "Inspect Selected Diagram Elements", diagramPresentationElement, selectedElements, requestor));
 		category.addAction(new InspectDiagramElementNestedAction(null, "Inspect All Diagram Elements", diagramPresentationElement, selectedElements, requestor));
+		category.addAction(new InspectDiagramPresentationElementAction(null, "Inspected Diagram", diagramPresentationElement));
 		category.addAction(new ExportDiagramAction(null, "Export Diagram", diagramPresentationElement));
 		mtipCategory.addAction(category);
 		

@@ -98,6 +98,14 @@ public class XmlUtils {
     return true;
   }
   
+  public static boolean isDiagramFrame(Node node) {
+    if (!getKey(node).equals(XmlTagConstants.DIAGRAM_FRAME)) {
+      return false;
+    }
+    
+    return true;
+  }
+  
   public static boolean isStereotypeTaggedValueAttribute(Node node) {
     if (!getKey(node).equals(XmlTagConstants.STEREOTYPE_TAGGED_VALUE)) {
       return false;

@@ -1,0 +1,16 @@
+package org.aero.mtip.metamodel.uaf.resources;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.core.CommonElement;
+import org.aero.mtip.metamodel.uaf.UAFElement;
+
+public class System extends CommonElement implements UAFElement {
+	
+	public System(String name, String importId) {
+		super(name, importId);
+		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+		this.metamodelConstant = UAFConstants.SYSTEM;
+		this.xmlConstant = XmlTagConstants.SYSTEM;
+	}
+}

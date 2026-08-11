@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.strategic;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.core.general.Dependency;
+
+public class AchievedEffect extends Dependency {
+
+	public AchievedEffect(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.ACHIEVED_EFFECT;
+		this.xmlConstant = XmlTagConstants.ACHIEVED_EFFECT;
+	}
+}

@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.operational;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.block.Signal;
+
+public class OperationalSignal extends Signal {
+
+	public OperationalSignal(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.OPERATIONAL_SIGNAL;
+		this.xmlConstant = XmlTagConstants.OPERATIONAL_SIGNAL;
+	}
+}

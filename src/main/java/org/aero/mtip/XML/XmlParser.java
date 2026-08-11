@@ -3,12 +3,16 @@ package org.aero.mtip.XML;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
+import javax.annotation.CheckForNull;
 import javax.xml.parsers.ParserConfigurationException;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.DiagramData;
+import org.aero.mtip.data.DiagramElementData;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.io.Parser;
-import org.aero.mtip.util.ElementData;
 import org.aero.mtip.util.FileSelect;
 import org.aero.mtip.util.Logger;
+import org.aero.mtip.util.MtipUtils;
 import org.aero.mtip.util.TaggedValue;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -54,11 +58,21 @@ public class XmlParser extends Parser {
     Logger.log(String.format("Successfully parsed %d/%d data elements.", totalElementCount - invalidElements, totalElementCount));
   }
 
+  public ElementData initializeElementData(String type) {
+    if (MtipUtils.isSupportedDiagram(type)) {
+      return new DiagramData();
+    }
+
+    return new ElementData();
+  }
+
   public ElementData parseElementData(Node dataNode) {
-    ElementData modelElement = new ElementData();
+    String type = parseType(XmlUtils.getFirstChildByTagName(dataNode, XmlTagConstants.TYPE));
+    ElementData modelElement = initializeElementData(type);
+
+    modelElement.setType(type);
 
     parseIds(XmlUtils.getFirstChildByTagName(dataNode, XmlTagConstants.ID), modelElement);
-    parseType(XmlUtils.getFirstChildByTagName(dataNode, XmlTagConstants.TYPE), modelElement);
     parseAttributes(XmlUtils.getFirstChildByTagName(dataNode, XmlTagConstants.ATTRIBUTES), modelElement);
     parseRelationships(XmlUtils.getFirstChildByTagName(dataNode, XmlTagConstants.RELATIONSHIPS), modelElement);
 
@@ -84,25 +98,25 @@ public class XmlParser extends Parser {
     }
   }
 
-  public void parseType(org.w3c.dom.Element typeElement, ElementData modelElement) {
+  public String parseType(org.w3c.dom.Element typeElement) {
     if (typeElement == null) {
       Logger.log("Cannot get type from input data. No type element found.");
-      return;
+      return "";
     }
 
     String type = typeElement.getTextContent();
 
     if (type == null) {
       Logger.log("Cannot get type from input data. No type string found in type element.");
-      return;
+      return "";
     }
 
     if (!type.contains(".")) {
       Logger.log("Cannot get type from input data. Format of type string does not match convention <metamodel.<type>: %s, type");
-      return;
+      return "";
     }
 
-    modelElement.setType(type.split("[.]")[1]);
+    return type.split("[.]")[1];
   }
 
   public void parseAttributes(Node fieldNode, ElementData elementData) {
@@ -125,7 +139,11 @@ public class XmlParser extends Parser {
       if (XmlUtils.isDataTypeList(attributeNode)) {
         parseListAttribute(attributeNode, elementData);
         continue;
+      }
 
+      if (XmlUtils.isDiagramFrame(attributeNode)) {
+        elementData.setDiagramFrame(parseBounds(attributeNode));
+        continue;
       }
 
       parseGenericAttribute(attributeNode, elementData);
@@ -235,8 +253,8 @@ public class XmlParser extends Parser {
     Node childAttributeNode = XmlUtils.getFirstChildByTagName(attributeNode, XmlTagConstants.ATTRIBUTE);
 
     if (childAttributeNode == null) {
-      Logger.log(
-          String.format("Cannot parse attribute. No attribute element nested in attribute element for %s", XmlUtils.getKey(attributeNode)));
+      Logger.log(String.format("Cannot parse attribute. No attribute element nested in attribute element for %s with key %s",
+          attributeNode.getNodeName(), XmlUtils.getKey(attributeNode)));
       return;
     }
 
@@ -295,7 +313,8 @@ public class XmlParser extends Parser {
     org.w3c.dom.Element relationshipMetadataNode = XmlUtils.getFirstChildByTagName(elementNode, XmlTagConstants.RELATIONSHIP_METADATA);
 
     if (idNode == null) {
-      Logger.log(String.format("Cannot parse diagram element. No %s found in %s for element with id: %s", XmlTagConstants.ID, elementNode.getNodeName(), elementData.getImportId()));
+      Logger.log(String.format("Cannot parse diagram element. No %s found in %s for element with id: %s", XmlTagConstants.ID,
+          elementNode.getNodeName(), elementData.getImportId()));
       Logger.log(elementData.toString());
       Logger.log(elementNode.getTextContent());
       return;
@@ -322,11 +341,18 @@ public class XmlParser extends Parser {
     if (type == null || type.isEmpty()) {
       return;
     }
-    // TODO: get properties for diagram formatting HashMap<String, DiagramProperty> properties =
-    // getProperties(elementNode);
-    elementData.addDiagramElement(id, type, parseBounds(relationshipMetadataNode));
+
+    DiagramElementData diagramElementData = new DiagramElementData();
+
+    diagramElementData.setId(id);
+    diagramElementData.setType(type);
+    diagramElementData.setBounds(parseBounds(relationshipMetadataNode));
+    diagramElementData.setOrientation(parseOrientation(relationshipMetadataNode));
+
+    ((DiagramData) elementData).addDiagramElementData(diagramElementData);
   }
 
+  @CheckForNull
   public Rectangle parseBounds(Node relationshipMetadata) {
     org.w3c.dom.Element topNode = XmlUtils.getFirstChildByTagName(relationshipMetadata, XmlTagConstants.TOP);
     org.w3c.dom.Element bottomNode = XmlUtils.getFirstChildByTagName(relationshipMetadata, XmlTagConstants.BOTTOM);
@@ -334,7 +360,7 @@ public class XmlParser extends Parser {
     org.w3c.dom.Element rightNode = XmlUtils.getFirstChildByTagName(relationshipMetadata, XmlTagConstants.RIGHT);
 
     if (topNode == null || bottomNode == null || leftNode == null || rightNode == null) {
-      return new Rectangle(-999, -999, -999, -999);
+      return null;
     }
 
     try {
@@ -345,8 +371,18 @@ public class XmlParser extends Parser {
 
       return new Rectangle(left, -top, right - left, -(bottom - top));
     } catch (NumberFormatException nfe) {
-      return new Rectangle(-999, -999, -999, -999);
+      return null;
     }
+  }
+  
+  public String parseOrientation(Node relationshipMetadataNode) {
+    org.w3c.dom.Element orientationTag = XmlUtils.getFirstChildByTagName(relationshipMetadataNode, XmlTagConstants.SWIMLANE_ORIENTATION);
+    
+    if (orientationTag == null) {
+      return "";
+    }
+    
+    return orientationTag.getTextContent();
   }
 
   public void parseDiagramConnectors(Node relationshipNode, ElementData elementData) {
@@ -426,28 +462,29 @@ public class XmlParser extends Parser {
     }
   }
 
-  public void addToModelMap(ElementData modelElement) {
-    for (String id : modelElement.getIds()) {
-      allElementData.put(id, modelElement);
+  public void addToModelMap(ElementData elementData) {
+    for (String id : elementData.getIds()) {
+      allElementData.put(id, elementData);
     }
 
-    if (modelElement.isStereotype()) {
-      for (String id : modelElement.getIds()) {
-        stereotypeElementData.put(id, modelElement);
+    if (elementData.isStereotype()) {
+      for (String id : elementData.getIds()) {
+        stereotypeElementData.put(id, elementData);
       }
     }
 
-    if (modelElement.isProperty() && modelElement.getParentImportId() == null) { // Property parent may not exists yet. Check later if property of
+    if (elementData.isProperty() && elementData.getParentImportId() == null) { // Property parent may not exists yet. Check later if
+                                                                               // property of
       // stereotype.
-      properties.add(modelElement);
+      properties.add(elementData);
     }
 
-    if (allElementData.containsKey(modelElement.getParentImportId()) && modelElement.isProperty()
-        && allElementData.get(modelElement.getParentImportId()).isStereotype()) {
-      stereotypeElementData.put(modelElement.getImportId(), modelElement);
+    if (allElementData.containsKey(elementData.getParentImportId()) && elementData.isProperty()
+        && allElementData.get(elementData.getParentImportId()).isStereotype()) {
+      stereotypeElementData.put(elementData.getImportId(), elementData);
     }
   }
-  
+
   // TODO: Re-factor these into Importer
   /**
    * Checks all cached element data in properties to determine if they are properties of stereotypes

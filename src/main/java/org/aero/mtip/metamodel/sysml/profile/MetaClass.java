@@ -9,9 +9,9 @@ package org.aero.mtip.metamodel.sysml.profile;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.ElementData;
 import org.w3c.dom.NodeList;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.uml.Finder;

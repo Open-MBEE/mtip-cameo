@@ -8,7 +8,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.xml.parsers.ParserConfigurationException;
 import org.aero.mtip.XML.XmlParser;
-import org.aero.mtip.util.ElementData;
+import org.aero.mtip.data.ElementData;
 import org.xml.sax.SAXException;
 import com.nomagic.magicdraw.core.Project;
 

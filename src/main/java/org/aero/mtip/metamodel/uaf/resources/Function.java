@@ -1,0 +1,13 @@
+package org.aero.mtip.metamodel.uaf.resources;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.activity.Activity;
+
+public class Function extends Activity {
+	public Function(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.FUNCTION;
+		this.xmlConstant = XmlTagConstants.FUNCTION;
+	}
+}

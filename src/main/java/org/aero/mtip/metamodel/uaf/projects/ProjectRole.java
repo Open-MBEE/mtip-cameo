@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.projects;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.sequence.Property;
+
+public class ProjectRole extends Property {
+	
+	public ProjectRole(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.PROJECT_ROLE;
+		this.xmlConstant = XmlTagConstants.PROJECT_ROLE;
+	}
+}

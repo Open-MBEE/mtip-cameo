@@ -8,10 +8,9 @@ package org.aero.mtip.metamodel.sysml.profile;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonRelationship;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.ElementData;
-
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.AggregationKindEnum;

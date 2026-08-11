@@ -14,6 +14,7 @@ public class UAFConstants {
 	public static final String ARCHITECTURAL_DESCRIPTION = "ArchitecturalDescription";
 	public static final String CAPABILITY = "Capability";
 	public static final String CAPABILITY_PROPERTY = "CapabilityProperty";
+	public static final String CAPABILITY_ROLE = "CapabilityRole";
 	public static final String STRATEGIC_TAXONOMY_PACKAGE = "Strategic Taxonomy Package";
 	public static final String ENTERPRISE_PHASE = "EnterprisePhase";
 	public static final String ENTERPRISE_VISION = "EnterpriseVision";
@@ -40,6 +41,7 @@ public class UAFConstants {
 	public static final String OPERATIONAL_AGENT = "OperationalAgent";
 	public static final String OPERATIONAL_ARCHITECTURE = "OperationalArchitecture";
 	public static final String OPERATIONAL_PERFORMER = "OperationalPerformer";
+	public static final String OPERATIONAL_INFORMATION = "OperationalInformation";
 	public static final String OPERATIONAL_INTERFACE = "OperationalInterface";
 	public static final String INFORMATION_ELEMENT = "InformationElement";
 	public static final String OPERATIONAL_CONTROL_FLOW = "OperationalControlFlow";
@@ -112,6 +114,7 @@ public class UAFConstants {
 	public static final String VERSION_OF_CONFIGURATION = "VersionOfConfiguration";
 	public static final String WHOLE_LIFE_CONFIGURATION_KIND = "WholeLifeConfigurationKind";
 	public static final String RESOURCE_ACTION = "ResourceAction";
+	public static final String RESOURCE_INFORMATION = "ResourceInformation";
 	
 	//Projects
 	public static final String ACTUAL_MILESTONE_KIND = "ActualMilestoneKind";
@@ -240,6 +243,7 @@ public class UAFConstants {
 	public static final String ACTUAL_RESOURCES_STRUCTURE_DIAGRAM = "ActualResourcesStructure";
 	
 	// Operational Diagrams
+	public static final String OPERATIONAL_INFORMATION_DIAGRAM = "OperationalInformationDiagram";
 	public static final String OPERATIONAL_PROCESS_FLOW = "OperationalProcessFlow";
 	public static final String OPERATIONAL_PROCESSES_DIAGRAM = "OperationalProcesses";
 	
@@ -261,6 +265,7 @@ public class UAFConstants {
 
 	// Resource Diagrams
 	public static final String RESOURCES_CONNECTIVITY_DIAGRAM = "ResourcesConnectivity";
+	public static final String RESOURCES_INFORMATION_DIAGRAM = "ResourcesInformation";
 	public static final String RESOURCES_INTERACTION_SCENARIOS_DIAGRAM ="ResourcesInteractionScenarios";
 	public static final String RESOURCES_PROCESSES_DIAGRAM = "ResourcesProcesses";
 	public static final String RESOURCES_PROCESS_FLOW = "ResourcesProcessFlow";
@@ -315,6 +320,7 @@ public class UAFConstants {
 			ARCHITECTURAL_DESCRIPTION,
 			CAPABILITY,
 			CAPABILITY_PROPERTY,
+			CAPABILITY_ROLE,
 			DESIRER,
 			ENDURING_TASK,
 			ENTERPRISE_GOAL,
@@ -335,6 +341,7 @@ public class UAFConstants {
 			OPERATIONAL_ACTIVITY_ACTION,
 			OPERATIONAL_AGENT,
 			OPERATIONAL_ARCHITECTURE,
+			OPERATIONAL_INFORMATION,
 			OPERATIONAL_INTERFACE,
 			STANDARD_OPERATIONAL_ACTIVITY,
 			OPERATIONAL_PERFORMER,
@@ -367,6 +374,7 @@ public class UAFConstants {
 			RESOURCE_ROLE,
 			ROLE_KIND,
 			RESOURCE_EXCHANGE_KIND,
+			RESOURCE_INFORMATION,
 			RESOURCE_SIGNAL,
 			RESOURCE_SIGNAL_PROPERTY,
 			FUNCTION,
@@ -566,6 +574,7 @@ public class UAFConstants {
 			
 			//Resources
 			RESOURCES_CONNECTIVITY_DIAGRAM,
+			RESOURCES_INFORMATION_DIAGRAM,
 			RESOURCES_INTERACTION_SCENARIOS_DIAGRAM,
 			RESOURCES_PROCESS_FLOW,
 			RESOURCES_PROCESSES_DIAGRAM,
@@ -599,6 +608,7 @@ public class UAFConstants {
 			STRATEGIC_CONSTRAINTS_DIAGRAM,
 			
 			// Operational
+			OPERATIONAL_INFORMATION_DIAGRAM,
 			OPERATIONAL_PROCESS_FLOW,
 			OPERATIONAL_CONNECTIVITY,
 			OPERATIONAL_CONSTRAINTS_DEFINITION,

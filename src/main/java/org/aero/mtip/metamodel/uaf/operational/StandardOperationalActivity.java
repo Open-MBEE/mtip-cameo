@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.operational;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.activity.Activity;
+
+public class StandardOperationalActivity extends Activity {
+
+	public StandardOperationalActivity(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.STANDARD_OPERATIONAL_ACTIVITY;
+		this.xmlConstant = XmlTagConstants.STANDARD_OPERATIONAL_ACTIVITY;
+	}
+}

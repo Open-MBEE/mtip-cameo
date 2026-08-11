@@ -10,9 +10,8 @@ import java.util.List;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.util.ElementData;
-
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ControlFlow;
 import com.nomagic.uml2.ext.magicdraw.activities.mdbasicactivities.ObjectFlow;

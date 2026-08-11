@@ -117,7 +117,6 @@ public class XmlWriter {
 
     Element mtipVersionTag = createTag(XmlTagConstants.MTIP_VERSION, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
     Element cameoVersionTag = createTag(XmlTagConstants.CAMEO_VERSION, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
-    Element patchNumber = createTag(XmlTagConstants.CAMEO_PATCH_NUMBER, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
     Element modelNameTag = createTag(XmlTagConstants.MODEL_NAME, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
     Element exportTimeTag = createTag(XmlTagConstants.EXPORT_TIME, XmlTagConstants.ATTRIBUTE_TYPE_STRING);
     

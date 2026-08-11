@@ -15,9 +15,10 @@ public class External extends CommonElement {
 
 	public External(String name, String importId) {
 		super(name, importId);
-		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+
 		this.metamodelConstant = SysmlConstants.EXTERNAL;
 		this.xmlConstant = XmlTagConstants.BLOCK;
+		this.element = f.createClassInstance();
 		this.creationStereotype = SysML.getExternalStereotype();
 	}
 }

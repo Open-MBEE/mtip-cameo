@@ -15,9 +15,10 @@ import org.aero.mtip.profiles.SysML;
 public class ConstraintBlock extends CommonElement {
   public ConstraintBlock(String name, String importId) {
     super(name, importId);
-    this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+    
     this.metamodelConstant = SysmlConstants.CONSTRAINT_BLOCK;
     this.xmlConstant = XmlTagConstants.CONSTRAINT_BLOCK;
+    this.element = f.createClassInstance();
     this.creationStereotype = SysML.getConstraintBlockStereotype();
   }
 }

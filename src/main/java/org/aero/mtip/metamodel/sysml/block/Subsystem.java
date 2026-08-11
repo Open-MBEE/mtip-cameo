@@ -15,9 +15,10 @@ public class Subsystem extends CommonElement {
 
 	public Subsystem(String name, String importId) {
 		super(name, importId);
-		this.creationType = XmlTagConstants.CLASS_WITH_STEREOTYPE;
+
 		this.metamodelConstant = SysmlConstants.SUBSYSTEM;
 		this.xmlConstant = XmlTagConstants.BLOCK;
+		this.element = f.createClassInstance();
 		this.creationStereotype = SysML.getSubsystemStereotype();
 	}
 }

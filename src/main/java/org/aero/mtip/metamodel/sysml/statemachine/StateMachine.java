@@ -9,9 +9,9 @@ package org.aero.mtip.metamodel.sysml.statemachine;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.io.Importer;
 import org.aero.mtip.metamodel.core.CommonElement;
-import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 import com.nomagic.uml2.ext.magicdraw.statemachines.mdbehaviorstatemachines.State;

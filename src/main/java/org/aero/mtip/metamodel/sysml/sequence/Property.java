@@ -9,10 +9,10 @@ package org.aero.mtip.metamodel.sysml.sequence;
 import org.aero.mtip.XML.XmlWriter;
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
 import org.aero.mtip.util.Logger;
-import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.ModelHelper;
 import com.nomagic.uml2.ext.magicdraw.classes.mdinterfaces.Interface;
@@ -29,60 +29,51 @@ public class Property extends CommonElement {
 
   public Property(String name, String importId) {
     super(name, importId);
-    this.creationType = XmlTagConstants.ELEMENTS_FACTORY;
-    this.metamodelConstant = SysmlConstants.PROPERTY;
-    this.xmlConstant = XmlTagConstants.PROPERTY;
-    this.element = f.createPropertyInstance();
+
+    creationType = XmlTagConstants.ELEMENTS_FACTORY;
+    metamodelConstant = SysmlConstants.PROPERTY;
+    xmlConstant = XmlTagConstants.PROPERTY;
+    element = f.createPropertyInstance();
   }
 
   @Override
   public Element createElement(Project project, Element owner, ElementData xmlElement) {
     super.createElement(project, owner, xmlElement);
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property =
-        (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
 
     if (xmlElement.hasAttribute(XmlTagConstants.ATTRIBUTE_KEY_DEFAULT_VALUE)) {
       String defaultValue = xmlElement.getAttribute(XmlTagConstants.ATTRIBUTE_KEY_DEFAULT_VALUE);
 
       try {
         if (property.getType() != null) {
-          if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY)
-              .contentEquals(SysmlConstants.BOOLEAN)) {
+          if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY).contentEquals(SysmlConstants.BOOLEAN)) {
             boolean boolVal = Boolean.valueOf(defaultValue);
-            LiteralBoolean valueSpecification = (LiteralBoolean) ModelHelper
-                .createValueSpecification(project, property.getType(), boolVal, null);
+            LiteralBoolean valueSpecification =
+                (LiteralBoolean) ModelHelper.createValueSpecification(project, property.getType(), boolVal, null);
             property.setDefaultValue(valueSpecification);
-          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY)
-              .contentEquals(SysmlConstants.INTEGER)) {
+          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY).contentEquals(SysmlConstants.INTEGER)) {
             int intVal = Integer.parseInt(defaultValue);
-            ValueSpecification valueSpecification =
-                ModelHelper.createValueSpecification(project, property.getType(), intVal, null);
+            ValueSpecification valueSpecification = ModelHelper.createValueSpecification(project, property.getType(), intVal, null);
             property.setDefaultValue(valueSpecification);
-          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY)
-              .contentEquals(SysmlConstants.REAL)) {
+          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY).contentEquals(SysmlConstants.REAL)) {
             double realVal = Double.parseDouble(defaultValue);
-            LiteralReal valueSpecification = (LiteralReal) ModelHelper
-                .createValueSpecification(project, property.getType(), realVal, null);
+            LiteralReal valueSpecification = (LiteralReal) ModelHelper.createValueSpecification(project, property.getType(), realVal, null);
             valueSpecification.setValue(realVal);
             property.setDefaultValue(valueSpecification);
-          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY)
-              .contentEquals(SysmlConstants.STRING)) {
-            LiteralString valueSpecification = (LiteralString) ModelHelper
-                .createValueSpecification(project, property.getType(), defaultValue, null);
+          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY).contentEquals(SysmlConstants.STRING)) {
+            LiteralString valueSpecification =
+                (LiteralString) ModelHelper.createValueSpecification(project, property.getType(), defaultValue, null);
             property.setDefaultValue(valueSpecification);
-          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY)
-              .contentEquals(SysmlConstants.ELEMENT_VALUE)) {
+          } else if (xmlElement.getAttribute(XmlTagConstants.TYPED_BY).contentEquals(SysmlConstants.ELEMENT_VALUE)) {
             // ElementValue ev = ModelHelper.createValueSpecification(arg0, arg1, arg2, arg3)
           } else {
-            CameoUtils.logGui("Primitive type not recognized: "
-                + xmlElement.getAttribute(XmlTagConstants.TYPED_BY));
+            CameoUtils.logGui("Primitive type not recognized: " + xmlElement.getAttribute(XmlTagConstants.TYPED_BY));
           }
         } else {
           CameoUtils.logGui("Property type is null. Cannot set default value.");
         }
       } catch (Exception exception) {
-        Logger.log(String.format(
-            "Error assigning default value to property with id: %s see stack trace:", importId));
+        Logger.log(String.format("Error assigning default value to property with id: %s see stack trace:", importId));
         Logger.logException(exception);
       }
     }
@@ -109,8 +100,7 @@ public class Property extends CommonElement {
   }
 
   protected void writeDefaultValue(org.w3c.dom.Element attributes, Element element) {
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property =
-        (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
     ValueSpecification vs = property.getDefaultValue();
 
     if (vs == null) {
@@ -128,16 +118,14 @@ public class Property extends CommonElement {
   }
 
   public void writeAssociation(org.w3c.dom.Element relationships, Element element) {
-    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property =
-        (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
+    com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property property = (com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Property) element;
     Association association = property.getAssociation();
 
     if (association == null) {
       return;
     }
 
-    org.w3c.dom.Element associationTag =
-        XmlWriter.createMtipRelationship(association, XmlTagConstants.ASSOCIATION_TAG);
+    org.w3c.dom.Element associationTag = XmlWriter.createMtipRelationship(association, XmlTagConstants.ASSOCIATION_TAG);
     XmlWriter.add(relationships, associationTag);
   }
 }

@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.resources;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.internalblock.Connector;
+
+public class ResourceConnector extends Connector {
+
+	public ResourceConnector(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.RESOURCE_CONNECTOR;
+		this.xmlConstant = XmlTagConstants.RESOURCE_CONNECTOR;
+	}
+}

@@ -6,9 +6,8 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 
 package org.aero.mtip.metamodel.sysml.block;
 
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonRelationship;
-import org.aero.mtip.util.ElementData;
-
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.magicdraw.classes.mdkernel.Element;
 

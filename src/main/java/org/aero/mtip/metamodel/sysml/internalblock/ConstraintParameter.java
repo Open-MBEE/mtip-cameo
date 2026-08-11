@@ -8,11 +8,11 @@ package org.aero.mtip.metamodel.sysml.internalblock;
 
 import org.aero.mtip.constants.SysmlConstants;
 import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.profiles.MDCustomizationForSysML;
 import org.aero.mtip.profiles.SysML;
 import org.aero.mtip.util.TaggedValue;
-import org.aero.mtip.util.ElementData;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.uml2.ext.jmi.helpers.StereotypesHelper;

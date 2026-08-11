@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.parameters;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.sequence.Property;
+
+public class EnvironmentProperty extends Property {
+
+	public EnvironmentProperty(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.ENVIRONMENT_PROPERTY;
+		this.xmlConstant = XmlTagConstants.ENVIRONMENT_PROPERTY;
+	}
+}

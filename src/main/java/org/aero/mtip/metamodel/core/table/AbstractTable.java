@@ -6,10 +6,9 @@ The Aerospace Corporation (http://www.aerospace.org/). */
 
 package org.aero.mtip.metamodel.core.table;
 
+import org.aero.mtip.data.ElementData;
 import org.aero.mtip.metamodel.core.CommonElement;
 import org.aero.mtip.util.CameoUtils;
-import org.aero.mtip.util.ElementData;
-
 import com.nomagic.generictable.GenericTableManager;
 import com.nomagic.magicdraw.core.Project;
 import com.nomagic.magicdraw.openapi.uml.ReadOnlyElementException;

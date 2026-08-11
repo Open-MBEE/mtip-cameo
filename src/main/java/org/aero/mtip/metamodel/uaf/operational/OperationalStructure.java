@@ -1,0 +1,15 @@
+package org.aero.mtip.metamodel.uaf.operational;
+
+import org.aero.mtip.constants.CameoDiagramConstants;
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.activity.ActivityDiagram;
+
+public class OperationalStructure extends ActivityDiagram {
+	public OperationalStructure(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.OPERATIONAL_STRUCTURE;
+		this.xmlConstant = XmlTagConstants.OPERATIONAL_STRUCTURE;
+		this.cameoDiagramConstant = CameoDiagramConstants.OPERATIONAL_STRUCTURE;
+	}
+}

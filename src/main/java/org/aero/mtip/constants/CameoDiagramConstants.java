@@ -18,6 +18,7 @@ public class CameoDiagramConstants {
 	public static final String OPERATIONAL_CONSTRAINTS_DEFINITION = "Operational Constraints Definition";
 	public static final String OPERATIONAL_FREE_FORM_TAXONOMY = "Operational Free Form Taxonomy";
 	public static final String OPERATIONAL_HIGH_LEVEL_TAXONOMY = "Operational High Level Taxonomy";
+	public static final String OPERATIONAL_INFORMATION_DIAGRAM = "Operational Information";
 	public static final String OPERATIONAL_INTERACTION_SCENARIOS = "Operational Interaction Scenarios";
 	public static final String OPERATIONAL_INTERNAL_CONNECTIVITY = "Operational Internal Connectivity";
 	public static final String OPERATIONAL_PARAMETRIC = "Operational Parametric";
@@ -51,6 +52,7 @@ public class CameoDiagramConstants {
 	public static final String RESOURCES_PROCESSES = "Resources Processes";
 	public static final String RESOURCES_PROCESS_FLOW = "Resources Process Flow";
 	public static final String RESOURCES_STATES = "Resources States";
+	public static final String RESOURCES_INFORMATION = "Resources Information";
 	public static final String RESOURCES_INTERACTION_SCENARIOS = "Resources Interaction Scenarios";
 	public static final String RESOURCES_STRUCTURE ="Resources Structure";
 	public static final String RESOURCES_TAXONOMY = "Resources Taxonomy";

@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.operational;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.sequence.Property;
+
+public class ProblemDomain extends Property {
+
+	public ProblemDomain(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.PROBLEM_DOMAIN;
+		this.xmlConstant = XmlTagConstants.PROBLEM_DOMAIN;
+	}
+}

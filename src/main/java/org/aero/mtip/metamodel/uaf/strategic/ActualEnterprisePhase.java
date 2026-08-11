@@ -1,0 +1,14 @@
+package org.aero.mtip.metamodel.uaf.strategic;
+
+import org.aero.mtip.constants.UAFConstants;
+import org.aero.mtip.constants.XmlTagConstants;
+import org.aero.mtip.metamodel.sysml.block.InstanceSpecification;
+
+public class ActualEnterprisePhase extends InstanceSpecification {
+
+	public ActualEnterprisePhase(String name, String importId) {
+		super(name, importId);
+		this.metamodelConstant = UAFConstants.ACTUAL_ENTERPRISE_PHASE;
+		this.xmlConstant = XmlTagConstants.ACTUAL_ENTERPRISE_PHASE;
+	}	
+}
