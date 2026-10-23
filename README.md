@@ -91,4 +91,4 @@ Please see the `CHANGELOG.md`.
 
 ## License
 
-This project is licensed under the Apache Commons License 2.0 - see the LICENSE.html file for details
+This project is licensed under the Apache Commons License 2.0 - see the LICENSE file for details
