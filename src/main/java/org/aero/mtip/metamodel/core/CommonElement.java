@@ -885,7 +885,7 @@ public abstract class CommonElement {
 			return importElement;
 		}
 
-		return (Element) Importer.getInstance().getImportedElement(importId);
+		return (Element) Importer.getInstance().getImportedElement(importID);
 
 	}
 
