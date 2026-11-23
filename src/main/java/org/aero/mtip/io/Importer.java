@@ -283,8 +283,15 @@ public class Importer {
     relationship.createDependentElements(elementData);
 
     CameoUtils.createSession(project, String.format("Creating CommonRelationship of type %s.", elementData.getType()));
-    Element importedRelationship = relationship.createElement(project, owner, client, supplier, elementData);
-    CameoUtils.closeSession(project);
+    Element importedRelationship;
+    try {
+      importedRelationship = relationship.createElement(project, owner, client, supplier, elementData);
+      if (importedRelationship != null && importedRelationship.getOwner() != null) {
+        addStereotypes(importedRelationship, elementData);
+      }
+    } finally {
+      CameoUtils.closeSession(project);
+    }
 
     if (importedRelationship == null) {
       Logger.log(String.format("Relationship failed to be created with id %s.", elementData.getImportId()));

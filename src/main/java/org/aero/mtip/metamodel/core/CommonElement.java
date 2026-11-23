@@ -96,6 +96,9 @@ public abstract class CommonElement {
 		setBaseElement();
 		setName();
 		setOwner(owner);
+		if (creationStereotype != null) {
+			StereotypesHelper.addStereotype(element, creationStereotype);
+		}
 		addInitialStereotype();
 		addMetamodelConstantStereotype();
 		setClassifier();
@@ -127,11 +130,6 @@ public abstract class CommonElement {
 
 		element = project.getElementsFactory().createClassInstance();
 
-		if (creationStereotype == null) {
-			return element;
-		}
-
-		StereotypesHelper.addStereotype(element, creationStereotype);
 		return element;
 	}
 
@@ -885,7 +883,7 @@ public abstract class CommonElement {
 			return importElement;
 		}
 
-		return (Element) Importer.getInstance().getImportedElement(importId);
+		return Importer.getInstance().getImportedElement(importID);
 
 	}
 

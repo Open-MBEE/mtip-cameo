@@ -14,8 +14,10 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.CheckForNull;
@@ -181,13 +183,14 @@ public abstract class AbstractDiagram extends CommonElement {
     DiagramPresentationElement presentationDiagram = project.getDiagram(diagram);
     removeAutopopulatedPathElements(presentationDiagram);
 
-    List<Element> relationshipsOnDiagram = new ArrayList<Element>();
+    Set<Element> relationshipsOnDiagram = new LinkedHashSet<>();
 
     for (String relationshipConnectorId : elementData.getDiagramConnectorIds()) {
       Element relationship = Importer.getInstance().getImportedElement(relationshipConnectorId);
 
       if (relationship == null) {
         Logger.log(String.format("Could not find imported element to populate diagram with id: %s", relationshipConnectorId));
+        continue;
       }
 
       relationshipsOnDiagram.add(relationship);
@@ -204,7 +207,7 @@ public abstract class AbstractDiagram extends CommonElement {
       try {
         if (clientPE == null || supplierPE == null) {
           Logger.log("Client or supplier presentation element does not exist. Could not create representation of relationship on diagram.");
-          return;
+          continue;
         }
 
         PresentationElementsManager.getInstance().createPathElement(relationship, clientPE, supplierPE);
@@ -221,14 +224,30 @@ public abstract class AbstractDiagram extends CommonElement {
   }
 
   protected void removeAutopopulatedPathElements(DiagramPresentationElement presentationDiagram) {
-    try {
-      for (PresentationElement presentationElement : presentationDiagram.getPresentationElements()) {
-        if (presentationElement instanceof PathElement) {
-          PresentationElementsManager.getInstance().deletePresentationElement(presentationElement);
-        }
+    // Cameo can auto-create paths inside the diagram frame or another
+    // presentation element when the endpoint shapes are added.
+    Set<PathElement> paths = new LinkedHashSet<>();
+    collectPaths(presentationDiagram, paths);
+    DiagramFrameView frame = presentationDiagram.getDiagramFrame();
+    if (frame != null) {
+      collectPaths(frame, paths);
+    }
+    for (PathElement path : paths) {
+      try {
+        PresentationElementsManager.getInstance().deletePresentationElement(path);
+      } catch (ReadOnlyElementException roee) {
+        Logger.logException(roee);
       }
-    } catch (ReadOnlyElementException roee) {
-      Logger.logException(roee);
+    }
+  }
+
+  private static void collectPaths(PresentationElement parent, Set<PathElement> paths) {
+    for (PresentationElement child : parent.getPresentationElements()) {
+      if (child instanceof PathElement path) {
+        paths.add(path);
+      } else {
+        collectPaths(child, paths);
+      }
     }
   }
 
