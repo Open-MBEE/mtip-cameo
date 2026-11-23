@@ -46,6 +46,6 @@ public class DiagramElementData {
   
   @Override
   public String toString() {
-    return String.format("Type=%s; Id=%s; Bounds=%s", getType(), getId(), getBounds().toString());
+    return String.format("Type=%s; Id=%s; Bounds=%s", getType(), getId(), getBounds());
   }
 }

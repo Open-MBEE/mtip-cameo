@@ -118,16 +118,16 @@ public class ActivityDiagram extends AbstractDiagram {
       }
       
       if (diagramElementData.getBounds() == null) {
-        PresentationElementsManager.getInstance().createShapeElement(createdElement, parentPresentationElement, true);
+        PresentationElementsManager.getInstance().createShapeElement(createdElement, parentPresentationElement, false);
         return;
       }
 
-      ShapeElement shape = PresentationElementsManager.getInstance().createShapeElement(createdElement, parentPresentationElement, true,
+      ShapeElement shape = PresentationElementsManager.getInstance().createShapeElement(createdElement, parentPresentationElement, false,
           new Point(diagramElementData.getBounds().x, diagramElementData.getBounds().y));
       
       if (shape == null) {
         Logger.log(String.format("Failed to create shape elemnt for %s", diagramElementData.toString()));
-        shape = PresentationElementsManager.getInstance().createShapeElement(createdElement, getDiagramPresentationElement(), true,
+        shape = PresentationElementsManager.getInstance().createShapeElement(createdElement, getDiagramPresentationElement(), false,
             new Point(diagramElementData.getBounds().x, diagramElementData.getBounds().y));
         return;
       }
